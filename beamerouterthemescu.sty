@@ -84,30 +84,30 @@
 \beamer@scu@len@sectotitleline=\dimexpr\the\paperwidth-\beamer@scu@len@secbar-20pt\relax
 
 % savebox 存储 TikZ Headline 背景底图绘图.
-\newsavebox{\beamer@scu@headlinebox}
-\sbox{\beamer@scu@headlinebox}{%
+\newsavebox{\beamer@scu@box@headlineBg}
+\sbox{\beamer@scu@box@headlineBg}{%
   \begin{tikzpicture}%
     % 绘图辅助节点定义.
-    \coordinate (LineNorthWest) at (0, -11pt);% 小节-标题分隔线 西北节点
-    \coordinate (LineSouthWest) at (0, -13pt);% 小节-标题分隔线 西南节点
-    \coordinate (LineSouthEast) at (\beamer@scu@len@sectotitleline, -13pt);% 小节-标题分隔线 东北节点
-    \coordinate (SecbarNorthEast) at (\the\paperwidth, 0);% 章节栏 东北节点
-    \coordinate (SecbarSouthEast) at (\the\paperwidth, -13pt);% 章节栏 东南节点
-    \coordinate (SecbarSouthWest) at ([xshift=-\beamer@scu@len@secbar]SecbarSouthEast);% 章节栏 西南节点
-    \coordinate (SecbarNorthWest) at ([xshift=-6.5pt, yshift=13pt]SecbarSouthWest);% 章节栏 西南节点
-    \coordinate (AdornDarkNorthWest) at ([xshift=-4pt]SecbarNorthWest);% 深色装饰 西北节点
-    \coordinate (AdornDarkSouthEast) at ([xshift=3.5pt, yshift=-7pt]SecbarNorthWest);% 深色装饰 东南节点
-    \coordinate (AdornLightNorthWest) at ([xshift=-4pt]AdornDarkSouthEast);%  浅色装饰 西北节点
-    \coordinate (AdornLightSouthEast) at ([xshift=2pt, yshift=-4pt]AdornDarkSouthEast);% 浅色装饰 东南节点
+    \coordinate (横向分隔线-西南) at (0, -\beamer@scu@ht@headline);% 小节-标题分隔线 西南节点
+    \coordinate (横向分隔线-西北) at ([yshift=2pt]横向分隔线-西南);% 小节-标题分隔线 西北节点
+    \coordinate (横向分隔线-东北) at (\beamer@scu@wd@sectotitleline, -\beamer@scu@ht@headline);% 小节-标题分隔线 东北节点
+    \coordinate (章节栏-东北) at (\the\paperwidth, 0);% 章节栏 东北节点
+    \coordinate (章节栏-东南) at (\the\paperwidth, -\beamer@scu@ht@headline);% 章节栏 东南节点
+    \coordinate (章节栏-西南) at ([xshift=-\beamer@scu@wd@secbar]章节栏-东南);% 章节栏 西南节点
+    \coordinate (章节栏-西北) at ([xshift=-6.5pt, yshift=13pt]章节栏-西南);% 章节栏 西北节点
+    \coordinate (深色装饰-西北) at ([xshift=-4pt]章节栏-西北);% 深色装饰 西北节点
+    \coordinate (深色装饰-东南) at ([xshift=3.5pt, yshift=-7pt]章节栏-西北);% 深色装饰 东南节点
+    \coordinate (浅色装饰-西北) at ([xshift=-4pt]深色装饰-东南);%  浅色装饰 西北节点
+    \coordinate (浅色装饰-东南) at ([xshift=2pt, yshift=-4pt]深色装饰-东南);% 浅色装饰 东南节点
     % 颜色图形绘制.
-    \fill[PrimaryC] (SecbarNorthEast) -- (SecbarSouthEast)%
-      -- (SecbarSouthWest) -- (SecbarNorthWest) -- cycle;% 章节栏背景
-    \fill[IntersperseC] (AdornDarkNorthWest) -- (SecbarNorthWest)%
-      -- (AdornDarkSouthEast) -- ++ (-4pt, 0) -- cycle;% 深色装饰
-    \fill[AuxiliaryC] (AdornLightNorthWest) -- (AdornDarkSouthEast)%
-      -- (AdornLightSouthEast) -- ++ (-4pt, 0) -- cycle;% 浅色装饰
-    \fill[PrimaryC] (LineNorthWest) -- (LineSouthWest)%
-      -- (LineSouthEast) -- ++ (-1pt, 2pt) -- cycle;% 小节与标题间分隔线
+    \fill[PrimaryC] (章节栏-东北) -- (章节栏-东南)%
+      -- (章节栏-西南) -- (章节栏-西北) -- cycle;% 章节栏背景
+    \fill[IntersperseC] (深色装饰-西北) -- (章节栏-西北)%
+      -- (深色装饰-东南) -- ++ (-4pt, 0) -- cycle;% 深色装饰
+    \fill[AuxiliaryC] (浅色装饰-西北) -- (深色装饰-东南)%
+      -- (浅色装饰-东南) -- ++ (-4pt, 0) -- cycle;% 浅色装饰
+    \fill[PrimaryC] (横向分隔线-西北) -- (横向分隔线-西南)%
+      -- (横向分隔线-东北) -- ++ (-1pt, 2pt) -- cycle;% 小节与标题间分隔线
   \end{tikzpicture}%
 }%
 
@@ -360,26 +360,26 @@
 \newcount\beamer@scu@count@totalframe
 
 % savebox 存储 TikZ Footline 背景底图绘图.
-\newsavebox{\beamer@scu@footlinebox}
-\sbox{\beamer@scu@footlinebox}{%
+\newsavebox{\beamer@scu@box@footlineBg}
+\sbox{\beamer@scu@box@footlineBg}{%
   \begin{tikzpicture}%
     % 绘图辅助节点定义.
-    \coordinate (LogoNorthWest) at (0, 12pt);% Logo 西北节点
-    \coordinate (LogoNorthEast) at (48pt, 12pt);% Logo 东北节点
-    \coordinate (LogoSouthEast) at (54pt, 0);% Logo 东南节点
-    \coordinate (AdornLightSouthEast) at (58pt, 0);% 浅色装饰 东南节点
-    \coordinate (AdornLightNorthEast) at (55.5pt, 5pt);% 浅色装饰 东北节点
-    \coordinate (AdornLightNorthWest) at (51.5pt, 5pt);% 浅色装饰 西北节点
-    \coordinate (AdornDarkNorthEast) at (53.5pt, 9pt);% 深色装饰 东北节点
-    \coordinate (AdornDarkNorthWest) at (49.5pt, 9pt);% 深色装饰 西北节点
+    \coordinate (Logo-西北) at (0, \beamer@scu@ht@footline);% Logo 西北节点
+    \coordinate (Logo-东北) at (\beamer@scu@wd@Logobar, \beamer@scu@ht@footline);% Logo 东北节点
+    \coordinate (Logo-东南) at (54pt, 0);% Logo 东南节点
+    \coordinate (浅色装饰-东南) at (58pt, 0);% 浅色装饰 东南节点
+    \coordinate (浅色装饰-东北) at (55.5pt, 5pt);% 浅色装饰 东北节点
+    \coordinate (浅色装饰-西北) at (51.5pt, 5pt);% 浅色装饰 西北节点
+    \coordinate (深色装饰-东北) at (53.5pt, 9pt);% 深色装饰 东北节点
+    \coordinate (深色装饰-西北) at (49.5pt, 9pt);% 深色装饰 西北节点
     % 颜色图形绘制.
-    \fill[PrimaryC] (0, 0) -- (LogoNorthWest)%
-      -- (LogoNorthEast) -- (LogoSouthEast) -- cycle;% Logo 背景
+    \fill[PrimaryC] (0, 0) -- (Logo-西北)%
+      -- (Logo-东北) -- (Logo-东南) -- cycle;% Logo 背景
     \node[inner sep=0pt, outer sep=0pt] at (25pt, 6pt) {\pgfuseimage{lg}};
-    \fill[AuxiliaryC] (LogoSouthEast) -- (AdornLightNorthWest)%
-      -- (AdornLightNorthEast) -- (AdornLightSouthEast) -- cycle;% 浅色装饰
-    \fill[IntersperseC] (AdornLightNorthWest) -- (AdornDarkNorthWest)%
-      -- (AdornDarkNorthEast) -- (AdornLightNorthEast) -- cycle;% 深色装饰
+    \fill[AuxiliaryC] (Logo-东南) -- (浅色装饰-西北)%
+      -- (浅色装饰-东北) -- (浅色装饰-东南) -- cycle;% 浅色装饰
+    \fill[IntersperseC] (浅色装饰-西北) -- (深色装饰-西北)%
+      -- (深色装饰-东北) -- (浅色装饰-东北) -- cycle;% 深色装饰
   \end{tikzpicture}%
 }%
 
