@@ -19,18 +19,19 @@
 
 % ----------------
 % Declare of Options
-% Confirmed in v1.3e(2024/10/31).
+% Confirmed in v2.1b(2025/10/06).
 % Established in v1.3c(2024/04/16), v1.3e(2024/10/31).
+% Updated in v1.3d(2024/05/18), v2.1b(2025/10/06).
 % ----------------
 % CMD:: \DeclareOptionBeamer  - 声明参数.
 % CMD:: \ExecuteOptionsBeamer - 预执行参数.
 % CMD:: \ProcessOptionsBeamer - 处理参数.
 % ----------------
 % KEY:: Miniframes.
-% VALUE:: follow | separate | negate.
+% VALUE:: follow | separate | none.
 \DeclareOptionBeamer{Miniframes}{\def\beamer@scu@Miniframes{#1}}
 % KEY:: NavigationTool.
-% VALUE:: negate | 1 | 2 | 3 | 1-2 | 1-3 | 2-3 | 1-2-3.
+% VALUE:: none | 1 | 2 | 3 | 1-2 | 1-3 | 2-3 | 1-2-3.
 \DeclareOptionBeamer{NavigationTool}{\def\beamer@scu@NavigationTool{#1}}
 
 \ExecuteOptionsBeamer{%
@@ -281,7 +282,7 @@
       \node[anchor=north east, inner sep=0pt, outer sep=0pt,%
         xshift=-7.2pt, yshift=-15pt] at (NorthEast) {%
         \insert@subsecminiframes{3.8pt}{1.6pt}};% 绘制小节迷你帧
-    \else\if\EqualOptionsBeamer{Miniframes}{negate}%
+    \else\if\EqualOptionsBeamer{Miniframes}{none}%
       \relax%
     \fi\fi\fi%
   \end{tikzpicture}%
@@ -412,7 +413,7 @@
 }
 
 % Compute Navigation Tool num.
-\if\EqualOptionsBeamer{NavigationTool}{negate}%
+\if\EqualOptionsBeamer{NavigationTool}{none}%
   \relax%
 \else%
   \StrSubstitute{\beamer@scu@NavigationTool}{-}{, }[\NavigationTool@group]
@@ -486,7 +487,7 @@
     \node[left, inner sep=0pt, outer sep=0pt,%
       xshift=-9pt, yshift=4.5pt] at (SouthEast) (FootlinePage) {%
       \insert@framenumberwithbutton};% 绘制带有 Acrobat 页面跳转按钮的页码
-    \if\EqualOptionsBeamer{NavigationTool}{negate}%
+    \if\EqualOptionsBeamer{NavigationTool}{none}%
       \relax%
     \else%
       \node[left, inner sep=0pt, outer sep=0pt,%
