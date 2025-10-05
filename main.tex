@@ -13,16 +13,21 @@
 \documentclass[hyperref, UTF8, CJK]{beamer}
 %\special{dvipdfmx:config z 0}
 
-% \colorlet{PrimaryC}{white}
-% \colorlet{BackgroundC}{black}
-% \colorlet{NomalTextC}{white}
-
 % --------SCU Beamer 模板宏包--------
 % ----------------
-\usetheme[ColorDisplay=Custom,
-	ContentMuticols=true,
-	Miniframes=follow,
-	Background=false
+\usetheme[
+	% MathFont=LM, % LM(默认) | XITS → 数学字体设置
+	ColorDisplay=JXred, % JXred(默认) | BSblue | Custom → 主题色显示设置
+	% CodeDisplay=minted, % listing(默认) | minted → 代码高亮显示设置
+	% MintedStyle=lightmode, % lightmode(默认) | darkmode | ⟨custom⟩ → minted 样式设置 (需优先设置 CodeDisplay=minted)
+	% BlockDisplay=colorful, % colorful(默认) | followtheme | allgrey → 区块颜色显示设置
+	% LanguageMode=cn, % cn(默认) | en → 语言模式设置
+	Miniframes=follow, % follow(默认) | separate | none → 页眉小节迷你帧设置
+	% NavigationTool=1-2-3, % ⟨参考 Manual 设置⟩ | none → 页脚导航工具栏设置
+	% BIBMode=biber, % biber(默认) | none → 参考文献引擎设置
+	% BIBStyle=biber-gb7714, %  biber-gb7714(默认) → 参考文献样式设置(设置 BIBMode=none 时无效)
+	% ContentMuticols=true, % true(默认) | false → 目录帧双栏显示设置
+	Background=false, % true(默认) | false → 背景显示设置
 ]{scu}
 	
 % --------不要调用的宏包--------
@@ -31,7 +36,6 @@
 
 % --------宏包调用--------
 % ----------------
-\usepackage{transparent}
 \usetikzlibrary{shadings,arrows,decorations.pathmorphing,patterns}
 \usepackage{array}
 \usepackage{algorithm,algorithmic}
@@ -96,7 +100,7 @@
 		\item 项目地址:
 		\begin{itemize}
 			\item 使用前请前往下列地址中查看模板版本!
-			\item \faGithub\enspace{\color{scublue}\url{https://github.com/FvNCCR228/SCU_Beamer_Slide-demo}}
+			\item \faGithub\enspace{\color{scublue}\url{https://github.com/FvNCCR228/SCU-Beamer-Theme}}
 			\item Gitee: \color{scublue}\url{https://gitee.com/NCCR/SCU_Beamer_Slide-demo}
 		\end{itemize}
 		%			\framebreak

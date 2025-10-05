@@ -16,16 +16,22 @@
 % --------SCU Beamer 模板宏包--------
 % ----------------
 \usetheme[
-	CodeDisplay=minted, 
-	LanguageMode=en, 
-	MintedStyle=dracula,
-	ColorDisplay=BSblue, 
-	Background=false
-]{scu}%, BIBMode=none
+	% MathFont=LM, % LM(默认) | XITS → 数学字体设置
+	ColorDisplay=BSblue, % JXred(默认) | BSblue | Custom → 主题色显示设置
+	CodeDisplay=minted, % listing(默认) | minted → 代码高亮显示设置
+	MintedStyle=dracula, % lightmode(默认) | darkmode | ⟨custom⟩ → minted 样式设置 (需优先设置 CodeDisplay=minted)
+	% BlockDisplay=colorful, % colorful(默认) | followtheme | allgrey → 区块颜色显示设置
+	% LanguageMode=cn, % cn(默认) | en → 语言模式设置
+	Miniframes=follow, % follow(默认) | separate | none → 页眉小节迷你帧设置
+	% NavigationTool=1-2-3, % ⟨参考 Manual 设置⟩ | none → 页脚导航工具栏设置
+	% BIBMode=none, % biber(默认) | none → 参考文献引擎设置
+	% BIBStyle=biber-gb7714, %  biber-gb7714(默认) → 参考文献样式设置(设置 BIBMode=none 时无效)
+	% ContentMuticols=true, % true(默认) | false → 目录帧双栏显示设置
+	Background=false, % true(默认) | false → 背景显示设置
+]{scu}
 
 % --------宏包调用--------
 % ----------------
-\usepackage{transparent}
 \usepackage{array}
 \usepackage{algorithm,algorithmic}
 \usepackage[english]{babel}
@@ -79,7 +85,7 @@
 \subsection{The Project}
 \begin{frame}{Info.}
 	\faShare*\enspace{\color{scublue}lr.wu.interact@outlook.com}
-	\faGithub\enspace{\color{scublue}\url{https://github.com/FvNCCR228/SCU_Beamer_Slide-demo}}
+	\faGithub\enspace{\color{scublue}\url{https://github.com/FvNCCR228/SCU-Beamer-Theme}}
 
 	
 \end{frame}
