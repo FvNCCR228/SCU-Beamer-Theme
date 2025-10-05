@@ -62,9 +62,9 @@
 
 % ----------------
 % Beamer Theme Headline Layout
-% Confirmed in v1.3e(2024/10/31).
+% Confirmed in v2.1b(2025/10/06).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31).
+% Updated in v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31), v2.1b(2025/10/06).
 % ----------------
 % 于 v1.3c(2024/04/16) 与 Headline TikZ 绘图部分合并, 强化代码关联度.
 % 于 v1.3e(2024/10/31) 修改 beamerthemescu.sty 中 Miniframe Layout 并合并于此.
@@ -330,7 +330,7 @@
 
 % 设置 Headline 主题模板.
 \defbeamertemplate*{headline}{SCU headline theme}{%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=11.5pt]{}%
+  \begin{beamercolorbox}[wd=\paperwidth, ht=\beamer@scu@ht@headline]{}%
     \beamer@scu@headline%
   \end{beamercolorbox}%
 }
@@ -340,24 +340,27 @@
 
 % ----------------
 % Beamer Theme Frametitle Layout
-% Confirmed in v1.3c(2024/04/16).
+% Confirmed in v2.1b(2025/10/06).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.2a(2022/03/10), v1.3b(2022/04/13), v1.3c(2024/04/16).
+% Updated in v1.2a(2022/03/10), v1.3b(2022/04/13), v1.3c(2024/04/16), v2.1b(2025/10/06).
+% ----------------
+% 于 v2.1b(2025/10/06) 优化 Frametitle 纵向间距.
 % ----------------
 % FORMAT:: frametitle | framesubtitle.
 % ----------------
 % 设置 Frametitle 主题模板.
 \defbeamertemplate*{frametitle}{SCU frametitle theme}{%
+  \vskip-2pt% 消除 Headline 和 Frametitle 间空白距离
   \ifx\insertframesubtitle\@empty%
-    \begin{beamercolorbox}[wd=\paperwidth,%
-      ht=2.5ex, dp=.5ex, leftskip=8.6pt]{}%{frametitle}
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.2ex,%
+      leftskip=\beamer@scu@wd@headlineskip]{mybox}%{frametitle}
       \usebeamerfont{frametitle}%
       \usebeamercolor[fg]{frametitle}%
       \insertframetitle%
     \end{beamercolorbox}%
   \else%
-    \begin{beamercolorbox}[wd=\paperwidth,%
-      ht=2.5ex, dp=.5ex, leftskip=8.6pt]{}%{frametitle}
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.2ex,%
+      leftskip=\beamer@scu@wd@headlineskip]{}%{frametitle}
       \usebeamerfont{frametitle}%
       \usebeamercolor[fg]{frametitle}%
       \insertframetitle~%
@@ -374,9 +377,9 @@
 
 % ----------------
 % Beamer Theme Footline Layout
-% Confirmed in v1.3e(2024/10/31).
+% Confirmed in v2.1b(2025/10/06).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3e(2024/10/31).
+% Updated in v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3e(2024/10/31), v2.1b(2025/10/06).
 % ----------------
 % 于 v1.3c(2024/04/16) 与 Footline TikZ 绘图部分合并, 强化代码关联度.
 % 于 v2.1b(2025/10/06) 更改 Tikz 节点描述为中文, 更直观; 使用 picture 环境替换此前所用 tikz 环境定位及绘制 Footline.
@@ -594,7 +597,7 @@
 
 % 设置 Footline 主题模板.
 \defbeamertemplate*{footline}{SCU footline theme}{%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=12pt]{}%
+  \begin{beamercolorbox}[wd=\paperwidth, ht=\beamer@scu@ht@footline, dp=0pt]{}%
     \beamer@scu@framenumber% 优先调用计数器设置
     \beamer@scu@progressbar{AuxiliaryC}{PrimaryC}{BackgroundC}%
     \beamer@scu@footline%
