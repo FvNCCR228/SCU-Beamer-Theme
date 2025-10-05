@@ -1,6 +1,6 @@
 % This is file `beamerthemescu.sty'.
-% Copyright (C) 2021-2024 by Linrong Wu.
-% Version: 2024/10/31 v1.3e (Original Version: 2021/11/30 v1.0a).
+% Copyright (C) 2021-2025 by Linrong Wu.
+% Version: 2025/10/06 v2.1b (Original Version: 2021/11/30 v1.0a).
 %
 % This file may be distributed and/or modified
 %
@@ -22,21 +22,21 @@
 %   ContentMuticols = true | false
 %   Background = true | false
 %
-% 本文件为 SCU_Beamer_Slide-demo 宏包文件.
+% 本文件为 SCU Beamer Theme 宏包文件.
 % !请勿轻易改动此文档中代码.
 %%%% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{beamerthemescu}[2024/10/31 v1.3e, SCU Beamer Theme(Main Theme)]
+\ProvidesPackage{beamerthemescu}[2025/10/06 v2.1b, SCU Beamer Theme(Main Theme)]
 %%%% ----------------------------------------------------------------
 
 
 % ----------------
 % Declare of Commands
-% Confirmed in v1.3e(2024/10/31).
+% Confirmed in v2.1b(2025/10/06).
 % Established in v1.3b(2022/04/13).
-% Updated in v1.3e(2024/10/31).
+% Updated in v1.3e(2024/10/31), v2.1b(2025/10/06).
 % ----------------
-\def\mycopyright{\vspace{2ex}Copyright\enspace\copyright\enspace2021-2024 by LR Wu.}% 版权声明.
+\def\mycopyright{\vspace{2ex}Copyright\enspace\copyright\enspace2021-2025 by LR Wu.}% 版权声明.
 \def\myestablish#1#2{Establish: \textcolor{scugreen}{#1 (#2)}}
 \def\myupdate#1#2{Update: \textcolor{scugreen}{#1 (#2)}}
 \def\kvtcb@label@sep{:}% tcolorbox 中 label 分隔符.
@@ -309,9 +309,9 @@
 
 % ----------------
 % Font Layout
-% Confirmed in v1.3d(2024/05/18).
+% Confirmed in v2.1b(2025/10/06).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3d(2024/05/18).
+% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3d(2024/05/18), v2.1b(2025/10/06).
 % ----------------
 % 设置了主题数学字体选项 "mathdisplay=XITS" & "mathdisplay=LM".
 % ----------------
@@ -333,7 +333,8 @@
 
 % 设置中文无衬线字体为项目文件夹下 "fonts" 中 "simkai.ttf" (楷体), 加粗为 "simhei.ttf" (黑体).
 %\setCJKsansfont[Path="fonts/",BoldFont={simhei.ttf}]{simkai.ttf}
-\setCJKsansfont[Scale=0.956]{Microsoft YaHei}
+% \setCJKsansfont[Scale=0.956]{Microsoft YaHei}
+\setCJKsansfont{Noto Sans CJK SC}
 % \setCJKsansfont{LXGWWenKai-Bold.ttf}[Path="fonts/",Scale=0.956,BoldFont={SourceHanSansSC-Medium.otf}]
 % \setCJKsansfont{LXGW WenKai Bold}[Scale=0.956,BoldFont={Source Han Sans SC Medium}]
 %\usefonttheme{professionalfonts}

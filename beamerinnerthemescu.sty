@@ -1,6 +1,6 @@
 % This is file `beamerinnerthemescu.sty'.
-% Copyright (C) 2021-2024 by Linrong Wu.
-% Version: 2024/10/31 v1.3e (Original Version: 2024/04/16 v1.3c).
+% Copyright (C) 2021-2025 by Linrong Wu.
+% Version: 2025/10/06 v2.1b (Original Version: 2024/04/16 v1.3c).
 %
 % This file may be distributed and/or modified
 %
@@ -9,11 +9,11 @@
 %
 % See the file doc/licenses/LICENSE for more details.
 %
-% 本文件为 SCU_Beamer_Slide-demo 内部主题宏包文件.
+% 本文件为 SCU Beamer Theme 内部主题宏包文件.
 % !请勿轻易改动此文档中代码.
 %%%% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{beamerinnerthemescu}[2024/10/31 v1.3e, SCU Beamer Theme(Inner Theme)]
+\ProvidesPackage{beamerinnerthemescu}[2025/10/06 v2.1b, SCU Beamer Theme(Inner Theme)]
 %%%% ----------------------------------------------------------------
 
 
@@ -22,34 +22,35 @@
 
 % ----------------
 % Beamer Theme Title Page Layout
-% Confirmed in v1.3c(2024/04/16).
+% Confirmed in v2.1b(2025/10/06).
 % Established in v1.3c(2024/04/16).
+% Updated in v2.1b(2025/10/06).
 % ----------------
 % CMD:: \newdimen   - 创建长度寄存器.
 % CMD:: \newsavebox - 创建盒子.
 % ----------------
-% DIMEN:: title 框底部高度 - titlelow.
+% DIMEN:: title 框底部高度 - len@titlelow.
 \newdimen\beamer@scu@len@titlelow
 \beamer@scu@len@titlelow=0.4\paperheight
-% DIMEN:: title 框顶部高度 - titlehigh.
+% DIMEN:: title 框顶部高度 - len@titlehigh.
 \newdimen\beamer@scu@len@titlehigh
 \beamer@scu@len@titlehigh=0.65\paperheight
-% DIMEN:: title 框文字顶部高度 - titletexthigh.
+% DIMEN:: title 框文字顶部高度 - len@titletexthigh.
 \newdimen\beamer@scu@len@titletexthigh
 \beamer@scu@len@titletexthigh=\dimexpr\beamer@scu@len@titlehigh-0.025\paperheight\relax
-% DIMEN:: author 框顶部高度 - authorhigh.
+% DIMEN:: author 框顶部高度 - len@authorhigh.
 \newdimen\beamer@scu@len@authorhigh
 \beamer@scu@len@authorhigh=0.475\paperheight
-% DIMEN:: author 框文字顶部高度 - authortexthigh.
+% DIMEN:: author 框文字顶部高度 - len@authortexthigh.
 \newdimen\beamer@scu@len@authortexthigh
 \beamer@scu@len@authortexthigh=\dimexpr\beamer@scu@len@authorhigh-0.025\paperheight\relax
-% DIMEN:: author 框最小宽度 - authorwidthmin.
+% DIMEN:: author 框最小宽度 - len@authorwidthmin.
 \newdimen\beamer@scu@len@authorwidthmin
 \beamer@scu@len@authorwidthmin=0.75\paperwidth
-% DIMEN:: author 框顶部到 title 框底部距离 - titletoauthor.
+% DIMEN:: author 框顶部到 title 框底部距离 - len@titletoauthor.
 \newdimen\beamer@scu@len@titletoauthor
 \beamer@scu@len@titletoauthor=\dimexpr\beamer@scu@len@authorhigh-\beamer@scu@len@titlelow+0.2pt\relax
-% DIMEN:: author 框高度 - titletoauthor.
+% DIMEN:: author 框高度 - len@titletoauthor.
 \newdimen\beamer@scu@len@authorheight
 
 % 封面样式定义.

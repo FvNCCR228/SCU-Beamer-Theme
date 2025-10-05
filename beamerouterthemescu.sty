@@ -1,6 +1,6 @@
 % This is file `beamerouterthemescu.sty'.
-% Copyright (C) 2021-2024 by Linrong Wu.
-% Version: 2024/10/31 v1.3e (Original Version: 2024/04/16 v1.3c).
+% Copyright (C) 2021-2025 by Linrong Wu.
+% Version: 2025/10/06 v2.1b (Original Version: 2024/04/16 v1.3c).
 %
 % This file may be distributed and/or modified
 %
@@ -9,11 +9,11 @@
 %
 % See the file doc/licenses/LICENSE for more details.
 %
-% 本文件为 SCU_Beamer_Slide-demo 外部主题宏包文件.
+% 本文件为 SCU Beamer Theme 外部主题宏包文件.
 % !请勿轻易改动此文档中代码.
 %%%% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{beamerouterthemescu}[2024/10/31 v1.3e, SCU Beamer Theme(Outer Theme)]
+\ProvidesPackage{beamerouterthemescu}[2025/10/06 v2.1b, SCU Beamer Theme(Outer Theme)]
 %%%% ----------------------------------------------------------------
 
 
@@ -531,13 +531,13 @@
 \def\beamer@scu@footline{%
   % 填充内容盒子.
   \setbox\beamer@scu@box@titlebar=\hbox{%
-      \usebeamerfont{author in head/foot}%
-      \usebeamercolor[fg]{author in head/foot}%
-      \insertshortauthor\,%
-      \usebeamerfont{title in head/foot}%
-      \textcolor{SecondaryAuxiliaryC}{·\,}%
-      \usebeamercolor[fg]{title in head/foot}%
-      \insertshorttitle%
+    \usebeamerfont{author in head/foot}%
+    \usebeamercolor[fg]{author in head/foot}%
+    \insertshortauthor\,%
+    \usebeamerfont{title in head/foot}%
+    \textcolor{SecondaryAuxiliaryC}{·\,}%
+    \usebeamercolor[fg]{title in head/foot}%
+    \insertshorttitle%
   }% 设置页脚标题导航栏盒子
   \setbox\beamer@scu@box@pagebar=\hbox{%
     \insert@framenumberwithbutton}% 设置页脚页码导航栏盒子
