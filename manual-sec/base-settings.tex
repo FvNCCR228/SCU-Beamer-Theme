@@ -71,13 +71,14 @@
 			\item \myupdate{v1.3b}{2022/04/13}
 			\item \myupdate{v1.3d}{2024/05/18}
 			\item \myupdate{v1.3e}{2024/10/31}
+			\item \myupdate{v2.1b}{2025/10/06}
 		\end{itemize}
 	\end{multicols}
 	注: 自 \textcolor{scugreen}{v1.1a (2021/12/30)} 起, 本小节已替代手册中\alert{\textbf{可注释项}}小节.\par
 	\mycopyright
 \end{frame}
 
-\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明}{MathFont, ColorDisplay, CodeDisplay}
+\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(1/4)}{MathFont, ColorDisplay, CodeDisplay}
 	\pkg{beamethemescu} 是基于\LaTeX{} beamer开发的四川大学beamer样式主题宏包, 可通过命令 \cmd{usetheme}\marg*{scu}调用.
 
 	\begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
@@ -122,7 +123,7 @@
 	\vspace*{-1ex}
 \end{frame}
 
-\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明}{MintedStyle, BlockDisplay, LanguageMode}
+\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(2/4)}{MintedStyle, BlockDisplay, LanguageMode}
 	\vspace*{-1.6ex}
 	\begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
 		\begin{column}{.5\textwidth}
@@ -147,7 +148,7 @@
 			v1.3a (C) \alert{\texttt{MintedStyle}} & \textbf{minted样式设置(需优先设置 \texttt{\alert{CodeDisplay}=minted})}\\
 			(D) \texttt{lightmode} & 亮色模式, Pygments default样式.\\
 			\texttt{darkmode} & 暗色模式, Pygments rrt样式.\\
-			v1.3c \Arg{custom} & 自定义值. (设置前请阅读手册)\\
+			v1.3c \Arg{custom} & 自定义值. (设置前请阅读手册\label{back:CustomColorTheme} \scugoto{goto:CustomColorTheme}{DTL})\\
 			\midrule
 			v1.3a \alert{\texttt{BlockDisplay}} & \textbf{区块颜色显示设置}\\
 			(D) \texttt{colorful} & 彩色模式.\\
@@ -162,7 +163,7 @@
 	\vspace*{-2ex}
 \end{frame}
 
-\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明}{Miniframes, NavigationTool}
+\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(3/4)}{Miniframes, NavigationTool}
 	\vspace*{-1.6ex}
 	\begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
 		\begin{column}{.5\textwidth}
@@ -187,19 +188,21 @@
 			v1.3c \alert{\texttt{Miniframes}} & \textbf{页眉小节迷你帧设置}\label{back:Miniframes} \scugoto{goto:Miniframes}{PREV}\\
 			(D) \texttt{follow} & 迷你帧跟随页眉小节标题.\\
 			\texttt{separate} & 迷你帧与页眉小节标题分离. (实际位于页眉节导航栏右下方)\\
-			\texttt{negate} & 取消小节迷你帧.\\
+			\texttt{none} & 取消小节迷你帧.\\
+			\texttt{negate} & 已于 v2.1b 版本废除(由 \texttt{none} 替代).\\
 			\midrule
-			v1.3d \alert{\texttt{NavigationTool}} & \textbf{页脚导航工具栏设置}\label{back:NavigationTool} \scugoto{goto:NavigationTool}{DTL}\\
+			v1.3d \alert{\texttt{NavigationTool}} & \textbf{页脚导航工具栏设置}\label{back:CustomNavigationTool} \scugoto{goto:CustomNavigationTool}{DTL}\\
 			(D) \texttt{1-2-3} & 依次显示小节及小节跳转、查询及首尾跳转、放映及历史跳转三种工具. (可调换顺序)\\
 			\texttt{1} & 类似命令为 \texttt{2} 或 \texttt{3}, 工具含义见上.\\
 			\texttt{1-2} & 类似命令为 \texttt{1-3} 或 \texttt{2-3}, 工具含义见上. (可调换顺序)\\
-			\texttt{negate} & 取消小节迷你帧.\\
+			\texttt{none} & 取消导航工具栏.\\
+			\texttt{negate} & 已于 v2.1b 版本废除(由 \texttt{none} 替代).\\
 		\end{tabular}
 	\end{table}
 	\vspace*{-2ex}
 \end{frame}
 
-\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明}{BIBMode, BIBStyle, ContentMuticols, Background}
+\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(4/4)}{BIBMode, BIBStyle, ContentMuticols, Background}
 	\begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
 		\begin{column}{.5\textwidth}
 			\textbf{调用命令}(无需额外调用默认键值对):\\
@@ -357,3 +360,5 @@
 % 		\date{\noindent <text.t>}
 % 	\end{scucode}
 % \end{frame}
+
+%% End of file `base-settings.tex'.
