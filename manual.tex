@@ -2,9 +2,9 @@
 % !BIB TS-program = biber
 % !TeX TS-program = xelatex
 % This is file `manual.tex'.
-% Copyright (C) 2021-2024 by Linrong Wu.
-% Version: 2024/10/31 v1.3e (Original Version: 2021/11/30 v1.0a).
-% 本文件为 SCU_Beamer_Slide-demo 用户手册源文件.
+% Copyright (C) 2021-2025 by Linrong Wu.
+% Version: 2025/10/06 v2.1b (Original Version: 2021/11/30 v1.0a).
+% 本文件为 SCU Beamer Theme 用户手册源文件.
 % !使用前请阅读用户手册.
 
 % ================ %
@@ -14,7 +14,20 @@
 
 % --------SCU Beamer 模板宏包--------
 % ----------------
-\usetheme[CodeDisplay=minted, Background=true]{scu}
+\usetheme[
+	% MathFont=LM, % LM(默认) | XITS → 数学字体设置
+	% ColorDisplay=JXred, % JXred(默认) | BSblue | Custom → 主题色显示设置
+	CodeDisplay=minted, % listing(默认) | minted → 代码高亮显示设置
+	MintedStyle=lightmode, % lightmode(默认) | darkmode | ⟨custom⟩ → minted 样式设置 (需优先设置 CodeDisplay=minted)
+	% BlockDisplay=colorful, % colorful(默认) | followtheme | allgrey → 区块颜色显示设置
+	% LanguageMode=cn, % cn(默认) | en → 语言模式设置
+	Miniframes=follow, % follow(默认) | separate | none → 页眉小节迷你帧设置
+	% NavigationTool=1-2-3, % ⟨参考 Manual 设置⟩ | none → 页脚导航工具栏设置
+	% BIBMode=biber, % biber(默认) | none → 参考文献引擎设置
+	% BIBStyle=biber-gb7714, %  biber-gb7714(默认) → 参考文献样式设置(设置 BIBMode=none 时无效)
+	% ContentMuticols=true, % true(默认) | false → 目录帧双栏显示设置
+	Background=true, % true(默认) | false → 背景显示设置
+]{scu}
 
 % --------不要调用的宏包--------
 % ----------------
@@ -22,7 +35,6 @@
 
 % --------宏包调用--------
 % ----------------
-\usepackage{transparent}
 \usepackage[autoplay]{animate}
 \usepackage{tikz}
 \usetikzlibrary{shadings,arrows,calc,decorations.pathmorphing,patterns}
@@ -51,8 +63,8 @@
 % --------封面信息输入--------
 % [<in footline>], {<in title page>} 方括号内容显示在页脚, 花括号内容为全称显示在封面.
 % ----------------
-\title[四川大学Beamer模板 | User's Manual Rev~v1.3e]{四川大学Beamer模板}
-\subtitle{用户手册~~~~Rev v1.3e} % subtitle 未设置页脚显示项, 请在 title 中设置.
+\title[四川大学Beamer模板 | User's Manual Rev~v2.1b]{四川大学Beamer模板}
+\subtitle{用户手册~~~~Rev v2.1b} % subtitle 未设置页脚显示项, 请在 title 中设置.
 \author[我不卷, 你才卷]{马老卷\inst{1}\inst{a} \and 马小卷\inst{2}\inst{b}}
 \institute{%
 	\inst{1} 混元形翼太极门
@@ -61,7 +73,7 @@
 	\vspace*{-6pt} \and
 	\inst{a} ~\textit{MaLJFake@taichi.hunyuan} ~ \inst{b} ~\textit{MaXJFake@scu.edu.cn}
 }
-\date{2024年10月31日}
+\date{2025年10月6日}
 
 % ---------------- %
 %      正文区      %
@@ -111,7 +123,7 @@
 		\item 项目地址:
 		\begin{itemize}
 			\item 使用前请前往下列地址中查看模板版本!
-			\item \faGithub\enspace{\color{scublue}\url{https://github.com/FvNCCR228/SCU_Beamer_Slide-demo}}
+			\item \faGithub\enspace{\color{scublue}\url{https://github.com/FvNCCR228/SCU-Beamer-Theme}}
 			\item Gitee: \color{scublue}\url{https://gitee.com/NCCR/SCU_Beamer_Slide-demo}
 			\item main分支 - SCU Beamer Theme 核心分支\label{back:BranchMain} \scugoto{goto:BranchMain}{DTL}
 			\item manual分支 - SCU Beamer Theme 用户手册分支\label{back:BranchManual} \scugoto{goto:BranchManual}{DTL}
@@ -1097,7 +1109,7 @@
 		\end{column}
 	\end{columns}
 	\centering\vskip4ex
-	SCU Beamer Slide-demo, Rev 1.3e
+	SCU Beamer Theme, Rev 2.1b
 \end{frame}
 
 \appendix
