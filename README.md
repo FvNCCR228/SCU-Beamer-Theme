@@ -7,7 +7,7 @@
 
 ## 项目地址
 
--GitHub: https://github.com/FvNCCR228/SCU_Beamer_Slide-demo
+-GitHub: https://github.com/FvNCCR228/SCU-Beamer-Theme
 
 -Gitee: https://gitee.com/NCCR/SCU_Beamer_Slide-demo
 
