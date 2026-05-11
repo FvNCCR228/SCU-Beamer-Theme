@@ -1,6 +1,6 @@
 % This is file `beamerouterthemescu.sty'.
-% Copyright (C) 2021-2025 by Linrong Wu.
-% Version: 2025/10/06 v2.1b (Original Version: 2024/04/16 v1.3c).
+% Copyright (C) 2021-2026 by Linrong Wu.
+% Version: 2026/05/20 v2.1c (Original Version: 2024/04/16 v1.3c).
 %
 % This file may be distributed and/or modified
 %
@@ -13,7 +13,7 @@
 % !请勿轻易改动此文档中代码.
 %%%% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{beamerouterthemescu}[2025/10/06 v2.1b, SCU Beamer Theme(Outer Theme)]
+\ProvidesPackage{beamerouterthemescu}[2026/05/20 v2.1c, SCU Beamer Theme(Outer Theme)]
 %%%% ----------------------------------------------------------------
 
 
@@ -62,13 +62,14 @@
 
 % ----------------
 % Beamer Theme Headline Layout
-% Confirmed in v2.1b(2025/10/06).
+% Confirmed in v2.1c(2026/05/20).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31), v2.1b(2025/10/06).
+% Updated in v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31), v2.1b(2025/10/06), v2.1c(2026/05/20).
 % ----------------
 % 于 v1.3c(2024/04/16) 与 Headline TikZ 绘图部分合并, 强化代码关联度.
 % 于 v1.3e(2024/10/31) 修改 beamerthemescu.sty 中 Miniframe Layout 并合并于此.
 % 于 v2.1b(2025/10/06) 更改 Tikz 节点描述为中文, 更直观; 使用 picture 环境替换此前所用 tikz 环境定位及绘制 Headline.
+% 于 v2.1c(2026/05/20) 缩减 DIMEN, BOX 等变量名的长度 (由 beamer@scu@xxx 改为 scu@xxx, 更直观); 使用曲线函数重绘原直角梯形图形, 部分采用渐变过渡.
 % ----------------
 % CMD:: \newdimen   - 创建长度寄存器.
 % CMD:: \newbox - 创建盒子.
@@ -119,27 +120,33 @@
 \newsavebox{\scu@box@headlineBg}%
 \sbox{\scu@box@headlineBg}{%
   \begin{tikzpicture}%
-    % 绘图辅助节点定义.
-    \coordinate (横向分隔线-西南) at (0, -\beamer@scu@ht@headline);% 小节-标题分隔线 西南节点
-    \coordinate (横向分隔线-西北) at ([yshift=2pt]横向分隔线-西南);% 小节-标题分隔线 西北节点
-    \coordinate (横向分隔线-东北) at (\beamer@scu@wd@sectotitleline, -\beamer@scu@ht@headline);% 小节-标题分隔线 东北节点
-    \coordinate (章节栏-东北) at (\the\paperwidth, 0);% 章节栏 东北节点
-    \coordinate (章节栏-东南) at (\the\paperwidth, -\beamer@scu@ht@headline);% 章节栏 东南节点
-    \coordinate (章节栏-西南) at ([xshift=-\beamer@scu@wd@secbar]章节栏-东南);% 章节栏 西南节点
-    \coordinate (章节栏-西北) at ([xshift=-6.5pt, yshift=13pt]章节栏-西南);% 章节栏 西北节点
-    \coordinate (深色装饰-西北) at ([xshift=-4pt]章节栏-西北);% 深色装饰 西北节点
-    \coordinate (深色装饰-东南) at ([xshift=3.5pt, yshift=-7pt]章节栏-西北);% 深色装饰 东南节点
-    \coordinate (浅色装饰-西北) at ([xshift=-4pt]深色装饰-东南);%  浅色装饰 西北节点
-    \coordinate (浅色装饰-东南) at ([xshift=2pt, yshift=-4pt]深色装饰-东南);% 浅色装饰 东南节点
-    % 颜色图形绘制.
-    \fill[PrimaryC] (章节栏-东北) -- (章节栏-东南)%
-      -- (章节栏-西南) -- (章节栏-西北) -- cycle;% 章节栏背景
-    \fill[IntersperseC] (深色装饰-西北) -- (章节栏-西北)%
-      -- (深色装饰-东南) -- ++ (-4pt, 0) -- cycle;% 深色装饰
-    \fill[AuxiliaryC] (浅色装饰-西北) -- (深色装饰-东南)%
-      -- (浅色装饰-东南) -- ++ (-4pt, 0) -- cycle;% 浅色装饰
-    \fill[PrimaryC] (横向分隔线-西北) -- (横向分隔线-西南)%
-      -- (横向分隔线-东北) -- ++ (-1pt, 2pt) -- cycle;% 小节与标题间分隔线
+    % 定义 章节栏 辅助绘图节点.
+    \coordinate (章节栏-右上) at (\the\paperwidth, 0);%
+    \coordinate (章节栏-右下) at (\the\paperwidth, -\scu@ht@headline);%
+    \coordinate (章节栏-左上) at ([xshift=-\scu@wd@secbar]章节栏-右上);%
+    \coordinate (章节栏-左下) at ([xshift=-\scu@wd@secbar]章节栏-右下);%
+    % 限制绘图范围.
+    \clip (0,0) rectangle (章节栏-右下);%
+    % 绘制 章节栏.
+    \shade[top color=IntersperseC, bottom color=AuxiliaryC]%
+      (章节栏-左上) -- (章节栏-左下)%
+      -- plot[smooth, domain=270:216, samples=40]%
+        ({\scu@ht@headline*\RCurveX{T}{\x}+\the\paperwidth-\scu@wd@secbar},%
+        {\scu@ht@headline*\RCurveYD{T}{\x}}) -- cycle;% 渐变装饰
+    \fill[PrimaryC] (章节栏-右上) -- (章节栏-右下) -- (章节栏-左下)%
+      -- plot[smooth, domain=270:216, samples=40]%
+        ({\scu@ht@headline*\RCurveX{FP}{\x}+\the\paperwidth-\scu@wd@secbar},%
+        {\scu@ht@headline*\RCurveYD{FP}{\x}}) -- cycle;% 章节栏背景
+    % 定义 横向分隔线 辅助绘图节点.
+    \coordinate (横向分隔线-左下) at (0, -\scu@ht@headline);%
+    \coordinate (横向分隔线-左上) at ([yshift=2pt]横向分隔线-左下);%
+    \coordinate (横向分隔线-右下) at (\scu@wd@sectotitleline, -\scu@ht@headline);%
+    % 绘制 小节与标题间横向分隔线.
+    \shade[left color=PrimaryC, right color=IntersperseC]%
+      (横向分隔线-右下) -- (横向分隔线-左下) -- (横向分隔线-左上)%
+      -- plot[smooth, domain=90:36, samples=18]%
+        ({2pt*\RCurveX{TP}{\x}+\scu@wd@sectotitleline},%
+        {2pt*\RCurveYU{TP}{\x}-\scu@ht@headline}) -- cycle;% 横向分隔线
   \end{tikzpicture}%
 }%
 
@@ -396,7 +403,7 @@
 % ----------------
 % 于 v1.3c(2024/04/16) 与 Footline TikZ 绘图部分合并, 强化代码关联度.
 % 于 v2.1b(2025/10/06) 更改 Tikz 节点描述为中文, 更直观; 使用 picture 环境替换此前所用 tikz 环境定位及绘制 Footline.
-% 于 v2.1c(2026/05/20) 缩减 DIMEN, BOX 等变量名的长度 (由 beamer@scu@xxx 改为 scu@xxx, 更直观).
+% 于 v2.1c(2026/05/20) 缩减 DIMEN, BOX 等变量名的长度 (由 beamer@scu@xxx 改为 scu@xxx, 更直观), Logo 相关长度重新调整, 后续将支持可变 Logo 区宽度; 使用曲线函数重绘原直角梯形图形, 部分采用渐变过渡.
 % ----------------
 % CMD:: \newdimen   - 创建长度寄存器.
 % CMD:: \newcount   - 创建计数器.
@@ -438,23 +445,47 @@
 \newsavebox{\scu@box@footlineBg}%
 \sbox{\scu@box@footlineBg}{%
   \begin{tikzpicture}%
-    % 绘图辅助节点定义.
-    \coordinate (Logo-西北) at (0, \beamer@scu@ht@footline);% Logo 西北节点
-    \coordinate (Logo-东北) at (\beamer@scu@wd@Logobar, \beamer@scu@ht@footline);% Logo 东北节点
-    \coordinate (Logo-东南) at (54pt, 0);% Logo 东南节点
-    \coordinate (浅色装饰-东南) at (58pt, 0);% 浅色装饰 东南节点
-    \coordinate (浅色装饰-东北) at (55.5pt, 5pt);% 浅色装饰 东北节点
-    \coordinate (浅色装饰-西北) at (51.5pt, 5pt);% 浅色装饰 西北节点
-    \coordinate (深色装饰-东北) at (53.5pt, 9pt);% 深色装饰 东北节点
-    \coordinate (深色装饰-西北) at (49.5pt, 9pt);% 深色装饰 西北节点
-    % 颜色图形绘制.
-    \fill[PrimaryC] (0, 0) -- (Logo-西北)%
-      -- (Logo-东北) -- (Logo-东南) -- cycle;% Logo 背景
-    \node[inner sep=0pt, outer sep=0pt] at (25pt, 6pt) {\pgfuseimage{lg}};
-    \fill[AuxiliaryC] (Logo-东南) -- (浅色装饰-西北)%
-      -- (浅色装饰-东北) -- (浅色装饰-东南) -- cycle;% 浅色装饰
-    \fill[IntersperseC] (浅色装饰-西北) -- (深色装饰-西北)%
-      -- (深色装饰-东北) -- (浅色装饰-东北) -- cycle;% 深色装饰
+    % 定义 Logo 辅助绘图节点.
+    \coordinate (Logo-左上) at (0, \scu@ht@footline);%
+    \coordinate (Logo-右上) at (\scu@wd@Logobar, \scu@ht@footline);%
+    \coordinate (Logo-右下) at (\scu@wd@Logobar, 0);%
+    % 限制绘图范围.
+    \clip (Logo-左上) rectangle (\the\paperwidth, 0);%
+    % 绘制 Logo.
+    \shade[top color=AuxiliaryC, bottom color=IntersperseC]%
+      (Logo-右下) -- (Logo-右上)%
+      -- plot[smooth, domain=90:36, samples=40]%
+        ({\scu@ht@footline*\RCurveX{TP}{\x}+\scu@wd@Logobar},%
+        {\scu@ht@footline*\RCurveYU{TP}{\x}}) -- cycle;% 渐变装饰
+    \fill[PrimaryC] (0, 0) -- (Logo-左上) -- (Logo-右上)%
+      -- plot[smooth, domain=90:36, samples=40]%
+        ({\scu@ht@footline*\RCurveX{F}{\x}+\scu@wd@Logobar},%
+        {\scu@ht@footline*\RCurveYU{F}{\x}}) -- cycle;% Logo 背景
+    \node[inner sep=0pt, outer sep=0pt] at (25pt, 6pt) {\pgfuseimage{lg}};% Logo
+    % 定义 进度条 辅助绘图节点.
+    \coordinate (进度条-左上) at (\scu@wd@pagebarbk, \scu@ht@footline);%
+    \fill[IntersperseC] (进度条-左上) -- ++ (.2pt, 0) -- ++ (0, -3pt) -- ++ (-.2pt, 0)%
+      -- plot[smooth, domain=270:216, samples=18]%
+        ({3pt*\RCurveX{FP}{\x}+\scu@wd@pagebarbk},%
+        {3pt*\RCurveYD{FP}{\x}+\scu@ht@footline}) -- cycle;% 进度条 装饰
+  \end{tikzpicture}%
+}%
+
+% SAVEBOX:: TikZ ProgressBar 装饰盒子 - box@progressbarDc.
+\newsavebox{\scu@box@progressbarDc}%
+\sbox{\scu@box@progressbarDc}{%
+  \begin{tikzpicture}%
+    % 限制绘图范围.
+    \clip (1.5pt, .01pt) rectangle (-5pt, -3pt);%
+    % 绘制 进度条 装饰.
+    \shade[left color=IntersperseC, right color=BackgroundC] (0, -2.99pt)%
+      -- plot[smooth, domain=270:210, samples=18]%
+        ({3pt*\RCurveX{FP}{\x}}, {3pt*\RCurveYD{FP}{\x}+.01pt})%
+      -- (0, .01pt) arc (90:-90: 1.5pt) -- cycle;% 进度条 色块
+    \draw[BackgroundC, line width=.3pt] (.8pt, -3.3pt) arc (0:84: .8pt and .3pt)%
+      -- plot[smooth, domain=270:210, samples=18]% 
+        ({3pt*\RCurveX{FP}{\x}}, {3pt*\RCurveYD{FP}{\x}})%
+      arc (260:220: 1.5pt and .6pt);% 进度条 装饰
   \end{tikzpicture}%
 }%
 
@@ -599,13 +630,18 @@
   \multiply\scu@len@probartmp by 1000%
   \begin{tikzpicture}[very thin, overlay, remember picture]%
     % 绘图辅助节点定义.
-    \coordinate (SouthWest) at (current page.south west);% 西南节点
-    \coordinate (ProBar) at ([xshift=48pt, yshift=9pt]SouthWest);% 初始节点
-    % 图形绘制.
-    \fill[#1] (ProBar) rectangle ++ (\beamer@scu@wd@probar, 3pt);% 未放映部分
-    \fill[#2] ([yshift=9pt]SouthWest) rectangle ++ (\beamer@scu@wd@Logobar, 3pt);
-    \fill[#2] (ProBar) rectangle ++ (\beamer@scu@len@probartmp, 3pt);% 已放映部分
-    \fill[#3, draw=#2, line width=.48pt] ([xshift=\beamer@scu@len@probartmp, yshift=1.5pt]ProBar) circle (1.26pt);
+    \coordinate (SouthEast) at (current page.south east);% dong南节点
+    \coordinate (ProBar) at (\scu@wd@pagebarbk, 9pt);% 初始节点
+    % 限制绘图范围.
+    \clip (ProBar) rectangle (\the\paperwidth, \scu@ht@footline);%
+    % 绘制 进度条.
+    \fill[#1] (ProBar) rectangle ++ (\scu@wd@probar, 3pt);% 未放映部分
+    \shade[left color=#3, right color=#2] (ProBar)%
+      -- ++ (\scu@len@probartmp, 0) arc (0:90: 3pt)%
+      -- ([yshift=3pt]ProBar) -- cycle;% 已放映部分
+    \node[inner sep=0pt, outer sep=0pt] at%
+      ([xshift=\dimexpr\scu@len@probartmp-1.75pt\relax, yshift=1.5pt]ProBar)%
+      {\usebox{\scu@box@progressbarDc}};% 装饰线
   \end{tikzpicture}%
 }
 
@@ -616,7 +652,7 @@
 \defbeamertemplate*{footline}{SCU footline theme}{%
   \begin{beamercolorbox}[wd=\paperwidth, ht=\scu@ht@footline, dp=0pt]{}%
     \beamer@scu@framenumber% 优先调用计数器设置
-    \beamer@scu@progressbar{AuxiliaryC}{PrimaryC}{BackgroundC}%
+    \beamer@scu@progressbar{AuxiliaryC}{PrimaryC}{IntersperseC}%
     \beamer@scu@footline%
   \end{beamercolorbox}%
 }
