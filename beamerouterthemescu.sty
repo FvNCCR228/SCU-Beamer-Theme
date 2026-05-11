@@ -103,6 +103,17 @@
 % BOX:: 迷你帧盒子 - box@miniframes.
 \newbox\scu@box@miniframes
 
+% 定义 Curve 函数.
+%% 参考::
+%% https://www.desmos.com/calculator/b2ojducp8y
+\def\RCurveT#1{(2+2^(sin(3*(#1))))/2}% r=(2+2^(sin(3θ)))/2
+\def\RCurveTP#1{(2+2^(sin(3*(#1+180))))/2}% r=(2+2^(sin(3*(θ+π))))/2
+\def\RCurveF#1{(2+2^(sin(5*(#1))))/2}% r=(2+2^(sin(5θ))/2
+\def\RCurveFP#1{(2+2^(sin(5*(#1+180))))/2}% r=(2+2^(sin(5*(θ+π))))/2
+\def\ycut{0.88}%
+\def\RCurveX#1#2{((\csname RCurve#1\endcsname{#2}*cos(#2))/(2-\ycut))}% 定位 x
+\def\RCurveYU#1#2{((\csname RCurve#1\endcsname{#2}*sin(#2)-\ycut)/(2-\ycut))}% 定位 y, 图形在 y 轴上方
+\def\RCurveYD#1#2{((\csname RCurve#1\endcsname{#2}*sin(#2)+\ycut)/(2-\ycut))}% 定位 y, 图形在 y 轴下方
 
 % SAVEBOX:: TikZ Headline 底图盒子 - box@headlinebg.
 \newsavebox{\scu@box@headlineBg}%
