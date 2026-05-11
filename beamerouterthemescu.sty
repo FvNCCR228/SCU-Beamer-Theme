@@ -77,35 +77,36 @@
 % FORMAT:: section [cn - ALL; en - CURRENT] | subsection (with mini-frames).
 % ----------------
 % DIMEN:: Headline 高度 - ht@headline.
-\newdimen\beamer@scu@ht@headline
-\beamer@scu@ht@headline=13pt
+\newdimen\scu@ht@headline
+\scu@ht@headline=13pt
 % DIMEN:: Headline 页边距宽度 - wd@headlineskip.
-\newdimen\beamer@scu@wd@headlineskip
-\beamer@scu@wd@headlineskip=9pt
-% DIMEN:: 章节导航栏宽度(窄边) - wd@secbar.
-\newdimen\beamer@scu@wd@secbar
+\newdimen\scu@wd@headlineskip
+\scu@wd@headlineskip=9pt
+% DIMEN:: 章节导航栏宽度 - wd@secbar.
+\newdimen\scu@wd@secbar
 \if\EqualOptionsBeamer{LanguageMode}{cn}%
-  \beamer@scu@wd@secbar=0.64\paperwidth%
+  \scu@wd@secbar=0.64\paperwidth%
 \else\if\EqualOptionsBeamer{LanguageMode}{en}%
-  \beamer@scu@wd@secbar=0.52\paperwidth%
+  \scu@wd@secbar=0.52\paperwidth%
 \fi\fi
-% DIMEN:: 小节-标题分隔线宽度(窄边) - wd@sectotitleline.
-\newdimen\beamer@scu@wd@sectotitleline
-\beamer@scu@wd@sectotitleline=\dimexpr\the\paperwidth-\beamer@scu@wd@secbar-20pt\relax
+% DIMEN:: 小节-标题分隔线宽度 - wd@sectotitleline.
+\newdimen\scu@wd@sectotitleline
+\scu@wd@sectotitleline=\dimexpr\the\paperwidth-\scu@wd@secbar-36pt\relax
 % DIMEN:: 小节导航栏宽度 - wd@sectotitleline.
-\newdimen\beamer@scu@wd@subsecbar
-\beamer@scu@wd@subsecbar=0pt
+\newdimen\scu@wd@subsecbar
+\scu@wd@subsecbar=0pt
 
 % BOX:: 章节导航栏盒子 - box@secbar.
-\newbox\beamer@scu@box@secbar
+\newbox\scu@box@secbar
 % BOX:: 小节导航栏盒子 - box@subsecbar.
-\newbox\beamer@scu@box@subsecbar
+\newbox\scu@box@subsecbar
 % BOX:: 迷你帧盒子 - box@miniframes.
-\newbox\beamer@scu@box@miniframes
+\newbox\scu@box@miniframes
+
 
 % SAVEBOX:: TikZ Headline 底图盒子 - box@headlinebg.
-\newsavebox{\beamer@scu@box@headlineBg}
-\sbox{\beamer@scu@box@headlineBg}{%
+\newsavebox{\scu@box@headlineBg}%
+\sbox{\scu@box@headlineBg}{%
   \begin{tikzpicture}%
     % 绘图辅助节点定义.
     \coordinate (横向分隔线-西南) at (0, -\beamer@scu@ht@headline);% 小节-标题分隔线 西南节点
@@ -137,7 +138,7 @@
   \usebeamerfont{section in head/foot}%
   \usebeamercolor[fg]{section in head/foot}%
   \if\EqualOptionsBeamer{LanguageMode}{cn}%
-    \insertsectionnavigationhorizontal{\beamer@scu@wd@secbar}{}{}%
+    \insertsectionnavigationhorizontal{\scu@wd@secbar}{}{}%
   \else\if\EqualOptionsBeamer{LanguageMode}{en}%
     \insertsectionhead\hspace*{#1}%
   \fi\fi%
@@ -280,47 +281,47 @@
 % }
 
 % 页眉样式定义.
-\newdimen\beamer@scu@len@secbarY% 章节导航栏 y 值
-\newdimen\beamer@scu@len@subsecbarY% 小节导航栏 y 值
-\newdimen\beamer@scu@len@miniframesX% 迷你帧 x 值
-\newdimen\beamer@scu@len@miniframesY% 迷你帧 y 值
+\newdimen\scu@len@secbarY% 章节导航栏 y 值
+\newdimen\scu@len@subsecbarY% 小节导航栏 y 值
+\newdimen\scu@len@miniframesX% 迷你帧 x 值
+\newdimen\scu@len@miniframesY% 迷你帧 y 值
 \def\beamer@scu@headline{%
   % 填充内容盒子.
-  \setbox\beamer@scu@box@secbar=\hbox{%
-    \insert@secbar{\beamer@scu@wd@headlineskip}}% 设置章节导航栏盒子, 内容右对齐
-  \setbox\beamer@scu@box@subsecbar=\hbox{\insert@subsecbar}% 设置小节导航栏盒子
+  \setbox\scu@box@secbar=\hbox{%
+    \insert@secbar{\scu@wd@headlineskip}}% 设置章节导航栏盒子, 内容右对齐
+  \setbox\scu@box@subsecbar=\hbox{\insert@subsecbar}% 设置小节导航栏盒子
   % 设置 dimen.
-  \beamer@scu@wd@subsecbar=\wd\beamer@scu@box@subsecbar% 设置小节导航栏宽度
-  \beamer@scu@len@secbarY=\dimexpr.5\beamer@scu@ht@headline%
-    -.5\ht\beamer@scu@box@secbar+.25\dp\beamer@scu@box@secbar\relax% 设置章节导航栏 y 值
-  \beamer@scu@len@subsecbarY=\dimexpr.5\beamer@scu@ht@headline+1pt%
-    -.5\ht\beamer@scu@box@subsecbar+.5\dp\beamer@scu@box@subsecbar\relax% 设置小节导航栏 y 值
+  \scu@wd@subsecbar=\wd\scu@box@subsecbar% 设置小节导航栏宽度
+  \scu@len@secbarY=\dimexpr.5\scu@ht@headline%
+    -.5\ht\scu@box@secbar+.25\dp\scu@box@secbar\relax% 设置章节导航栏 y 值
+  \scu@len@subsecbarY=\dimexpr.5\scu@ht@headline+1pt%
+    -.5\ht\scu@box@subsecbar+.5\dp\scu@box@subsecbar\relax% 设置小节导航栏 y 值
   % 使用 picture 环境定位及绘制 Headline.
   \begin{picture}(0, 0)%
-    \put(0, 0){\usebox{\beamer@scu@box@headlineBg}}% 绘制 Headline 底图
-    \put(\paperwidth, \beamer@scu@len@secbarY){%
-      \makebox[0pt][r]{\box\beamer@scu@box@secbar}}% 绘制章节栏水平导航
-    \put(\beamer@scu@wd@headlineskip, \beamer@scu@len@subsecbarY){%
-      \box\beamer@scu@box@subsecbar}% 绘制小节导航栏
+    \put(0, 0){\usebox{\scu@box@headlineBg}}% 绘制 Headline 底图
+    \put(\paperwidth, \scu@len@secbarY){%
+      \makebox[0pt][r]{\box\scu@box@secbar}}% 绘制章节栏水平导航
+    \put(\scu@wd@headlineskip, \scu@len@subsecbarY){%
+      \box\scu@box@subsecbar}% 绘制小节导航栏
     % 迷你帧跟随模式.
     \if\EqualOptionsBeamer{Miniframes}{follow}%
-      \setbox\beamer@scu@box@miniframes=\hbox{\parbox{%
-        \dimexpr\beamer@scu@wd@sectotitleline-\beamer@scu@wd@subsecbar\relax}{%
+      \setbox\scu@box@miniframes=\hbox{\parbox{%
+        \dimexpr\scu@wd@sectotitleline-\scu@wd@subsecbar\relax}{%
           \insert@subsecminiframes{3.6pt}{1.6pt}}}% 设置迷你帧盒子
-      \beamer@scu@len@miniframesX=\dimexpr\beamer@scu@wd@headlineskip%
-        +\beamer@scu@wd@subsecbar+2.4pt\relax% 设置迷你帧 x 值
-      \beamer@scu@len@miniframesY=\dimexpr.5\beamer@scu@ht@headline+1pt-.75pt%
-        -.5\ht\beamer@scu@box@miniframes+.5\dp\beamer@scu@box@miniframes\relax% 设置迷你帧 y 值
-      \put(\beamer@scu@len@miniframesX, \beamer@scu@len@miniframesY){%
-        \box\beamer@scu@box@miniframes}% 绘制小节迷你帧
+      \scu@len@miniframesX=\dimexpr\scu@wd@headlineskip%
+        +\scu@wd@subsecbar+2.4pt\relax% 设置迷你帧 x 值
+      \scu@len@miniframesY=\dimexpr.5\scu@ht@headline+1pt-.75pt%
+        -.5\ht\scu@box@miniframes+.5\dp\scu@box@miniframes\relax% 设置迷你帧 y 值
+      \put(\scu@len@miniframesX, \scu@len@miniframesY){%
+        \box\scu@box@miniframes}% 绘制小节迷你帧
     % 迷你帧分离模式.
     \else\if\EqualOptionsBeamer{Miniframes}{separate}%
-      \setbox\beamer@scu@box@miniframes=\hbox{%
+      \setbox\scu@box@miniframes=\hbox{%
         \insert@subsecminiframes{3.6pt}{1.6pt}}% 设置迷你帧盒子
-      \beamer@scu@len@miniframesX=\dimexpr\paperwidth%
-        -\beamer@scu@wd@headlineskip+1.6pt\relax% 设置迷你帧 x 值
-      \put(\beamer@scu@len@miniframesX, -6){%
-        \makebox[0pt][r]{\box\beamer@scu@box@miniframes}}% 绘制小节迷你帧
+      \scu@len@miniframesX=\dimexpr\paperwidth%
+        -\scu@wd@headlineskip+1.6pt\relax% 设置迷你帧 x 值
+      \put(\scu@len@miniframesX, -6){%
+        \makebox[0pt][r]{\box\scu@box@miniframes}}% 绘制小节迷你帧
     % 迷你帧取消模式.
     \else\if\EqualOptionsBeamer{Miniframes}{none}%
       \relax%
@@ -330,7 +331,7 @@
 
 % 设置 Headline 主题模板.
 \defbeamertemplate*{headline}{SCU headline theme}{%
-  \begin{beamercolorbox}[wd=\paperwidth, ht=\beamer@scu@ht@headline]{}%
+  \begin{beamercolorbox}[wd=\paperwidth, ht=\scu@ht@headline]{}%
     \beamer@scu@headline%
   \end{beamercolorbox}%
 }
@@ -340,11 +341,12 @@
 
 % ----------------
 % Beamer Theme Frametitle Layout
-% Confirmed in v2.1b(2025/10/06).
+% Confirmed in v2.1c(2026/05/20).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.2a(2022/03/10), v1.3b(2022/04/13), v1.3c(2024/04/16), v2.1b(2025/10/06).
+% Updated in v1.2a(2022/03/10), v1.3b(2022/04/13), v1.3c(2024/04/16), v2.1b(2025/10/06), v2.1c(2026/05/20).
 % ----------------
 % 于 v2.1b(2025/10/06) 优化 Frametitle 纵向间距.
+% 于 v2.1c(2026/05/20) 缩减 DIMEN, BOX 等变量名的长度 (由 beamer@scu@xxx 改为 scu@xxx, 更直观).
 % ----------------
 % FORMAT:: frametitle | framesubtitle.
 % ----------------
@@ -353,14 +355,14 @@
   \vskip-2pt% 消除 Headline 和 Frametitle 间空白距离
   \ifx\insertframesubtitle\@empty%
     \begin{beamercolorbox}[wd=\paperwidth, ht=2.2ex,%
-      leftskip=\beamer@scu@wd@headlineskip]{}%{frametitle}
+      leftskip=\scu@wd@headlineskip]{}%{frametitle}
       \usebeamerfont{frametitle}%
       \usebeamercolor[fg]{frametitle}%
       \insertframetitle%
     \end{beamercolorbox}%
   \else%
     \begin{beamercolorbox}[wd=\paperwidth, ht=2.2ex,%
-      leftskip=\beamer@scu@wd@headlineskip]{}%{frametitle}
+      leftskip=\scu@wd@headlineskip]{}%{frametitle}
       \usebeamerfont{frametitle}%
       \usebeamercolor[fg]{frametitle}%
       \insertframetitle~%
@@ -377,12 +379,13 @@
 
 % ----------------
 % Beamer Theme Footline Layout
-% Confirmed in v2.1b(2025/10/06).
+% Confirmed in v2.1c(2026/05/20).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3e(2024/10/31), v2.1b(2025/10/06).
+% Updated in v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3e(2024/10/31), v2.1b(2025/10/06), v2.1c(2026/05/20).
 % ----------------
 % 于 v1.3c(2024/04/16) 与 Footline TikZ 绘图部分合并, 强化代码关联度.
 % 于 v2.1b(2025/10/06) 更改 Tikz 节点描述为中文, 更直观; 使用 picture 环境替换此前所用 tikz 环境定位及绘制 Footline.
+% 于 v2.1c(2026/05/20) 缩减 DIMEN, BOX 等变量名的长度 (由 beamer@scu@xxx 改为 scu@xxx, 更直观).
 % ----------------
 % CMD:: \newdimen   - 创建长度寄存器.
 % CMD:: \newcount   - 创建计数器.
@@ -392,34 +395,37 @@
 % FORMAT:: NAME of SCU | author | short title | navigation tool | framenumber.
 % ----------------
 % DIMEN:: Footline 高度 - ht@footline.
-\newdimen\beamer@scu@ht@footline
-\beamer@scu@ht@footline=12pt
-% DIMEN:: Logo 宽度(窄边) - wd@Logobar.
-\newdimen\beamer@scu@wd@Logobar
-\beamer@scu@wd@Logobar=48pt
+\newdimen\scu@ht@footline
+\scu@ht@footline=12pt
+% DIMEN:: Logo 宽度 - wd@Logobar.
+\newdimen\scu@wd@Logobar
+\scu@wd@Logobar=48pt
 % DIMEN:: Acrobat 页面跳转页码导航栏宽度 - wd@pagebar.
-\newdimen\beamer@scu@wd@pagebar
+\newdimen\scu@wd@pagebar
+% DIMEN:: ProgressBar 空白 - wd@pagebarbk.
+\newdimen\scu@wd@pagebarbk
+\scu@wd@pagebarbk=\dimexpr\scu@wd@Logobar+16pt\relax
 % DIMEN:: ProgressBar 宽度 - wd@probar.
-\newdimen\beamer@scu@wd@probar
-\beamer@scu@wd@probar=\dimexpr\the\paperwidth-\beamer@scu@wd@Logobar\relax
+\newdimen\scu@wd@probar
+\scu@wd@probar=\dimexpr\the\paperwidth-\scu@wd@pagebarbk\relax
 % DIMEN:: ProgressBar auxiliary dimension - len@probartmp.
-\newdimen\beamer@scu@len@probartmp
+\newdimen\scu@len@probartmp
 
 % COUNT:: 当前帧页码(正文/附录) - currentframe.
-\newcount\beamer@scu@count@currentframe
+\newcount\scu@count@currentframe
 % COUNT:: 当前总页码(正文/附录) - totalframe.
-\newcount\beamer@scu@count@totalframe
+\newcount\scu@count@totalframe
 
 % BOX:: 标题导航栏盒子 - box@titlebar.
-\newbox\beamer@scu@box@titlebar
+\newbox\scu@box@titlebar
 % BOX:: 页码导航栏盒子 - box@pagebar.
-\newbox\beamer@scu@box@pagebar
+\newbox\scu@box@pagebar
 % BOX:: 功能导航栏盒子 - box@navbar.
-\newbox\beamer@scu@box@navbar
+\newbox\scu@box@navbar
 
 % SAVEBOX:: TikZ Footline 底图盒子 - box@footlineBg.
-\newsavebox{\beamer@scu@box@footlineBg}
-\sbox{\beamer@scu@box@footlineBg}{%
+\newsavebox{\scu@box@footlineBg}%
+\sbox{\scu@box@footlineBg}{%
   \begin{tikzpicture}%
     % 绘图辅助节点定义.
     \coordinate (Logo-西北) at (0, \beamer@scu@ht@footline);% Logo 西北节点
@@ -444,11 +450,11 @@
 % 设置帧页码计数器(正文/附录).
 \def\beamer@scu@framenumber{%
   \ifbeamer@inappendix% 附录帧取附录帧页码
-    \beamer@scu@count@currentframe=\insertframenumberinappendix%
-    \beamer@scu@count@totalframe=\insertappendixframenumber%
+    \scu@count@currentframe=\insertframenumberinappendix%
+    \scu@count@totalframe=\insertappendixframenumber%
   \else% 正文帧取除开附录帧页码
-    \beamer@scu@count@currentframe=\insertframenumber%
-    \beamer@scu@count@totalframe=\insertmainframenumber%
+    \scu@count@currentframe=\insertframenumber%
+    \scu@count@totalframe=\insertmainframenumber%
   \fi%
 }
 
@@ -465,9 +471,9 @@
   \Acrobatmenu{GoToPage}{%
     \usebeamerfont{framenumber in head/foot}%
     \usebeamercolor[fg]{framenumber in head/foot}%
-    \the\beamer@scu@count@currentframe}%
+    \the\scu@count@currentframe}%
   \usebeamerfont{framenumber in head/foot}%
-  \textcolor{SecondaryAuxiliaryC}{~\scalebox{1.33}[0.9]{\faCaretRight}\,\the\beamer@scu@count@totalframe}%
+  \textcolor{SecondaryAuxiliaryC}{~\scalebox{1.33}[0.9]{\faCaretRight}\,\the\scu@count@totalframe}%
 }
 
 % Compute Navigation Tool num.
@@ -523,14 +529,14 @@
 }
 
 % 页脚样式定义.
-\newdimen\beamer@scu@len@titlebarY% 标题导航栏 y 值
-\newdimen\beamer@scu@len@pagebarX% 页码导航栏 x 值
-\newdimen\beamer@scu@len@pagebarY% 页码导航栏 y 值
-\newdimen\beamer@scu@len@navbarX% 功能导航栏 x 值
-\newdimen\beamer@scu@len@navbarY% 功能导航栏 y 值
+\newdimen\scu@len@titlebarY% 标题导航栏 y 值
+\newdimen\scu@len@pagebarX% 页码导航栏 x 值
+\newdimen\scu@len@pagebarY% 页码导航栏 y 值
+\newdimen\scu@len@navbarX% 功能导航栏 x 值
+\newdimen\scu@len@navbarY% 功能导航栏 y 值
 \def\beamer@scu@footline{%
   % 填充内容盒子.
-  \setbox\beamer@scu@box@titlebar=\hbox{%
+  \setbox\scu@box@titlebar=\hbox{%
     \usebeamerfont{author in head/foot}%
     \usebeamercolor[fg]{author in head/foot}%
     \insertshortauthor\,%
@@ -539,33 +545,33 @@
     \usebeamercolor[fg]{title in head/foot}%
     \insertshorttitle%
   }% 设置页脚标题导航栏盒子
-  \setbox\beamer@scu@box@pagebar=\hbox{%
+  \setbox\scu@box@pagebar=\hbox{%
     \insert@framenumberwithbutton}% 设置页脚页码导航栏盒子
   % 设置 dimen.
-  \beamer@scu@wd@pagebar=\wd\beamer@scu@box@pagebar% 设置页码导航栏宽度
-  \beamer@scu@len@secbarY=\dimexpr.5\beamer@scu@ht@footline-1.5pt%
-    -.5\ht\beamer@scu@box@titlebar+.25\dp\beamer@scu@box@titlebar\relax% 设置标题导航栏 y 值
-  \beamer@scu@len@pagebarX=\dimexpr\paperwidth%
-    -\beamer@scu@wd@headlineskip\relax% 设置页码导航栏 x 值
-  \beamer@scu@len@pagebarY=\dimexpr.5\beamer@scu@ht@footline-1.5pt%
-    -.5\ht\beamer@scu@box@pagebar+.25\dp\beamer@scu@box@pagebar\relax% 设置页码导航栏 y 值
+  \scu@wd@pagebar=\wd\scu@box@pagebar% 设置页码导航栏宽度
+  \scu@len@secbarY=\dimexpr.5\scu@ht@footline-1.5pt%
+    -.5\ht\scu@box@titlebar+.25\dp\scu@box@titlebar\relax% 设置标题导航栏 y 值
+  \scu@len@pagebarX=\dimexpr\paperwidth%
+    -\scu@wd@headlineskip\relax% 设置页码导航栏 x 值
+  \scu@len@pagebarY=\dimexpr.5\scu@ht@footline-1.5pt%
+    -.5\ht\scu@box@pagebar+.25\dp\scu@box@pagebar\relax% 设置页码导航栏 y 值
   % 使用 picture 环境定位及绘制 Footline.
   \begin{picture}(0, 0)%
-    \put(0, 0){\usebox{\beamer@scu@box@footlineBg}}% 绘制 footline 底图
-    \put(64pt, \beamer@scu@len@secbarY){\box\beamer@scu@box@titlebar}% 绘制 Beamer 标题
-    \put(\beamer@scu@len@pagebarX, \beamer@scu@len@pagebarY){%
-      \makebox[0pt][r]{\box\beamer@scu@box@pagebar}}% 绘制带有 Acrobat 页面跳转按钮的页码
+    \put(0, 0){\usebox{\scu@box@footlineBg}}% 绘制 footline 底图
+    \put(\scu@wd@pagebarbk, \scu@len@secbarY){\box\scu@box@titlebar}% 绘制 标题
+    \put(\scu@len@pagebarX, \scu@len@pagebarY){%
+      \makebox[0pt][r]{\box\scu@box@pagebar}}% 绘制带有 Acrobat 页面跳转按钮的页码
     \if\EqualOptionsBeamer{NavigationTool}{none}%
       \relax%
     \else%
-      \setbox\beamer@scu@box@navbar=\hbox{%
+      \setbox\scu@box@navbar=\hbox{%
         \insert@footnavigationtool{1.6pt}{4.2pt}}% 设置功能导航栏盒子
-      \beamer@scu@len@navbarX=\dimexpr\beamer@scu@len@pagebarX%
-        -\beamer@scu@wd@pagebar-6pt\relax% 设置功能导航栏 x 值
-      \beamer@scu@len@navbarY=\dimexpr.5\beamer@scu@ht@footline-1.5pt%
-        -.5\ht\beamer@scu@box@navbar+.25\dp\beamer@scu@box@navbar\relax% 设置功能导航栏 y 值
-      \put(\beamer@scu@len@navbarX, \beamer@scu@len@navbarY){%
-        \makebox[0pt][r]{\box\beamer@scu@box@navbar}}% 绘制 Navigation Tools
+      \scu@len@navbarX=\dimexpr\scu@len@pagebarX%
+        -\scu@wd@pagebar-6pt\relax% 设置功能导航栏 x 值
+      \scu@len@navbarY=\dimexpr.5\scu@ht@footline-1.5pt%
+        -.5\ht\scu@box@navbar+.25\dp\scu@box@navbar\relax% 设置功能导航栏 y 值
+      \put(\scu@len@navbarX, \scu@len@navbarY){%
+        \makebox[0pt][r]{\box\scu@box@navbar}}% 绘制 Navigation Tools
     \fi%
   \end{picture}%
 }
@@ -575,11 +581,11 @@
   % #1:: 未放映部分颜色.
   % #2:: 已放映部分颜色.
   % #3:: 辅助色.
-  \beamer@scu@len@probartmp=\beamer@scu@wd@probar%
-  \divide\beamer@scu@len@probartmp by 1000%
-  \multiply\beamer@scu@len@probartmp by \beamer@scu@count@currentframe%
-  \divide\beamer@scu@len@probartmp by \beamer@scu@count@totalframe%
-  \multiply\beamer@scu@len@probartmp by 1000%
+  \scu@len@probartmp=\scu@wd@probar%
+  \divide\scu@len@probartmp by 1000%
+  \multiply\scu@len@probartmp by \scu@count@currentframe%
+  \divide\scu@len@probartmp by \scu@count@totalframe%
+  \multiply\scu@len@probartmp by 1000%
   \begin{tikzpicture}[very thin, overlay, remember picture]%
     % 绘图辅助节点定义.
     \coordinate (SouthWest) at (current page.south west);% 西南节点
@@ -597,7 +603,7 @@
 
 % 设置 Footline 主题模板.
 \defbeamertemplate*{footline}{SCU footline theme}{%
-  \begin{beamercolorbox}[wd=\paperwidth, ht=\beamer@scu@ht@footline, dp=0pt]{}%
+  \begin{beamercolorbox}[wd=\paperwidth, ht=\scu@ht@footline, dp=0pt]{}%
     \beamer@scu@framenumber% 优先调用计数器设置
     \beamer@scu@progressbar{AuxiliaryC}{PrimaryC}{BackgroundC}%
     \beamer@scu@footline%
