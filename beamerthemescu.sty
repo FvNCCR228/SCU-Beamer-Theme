@@ -105,13 +105,13 @@
 \DeclareOptionBeamer{MintedStyle}{\def\beamer@scu@MintedStyle{#1}}
 % KEY:: ColorDisplay [PASSTO:: beamercolorthemescu.sty].
 % VALUE:: JXred | BSblue.
-\DeclareOptionBeamer{ColorDisplay}{\PassOptionsToPackage{ColorDisplay=#1}{beamercolorthemescu}}
+\DeclareOptionBeamer{ColorDisplay}{\PassOptionsToPackage{ColorDisplay={#1}}{beamercolorthemescu}}
 % KEY:: Miniframes [PASSTO:: beamerouterthemescu.sty].
 % VALUE:: follow | separate | none.
-\DeclareOptionBeamer{Miniframes}{\PassOptionsToPackage{Miniframes=#1}{beamerouterthemescu}}
+\DeclareOptionBeamer{Miniframes}{\PassOptionsToPackage{Miniframes={#1}}{beamerouterthemescu}}
 % KEY:: NavigationTool [PASSTO:: beamerouterthemescu.sty].
 % VALUE:: none | 1 | 2 | 3 | 1-2 | 1-3 | 2-3 | 1-2-3.
-\DeclareOptionBeamer{NavigationTool}{\PassOptionsToPackage{NavigationTool=#1}{beamerouterthemescu}}
+\DeclareOptionBeamer{NavigationTool}{\PassOptionsToPackage{NavigationTool={#1}}{beamerouterthemescu}}
 % KEY:: LanguageMode.
 % VALUE:: cn | en.
 \DeclareOptionBeamer{LanguageMode}{\def\beamer@scu@LanguageMode{#1}}
