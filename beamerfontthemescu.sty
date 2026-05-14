@@ -1,0 +1,206 @@
+% This is file `beamerfontthemescu.sty'.
+% Copyright (C) 2021-2026 by Linrong Wu.
+% Version: 2026/05/20 v2.1c (Original Version: 2026/05/20 v2.1c).
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+%
+% 本文件为 SCU Beamer Theme 字体主题宏包文件.
+% !请勿轻易改动此文档中代码.
+%%%% ----------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{beamerfontthemescu}[2026/05/20 v2.1c, SCU Beamer Theme(Font Theme)]
+%%%% ----------------------------------------------------------------
+
+
+% ----------------
+% Declare of Options
+% Confirmed in v2.1c(2026/05/20).
+% Established in v2.1c(2026/05/20).
+% ----------------
+% CMD:: \DeclareOptionBeamer  - 声明参数.
+% CMD:: \ExecuteOptionsBeamer - 预执行参数.
+% CMD:: \ProcessOptionsBeamer - 处理参数.
+% ----------------
+% KEY:: FontTheme.
+% VALUE:: Auto | Ubuntu | Win | Mac | Fandol | Source-Han | Source-Han(Local) | ZhongYi(Local) | Custom.
+\DeclareOptionBeamer{FontTheme}{\def\beamer@scu@FontTheme{#1}}
+% KEY:: MathFont.
+% VALUE:: XITS | LM | <custom>.
+\DeclareOptionBeamer{MathFont}{\def\beamer@scu@MathFont{#1}}
+
+\ExecuteOptionsBeamer{
+  FontTheme=Auto,%
+  MathFont=LM%
+}
+\ProcessOptionsBeamer
+% ----------------
+
+
+% ----------------
+% Beamer Theme Font Layout
+% ----------------
+% Confirmed in v2.1c(2026/05/20).
+% Established in v1.0a(2021/12/03).
+% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3d(2024/05/18), v2.1b(2025/10/06), v2.1c(2026/05/20).
+% ----------------
+% 于 v1.2a(2022/03/10) 设置主题数学字体选项 MathFont.
+% 于 v2.1c(2026/05/20) 从主主题文件独立, 设置 FontTheme 与 MathFont 选项. 定义 FontTheme(系统/字体包/本地/Custom) 与 MathFont(含<custom>) 两类参数, 可按需切换 sans/mono/CJK 字体族.
+% ----------------
+% 自动检测操作系统 (Auto), 无需手动设置.
+\if\EqualOptionsBeamer{FontTheme}{Auto}%
+  \IfFileExists{/Library/Keychains/System.keychain}{%
+    \def\beamer@scu@FontTheme{Mac}%
+  }{%
+    \IfFileExists{C:/Windows/System32/cmd.exe}{%
+      \def\beamer@scu@FontTheme{Win}%
+    }{%
+      \def\beamer@scu@FontTheme{Ubuntu}%
+    }%
+  }%
+\fi
+
+% 主字体(无衬线) / CJK 字体设置.
+\if\EqualOptionsBeamer{FontTheme}{Ubuntu}%
+  \setsansfont{Roboto}%                            sans      - Roboto
+  \setmonofont{Ubuntu Mono}%                       mono      - Ubuntu Mono
+  \ctexset{fontset=ubuntu}%                        CJK       - 思源黑体(CTeX)
+  \setCJKsansfont{Noto Sans CJK SC}%               CJKsans   - 思源黑体(简体中文)
+    [%
+      ItalicFont = {AR PL KaitiM GB}%              (italic)  - 文鼎楷体
+    ]%
+\else\if\EqualOptionsBeamer{FontTheme}{Win}%
+  \setsansfont{Segoe UI}%                          sans      - Segoe UI
+  \setmonofont{Consolas}%                          mono      - Consolas
+  \ctexset{fontset=windows}%                       CJK       - 微软雅黑(CTeX)
+  \setCJKsansfont{Microsoft YaHei}%                CJKsans   - 微软雅黑
+    [%
+      BoldFont   = {* Bold},%                      (bold)    - 微软雅黑 Bold
+      ItalicFont = {KaiTi}%                        (italic)  - 楷体
+    ]%
+\else\if\EqualOptionsBeamer{FontTheme}{Mac}%
+  \setsansfont{Helvetica}%                         sans      - Helvetica
+  \setmonofont{Menlo}%                             mono      - Menlo
+  \IfFileExists{/System/Library/Fonts/PingFang.ttc}%
+    {%
+      \ctexset{fontset=macnew}%                    CJK       - 苹方(CTeX)
+      \setCJKsansfont{PingFang SC}%                CJKsans   - 苹方(简体中文)
+        [%
+          ItalicFont     = {Kaiti SC}%             (italic)  - 华文楷体
+          BoldItalicFont = {Kaiti SC Bold}%        (bold-it) - 华文楷体 Bold
+        ]%
+    }{%
+      \ctexset{fontset=macold}%                    CJK       - 华文(CTeX)
+      \setCJKsansfont{STXihei}%                    CJKsans   - 华文细黑
+        [%
+          BoldFont       = {STHeiti},%             (bold)    - 华文黑体
+          ItalicFont     = {STKaiti}%              (italic)  - 华文楷体
+        ]%
+    }%
+\else\if\EqualOptionsBeamer{FontTheme}{Fandol}%
+  \setsansfont{Latin Modern Sans}%                 sans      - Latin Modern
+  \setmonofont{Latin Modern Mono}%                 mono      - Latin Modern
+  \ctexset{fontset=fandol}%                        CJK       - Fandol(CTeX)
+  \setCJKsansfont{FandolHei}%                      CJKsans   - FandolHei
+    [%
+      BoldFont   = {*-Bold},%                      (bold)    - FandolHei Bold
+      ItalicFont = {FandolKai}%                    (italic)  - FandolKai
+    ]%
+\else\if\EqualOptionsBeamer{FontTheme}{Source-Han}%
+  \setsansfont{Latin Modern Sans}%                 sans      - Latin Modern
+  \setmonofont{Latin Modern Mono}%                 mono      - Latin Modern
+  \setCJKsansfont{Source Han Sans SC}%             CJKsans   - 思源黑体(简体中文)
+    [%
+      ItalicFont = {LXGW WenKai Medium}%           (italic)  - 霞鹜文楷 Medium
+    ]%
+  \setCJKmonofont{LXGW WenKai Medium}%             CJKmono   - 霞鹜文楷
+\else\if\EqualOptionsBeamer{FontTheme}{Source-Han(Local)}%
+  \setsansfont{Latin Modern Sans}%                 sans      - Latin Modern
+  \setmonofont{Latin Modern Mono}%                 mono      - Latin Modern
+  \setCJKsansfont{SourceHanSansSC-Regular.otf}%    CJKsans   - 思源黑体(简体中文)
+    [%
+      Path       = "fonts/,"%
+      BoldFont   = {SourceHanSansSC-Bold.otf},%    (bold)    - 思源黑体 Bold
+      ItalicFont = {LXGWWenKai-Medium.ttf}%        (italic)  - 霞鹜文楷 Medium
+    ]%
+  \setCJKmonofont{LXGWWenKai-Medium.ttf}%          CJKmono   - 霞鹜文楷 Medium
+    [Path = "fonts/,"]%
+\else\if\EqualOptionsBeamer{FontTheme}{ZhongYi(Local)}%
+  \setsansfont{Latin Modern Sans}%                 sans      - Latin Modern
+  \setmonofont{Latin Modern Mono}%                 mono      - Latin Modern
+  \setCJKsansfont{simhei.ttf}%                     CJKsans   - 黑体
+    [%
+      Path       = "fonts/,"%
+      ItalicFont = {simkai.ttf}%                   (italic)  - 楷体
+    ]%
+  \setCJKmonofont{simfang.ttf}%                    CJKmono   - 仿宋
+    [Path = "fonts/,"]%
+\else\if\EqualOptionsBeamer{FontTheme}{Custom}%
+  \ifcsname beamer@scu@fontextend\endcsname%
+    \beamer@scu@fontextend%
+  \else%
+    \PackageWarningNoLine{beamerfontthemescu}{%
+      Option [FontTheme=Custom] is loaded. %
+      You should define \string\beamer@scu@fontextend\space to extend the font theme}%
+  \fi%
+\fi\fi\fi\fi\fi\fi\fi\fi
+
+% 数学字体设置.
+\if\EqualOptionsBeamer{MathFont}{XITS}%
+  \setmathfont{XITS Math}%                         math      - XITS
+\else\if\EqualOptionsBeamer{MathFont}{LM}%
+  \setmathfont{Latin Modern Math}%                 math      - Latin Modern
+\else\if\EqualOptionsBeamer{MathFont}{\beamer@scu@MathFont}%
+  \edef\set@MathFont{\noexpand%
+    \setmathfont{\beamer@scu@MathFont}}%
+  \set@MathFont%
+\fi\fi\fi
+% ----------------
+
+
+\mode<presentation>
+
+
+% ----------------
+% Beamer Theme Font Style Layout
+% ----------------
+% Confirmed in v2.1c(2026/05/20).
+% Established in v1.1a(2021/12/03).
+% ----------------
+% 于 v2.1c(2026/05/20) 从主主题文件独立.
+% ----------------
+% 幻灯标题字体设置.
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\scriptsize,series=\bfseries}
+% 封页字体设置.
+\setbeamerfont{title}{size=\LARGE,series=\bfseries}
+\setbeamerfont{subtitle}{size=\small,series=\bfseries}
+\setbeamerfont{author}{size=\small,series=\bfseries}
+\setbeamerfont{date}{size=\footnotesize,series=\bfseries}
+
+\setbeamerfont{block title}{size=\normalsize}
+\setbeamerfont{structure}{size=\normalsize,series=\bfseries}
+% 脚注字号设置.
+\setbeamerfont{footnote}{size=\scriptsize}
+% 页眉页脚字体设置.
+\setbeamerfont{section in head/foot}{size=\scriptsize,series=\bfseries}
+\setbeamerfont{subsection in head/foot}{size=\scriptsize,series=\bfseries}
+\setbeamerfont{institute in head/foot}{size=\scriptsize,series=\bfseries}
+\setbeamerfont{author in head/foot}{size=\tiny,series=\mdseries}
+\setbeamerfont{title in head/foot}{size=\tiny,series=\bfseries}
+\setbeamerfont{framenumber in head/foot}{size=\scriptsize,series=\bfseries}
+% itemize 环境序号设置.
+% \setbeamertemplate{itemize item}{\scriptsize\raise1.25pt\hbox{\textbullet}}
+% \setbeamertemplate{itemize subitem}{\scriptsize\raise1.25pt\hbox{\textbullet}}
+% \setbeamertemplate{itemize subsubitem}{\scriptsize\raise1.25pt\hbox{\textbullet}}
+% ----------------
+
+
+%%%% ----------------------------------------------------------------
+\endinput
+%%%% ----------------------------------------------------------------
+% End of file `beamerfontthemescu.sty'.
