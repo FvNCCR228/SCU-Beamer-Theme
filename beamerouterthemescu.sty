@@ -19,9 +19,9 @@
 
 % ----------------
 % Declare of Options
-% Confirmed in v2.1b(2025/10/06).
+% Confirmed in v2.1c(2026/05/20).
 % Established in v1.3c(2024/04/16), v1.3e(2024/10/31).
-% Updated in v1.3d(2024/05/18), v2.1b(2025/10/06).
+% Updated in v1.3d(2024/05/18), v2.1b(2025/10/06), v2.1c(2026/05/20).
 % ----------------
 % CMD:: \DeclareOptionBeamer  - 声明参数.
 % CMD:: \ExecuteOptionsBeamer - 预执行参数.
@@ -33,10 +33,14 @@
 % KEY:: NavigationTool.
 % VALUE:: none | 1 | 2 | 3 | 1-2 | 1-3 | 2-3 | 1-2-3.
 \DeclareOptionBeamer{NavigationTool}{\def\beamer@scu@NavigationTool{#1}}
+% KEY:: LogoWidth.
+% VALUE:: <dimen>.
+\DeclareOptionBeamer{LogoWidth}{\def\beamer@scu@LogoWidth{#1}}
 
 \ExecuteOptionsBeamer{%
   Miniframes=follow,%
-  NavigationTool=1-2-3%
+  NavigationTool=1-2-3,%
+  LogoWidth=48pt%
 }
 \ProcessOptionsBeamer
 % ----------------
@@ -403,7 +407,7 @@
 % ----------------
 % 于 v1.3c(2024/04/16) 与 Footline TikZ 绘图部分合并, 强化代码关联度.
 % 于 v2.1b(2025/10/06) 更改 Tikz 节点描述为中文, 更直观; 使用 picture 环境替换此前所用 tikz 环境定位及绘制 Footline.
-% 于 v2.1c(2026/05/20) 缩减 DIMEN, BOX 等变量名的长度 (由 beamer@scu@xxx 改为 scu@xxx, 更直观), Logo 相关长度重新调整, 后续将支持可变 Logo 区宽度; 使用曲线函数重绘原直角梯形图形, 部分采用渐变过渡.
+% 于 v2.1c(2026/05/20) 缩减 DIMEN, BOX 等变量名的长度 (由 beamer@scu@xxx 改为 scu@xxx, 更直观), Logo 相关长度重新调整, 且支持自定义 Logo 区宽度; 使用曲线函数重绘原直角梯形图形, 部分采用渐变过渡.
 % ----------------
 % CMD:: \newdimen   - 创建长度寄存器.
 % CMD:: \newcount   - 创建计数器.
@@ -417,7 +421,7 @@
 \scu@ht@footline=12pt
 % DIMEN:: Logo 宽度 - wd@Logobar.
 \newdimen\scu@wd@Logobar
-\scu@wd@Logobar=48pt
+\scu@wd@Logobar=\beamer@scu@LogoWidth\relax
 % DIMEN:: Acrobat 页面跳转页码导航栏宽度 - wd@pagebar.
 \newdimen\scu@wd@pagebar
 % DIMEN:: ProgressBar 空白 - wd@pagebarbk.
