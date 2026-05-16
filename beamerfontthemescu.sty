@@ -143,9 +143,9 @@
   \ifcsname beamer@scu@fontextend\endcsname%
     \beamer@scu@fontextend%
   \else%
-    \PackageWarningNoLine{beamerfontthemescu}{%
+    \PackageError{beamerfontthemescu}{%
       Option [FontTheme=Custom] is loaded. %
-      You should define \string\beamer@scu@fontextend\space to extend the font theme}%
+      To extend the theme, define the command \string\beamer@scu@fontextend}%
   \fi%
 \fi\fi\fi\fi\fi\fi\fi\fi
 

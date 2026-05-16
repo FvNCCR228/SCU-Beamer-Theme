@@ -311,9 +311,9 @@
   \ifcsname beamer@scu@viextend\endcsname%
     \beamer@scu@viextend%
   \else%
-    \PackageWarningNoLine{beamerthemescu}{%
+    \PackageError{beamerthemescu}{%
       Option [VI=Custom] is loaded. %
-      You should define \string\beamer@scu@viextend\space to extend the VI images}%
+      To extend the theme, define the command \string\beamer@scu@viextend}%
   \fi%
 \fi\fi
 
