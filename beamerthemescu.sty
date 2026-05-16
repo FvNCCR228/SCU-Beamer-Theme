@@ -1,6 +1,6 @@
 % This is file `beamerthemescu.sty'.
-% Copyright (C) 2021-2025 by Linrong Wu.
-% Version: 2025/10/06 v2.1b (Original Version: 2021/11/30 v1.0a).
+% Copyright (C) 2021-2026 by Linrong Wu.
+% Version: 2026/05/20 v2.1c (Original Version: 2021/11/30 v1.0a).
 %
 % This file may be distributed and/or modified
 %
@@ -24,13 +24,14 @@
 %   BIBMode = biber | none
 %   BIBStyle = biber-gb7714
 %   ContentMuticols = true | false
-%   Background = true | false
+%   Background = SCU-Full | SCU-Lite | none | Custom
+%   VI = SCU | Custom
 %
 % 本文件为 SCU Beamer Theme 宏包文件.
 % !请勿轻易改动此文档中代码.
 %%%% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{beamerthemescu}[2025/10/06 v2.1b, SCU Beamer Theme(Main Theme)]
+\ProvidesPackage{beamerthemescu}[2026/05/20 v2.1c, SCU Beamer Theme(Main Theme)]
 %%%% ----------------------------------------------------------------
 
 
@@ -83,9 +84,9 @@
 
 % ----------------
 % Declare of Options
-% Confirmed in v2.1b(2025/10/06).
+% Confirmed in v2.1c(2026/05/20).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31), v2.1b(2025/10/06).
+% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31), v2.1b(2025/10/06), v2.1c(2026/05/20).
 % ----------------
 % CMD:: \DeclareOptionBeamer  - 声明参数.
 % CMD:: \ExecuteOptionsBeamer - 预执行参数.
@@ -93,7 +94,6 @@
 % ----------------
 % 定义新的 if.
 \newif\ifbeamer@scu@contentmuticols
-\newif\ifbeamer@scu@background
 
 % KEY:: BlockDisplay.
 % VALUE:: colorful | followtheme | allgrey.
@@ -132,9 +132,12 @@
 % VALUE:: biber-gb7714.
 \DeclareOptionBeamer{BIBStyle}{\def\beamer@scu@BIBStyle{#1}}
 \DeclareOptionBeamer{ContentMuticols}{\csname beamer@scu@contentmuticols#1\endcsname}
-\DeclareOptionBeamer{Background}{\csname beamer@scu@background#1\endcsname}
-
-%\PassOptionsToClass{aspectratio=169}{beamer}
+% KEY:: Background.
+% VALUE:: SCU-Full | SCU-Lite | none | Custom.
+\DeclareOptionBeamer{Background}{\def\beamer@scu@Background{#1}}
+% KEY:: VI.
+% VALUE:: SCU | Custom.
+\DeclareOptionBeamer{VI}{\def\beamer@scu@VI{#1}}
 
 \ExecuteOptionsBeamer{%
   MathFont=LM,%
@@ -147,7 +150,8 @@
   LanguageMode=cn,%
   BIBMode=biber,%
   ContentMuticols=true,%
-  Background=true%
+  Background=SCU-Full,%
+  VI=SCU%
 }
 \ProcessOptionsBeamer
 \if\EqualOptionsBeamer{CodeDisplay}{minted}%
@@ -244,23 +248,75 @@
 
 
 % ----------------
+% Beamer Theme Background Layout
+% Confirmed in v2.1c(2026/05/20).
+% Established in v1.0a(2021/12/03).
+% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3c(2024/04/16), v2.1c(2026/05/20).
+% ----------------
+% 于 v2.1c(2026/05/20) 修改原 Background 选项 (boolean if), 为 Key-Value 形式, 且选项分支只负责定义 \scu@path@<name> 路径宏, 实际 \pgfdeclareimage 在选项配置外统一基于路径是否存在来配置.
+% ----------------
+% SCU-Full(原 Background=true):: 设置 \scu@path@bg, \scu@path@bgoftitle, \scu@path@bgofsubsectoc.
+% SCU-Lite(原 Background=false):: 仅设置 \scu@path@bgoftitle.
+% none:: 置空.
+% Custom:: 用户通过 \beamer@scu@backgroundextend 自行设置.
+% ----------------
+% 设置图片路径宏.
+\if\EqualOptionsBeamer{Background}{SCU-Full}%
+  \def\scu@path@bg{./resources/background.png}% 带 Logo 的背景图.
+  \def\scu@path@bgoftitle{./resources/backgroundoftitlepage(Empty).png}% 空白背景图.
+  \def\scu@path@bgofsubsectoc{./resources/backgroundofsubsectiontocpage.png}% 带 Verify 的背景图.
+\else\if\EqualOptionsBeamer{Background}{SCU-Lite}%
+  \def\scu@path@bgoftitle{./resources/backgroundoftitlepage(Empty).png}%
+\else\if\EqualOptionsBeamer{Background}{Custom}%
+  \relax%
+\else\if\EqualOptionsBeamer{Background}{none}%
+  \relax%
+\fi\fi\fi\fi
+
+% 定义图片.
+\ifcsname scu@path@bg\endcsname%
+  \pgfdeclareimage[width=\paperwidth]{bg}{\scu@path@bg}%
+  \usebackgroundtemplate{\pgfuseimage{bg}}% 定义背景为 bg 图片.
+\fi
+\ifcsname scu@path@bgoftitle\endcsname%
+  \pgfdeclareimage[width=\paperwidth]{bgoftitle}{\scu@path@bgoftitle}%
+\fi
+\ifcsname scu@path@bgofsubsectoc\endcsname%
+  \pgfdeclareimage[width=\paperwidth]{bgofsubsectoc}{\scu@path@bgofsubsectoc}%
+\fi
+% ----------------
+
+
+% ----------------
 % Theme Layout
-% Confirmed in v1.3c(2024/04/16).
+% Confirmed in v2.1c(2026/05/20).
 % Established in v1.0a(2021/12/03).
 % Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16).
 % ----------------
-% 包含外部主题, 内部主题, 颜色主题.
+% 于 v2.1c(2026/05/20) 新增选项 VI, 可设置视觉识别内容, 支持自定义.
 % ----------------
-% 设置 "SCUname.pdf" 为图片 "logo".
-\pgfdeclareimage[width=40pt]%
-  {lg}{./resources/SCUname.pdf}
-% 设置 "SCUname.pdf" 为图片 "logo".
-\pgfdeclareimage[height=36pt]%
-  {lg-name}{./resources/SCUlogo_name.pdf}
-\pgfdeclareimage[height=80pt]%
-  {building}{./resources/SCUbuilding.png}
-\pgfdeclareimage[height=30pt]%
-  {verify}{./resources/SCUverify.png}
+% THEME:: 颜色主题 - scu | 外部主题 - scu | 内部主题 - sc | 字体主题 - scu.
+% ----------------
+% VI 视觉识别图像设置.
+\if\EqualOptionsBeamer{VI}{SCU}%
+  % Logo:: SCU name.
+  \pgfdeclareimage[width=40pt]{lg}{./resources/SCUname.pdf}%
+  % Logo+Name:: SCU logo+name.
+  \pgfdeclareimage[height=36pt]{lg-name}{./resources/SCUlogo_name.pdf}%
+  % Landmark:: SCU building.
+  \pgfdeclareimage[height=80pt]{landmark}{./resources/SCUbuilding.png}%
+  % Verify:: SCU verify.
+  \pgfdeclareimage[height=30pt]{verify}{./resources/SCUverify.png}
+\else\if\EqualOptionsBeamer{VI}{Custom}%
+  \ifcsname beamer@scu@viextend\endcsname%
+    \beamer@scu@viextend%
+  \else%
+    \PackageWarningNoLine{beamerthemescu}{%
+      Option [VI=Custom] is loaded. %
+      You should define \string\beamer@scu@viextend\space to extend the VI images}%
+  \fi%
+\fi\fi
+
 % 颜色主题 - scu.
 \usecolortheme{scu}
 % 外部主题 - scu.
@@ -283,39 +339,6 @@
 \setbeamertemplate{blocks}[rounded]
 % 压缩模式.
 \beamer@compresstrue
-% ----------------
-
-
-% ----------------
-% Background Layout
-% Confirmed in v1.3c(2024/04/16).
-% Established in v1.0a(2021/12/03).
-% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3c(2024/04/16).
-% ----------------
-% 设置了主题背景选项 "background=true" & "background=false".
-% 设置了页眉 logo.
-% ----------------
-\ifbeamer@scu@background%
-  % 设置 "background.png" 为图片 "bg".
-  \pgfdeclareimage[width=\paperwidth]%
-    {bg}{./resources/background.png}
-  % 设置图片 "bg" 为背景图片.
-  \usebackgroundtemplate{\pgfuseimage{bg}}
-  % 设置 "backgroundofsubsectiontocpage.png" 为图片 "bgofsubsectoc".
-  \pgfdeclareimage[width=\paperwidth]%
-    {bgofsubsectoc}{./resources/backgroundofsubsectiontocpage.png}
-  % 设置 "backgroundoftitlepage.png" 为图片 "bgoftitle".
-  % \pgfdeclareimage[width=\paperwidth]%
-  %   {bgoftitle}{./resources/backgroundoftitlepage.png}
-  \pgfdeclareimage[width=\paperwidth]%
-    {bgoftitle}{./resources/backgroundoftitlepage(Empty).png}
-\else%
-  % 设置 "backgroundoftitlepage(Light).png" 为图片 "bgoftitle".
-  % \pgfdeclareimage[width=\paperwidth]%
-  %   {bgoftitle}{./resources/backgroundoftitlepage(Light).png}
-  \pgfdeclareimage[width=\paperwidth]%
-    {bgoftitle}{./resources/backgroundoftitlepage(Empty).png}
-\fi
 % ----------------
 
 
@@ -1117,16 +1140,18 @@
 
 % ----------------
 % Automatic Frame Layout
-% Confirmed in v1.3b(2022/04/13).
+% Confirmed in v2.1c(2026/05/20).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.1a(2021/12/30).
+% Updated in v1.1a(2021/12/30), v2.1c(2026/05/20).
 % ----------------
-% 以下设置自动帧输出, 含封页, 小节前目录页.
+% 于 v2.1c(2026/05/20) 修改封面和小节背景设置.
 % ----------------
 % 添加封页.
 \AtBeginDocument{%
   \begingroup%
-    \setbeamertemplate{background}{\pgfuseimage{bgoftitle}}%
+    \ifcsname scu@path@bgoftitle\endcsname%
+      \setbeamertemplate{background}{\pgfuseimage{bgoftitle}}%
+    \fi% 定义封面背景.
     % 取消页眉残留空白.
     \vspace*{-\dimexpr\headheight+\topskip\relax}%
     \begin{frame}[plain]
@@ -1155,9 +1180,11 @@
 % 小节前加目录.
 \AtBeginSubsection[]{%
   \begingroup%
-    \ifbeamer@scu@background%
+    \ifcsname scu@path@bgofsubsectoc\endcsname%
       \setbeamertemplate{background}{\pgfuseimage{bgofsubsectoc}}%
-    \fi%
+    \else%
+      \setbeamertemplate{background}{}%
+    \fi% 定义小节背景.
     \if\EqualOptionsBeamer{LanguageMode}{cn}
 	    \begin{frame}{目录}
 	      \inserttableofcontent%

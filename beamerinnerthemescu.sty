@@ -1,6 +1,6 @@
 % This is file `beamerinnerthemescu.sty'.
-% Copyright (C) 2021-2025 by Linrong Wu.
-% Version: 2025/10/06 v2.1b (Original Version: 2024/04/16 v1.3c).
+% Copyright (C) 2021-2026 by Linrong Wu.
+% Version: 2026/05/20 v2.1c (Original Version: 2024/04/16 v1.3c).
 %
 % This file may be distributed and/or modified
 %
@@ -13,7 +13,7 @@
 % !请勿轻易改动此文档中代码.
 %%%% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{beamerinnerthemescu}[2025/10/06 v2.1b, SCU Beamer Theme(Inner Theme)]
+\ProvidesPackage{beamerinnerthemescu}[2026/05/20 v2.1c, SCU Beamer Theme(Inner Theme)]
 %%%% ----------------------------------------------------------------
 
 
@@ -22,9 +22,9 @@
 
 % ----------------
 % Beamer Theme Title Page Layout
-% Confirmed in v2.1b(2025/10/06).
+% Confirmed in v2.1c(2026/05/20).
 % Established in v1.3c(2024/04/16).
-% Updated in v2.1b(2025/10/06).
+% Updated in v2.1b(2025/10/06), v2.1c(2026/05/20).
 % ----------------
 % CMD:: \newdimen   - 创建长度寄存器.
 % CMD:: \newsavebox - 创建盒子.
@@ -69,7 +69,7 @@
       \node[anchor=north west, inner sep=0pt, outer sep=0pt]%
         at (16pt, \dimexpr\paperheight-14pt\relax) {\pgfuseimage{lg-name}};% 绘制 logo-name
       \node[anchor=south east, inner sep=0pt, outer sep=0pt]%
-        at (\paperwidth, \beamer@scu@len@titlehigh) {\pgfuseimage{building}};% 绘制望江楼房
+        at (\paperwidth, \beamer@scu@len@titlehigh) {\pgfuseimage{landmark}};% 绘制望江楼房
       \fill[PrimaryC] (0, \beamer@scu@len@titlelow) rectangle (\paperwidth, \beamer@scu@len@titlehigh); % 绘制 title 框
       \node[anchor=north west, inner sep=0pt, outer sep=0pt,%
         text width=.9\paperwidth] at (16pt, \beamer@scu@len@titletexthigh) {%
