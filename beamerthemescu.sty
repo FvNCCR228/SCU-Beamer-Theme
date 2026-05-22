@@ -191,7 +191,7 @@
 \RequirePackage{tcolorbox}% tcolorbox: 绘制彩色文本框.
 \if\EqualOptionsBeamer{CodeDisplay}{minted}%
   % minted 临时文件存储在 mintedbuild 文件夹
-  \PassOptionsToPackage{outputdir=./mintedbuild}{minted}
+  \PassOptionsToPackage{outputdir=./tmp/minted}{minted}
   \RequirePackage{minted}% minted: 代码高亮.
   \tcbuselibrary{skins, breakable, xparse, listings, minted}
   \PackageWarningNoLine{beamerthemescu}{%

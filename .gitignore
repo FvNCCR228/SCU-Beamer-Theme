@@ -3,6 +3,8 @@ manual-sec/
 manual.tex
 
 ## tmp files:
+tmp/minted/*
+!tmp/minted/.gitkeep
 tmp/plug/*
 !tmp/plug/.gitkeep
 
