@@ -1,6 +1,11 @@
 ## manual tex files:
 manual-sec/
 manual.tex
+
+## tmp files:
+tmp/plug/*
+!tmp/plug/.gitkeep
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
