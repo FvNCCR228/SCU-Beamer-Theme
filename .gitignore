@@ -1,3 +1,6 @@
+## manual tex files:
+manual-sec/
+manual.tex
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
