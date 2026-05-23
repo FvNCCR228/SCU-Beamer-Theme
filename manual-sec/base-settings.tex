@@ -9,6 +9,7 @@
 		\begin{itemize}
 			\item \myestablish{v1.3a}{2022/03/16}
 			\item \myupdate{v1.3d}{2024/05/18}
+			\item \myupdate{v2.1c}{2026/05/20}
 		\end{itemize}
 	\end{multicols}
 	\vspace{2ex}本小节摘自\textcolor{scugreen}{Beamer User Guide}, 详细内容请在终端输入\alert{\texttt{texdoc beamer}}查看完整手册.
@@ -18,18 +19,18 @@
 	\textbf{调用命令}: \cmd{documentclass}\oarg*{\Arg{key1},\Arg{key2}=\Arg{value2},\ldots}\marg*{beamer}
 
   \textbf{调用示例}: \cmd{documentclass}\oarg*{hyperref, UTF8, CJK, aspectratio=169}\marg*{beamer}\\
-	
+
 	\alert{\texttt{t}}\&\alert{\texttt{c}}\&\alert{\texttt{b}}\hfill \textbf{Slide文本位置}
 	\begin{itemize}
 		\item \texttt{t}: 文本置于Slide顶部, 全局设置为\texttt{t}后允许将单个frame设置为\texttt{c}或\texttt{b}.
 		\item \texttt{c}: (Default)文本置于Slide中心, 全局设置为\texttt{c}后允许将单个frame设置为\texttt{t}或\texttt{b}.
 		\item 注: \texttt{b}意为将文本置于Slide底部, 为\texttt{frame}环境选项.
 	\end{itemize}
-	
+
 	\vspace*{1ex}\alert{\texttt{aspectratio} = \Arg{value}}\hfill \textbf{Slide比例}
 	\begin{itemize}
 		\item \Arg{value} = \texttt{2013}: 比例为20:13 (W-140mm, H-91mm).
-		\item \Arg{value} = \texttt{1610}: 比例为16:10 (W-160mm, H-100mm).
+		\item \Arg{value} = \texttt{1610}: 比例为16:10 (W-160mm, H-100mm), \textbf{推荐使用}.
 		\item \Arg{value} = \texttt{169}: 比例为16:9 (W-160mm, H-90mm).
 		\item \Arg{value} = \texttt{149}: 比例为14:9 (W-140mm, H-90mm).
 		\item \Arg{value} = \texttt{141}: 比例为1.41:1 (W-148.5mm, H-105mm).
@@ -72,13 +73,14 @@
 			\item \myupdate{v1.3d}{2024/05/18}
 			\item \myupdate{v1.3e}{2024/10/31}
 			\item \myupdate{v2.1b}{2025/10/06}
+			\item \myupdate{v2.1c}{2026/05/20}
 		\end{itemize}
 	\end{multicols}
 	注: 自 \textcolor{scugreen}{v1.1a (2021/12/30)} 起, 本小节已替代手册中\alert{\textbf{可注释项}}小节.\par
 	\mycopyright
 \end{frame}
 
-\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(1/4)}{MathFont, ColorDisplay, CodeDisplay}
+\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(1/6)}{ColorDisplay, BlockDisplay}
 	\pkg{beamethemescu} 是基于\LaTeX{} beamer开发的四川大学beamer样式主题宏包, 可通过命令 \cmd{usetheme}\marg*{scu}调用.
 
 	\begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
@@ -106,24 +108,23 @@
 			\textbf{Initial supported ver. \alert{\Arg{key}}} & \textbf{`C' means the key here supports a custom value.}\\
 			\textbf{\Arg{value}} & \textbf{`D' means the value here is the default one.}\\
 			\midrule
-			v1.1a \alert{\texttt{MathFont}} & \textbf{数学字体设置}\\
-			(D) \texttt{LM} & Latin Modern Math字体.\\
-			\texttt{XITS} & XITS Math字体.\\
-			\midrule
+
 			v1.3a \alert{\texttt{ColorDisplay}} & \textbf{主题色显示设置}\label{back:ColorDisplay} \scugoto{goto:ColorDisplay}{PREV}\\
 			(D) \texttt{JXred} & 四川大学锦锈红主题色. \textcolor{scured}{\rule[-.1ex]{1.2em}{1.8ex}} (CMYK 12, 92, 95, 20)\\
 			\texttt{BSblue} & 四川大学宝石蓝主题色. \textcolor{scublue}{\rule[-.1ex]{1.2em}{1.8ex}} (CMYK 100, 60, 00, 15)\\
 			v1.3c \texttt{Custom} & 自定义主题色模式. (设置前请阅读手册)\\
 			\midrule
-			v1.1a \alert{\texttt{CodeDisplay}} & \textbf{代码高亮显示设置}\\
-			(D) \texttt{listing} & listing排版引擎.\\
-			\texttt{minted} & minted排版引擎. (需Python环境, 设置前请阅读手册)\\
+
+			v1.3a \alert{\texttt{BlockDisplay}} & \textbf{区块颜色显示设置}\\
+			(D) \texttt{colorful} & 彩色模式.\\
+			\texttt{followtheme} & 跟随主题色.\\
+			\texttt{allgrey} & 纯灰色模式.\\
 		\end{tabular}
 	\end{table}
 	\vspace*{-1ex}
 \end{frame}
 
-\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(2/4)}{MintedStyle, BlockDisplay, LanguageMode}
+\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(2/6)}{CodeDisplay, MintedStyle, LanguageMode}
 	\vspace*{-1.6ex}
 	\begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
 		\begin{column}{.5\textwidth}
@@ -145,16 +146,17 @@
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{>{\raggedleft\arraybackslash}p{0.25\textwidth}p{0.68\textwidth}}
+			v1.1a \alert{\texttt{CodeDisplay}} & \textbf{代码高亮显示设置}\\
+			(D) \texttt{listing} & listing排版引擎.\\
+			\texttt{minted} & minted排版引擎. (需Python环境, 设置前请阅读手册)\\
+			\midrule
+
 			v1.3a (C) \alert{\texttt{MintedStyle}} & \textbf{minted样式设置(需优先设置 \texttt{\alert{CodeDisplay}=minted})}\\
 			(D) \texttt{lightmode} & 亮色模式, Pygments default样式.\\
 			\texttt{darkmode} & 暗色模式, Pygments rrt样式.\\
 			v1.3c \Arg{custom} & 自定义值. (设置前请阅读手册\label{back:CustomColorTheme} \scugoto{goto:CustomColorTheme}{DTL})\\
 			\midrule
-			v1.3a \alert{\texttt{BlockDisplay}} & \textbf{区块颜色显示设置}\\
-			(D) \texttt{colorful} & 彩色模式.\\
-			\texttt{followtheme} & 跟随主题色.\\
-			\texttt{allgrey} & 纯灰色模式.\\
-			\midrule
+
 			v1.3b \alert{\texttt{LanguageMode}} & \textbf{语言模式设置}\\
 			(D) \texttt{cn} & 中文模式.\\
 			\texttt{en} & 英文模式, 支持中文输入, Headline节导航栏更窄且只显示当前节.\\
@@ -163,7 +165,7 @@
 	\vspace*{-2ex}
 \end{frame}
 
-\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(3/4)}{Miniframes, NavigationTool}
+\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(3/6)}{Miniframes, NavigationTool, LogoWidth}
 	\vspace*{-1.6ex}
 	\begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
 		\begin{column}{.5\textwidth}
@@ -189,20 +191,102 @@
 			(D) \texttt{follow} & 迷你帧跟随页眉小节标题.\\
 			\texttt{separate} & 迷你帧与页眉小节标题分离. (实际位于页眉节导航栏右下方)\\
 			\texttt{none} & 取消小节迷你帧.\\
-			\texttt{negate} & 已于 v2.1b 版本废除(由 \texttt{none} 替代).\\
 			\midrule
+
 			v1.3d \alert{\texttt{NavigationTool}} & \textbf{页脚导航工具栏设置}\label{back:CustomNavigationTool} \scugoto{goto:CustomNavigationTool}{DTL}\\
 			(D) \texttt{1-2-3} & 依次显示小节及小节跳转、查询及首尾跳转、放映及历史跳转三种工具. (可调换顺序)\\
 			\texttt{1} & 类似命令为 \texttt{2} 或 \texttt{3}, 工具含义见上.\\
 			\texttt{1-2} & 类似命令为 \texttt{1-3} 或 \texttt{2-3}, 工具含义见上. (可调换顺序)\\
 			\texttt{none} & 取消导航工具栏.\\
-			\texttt{negate} & 已于 v2.1b 版本废除(由 \texttt{none} 替代).\\
+			\midrule
+
+			v2.1c \alert{\texttt{LogoWidth}} & \textbf{页脚Logo区宽度设置}\\
+			(D) \texttt{48pt} & 默认宽度.\\
+			\Arg{dimen} & 自定义宽度值, 如 \texttt{36pt}, \texttt{1cm}.\\
 		\end{tabular}
 	\end{table}
 	\vspace*{-2ex}
 \end{frame}
 
-\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(4/4)}{BIBMode, BIBStyle, ContentMuticols, Background}
+\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(4/6)}{FontTheme, MathFont}
+	\begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
+		\begin{column}{.5\textwidth}
+			\textbf{调用命令}(无需额外调用默认键值对):\\
+			\cmd{usetheme}\oarg*{\%\\
+				\hspace*{1em}\Arg{key1}=\Arg{value1},\%\\
+				\hspace*{1em}\ldots,\%\\
+			}\marg*{scu}
+		\end{column}
+		\begin{column}{.5\textwidth}
+			\textbf{调用示例}:\\
+			\cmd{usetheme}\oarg*{\%\\
+				\hspace*{1em}ColorDisplay=BSblue,\%\\
+				\hspace*{1em}MathFont=XITS,\%\\
+			}\marg*{scu}
+		\end{column}
+	\end{columns}
+
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{>{\raggedleft\arraybackslash}p{0.25\textwidth}p{0.68\textwidth}}
+			v2.1c \alert{\texttt{FontTheme}} & \textbf{字体主题设置}\\
+			(D) \texttt{Auto} & 自动检测操作系统并匹配对应字体.\\
+			\texttt{Ubuntu} & Ubuntu系统字体 (Roboto + 思源黑体).\\
+			\texttt{Win} & Windows系统字体 (Segoe UI + 微软雅黑).\\
+			\texttt{Mac} & MacOS系统字体 (Helvetica + 苹方/华文).\\
+			\texttt{Fandol} & Fandol字体, TeXLive自带 (Latin Modern + FandolHei).\\
+			\texttt{Source-Han} & 思源黑体, 系统调用 (需下载安装至系统中).\\
+			\texttt{Source-Han(Local)} & 思源黑体, 本地字体文件 (需置于 \texttt{fonts/} 目录).\\
+			\texttt{ZhongYi(Local)} & 中易字体, 本地字体文件 (需置于 \texttt{fonts/} 目录).\\
+			\texttt{Custom} & 自定义字体. (需定义命令 \cmd{beamer@scu@fontextend})\\
+			\midrule
+
+			v1.1a (C) \alert{\texttt{MathFont}} & \textbf{数学字体设置}\\
+			(D) \texttt{LM} & Latin Modern Math字体.\\
+			\texttt{XITS} & XITS Math字体.\\
+			v2.1c \Arg{custom} & 自定义数学字体名称, 需系统已安装对应 OpenType Math 字体.\\
+		\end{tabular}
+	\end{table}
+	\vspace*{-2ex}
+\end{frame}
+
+\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(5/6)}{Background, VI}
+	\begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
+		\begin{column}{.5\textwidth}
+			\textbf{调用命令}(无需额外调用默认键值对):\\
+			\cmd{usetheme}\oarg*{\%\\
+				\hspace*{1em}\Arg{key1}=\Arg{value1},\%\\
+				\hspace*{1em}\ldots,\%\\
+			}\marg*{scu}
+		\end{column}
+		\begin{column}{.5\textwidth}
+			\textbf{调用示例}:\\
+			\cmd{usetheme}\oarg*{\%\\
+				\hspace*{1em}Background=SCU-Lite,\%\\
+				\hspace*{1em}VI=SCU,\%\\
+			}\marg*{scu}
+		\end{column}
+	\end{columns}
+
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{>{\raggedleft\arraybackslash}p{0.25\textwidth}p{0.68\textwidth}}
+			v2.1c \alert{\texttt{Background}} & \textbf{背景显示设置}\\
+			(D) \texttt{SCU-Full} & SCU完整背景 (含Logo的正文背景 + 封面背景 + 含校训的目录背景).\\
+			\texttt{SCU-Lite} & SCU精简背景 (仅封面背景).\\
+			\texttt{Custom} & 自定义背景. (需定义路径宏 \cmd{scu@path@bg} 等)\\
+			\texttt{none} & 无背景.\\
+			\midrule
+
+			v2.1c \alert{\texttt{VI}} & \textbf{视觉识别(VI)图像设置}\\
+			(D) \texttt{SCU} & 使用四川大学VIS视觉识别图像 (Logo, Logo+Name, 建筑, 校训).\\
+			\texttt{Custom} & 自定义VI图像. (需定义命令 \cmd{beamer@scu@viextend})\\
+		\end{tabular}
+	\end{table}
+	\vspace*{-2ex}
+\end{frame}
+
+\begin{frame}{\pkg{beamethemescu} 宏包参数键值对说明(6/6)}{BIBMode, BIBStyle, ContentMuticols}
 	\begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
 		\begin{column}{.5\textwidth}
 			\textbf{调用命令}(无需额外调用默认键值对):\\
@@ -227,16 +311,29 @@
 			(D) \texttt{biber} & biber引擎.\\
 			\texttt{none} & 无引擎, 不输出参考文献.\\
 			\midrule
+
 			v1.3b (C) \alert{\texttt{BIBStyle}} & \textbf{参考文献样式设置(设置 \texttt{\alert{BIBMode}=none} 时无效)}\\
 			(D) \texttt{biber-gb7714} & gb7714-2015样式(biber引擎).\\
 			\midrule
+
 			v1.1a \alert{\texttt{ContentMuticols}} & \textbf{目录帧双栏显示设置}\\
 			(D) \texttt{true} & 是.\\
 			\texttt{false} & 否.\\
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}{\pkg{beamethemescu} 宏包已废除参数}
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{>{\raggedleft\arraybackslash}p{0.3\textwidth}p{0.15\textwidth}p{0.45\textwidth}}
+			\textbf{\Arg{key}} & \textbf{废除版本} & \textbf{说明}\\
 			\midrule
-			v1.1a \alert{\texttt{Background}} & \textbf{背景显示设置}\\
-			(D) \texttt{true} & 是.\\
-			\texttt{false} & 否.\\
+
+			~\alert{\texttt{Miniframes}}\texttt{ =  negate} & v2.1b & 由 \texttt{Miniframes}\texttt{ = none} 替代.\\
+			~\alert{\texttt{NavigationTool}}\texttt{  =  negate} & v2.1b & 由 \texttt{NavigationTool}\texttt{ = none} 替代.\\
+			~\alert{\texttt{Background}}\texttt{ =  true} & v2.1c & 由 \texttt{Background}\texttt{ = SCU-Full} 替代.\\
+			~\alert{\texttt{Background}}\texttt{ =  false} & v2.1c & 由 \texttt{Background}\texttt{ = SCU-Lite} 替代.\\
 		\end{tabular}
 	\end{table}
 \end{frame}
@@ -256,7 +353,7 @@
 \begin{frame}{封面及页脚信息}
   \structure{基本使用}
 
-  一个Beamer演示文稿的基本信息包括标题 \alert{\texttt{title}}, 子标题 \alert{\texttt{subtitle}}, 作者 \alert{\texttt{author}}, 机构 \alert{\texttt{institute}} 和时间 \alert{\texttt{date}}. 在本模板中, 可以设置\alert{标题简称}和\alert{作者简称}使其显示在页脚中. 如下是基本的调用命令及示例: 
+  一个Beamer演示文稿的基本信息包括标题 \alert{\texttt{title}}, 子标题 \alert{\texttt{subtitle}}, 作者 \alert{\texttt{author}}, 机构 \alert{\texttt{institute}} 和时间 \alert{\texttt{date}}. 在本模板中, 可以设置\alert{标题简称}和\alert{作者简称}使其显示在页脚中. 如下是基本的调用命令及示例:
 
   \begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
 		\begin{column}{.5\textwidth}
