@@ -10,6 +10,7 @@
 			\item \myestablish{v1.3e}{2024/10/31}
 			\item \myupdate{v1.3e}{2024/10/31}
 			\item \myupdate{v2.1b}{2025/10/06}
+			\item \myupdate{v2.1c}{2026/05/20}
 		\end{itemize}
 	\end{multicols}
 	注: 本小节仅对部分主题参数进行了演示, 您可点击标题栏 \texttt{BACK} 字样返回对应的宏包参数说明处.\par
@@ -40,42 +41,42 @@
   \vspace*{-6ex}
   \begin{figure}[h]
     \begin{tikzpicture}
-      \node[anchor=south west] (img) at (0,10pt) {\includegraphics[height=.88\textheight]{manual-sec/manual-demo/appendix-themescu-Miniframes.pdf}};
+      \node[anchor=south west] (img) at (0,10pt) {\includegraphics[height=.88\textheight]{manual-sec/manual-demo/appendix-themescu-Miniframes.pdf}};% inkscape 导入单页 pdf 且转换背景为位图后, (1)每个对象宽缩小 1/2(即 181.414). (2)设置 5 个对象的 y 值分别为 0, 60, 120, 180, 210. (3)点击导出选项卡 - 自定义, 右 181.414, 底部 240, 单位 pt, DPI 40, 导出为 PDF.
       \node[anchor=west] at (8, 211.4pt) {\structure{\cmd{usetheme}\oarg*{Miniframes=\Arg{value}}\marg*{scu}}};
       % --------- First ----------
-      \def\xFir{28.8pt}
-      \def\yFir{211.4pt}
+      \def\xFir{29.2pt}
+      \def\yFir{210.4pt}
       \draw[scublue, thin] (\xFir-6pt, \yFir-2pt) rectangle (\xFir+6pt, \yFir+2pt); % 以 (x, y) 为中心的框
       \draw[scublue, thin] (\xFir+6pt, \yFir-2pt) -- (\xFir+28pt, \yFir-13pt); % 斜线
       \draw[scublue, thin] (\xFir+28pt, \yFir-13pt) -- (8, \yFir-13pt); % 水平线
       \node[anchor=west] (NodeOne) at (8, \yFir-13pt) {\structure{迷你帧跟随} \Arg{value}\texttt{=follow}};
       \node[anchor=west] at ([yshift=-12pt]NodeOne.west) {迷你帧跟随当前小节标题(如此处为“小节迷你帧”)};
       % ---------- Second ----------
-      \def\xSec{149.5pt}
-      \def\ySec{154.2pt}
+      \def\xSec{148.4pt}
+      \def\ySec{155.4pt}
       \draw[scublue, thin] (\xSec-6pt, \ySec-2pt) rectangle (\xSec+6pt, \ySec+2pt); % 以 (x, y) 为中心的框
       \draw[scublue, thin] (\xSec+6pt, \ySec) -- (8, \ySec); % 水平线
       \node[anchor=west] (NodeTwo) at (8, \ySec) {\structure{迷你帧分离} \Arg{value}\texttt{=separate}};
       \node[anchor=west] at ([yshift=-12pt]NodeTwo.west) {迷你帧与小节标题分离(位于节导航栏下方且右侧对齐)};
       % ---------- Third ----------
-      \def\xThiO{28.8pt}
-      \def\yThiO{105.5pt}
+      \def\xThiO{29.2pt}
+      \def\yThiO{110.4pt}
       \draw[scublue, thin] (\xThiO-6pt, \yThiO-2pt) rectangle (\xThiO+6pt, \yThiO+2pt); % 以 (x, y) 为中心的框
       \draw[scublue, thin] (\xThiO+6pt, \yThiO-2pt) -- (\xThiO+28pt, \yThiO-13pt); % 斜线
       \draw[scublue, thin] (\xThiO+28pt, \yThiO-13pt) -- (8, \yThiO-13pt); % 水平线
-      \def\xThiT{149.5pt}
-      \def\yThiT{101.3pt}
+      \def\xThiT{148.4pt}
+      \def\yThiT{105.4pt}
       \draw[scublue, thin] (\xThiT-6pt, \yThiT-2pt) rectangle (\xThiT+6pt, \yThiT+2pt); % 以 (x, y) 为中心的框
-      \draw[scublue, thin] (\xThiT+6pt, \yThiT-2pt) -- (\xThiT+19.6pt, \yThiT-8.8pt); % 斜线
+      \draw[scublue, thin] (\xThiT+6pt, \yThiT-2pt) -- (\xThiT+19pt, \yThiT-8pt); % 斜线
       \node[anchor=west] (NodeThree) at (8, \yThiO-13pt) {\structure{取消迷你帧} \Arg{value}\texttt{=none}};
       \node[anchor=west] at ([yshift=-12pt]NodeThree.west) {页眉上无迷你帧显示};
       % ---------- Forth ----------
-      \def\xForO{146.6pt}
-      \def\yForO{48.2pt}
-      \draw[scublue, thin] (\xForO-8pt, \yForO-2pt) rectangle (\xForO+8pt, \yForO+2pt); % 以 (x, y) 为中心的框
-      \draw[scublue, thin] (\xForO+8pt, \yForO-2pt) -- (\xForO+20pt, \yForO-8pt); % 斜线
+      \def\xForO{145.4pt}
+      \def\yForO{55.5pt}
+      \draw[scublue, thin] (\xForO-8pt, \yForO-2pt) rectangle (\xForO+9pt, \yForO+2pt); % 以 (x, y) 为中心的框
+      \draw[scublue, thin] (\xForO+9pt, \yForO-2pt) -- (\xForO+29pt, \yForO-12pt); % 斜线
       \def\xForT{49pt}
-      \def\yForT{31.4pt}
+      \def\yForT{35.5pt}
       \draw[scublue, thin] (\xForT-6pt, \yForT-2.8pt) rectangle (\xForT+6pt, \yForT+2.8pt); % 以 (x, y) 为中心的框
       \draw[scublue, thin] (\xForT+6pt, \yForT+2.8pt) -- (\xForT+18pt, \yForT+8.8pt); % 斜线
       \draw[scublue, thin] (\xForT+18pt, \yForT+8.8pt) -- (8, \yForT+8.8pt); % 水平线
@@ -111,6 +112,7 @@
 		\begin{itemize}
 			\item \myestablish{v1.3e}{2024/10/31}
 			\item \myupdate{v1.3e}{2024/10/31}
+			\item \myupdate{v2.1c}{2026/05/20}
 		\end{itemize}
 	\end{multicols}
 	注: 自 \textcolor{scugreen}{v1.3e (2024/10/31)} 起, 本小节已替代手册中\alert{\textbf{使用注意}}小节的\alert{项目结构}板块.\par
@@ -123,35 +125,35 @@
     \setlength{\DTbaselineskip}{10pt}
     \dirtree{%
     .1 \alert{SCU Beamer Theme}/.
+    .2 dev/\DTcomment{\alert{开发辅助脚本}[开发]}.
     .2 fonts/\DTcomment{\alert{字体存放}[资源]}.
     .2 image/\DTcomment{\alert{图像存放}[资源]}.
-    .2 mintedbuild/\DTcomment{\alert{minted 缓存}[缓存]}.
     .2 resources/\DTcomment{\alert{\textbf{scu 主题素材}}[主题]}.
     .3 SCUbuilding.png\DTcomment{\text{建筑}[主题]}.
     .3 SCUlogo\_name.pdf\DTcomment{\text{logo + 校名}[主题]}.
     .3 SCUname.pdf\DTcomment{\text{校名}[主题]}.
     .3 SCUverify.png\DTcomment{\text{校训}[主题]}.
-    .3 background.png.
-    .3 backgroundofsubsectiontocpage.png.
-    .3 backgroundoftitlepage(Empty).png.
-    .3 backgroundoftitlepage(Light).png.
-    .3 backgroundoftitlepage.png.
+    .3 background\text{...}.png.\DTcomment{\text{背景}[主题]}.
     .2 sourcecode/\DTcomment{\alert{代码存放}[资源]}.
-    }
+    .2 tmp/\DTcomment{\alert{缓存}[缓存]}.
+    .3 minted/\DTcomment{\alert{minted缓存}[缓存]}.
+    .3 plug/\DTcomment{\alert{插件缓存}[缓存]}.
+    .2 .gitignore.
+    }\columnbreak
     \dirtree{%
     .1 \alert{SCU Beamer Theme}/.
     .2 beamercolorthemescu.sty\DTcomment{\alert{\textbf{颜色主题}}[主题]}.
-    .2 beamerinnnerthemescu.sty\DTcomment{\alert{\textbf{内部主题}}[主题]}.
+    .2 beamerfontthemescu.sty\DTcomment{\alert{\textbf{字体主题}}[主题]}.
+    .2 beamerinnerthemescu.sty\DTcomment{\alert{\textbf{内部主题}}[主题]}.
     .2 beamerouterthemescu.sty\DTcomment{\alert{\textbf{外部主题}}[主题]}.
     .2 beamerthemescu.sty\DTcomment{\alert{\textbf{scu核心主题}}[主题]}.
-    .2 .gitignore.
     .2 LICENSE.
-    .2 README.md.
     .2 main.tex\DTcomment{\alert{cn模式tex文件}[示例]}.
     .2 main.pdf\DTcomment{\alert{cn模式pdf文件}[示例]}.
     .2 main-en.tex\DTcomment{\alert{en模式tex文件}[示例]}.
     .2 main-en.pdf\DTcomment{\alert{en模式pdf文件}[示例]}.
     .2 manual.pdf\DTcomment{\alert{\textbf{用户手册}}[手册]}.
+    .2 README.md.
     .2 ref.bib\DTcomment{\alert{\textbf{文献库}}[资源]}.
     }
   \end{multicols}
@@ -167,8 +169,10 @@
     .3 manual-demo/\DTcomment{\alert{手册中示例演示资源}[演示]}.
     .4 \text{...}.tex\DTcomment{\alert{示例tex文件}[演示]}.
     .4 \text{...}.pdf\DTcomment{\alert{示例pdf文件}[演示]}.
+    .3 tikz-\text{...}.tex\DTcomment{\alert{TikZ 绘图}[章节]}.
     .3 base-settings.tex\DTcomment{\alert{基础设置}[章节]}.
     .3 appendix-themescu.tex\DTcomment{\alert{附录}[章节]}.
+    .2 .gitignore.
     }\columnbreak
     \dirtree{%
     .1 \alert{SCU Beamer Theme Manual}/.
@@ -261,10 +265,10 @@
 \end{frame}
 
 \begin{frame}{导航工具栏自定义 \scugoback{back:CustomNavigationTool}{BACK}}\label{goto:CustomNavigationTool}
-  \structure{\cmd{usetheme}\oarg*{NavigationTool=\Arg{value}}\marg*{scu}}\vspace*{-2.5ex}
+  \structure{\cmd{usetheme}\oarg*{NavigationTool=\Arg{value}}\marg*{scu}}\vspace*{-.5ex}
   \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{manual-sec/manual-demo/appendix-themescu-NavigationTool.pdf}
+    \includegraphics[width=\textwidth]{manual-sec/manual-demo/appendix-themescu-NavigationTool.pdf}% inkscape 导入单页 pdf 且转换背景为位图后, 点击导出选项卡 - 自定义, 修改单位 pt, 点击页面再点击自定义(让 inkscape 自动由 px 转为 pt), 设置顶部 260, DPI 40, 导出为 PDF, 可用 Acrobat 减小大小.
   \end{figure}
 
   \structure{小节及小节跳转工具} 标记为1 - \alert{\hskip.4pt\setfontscu{5}\faCaretLeft\hskip1.6pt\faStream\hskip1.6pt\faCaretRight}\vspace*{1ex}
