@@ -49,7 +49,7 @@
 % Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3d(2024/05/18), v2.1b(2025/10/06), v2.1c(2026/05/20).
 % ----------------
 % 于 v1.2a(2022/03/10) 设置主题数学字体选项 MathFont.
-% 于 v2.1c(2026/05/20) 从主主题文件独立, 设置 FontTheme 与 MathFont 选项. 定义 FontTheme(系统/字体包/本地/Custom) 与 MathFont(含<custom>) 两类参数, 可按需切换 sans/mono/CJK 字体族.
+% 于 v2.1c(2026/05/20) 从主主题文件独立, 设置 FontTheme 与 MathFont 选项. 定义 FontTheme(系统/字体包/本地/Custom) 与 MathFont(含<custom>) 两类参数, 可按需切换 sans/mono/CJK 字体族. 补充 Latin Modern Mono 字体的 Italic 字形为 Slanted, 补齐 Latin Modern Sans 的 Small Caps 字形 (使用 NewComputerModern, 部分涉及 FakeBold), 补齐 Helvetica 的 Small Caps 字形 (使用 TeX Gyre Heros, 没有 Mac 测试我随便补了个 TeX 自带的近似字体).
 % ----------------
 % 自动检测操作系统 (Auto), 无需手动设置.
 \if\EqualOptionsBeamer{FontTheme}{Auto}%
@@ -65,79 +65,183 @@
 \fi
 
 % 主字体(无衬线) / CJK 字体设置.
+%% 参考::
+%% https://tex.stackexchange.com/questions/468795
 \if\EqualOptionsBeamer{FontTheme}{Ubuntu}%
-  \setsansfont{Roboto}%                            sans      - Roboto
-  \setmonofont{Ubuntu Mono}%                       mono      - Ubuntu Mono
-  \ctexset{fontset=ubuntu}%                        CJK       - 思源黑体(CTeX)
-  \setCJKsansfont{Noto Sans CJK SC}%               CJKsans   - 思源黑体(简体中文)
+  \setsansfont{Roboto}%                                sans      - Roboto
+  \setmonofont{Ubuntu Mono}%                           mono      - Ubuntu Mono
+  \ctexset{fontset=ubuntu}%                            CJK       - 思源黑体(CTeX)
+  \setCJKsansfont{Noto Sans CJK SC}%                   CJKsans   - 思源黑体(简体中文)
     [%
-      ItalicFont = {AR PL KaitiM GB}%              (italic)  - 文鼎楷体
+      ItalicFont = {AR PL KaitiM GB}%                  (italic)  - 文鼎楷体
     ]%
 \else\if\EqualOptionsBeamer{FontTheme}{Win}%
-  \setsansfont{Segoe UI}%                          sans      - Segoe UI
-  \setmonofont{Consolas}%                          mono      - Consolas
-  \ctexset{fontset=windows}%                       CJK       - 微软雅黑(CTeX)
-  \setCJKsansfont{Microsoft YaHei}%                CJKsans   - 微软雅黑
+  \setsansfont{Segoe UI}%                              sans      - Segoe UI
+  \setmonofont{Consolas}%                              mono      - Consolas
+  \ctexset{fontset=windows}%                           CJK       - 微软雅黑(CTeX)
+  \setCJKsansfont{Microsoft YaHei}%                    CJKsans   - 微软雅黑
     [%
-      BoldFont   = {* Bold},%                      (bold)    - 微软雅黑 Bold
-      ItalicFont = {KaiTi}%                        (italic)  - 楷体
+      BoldFont   = {* Bold},%                          (bold)    - 微软雅黑 Bold
+      ItalicFont = {KaiTi}%                            (italic)  - 楷体
     ]%
 \else\if\EqualOptionsBeamer{FontTheme}{Mac}%
-  \setsansfont{Helvetica}%                         sans      - Helvetica
-  \setmonofont{Menlo}%                             mono      - Menlo
+  \setsansfont{Helvetica}%                             sans      - Helvetica
+    [%
+      UprightFeatures = {%
+        SmallCapsFont = {TeX Gyre Heros},%             (sc)      - TeX Gyre Heros
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      },%
+      ItalicFeatures = {%
+        SmallCapsFont = {TeX Gyre Heros Italic},%      (it-sc)   - TeX Gyre Heros Italic
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      },%
+      BoldFeatures = {%
+        SmallCapsFont = {TeX Gyre Heros Bold},%        (bold-sc) - TeX Gyre Heros Bold
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      },%
+      BoldItalicFeatures = {%
+        SmallCapsFont = {TeX Gyre Heros Bold Italic},% (bf-itsc) - TeX Gyre Heros Bold Italic
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      }%
+    ]%
+  \setmonofont{Menlo}%                                 mono      - Menlo
   \IfFileExists{/System/Library/Fonts/PingFang.ttc}%
     {%
-      \ctexset{fontset=macnew}%                    CJK       - 苹方(CTeX)
-      \setCJKsansfont{PingFang SC}%                CJKsans   - 苹方(简体中文)
+      \ctexset{fontset=macnew}%                        CJK       - 苹方(CTeX)
+      \setCJKsansfont{PingFang SC}%                    CJKsans   - 苹方(简体中文)
         [%
-          ItalicFont     = {Kaiti SC}%             (italic)  - 华文楷体
-          BoldItalicFont = {Kaiti SC Bold}%        (bold-it) - 华文楷体 Bold
+          ItalicFont     = {Kaiti SC}%                 (italic)  - 华文楷体
+          BoldItalicFont = {Kaiti SC Bold}%            (bold-it) - 华文楷体 Bold
         ]%
     }{%
-      \ctexset{fontset=macold}%                    CJK       - 华文(CTeX)
-      \setCJKsansfont{STXihei}%                    CJKsans   - 华文细黑
+      \ctexset{fontset=macold}%                        CJK       - 华文(CTeX)
+      \setCJKsansfont{STXihei}%                        CJKsans   - 华文细黑
         [%
-          BoldFont       = {STHeiti},%             (bold)    - 华文黑体
-          ItalicFont     = {STKaiti}%              (italic)  - 华文楷体
+          BoldFont       = {STHeiti},%                 (bold)    - 华文黑体
+          ItalicFont     = {STKaiti}%                  (italic)  - 华文楷体
         ]%
     }%
 \else\if\EqualOptionsBeamer{FontTheme}{Fandol}%
-  \setsansfont{Latin Modern Sans}%                 sans      - Latin Modern
-  \setmonofont{Latin Modern Mono}%                 mono      - Latin Modern
-  \ctexset{fontset=fandol}%                        CJK       - Fandol(CTeX)
-  \setCJKsansfont{FandolHei}%                      CJKsans   - FandolHei
+  \setsansfont{Latin Modern Sans}%                     sans      - Latin Modern Sans
     [%
-      BoldFont   = {*-Bold},%                      (bold)    - FandolHei Bold
-      ItalicFont = {FandolKai}%                    (italic)  - FandolKai
+      UprightFeatures = {%
+        SmallCapsFont = {NewCMSans10-Regular},%        (sc)      - New Computer Modern Sans Regular
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      },%
+      ItalicFeatures = {%
+        SmallCapsFont = {NewCMSans08-Oblique},%        (it-sc)   - New Computer Modern Sans Oblique
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      },%
+      BoldFeatures = {%
+        SmallCapsFont = {NewCMSans10-Regular},%        (bold-sc) - New Computer Modern Sans Regular(FakeBold)
+        SmallCapsFeatures = {Letters = SmallCaps, FakeBold = 3.6}%
+      },%
+      BoldItalicFeatures = {%
+        SmallCapsFont = {NewCMSans08-Oblique},%        (bf-itsc) - New Computer Modern Sans Oblique(FakeBold)
+        SmallCapsFeatures = {Letters = SmallCaps, FakeBold = 2.8}%
+      }%
+    ]%
+  \setmonofont{Latin Modern Mono}%                     mono      - Latin Modern Mono
+    [%
+      ItalicFont = {Latin Modern Mono Slanted}%        (italic)  - Latin Modern Mono Slanted
+    ]%
+  \ctexset{fontset=fandol}%                            CJK       - Fandol(CTeX)
+  \setCJKsansfont{FandolHei}%                          CJKsans   - FandolHei
+    [%
+      BoldFont   = {*-Bold},%                          (bold)    - FandolHei Bold
+      ItalicFont = {FandolKai}%                        (italic)  - FandolKai
     ]%
 \else\if\EqualOptionsBeamer{FontTheme}{Source-Han}%
-  \setsansfont{Latin Modern Sans}%                 sans      - Latin Modern
-  \setmonofont{Latin Modern Mono}%                 mono      - Latin Modern
-  \setCJKsansfont{Source Han Sans SC}%             CJKsans   - 思源黑体(简体中文)
+  \setsansfont{Latin Modern Sans}%                     sans      - Latin Modern Sans
     [%
-      ItalicFont = {LXGW WenKai Medium}%           (italic)  - 霞鹜文楷 Medium
+      UprightFeatures = {%
+        SmallCapsFont = {NewCMSans10-Regular},%        (sc)      - New Computer Modern Sans Regular
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      },%
+      ItalicFeatures = {%
+        SmallCapsFont = {NewCMSans08-Oblique},%        (it-sc)   - New Computer Modern Sans Oblique
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      },%
+      BoldFeatures = {%
+        SmallCapsFont = {NewCMSans10-Regular},%        (bold-sc) - New Computer Modern Sans Regular(FakeBold)
+        SmallCapsFeatures = {Letters = SmallCaps, FakeBold = 3.6}%
+      },%
+      BoldItalicFeatures = {%
+        SmallCapsFont = {NewCMSans08-Oblique},%        (bf-itsc) - New Computer Modern Sans Oblique(FakeBold)
+        SmallCapsFeatures = {Letters = SmallCaps, FakeBold = 2.8}%
+      }%
     ]%
-  \setCJKmonofont{LXGW WenKai Medium}%             CJKmono   - 霞鹜文楷
+  \setmonofont{Latin Modern Mono}%                     mono      - Latin Modern Mono
+    [%
+      ItalicFont = {Latin Modern Mono Slanted}%        (italic)  - Latin Modern Mono Slanted
+    ]%
+  \setCJKsansfont{Source Han Sans SC}%                 CJKsans   - 思源黑体(简体中文)
+    [%
+      ItalicFont = {LXGW WenKai Medium}%               (italic)  - 霞鹜文楷 Medium
+    ]%
+  \setCJKmonofont{LXGW WenKai Medium}%                 CJKmono   - 霞鹜文楷
 \else\if\EqualOptionsBeamer{FontTheme}{Source-Han(Local)}%
-  \setsansfont{Latin Modern Sans}%                 sans      - Latin Modern
-  \setmonofont{Latin Modern Mono}%                 mono      - Latin Modern
-  \setCJKsansfont{SourceHanSansSC-Regular.otf}%    CJKsans   - 思源黑体(简体中文)
+  \setsansfont{Latin Modern Sans}%                     sans      - Latin Modern Sans
+    [%
+      UprightFeatures = {%
+        SmallCapsFont = {NewCMSans10-Regular},%        (sc)      - New Computer Modern Sans Regular
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      },%
+      ItalicFeatures = {%
+        SmallCapsFont = {NewCMSans08-Oblique},%        (it-sc)   - New Computer Modern Sans Oblique
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      },%
+      BoldFeatures = {%
+        SmallCapsFont = {NewCMSans10-Regular},%        (bold-sc) - New Computer Modern Sans Regular(FakeBold)
+        SmallCapsFeatures = {Letters = SmallCaps, FakeBold = 3.6}%
+      },%
+      BoldItalicFeatures = {%
+        SmallCapsFont = {NewCMSans08-Oblique},%        (bf-itsc) - New Computer Modern Sans Oblique(FakeBold)
+        SmallCapsFeatures = {Letters = SmallCaps, FakeBold = 2.8}%
+      }%
+    ]%
+  \setmonofont{Latin Modern Mono}%                     mono      - Latin Modern Mono
+    [%
+      ItalicFont = {Latin Modern Mono Slanted}%        (italic)  - Latin Modern Mono Slanted
+    ]%
+  \setCJKsansfont{SourceHanSansSC-Regular.otf}%        CJKsans   - 思源黑体(简体中文)
     [%
       Path       = "fonts/,"%
-      BoldFont   = {SourceHanSansSC-Bold.otf},%    (bold)    - 思源黑体 Bold
-      ItalicFont = {LXGWWenKai-Medium.ttf}%        (italic)  - 霞鹜文楷 Medium
+      BoldFont   = {SourceHanSansSC-Bold.otf},%        (bold)    - 思源黑体 Bold
+      ItalicFont = {LXGWWenKai-Medium.ttf}%            (italic)  - 霞鹜文楷 Medium
     ]%
-  \setCJKmonofont{LXGWWenKai-Medium.ttf}%          CJKmono   - 霞鹜文楷 Medium
+  \setCJKmonofont{LXGWWenKai-Medium.ttf}%              CJKmono   - 霞鹜文楷 Medium
     [Path = "fonts/,"]%
 \else\if\EqualOptionsBeamer{FontTheme}{ZhongYi(Local)}%
-  \setsansfont{Latin Modern Sans}%                 sans      - Latin Modern
-  \setmonofont{Latin Modern Mono}%                 mono      - Latin Modern
-  \setCJKsansfont{simhei.ttf}%                     CJKsans   - 黑体
+  \setsansfont{Latin Modern Sans}%                     sans      - Latin Modern Sans
+    [%
+      UprightFeatures = {%
+        SmallCapsFont = {NewCMSans10-Regular},%        (sc)      - New Computer Modern Sans Regular
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      },%
+      ItalicFeatures = {%
+        SmallCapsFont = {NewCMSans08-Oblique},%        (it-sc)   - New Computer Modern Sans Oblique
+        SmallCapsFeatures = {Letters = SmallCaps}%
+      },%
+      BoldFeatures = {%
+        SmallCapsFont = {NewCMSans10-Regular},%        (bold-sc) - New Computer Modern Sans Regular(FakeBold)
+        SmallCapsFeatures = {Letters = SmallCaps, FakeBold = 3.6}%
+      },%
+      BoldItalicFeatures = {%
+        SmallCapsFont = {NewCMSans08-Oblique},%        (bf-itsc) - New Computer Modern Sans Oblique(FakeBold)
+        SmallCapsFeatures = {Letters = SmallCaps, FakeBold = 2.8}%
+      }%
+    ]%
+  \setmonofont{Latin Modern Mono}%                     mono      - Latin Modern Mono
+    [%
+      ItalicFont = {Latin Modern Mono Slanted}%        (italic)  - Latin Modern Mono Slanted
+    ]%
+  \setCJKsansfont{simhei.ttf}%                         CJKsans   - 黑体
     [%
       Path       = "fonts/,"%
-      ItalicFont = {simkai.ttf}%                   (italic)  - 楷体
+      ItalicFont = {simkai.ttf}%                       (italic)  - 楷体
     ]%
-  \setCJKmonofont{simfang.ttf}%                    CJKmono   - 仿宋
+  \setCJKmonofont{simfang.ttf}%                        CJKmono   - 仿宋
     [Path = "fonts/,"]%
 \else\if\EqualOptionsBeamer{FontTheme}{Custom}%
   \ifcsname beamer@scu@fontextend\endcsname%
