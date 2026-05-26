@@ -1,0 +1,119 @@
+% ----------------
+% 节: 页面布局
+% ----------------
+\section{页面布局}
+\subsection{页面相关}
+\cprotEnv\begin{frame}
+	\frametitle{Frame环境}
+	以下主要围绕frame环境展开. (编者不一定能介绍全面, 详细请移步官方文档)
+	\begin{scucode}[comment={%
+			\scriptsize%
+			{\color{scured}<keys>}\quad frame环境选项\\
+			~~常用选项: {\color{scublue}fragile}: 保护脆弱命令(如代码, 抄录环境需此项)\\
+			~~{\color{scublue}allowframebreaks(=?)}: 允许内容过多时自动切帧(括号中省略即自动判断). 注: 使用\texttt{pagebreak}或\texttt{framebreak}命令可实现手动位置切帧换页, 但会在一些时候失效(不知道为什么, 得看源码)\\
+			~~{\color{scublue}t}: 在页面顶部(默认居中)\\
+			{\color{scured}<title>}\quad 标题\\
+		},%
+		listing side comment]{Frame环境}[FrameHj]{tex}
+			\begin{frame}[<keys>]{<title>}
+				<code>
+			\end{frame}
+			或
+			\begin{frame}[<keys>]
+				\frametitle{<title>}
+				<code>
+			\end{frame}
+	\end{scucode}
+	对于定理等板块过长导致的无法换页问题, 此处定义了命令来处理. (尽量避免单个过长的环境)
+\end{frame}
+
+\begin{frame}[t,allowframebreaks]{环境切割示例}
+	\begin{scuremark}{卷王森林法则}[JuanwangSlfz]
+		补充自\vref{lemm:JuanwangSlfz}.\par
+		\textbf{\color{scured}基本公理:}
+		\begin{enumerate}
+			\item 获得研究生资格是当代大学生的第一需要;
+			\item 当代大学生对研究生资格的需求不断增长和扩张, 但研究生资格总量保持不变.
+		\end{enumerate}
+		\textbf{\color{scured}两大重要概念:}
+		\begin{enumerate}
+			\item 卷疑链: 双方无法判断对方是否正在内卷;\\
+			~~"当代大学生间的善意和恶意. 善和恶这类字眼放到内卷过程中是不严谨的, 所以需要对它们的含义加以限制: 善意就是指不主动内卷和卷灭其他大学生, 恶意则相反. 这是最低的善意了吧. "
+			\begin{itemize}
+				\item 一个大学生不能判断另一个大学生是善还是恶
+				\item 一个大学生不能判断另一个大学生认为本大学生文明是善还是恶
+				\item 一个大学生不能判断另一个大学生是否会对本大学生发起内卷
+				\item 一个大学生无法判断另一个大学生对自己是善意或恶意的
+				\item 一个大学生无法判断另一个大学生认为自己是善意或恶意的
+				\item 一个大学生无法判断另一个大学生判断自己对他是善意或恶意的
+				\item \dots\dots
+			\end{itemize}
+			\item 绩点爆炸: 不同大学生绩点进步的速度和加速度几乎不可能是一致的, 弱小的大学生很可能在短时间内超越强大的大学生. 可能由内因或者外因(例如内卷的交流, 内卷的程度突然加深)引发, 继而弱小的大学生能够对强大的大学生构成内卷优势乃至内卷威胁.
+		\end{enumerate}
+	\end{scuremark}
+\end{frame}
+
+\subsection{分栏}
+\begin{frame}[fragile,label={fra:Fenlan}]{分栏}
+	此处列出两种分栏方式: \\minipage环境及columns环境嵌套column环境, 其中column环境用法同minipage(见并列小图展示\vpageref{code:BinlieXtsl}), colums环境不需要加参数. 如下列出column环境和两个列表环境的显示效果.
+	\vspace{1ex}
+	\pause
+	\begin{columns}
+		\begin{column}[t]{0.35\linewidth}
+			这里是栏一
+			\begin{figure}[h]
+				\begin{center}
+					\includegraphics[width=.8\columnwidth]{logo_name}
+					\\四川大学校徽及校名\\
+					\vspace{1ex}
+					\includegraphics[width=.4\columnwidth]{Fy}
+					\\四川大学飞扬俱乐部
+				\end{center}
+			\end{figure}
+		\end{column}
+		\pause
+		\begin{column}[t]{0.4\linewidth}
+			这里是栏二
+			\vspace{1ex}
+			\begin{itemize}
+				\item 无序列表环境示例
+				\begin{enumerate}
+					\item 有序列表环境示例
+					\item 有序列表环境示例
+					\item 有序列表环境示例
+				\end{enumerate}
+				\item 无序列表环境示例
+				\item 无序列表环境示例
+			\end{itemize}
+		\end{column}
+		\pause
+		\begin{column}[t]{0.25\linewidth}
+			这里是栏三
+			\par\vskip1ex
+			四川大学校训\\
+			\vskip2ex
+			海纳百川\\[.5ex]
+			有容乃大
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\subsection{杂项}
+\begin{frame}[fragile]{杂项}
+	\textbf{帧的多页显示.}\\
+	非列表环境: \\
+	\verb|\pause|命令, \verb|\onslide<x-y>|命令(在该帧的第x到y页面显示, 为空则默认首页面或尾页面). \\
+	列表环境下:
+	\begin{itemize}[<+-| alert@+>]
+		\item 直接在\verb|\begin|\verb!{itemize}后加!\verb![<+-| alert@+>]!命令;
+		\item 或在\verb|item|后加\verb|<x-y>|命令(在该帧的第x到y页面显示, 为空则默认首页面或尾页面).
+	\end{itemize}
+	\textbf{脚注.}
+	\begin{itemize}[<+-| alert@+>]
+		\item \verb|\footnote|\verb|{<text>}|命令\footnote{这是方法一.};\\
+		\item \verb|\footnotemark|命令在正文中计数, \verb|\footnotetext|\verb|{<text>}|显示脚注\footnotemark.
+	\end{itemize}
+	\footnotetext{这是方法二.}
+\end{frame}
+
+%% End of file `basic-layout.tex'.
