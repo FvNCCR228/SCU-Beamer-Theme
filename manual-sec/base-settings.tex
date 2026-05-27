@@ -12,7 +12,7 @@
 			\item \myupdate{v2.1c}{2026/05/20}
 		\end{itemize}
 	\end{multicols}
-	\vspace{2ex}本小节摘自\textcolor{scugreen}{Beamer User Guide}, 详细内容请在终端输入\alert{\texttt{texdoc beamer}}查看完整手册.
+	\vspace{2ex}本小节摘自\textcolor{scugreen}{Beamer User Guide}, 详细内容请在终端输入\alert{\ttfamily texdoc beamer}查看完整手册.
 \end{frame}
 
 \begin{frame}{文档类部分参数}{t\&c\&b, aspectratio}
@@ -20,7 +20,7 @@
 
   \textbf{调用示例}: \cmd{documentclass}\oarg*{hyperref, UTF8, CJK, aspectratio=169}\marg*{beamer}\\
 
-	\alert{\texttt{t}}\&\alert{\texttt{c}}\&\alert{\texttt{b}}\hfill \textbf{Slide文本位置}
+	\alert{\ttfamily t}\&\alert{\ttfamily c}\&\alert{\ttfamily b}\hfill \textbf{Slide文本位置}
 	\begin{itemize}
 		\item \texttt{t}: 文本置于Slide顶部, 全局设置为\texttt{t}后允许将单个frame设置为\texttt{c}或\texttt{b}.
 		\item \texttt{c}: (Default)文本置于Slide中心, 全局设置为\texttt{c}后允许将单个frame设置为\texttt{t}或\texttt{b}.
@@ -45,11 +45,11 @@
 
   \textbf{调用示例}: \cmd{documentclass}\oarg*{hyperref, UTF8, CJK, aspectratio=169}\marg*{beamer}\\
 
-  \alert{\texttt{draft}}\hfill \textbf{草稿模式}
+  \alert{\ttfamily draft}\hfill \textbf{草稿模式}
 
 	初次编译时, 使用草稿模式以隐藏部分宏包(如 \pkg{pgf}, \pkg{hyperref})及headline, footline等的显示效果能较大提高编译速度.\\
 
-	\alert{\texttt{handout}}\hfill \textbf{讲义版本模式}
+	\alert{\ttfamily handout}\hfill \textbf{讲义版本模式}
 
 	生成无Overlay效果的讲义版本, 可缩减页数同时降低编译时间.\\
 	若需实现多合一效果, 使用 \pkg{pgfpages} 宏包(注意使用此项会破坏beamer的hyperref):
@@ -76,7 +76,7 @@
 			\item \myupdate{v2.1c}{2026/05/20}
 		\end{itemize}
 	\end{multicols}
-	注: 自 \textcolor{scugreen}{v1.1a (2021/12/30)} 起, 本小节已替代手册中\alert{\textbf{可注释项}}小节.\par
+	注: 自 \textcolor{scugreen}{v1.1a (2021/12/30)} 起, 本小节已替代手册中\alert{\bfseries 可注释项}小节.\par
 	\mycopyright
 \end{frame}
 
@@ -109,13 +109,13 @@
 			\textbf{\Arg{value}} & \textbf{`D' means the value here is the default one.}\\
 			\midrule
 
-			v1.3a \alert{\texttt{ColorDisplay}} & \textbf{颜色主题设置}\label{back:ColorDisplay} \scugoto{goto:ColorDisplay}{PREV}\\
+			v1.3a \alert{\ttfamily ColorDisplay} & \textbf{颜色主题设置}\label{back:ColorDisplay} \scugoto{goto:ColorDisplay}{PREV}\\
 			(D) \texttt{JXred} & 四川大学锦锈红主题. \textcolor{scured}{\rule[-.1ex]{1.2em}{1.8ex}} (CMYK 12, 92, 95, 20)\\
 			\texttt{BSblue} & 四川大学宝石蓝主题. \textcolor{scublue}{\rule[-.1ex]{1.2em}{1.8ex}} (CMYK 100, 60, 00, 15)\\
 			v1.3c \texttt{Custom} & 自定义颜色主题.\label{back:CustomColorTheme} \scugoto{goto:CustomColorTheme}{DTL}\\
 			\midrule
 
-			v1.3a \alert{\texttt{BlockDisplay}} & \textbf{区块颜色显示设置}\\
+			v1.3a \alert{\ttfamily BlockDisplay} & \textbf{区块颜色显示设置}\\
 			(D) \texttt{colorful} & 彩色模式.\\
 			\texttt{followtheme} & 跟随主题色.\\
 			\texttt{allgrey} & 纯灰色模式.\\
@@ -128,18 +128,18 @@
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{>{\raggedleft\arraybackslash}p{0.25\textwidth}p{0.68\textwidth}}
-			v1.1a \alert{\texttt{CodeDisplay}} & \textbf{代码高亮显示设置}\\
+			v1.1a \alert{\ttfamily CodeDisplay} & \textbf{代码高亮显示设置}\\
 			(D) \texttt{listing} & listing排版引擎.\\
 			\texttt{minted} & minted排版引擎. (需Python环境, 设置前请阅读手册)\\
 			\midrule
 
-			v1.3a (C) \alert{\texttt{MintedStyle}} & \textbf{minted样式设置(需优先设置 \texttt{\alert{CodeDisplay}=minted})}\\
+			v1.3a (C) \alert{\ttfamily MintedStyle} & \textbf{minted样式设置(需优先设置 \texttt{\alert{CodeDisplay}=minted})}\\
 			(D) \texttt{lightmode} & 亮色模式, Pygments default样式.\\
 			\texttt{darkmode} & 暗色模式, Pygments rrt样式.\\
 			v1.3c \Arg{custom} & 自定义值.\label{back:CustomMintedStyle} \scugoto{goto:CustomColorTheme}{DTL}\\
 			\midrule
 
-			v2.1c \alert{\texttt{FontTheme}} & \textbf{字体主题设置}\\
+			v2.1c \alert{\ttfamily FontTheme} & \textbf{字体主题设置}\\
 			(D) \texttt{Auto} & 自动检测操作系统并匹配对应字体.\\
 			\texttt{Ubuntu} & Ubuntu系统字体 (Roboto + 思源黑体).\\
 			\texttt{Win} & Windows系统字体 (Segoe UI + 微软雅黑).\\
@@ -176,19 +176,19 @@
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{>{\raggedleft\arraybackslash}p{0.25\textwidth}p{0.68\textwidth}}
-			v1.1a (C) \alert{\texttt{MathFont}} & \textbf{数学字体设置}\\
+			v1.1a (C) \alert{\ttfamily MathFont} & \textbf{数学字体设置}\\
 			(D) \texttt{LM} & Latin Modern Math字体.\\
 			\texttt{XITS} & XITS Math字体.\\
 			v2.1c \Arg{custom} & 自定义数学字体名称, 需系统已安装对应 OpenType Math 字体.\\
 			\midrule
 
-			v1.3c \alert{\texttt{Miniframes}} & \textbf{页眉小节迷你帧设置}\label{back:Miniframes} \scugoto{goto:Miniframes}{PREV}\\
+			v1.3c \alert{\ttfamily Miniframes} & \textbf{页眉小节迷你帧设置}\label{back:Miniframes} \scugoto{goto:Miniframes}{PREV}\\
 			(D) \texttt{follow} & 迷你帧跟随页眉小节标题.\\
 			\texttt{separate} & 迷你帧与页眉小节标题分离. (实际位于页眉节导航栏右下方)\\
 			\texttt{none} & 取消小节迷你帧.\\
 			\midrule
 
-			v1.3d \alert{\texttt{NavigationTool}} & \textbf{页脚导航工具栏设置}\label{back:NavigationTool} \scugoto{goto:NavigationTool}{PREV}\\
+			v1.3d \alert{\ttfamily NavigationTool} & \textbf{页脚导航工具栏设置}\label{back:NavigationTool} \scugoto{goto:NavigationTool}{PREV}\\
 			(D) \texttt{1-2-3} & 依次显示小节及小节跳转、查询及首尾跳转、放映及历史跳转三种工具. (可调换顺序)\\
 			\texttt{1} & 类似命令为 \texttt{2} 或 \texttt{3}, 工具含义见上.\\
 			\texttt{1-2} & 类似命令为 \texttt{1-3} 或 \texttt{2-3}, 工具含义见上. (可调换顺序)\\
@@ -202,24 +202,24 @@
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{>{\raggedleft\arraybackslash}p{0.25\textwidth}p{0.68\textwidth}}
-			v2.1c \alert{\texttt{LogoWidth}} & \textbf{页脚Logo区宽度设置}\\
+			v2.1c \alert{\ttfamily LogoWidth} & \textbf{页脚Logo区宽度设置}\\
 			(D) \texttt{48pt} & 默认宽度.\\
 			\Arg{dimen} & 自定义宽度值, 如 \texttt{36pt}, \texttt{1cm}.\\
 			\midrule
 
-			v2.1c \alert{\texttt{Background}} & \textbf{背景显示设置}\\
+			v2.1c \alert{\ttfamily Background} & \textbf{背景显示设置}\\
 			(D) \texttt{SCU-Full} & SCU完整背景 (含Logo的正文背景 + 封面背景 + 含校训的目录背景).\\
 			\texttt{SCU-Lite} & SCU精简背景 (仅封面背景).\\
 			\texttt{Custom} & 自定义背景. (需定义路径宏 \cmd{scu@path@bg} 等)\\
 			\texttt{none} & 无背景.\\
 			\midrule
 
-			v2.1c \alert{\texttt{VI}} & \textbf{视觉识别(VI)图像设置}\\
+			v2.1c \alert{\ttfamily VI} & \textbf{视觉识别(VI)图像设置}\\
 			(D) \texttt{SCU} & 使用四川大学VIS视觉识别图像 (Logo, Logo+Name, 建筑, 校训).\\
 			\texttt{Custom} & 自定义VI图像. (需定义命令 \cmd{beamer@scu@viextend})\\
 			\midrule
 
-			v1.3b \alert{\texttt{LanguageMode}} & \textbf{语言模式设置}\\
+			v1.3b \alert{\ttfamily LanguageMode} & \textbf{语言模式设置}\\
 			(D) \texttt{cn} & 中文模式.\\
 			\texttt{en} & 英文模式, 支持中文输入, Headline节导航栏更窄且只显示当前节.\\
 		\end{tabular}
@@ -249,16 +249,16 @@
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{>{\raggedleft\arraybackslash}p{0.25\textwidth}p{0.68\textwidth}}
-			v1.3b \alert{\texttt{BIBMode}} & \textbf{参考文献引擎设置}\\
+			v1.3b \alert{\ttfamily BIBMode} & \textbf{参考文献引擎设置}\\
 			(D) \texttt{biber} & biber引擎.\\
 			\texttt{none} & 无引擎, 不输出参考文献.\\
 			\midrule
 
-			v1.3b (C) \alert{\texttt{BIBStyle}} & \textbf{参考文献样式设置(设置 \texttt{\alert{BIBMode}=none} 时无效)}\\
+			v1.3b (C) \alert{\ttfamily BIBStyle} & \textbf{参考文献样式设置(设置 \texttt{\alert{BIBMode}=none} 时无效)}\\
 			(D) \texttt{biber-gb7714} & gb7714-2015样式(biber引擎).\\
 			\midrule
 
-			v1.1a \alert{\texttt{ContentMuticols}} & \textbf{目录帧双栏显示设置}\\
+			v1.1a \alert{\ttfamily ContentMuticols} & \textbf{目录帧双栏显示设置}\\
 			(D) \texttt{true} & 是.\\
 			\texttt{false} & 否.\\
 		\end{tabular}
@@ -270,13 +270,13 @@
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{>{\raggedleft\arraybackslash}p{0.3\textwidth}p{0.15\textwidth}p{0.45\textwidth}}
-			\textbf{\Arg{key}} & \textbf{废除版本} & \textbf{说明}\\
+			\textbf{\Arg{key} = \Arg{value}} & \textbf{废除版本} & \textbf{说明}\\
 			\midrule
 
-			~\alert{\texttt{Miniframes}}\texttt{ =  negate} & v2.1b & 由 \texttt{Miniframes}\texttt{ = none} 替代.\\
-			~\alert{\texttt{NavigationTool}}\texttt{  =  negate} & v2.1b & 由 \texttt{NavigationTool}\texttt{ = none} 替代.\\
-			~\alert{\texttt{Background}}\texttt{ =  true} & v2.1c & 由 \texttt{Background}\texttt{ = SCU-Full} 替代.\\
-			~\alert{\texttt{Background}}\texttt{ =  false} & v2.1c & 由 \texttt{Background}\texttt{ = SCU-Lite} 替代.\\
+			~\alert{\ttfamily Miniframes}\texttt{ = negate} & v2.1b & 由 \texttt{Miniframes}\texttt{ = none} 替代.\\
+			~\alert{\ttfamily NavigationTool}\texttt{ = negate} & v2.1b & 由 \texttt{NavigationTool}\texttt{ = none} 替代.\\
+			~\alert{\ttfamily Background}\texttt{ = true} & v2.1c & 由 \texttt{Background}\texttt{ = SCU-Full} 替代.\\
+			~\alert{\ttfamily Background}\texttt{ = false} & v2.1c & 由 \texttt{Background}\texttt{ = SCU-Lite} 替代.\\
 		\end{tabular}
 	\end{table}
 \end{frame}
@@ -296,7 +296,7 @@
 \begin{frame}{封面及页脚信息}
   \structure{基本使用}
 
-  一个Beamer演示文稿的基本信息包括标题 \alert{\texttt{title}}, 子标题 \alert{\texttt{subtitle}}, 作者 \alert{\texttt{author}}, 机构 \alert{\texttt{institute}} 和时间 \alert{\texttt{date}}. 在本模板中, 可以设置\alert{标题简称}和\alert{作者简称}使其显示在页脚中. 如下是基本的调用命令及示例:
+  一个Beamer演示文稿的基本信息包括标题 \alert{\ttfamily title}, 子标题 \alert{\ttfamily subtitle}, 作者 \alert{\ttfamily author}, 机构 \alert{\ttfamily institute} 和时间 \alert{\ttfamily date}. 在本模板中, 可以设置\alert{标题简称}和\alert{作者简称}使其显示在页脚中. 如下是基本的调用命令及示例:
 
   \begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
 		\begin{column}{.5\textwidth}

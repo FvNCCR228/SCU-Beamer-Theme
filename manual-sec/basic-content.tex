@@ -2,9 +2,9 @@
 % 节: 内容排版
 % ----------------
 \section{内容排版}
-\subsection{字体}
+\subsection{字体与间距}
 \begin{frame}{Info.}
-	\textbf{本小节将介绍字体的设置, 包括字号、字体属性、强调字体与添加线及标点符号.}
+	\textbf{本小节将介绍字体相关设置, 包括字号、字体属性、字体强调、文本间距、文本修饰、标点符号与颜色.}
 	\begin{multicols}{2}
 		\begin{itemize}
 			\item Establish: \textcolor{scugreen}{v1.0a (2021/11/30)}
@@ -21,28 +21,29 @@
 	应用到环境全局: \cmd{begin}\marg{env} {\color{scured}\cmd{cmd}} \ldots \cmd{end}\marg{env}\\
 	应用到特定文本: {\color{scured}\cmd{cmd}}\marg{text}\par\vspace{1ex}
 	\begin{columns}[onlytextwidth]
-		\begin{column}{.7\textwidth}
+		\begin{column}{.66\textwidth}
 			\begin{table}[h]
+				\centering
 				\begin{tabular}{r|l}
-				  \alert{\cmd{cmd}} & \alert{效果}                                 \\
-					 			 \cmd{Huge} & \Huge{Neighbor 老王}                         \\
-						 		 \cmd{huge} & \huge{Neighbor 老王}                         \\
-							  \cmd{LARGE} & \LARGE{Neighbor 老王}                        \\
-							  \cmd{Large} & \Large{Neighbor 老王}                        \\
-							  \cmd{large} & \large{Neighbor 老王}                        \\
-					 \cmd{normalsize} & \normalsize{\alert{Neighbor 老王}} (Default) \\
-							  \cmd{small} & \small{Neighbor 老王}                        \\
-				 \cmd{footnotesize} & \footnotesize{Neighbor 老王}                 \\
-					 \cmd{scriptsize} & \scriptsize{Neighbor 老王}                   \\
-								 \cmd{tiny} & \tiny{Neighbor 老王}
+				  \alert{命令}~\cmd{cmd} & \alert{效果} \\
+					 			 \cmd{Huge} & \Huge{Fu-Gui老王}                        \\
+						 		 \cmd{huge} & \huge{Fu-Gui老王}                        \\
+							  \cmd{LARGE} & \LARGE{Fu-Gui老王}                       \\
+							  \cmd{Large} & \Large{Fu-Gui老王}                       \\
+							  \cmd{large} & \large{Fu-Gui老王}                       \\
+					 \cmd{normalsize} & \normalsize{\alert{Fu-Gui老王}} (Default)\\
+							  \cmd{small} & \small{Fu-Gui老王}                       \\
+				 \cmd{footnotesize} & \footnotesize{Fu-Gui老王}                \\
+					 \cmd{scriptsize} & \scriptsize{Fu-Gui老王}                  \\
+								 \cmd{tiny} & \tiny{Fu-Gui老王}
 				\end{tabular}
 			\end{table}
 		\end{column}
-		\begin{column}{.2\textwidth}
-			Beamer全局默认字号为 \alert{normalsize}, 一般情况不必修改默认字号.\\[1ex]
-			局部调整建议使用左侧中 \cmd{footnotesize} 到 \cmd{Large} 间的字号.\\[3ex]
+		\begin{column}{.25\textwidth}
+			Beamer全局默认字号为 \alert{normalsize}, 一般情况不必修改默认字号.\\[3ex]
+			\textbf{掌门大课堂}~字号局部调整建议使用左侧中 \cmd{footnotesize} 到 \cmd{Large} 间的字号.\\[3ex]
 
-			老王, 形翼门自称超级英雄第二, 道上人称Neighbor, 其特异能力是形态的缩放.
+			老王, 形翼门自称超级英雄第二, 道上人称Fu-Gui叔, 其特异能力是形态的缩放.
 		\end{column}
 	\end{columns}
 \end{frame}
@@ -53,7 +54,7 @@
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{>{\bfseries\color{PrimaryC}}m{.05\textwidth}R{.26\textwidth}m{.16\textwidth}m{.12\textwidth}R{.26\textwidth}}
-		  & \alert{\textbf{名称}} & \alert{\textbf{调用命令}} & \alert{\textbf{声明命令}} & \alert{\textbf{中英文显示效果}} \\[.4ex]
+		  & \alert{\bfseries 名称} & \alert{\bfseries 调用命令} & \alert{\bfseries 声明命令} & \alert{\bfseries 中英文显示效果} \\[.4ex]
 			\toprule
 			\multirow{2}{=}{\centering 字体系列}
 		  & 中等 Medium             & \cmd{textmd}\marg{text} & \cmd{mdseries} & Master Ma 形翼马掌门          \\
@@ -71,7 +72,7 @@
 			& 打字机 Typewriter       & \cmd{texttt}\marg{text} & \cmd{ttfamily} & \texttt{Master Ma 形翼马掌门} \\
 			\bottomrule\\[-7pt]
 			\multirow{5}{=}{\centering 字体属性组合}
-			& Bold Italic       & \multicolumn{2}{c|}{{\bfseries\itshape Master Ma 形翼马掌门}} & \multirow{2}{=}{\centering\alert{\textbf{常用场景}}} \\
+			& Bold Italic       & \multicolumn{2}{c|}{{\bfseries\itshape Master Ma 形翼马掌门}} & \multirow{2}{=}{\centering\alert{\bfseries 常用场景}} \\
 			& Bold Slanted      & \multicolumn{2}{c|}{{\bfseries\slshape Master Ma 形翼马掌门}} \\
 			& Bold Small Caps   & \multicolumn{2}{c|}{{\bfseries\scshape Master Ma}}           & Bold $\rightarrow$ 强调重点            \\
 			& Italic Small Caps & \multicolumn{2}{c|}{{\itshape\scshape Master Ma}}            & Italic $\rightarrow$ 注释/书名         \\
@@ -82,7 +83,7 @@
 	\vspace*{-1.2ex}\textit{注: \textup{(1)}部分字体可能缺失Italic、Slanted或 Small Caps 字形, 此时 \LaTeX{} 会尝试使用近似字形或自动合成近似效果, 并在编译日志中给出警告. \textup{(2)}部分字体Italic Typewriter字形过于花哨, 建议类似本主题中使用Slanted Typewriter替代.}
 \end{frame}
 
-\begin{frame}{强调字体}
+\begin{frame}{字体强调}
 	老王常用三条口诀, 能迅速发挥出三种不同的狂暴力量, 一者健壮, 二者耀眼, 三者独特.\\
 
   \structure{结构字体}\\[1ex]
@@ -104,75 +105,92 @@
   标准\LaTeX{}强调命令, 中文模式下默认显示为\uline{下划线}(中文排版惯例), 英文模式下默认显示为\emph{斜体}, 会根据上下文自动切换.
 \end{frame}
 
-\begin{frame}[fragile]{添加线及标点符号}
-	添加线:
-	\begin{multicols}{2}
-		\verb|\uline|\hfill 下划线\qquad\uline{混}\\
-		\verb|\uuline|\hfill 双下划线\qquad\uuline{元}\\
-		\verb|\uwave|\hfill 波浪线\qquad\uwave{形}\\
-		\verb|\sout|\hfill 删除线\qquad\sout{翼}\\
-		\verb|\xout|\hfill 斜删除线\qquad\xout{太}\\
-		\verb|\dashuline|\hfill 虚线\qquad\dashuline{极}\\
-		\verb|\dotuline|\hfill 加点\qquad\dotuline{门}
-	\end{multicols}
-	标点符号:
-	\begin{itemize}
-		\item 建议使用半角标点符号, 后键入一个空格.
-		\item 双引号由两对左单引号、右单引号构成: `` ''. 左单引号在键盘上ESC键下方.
-		\item 建议使用实心的句号, 只要书写的是自然科学类文章.
-	\end{itemize}
-
-	\begin{scucode}[listing side text]{标点符号}*[BiaodianFh]{tex}
-		建议使用半角标点符号, 后键入一个空格. (尤其是英文书写!)\\[1ex]
-		双引号由两对左单引号、右单引号构成: ``  ''. 左单引号在键盘上ESC键下方.\\[1ex]
-		建议使用实心的句号, 只要书写的是自然科学类文章.
-	\end{scucode}
+\cprotEnv\begin{frame}
+	\frametitle{文本间距}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{.52\textwidth}
+			\structure{间距填充}\\[1ex]
+			\scriptsize
+			\verb|\hfil|\&\verb|\hfill|\hfill 填充最大水平间距\\
+			\verb|\vfil|\&\verb|\vfill|\hfill 填充最大垂直间距\\
+			\verb|~|\hfill 不折行空格\\[1ex]
+			\begin{table}[h]
+				\centering
+				\caption{部分空格演示}
+				\begin{tabular}[scale=0.8]{l|l|r|c}
+					\toprule
+					代码 & 效果 & 长度 & 是否需要amsmath宏包 \\
+					\midrule
+					\verb|a~b| & a~b & 不知道 & 否 \\
+					\verb|a\quad b| & a\quad b & 1em & 否 \\
+					\verb|a\qquad b| & a\qquad b & 2em & 否 \\
+					\verb|a\enspace b| & a\enspace b & 0.5em & 否 \\
+					\verb|a\;b| & a\;b & 5/18em & 是 \\
+					\verb|a\:b| & a\:b & 4/18em & 是 \\
+					\verb|a\,b|或者~\verb|a\thinspace b| & a\,b & 3/18em & 否 \\
+					\verb|a\!b|或者~\verb|a\negthinspace b| & a\!b & -3/18em & 是 \\
+					\bottomrule
+				\end{tabular}
+			\end{table}
+		\end{column}
+		\begin{column}{.45\textwidth}
+			\structure{段落与换行}\\[1ex]
+			换行方式:
+			\begin{itemize}
+				\item 两段文字间空一行
+				\item 文字结束使用"\texttt{\textbackslash newline}"
+				\item 文字结束使用"\texttt{\textbackslash par}"
+				\item 文字结束使用"\texttt{\textbackslash\textbackslash[<长度>]}", <长度>单位一般为ex(当前字体尺寸设置下x的高度), 该\textbf{可选}参数指定与下行间距, 可省略.
+			\end{itemize}
+		\end{column}
+	\end{columns}
 \end{frame}
 
-\subsection{版式相关}
-\cprotEnv\begin{frame}
-	\frametitle{长宽间距}
-	\scriptsize
-	\begin{multicols}{2}
-		\verb|\linewidth|\hfill 当前行的宽度\\
-		\verb|\columnwidth|\hfill 当前分栏的宽度\\
-		\verb|\textwidth|\hfill 整个页面版芯的宽度\\
-		\verb|\textheight|\hfill 整个页面版芯的高度\\
-		\verb|\paperwidth|\hfill 整个页面纸张的宽度\\
-		\verb|\hspace{宽度}|\hfill 水平间距为宽度\\
-		\verb|\hspace*{宽度}|\hfill 不因在行首行尾被删除\\
-		\verb|\vspace{高度}|\hfill 垂直间距为高度\\
-		\verb|\vspace*{高度}|\hfill 不因在页首页尾被删除\\
-		\verb|\hfil|\&\verb|\hfill|\hfill 填充最大水平间距\\
-		\verb|\vfil|\&\verb|\vfill|\hfill 填充最大垂直间距\\
-		\verb|~|\hfill 不折行空格\\
-	\end{multicols}
-	\vskip-2ex
-	\begin{table}[h]
-		\centering
-		\caption{部分空格演示}
-		\begin{tabular}[scale=0.8]{l|l|r|c}
-			\toprule
-			代码 & 效果 & 长度 & 是否需要amsmath宏包 \\
-			\midrule
-			\verb|a~b| & a~b & 不知道 & 否 \\
-			\verb|a\quad b| & a\quad b & 1em & 否 \\
-			\verb|a\qquad b| & a\qquad b & 2em & 否 \\
-			\verb|a\enspace b| & a\enspace b & 0.5em & 否 \\
-			\verb|a\;b| & a\;b & 5/18em & 是 \\
-			\verb|a\:b| & a\:b & 4/18em & 是 \\
-			\verb|a\,b|或者~\verb|a\thinspace b| & a\,b & 3/18em & 否 \\
-			\verb|a\!b|或者~\verb|a\negthinspace b| & a\!b & -3/18em & 是 \\
-			\bottomrule
-		\end{tabular}
-	\end{table}
-	换行:
-	\begin{itemize}
-		\item 两段文字间空一行
-		\item 文字结束使用"\texttt{\textbackslash newline}"
-		\item 文字结束使用"\texttt{\textbackslash par}"
-		\item 文字结束使用"\texttt{\textbackslash\textbackslash[<长度>]}", <长度>单位一般为ex(当前字体尺寸设置下x的高度), 该\textbf{可选}参数指定与下行间距, 可省略.
-	\end{itemize}
+\begin{frame}{文本修饰及标点符号}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{.7\textwidth}
+			\structure{文本修饰}\\[1ex]
+			来自 \pkg{ulem} 宏包, 提供下划线类与删除线类修饰命令.
+			\begin{table}[h]
+				\centering
+				\begin{tabular}{*{3}{>{\centering\arraybackslash}m{.12\textwidth}}|*{3}{>{\centering\arraybackslash}m{.12\textwidth}}}
+					\multicolumn{3}{c}{\alert{\bfseries 下划线类(underline)}} & \multicolumn{3}{c}{\alert{\bfseries 删除线类(strikeout)}} \\
+					\midrule
+					下划线   & \cmd{uline}  & \uline{混元}  & 删除线   & \cmd{sout} & \sout{弹抖} \\
+					双下划线 & \cmd{uuline} & \uuline{形翼} & 斜删除线 & \cmd{xout} & \xout{闪电鞭} \\
+					波浪线   & \cmd{uwave}      & \uwave{太极门} & \\
+					虚线	   & \cmd{dashuline}  & \dashuline{五连鞭} & \\
+					点线	   & \cmd{dotuline}   & \dotuline{松果} & \\
+				\end{tabular}
+			\end{table}
+		\end{column}
+		\begin{column}{.27\textwidth}
+			\textbf{简单自定义纹理修饰:}\\[0.5ex]
+			\cmd{newcommand}\cmd{cmd}\marg*{\%\\
+			  \hspace*{1em}\cmd{bgroup}\%\\
+				\hspace*{1em}\cmd{markoverwith}\marg{pattern}\%\\
+    		\hspace*{1em}\cmd{ULon}\%\\
+			}\\[0.5ex]
+			具体实现可参考 \pkg{ulem} 官方文档和 \href{https://tex.stackexchange.com/questions/530454}{TeX.SE 社区相关讨论}.
+		\end{column}
+	\end{columns}\vspace*{-.5ex}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{.25\textwidth}
+			\structure{标点符号}\\[1ex]
+			中西文混排可统一使用全角标点符号, \alert{自然科学类}或\alert{纯西文}排版建议使用\alert{半角标点符号}. \\[.5ex]
+			\CTeX{} \cmd{punctstyle}\marg{style} 可在导言区设置标点样式. \Arg{style} 可选 \texttt{quanjiao} \alert{全角}、\texttt{banjiao} \alert{半角}、\texttt{kaiming} \alert{开明} (。！？等部分标点为全角).
+		\end{column}
+		\begin{column}{.75\textwidth}
+			\hspace*{1.2em}\textbf{掌门大课堂}
+			\begin{itemize}
+				\item \alert{连字}: 部分西文字母连用时存在连字, 可通过 \alert{\fverb{shelf\{\}ful}} 或 \alert{\fverb{shelf\char`\\/ful}} 来取消.
+				\item \alert{引号}: 中文单/双引号可直接输入. 西文单引号为 \alert{\fverb{`\,\textquotesingle}}, 双引号为 \alert{\fverb{``\,\textquotesingle\textquotesingle}}, \alert{\fverb{`}} 在ESC键下方.
+				\item \alert{连字符}: 中文破折号在键盘键入\alert{一次全角长横线}(即两个连续的 \alert{\fverb{—}} )或 使用\alert{两次} \cmd{textemdash}. 西文连字符分单词连接 \alert{\fverb{-}}, 短连接符 \alert{\fverb{--}} 和破折号 \alert{\fverb{---}}.
+				\item \alert{省略号}: 中文在键盘键入\alert{六次点号}或 使用\alert{两次} \cmd{ldots}. 西文使用\alert{三个点号} 或 \cmd{ldots}.
+				\item \alert{特殊符号}: \LaTeX{} 保留字符 \alert{\texttt{@}} \alert{\fverb{\#}} \alert{\fverb{\$}} \alert{\fverb{\%}} \alert{\fverb{\&}} \alert{\fverb{\{}} \alert{\fverb{\}}} \alert{\fverb{\_}} 需在输入字符前加反斜杠 \alert{\fverb{\textbackslash}}. \alert{\textasciitilde} 和 \alert{\textasciicircum} 分别使用 \cmd{textasciitilde} 和 \cmd{textasciicircum}, 反斜杠使用 \cmd{textbackslash}.
+			\end{itemize}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{颜色}
@@ -324,7 +342,7 @@
 			\item Update: \textcolor{scugreen}{v1.3a (2022/03/16)}
 		\end{itemize}
 	\end{multicols}
-	注: 自 \textcolor{scugreen}{v1.3a (2021/03/16)} 起, 本小节将替代手册中\alert{\textbf{代码环境}}小节.\par
+	注: 自 \textcolor{scugreen}{v1.3a (2021/03/16)} 起, 本小节将替代手册中\alert{\bfseries 代码环境}小节.\par
 	\mycopyright
 \end{frame}
 
@@ -403,7 +421,7 @@
 			\item Update: \textcolor{scugreen}{v1.3a (2022/03/16)}
 		\end{itemize}
 	\end{multicols}
-	注: 自 \textcolor{scugreen}{v1.3a (2021/03/16)} 起, 本小节将替代手册中\alert{\textbf{数学环境}}小节.\par
+	注: 自 \textcolor{scugreen}{v1.3a (2021/03/16)} 起, 本小节将替代手册中\alert{\bfseries 数学环境}小节.\par
 	\mycopyright
 \end{frame}
 
@@ -533,7 +551,7 @@
       \item Update: \textcolor{scugreen}{v1.3b (2022/04/13)}
 		\end{itemize}
 	\end{multicols}
-	注: 自 \textcolor{scugreen}{v1.3a (2021/03/16)} 起, 本小节已自手册中\alert{\textbf{数学环境}}小节拆出.\par
+	注: 自 \textcolor{scugreen}{v1.3a (2021/03/16)} 起, 本小节已自手册中\alert{\bfseries 数学环境}小节拆出.\par
 	\mycopyright
 \end{frame}
 

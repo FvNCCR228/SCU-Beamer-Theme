@@ -54,6 +54,22 @@
 \end{frame}
 
 \subsection{分栏}
+\cprotEnv\begin{frame}
+	\frametitle{长宽间距}
+	\scriptsize
+	\begin{multicols}{2}
+		\verb|\linewidth|\hfill 当前行的宽度\\
+		\verb|\columnwidth|\hfill 当前分栏的宽度\\
+		\verb|\textwidth|\hfill 整个页面版芯的宽度\\
+		\verb|\textheight|\hfill 整个页面版芯的高度\\
+		\verb|\paperwidth|\hfill 整个页面纸张的宽度\\
+		\verb|\hspace{宽度}|\hfill 水平间距为宽度\\
+		\verb|\hspace*{宽度}|\hfill 不因在行首行尾被删除\\
+		\verb|\vspace{高度}|\hfill 垂直间距为高度\\
+		\verb|\vspace*{高度}|\hfill 不因在页首页尾被删除\\
+	\end{multicols}
+\end{frame}
+
 \begin{frame}[fragile,label={fra:Fenlan}]{分栏}
 	此处列出两种分栏方式: \\minipage环境及columns环境嵌套column环境, 其中column环境用法同minipage(见并列小图展示\vpageref{code:BinlieXtsl}), colums环境不需要加参数. 如下列出column环境和两个列表环境的显示效果.
 	\vspace{1ex}
