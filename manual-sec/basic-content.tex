@@ -2,7 +2,7 @@
 % 节: 内容排版
 % ----------------
 \section{内容排版}
-\subsection{字体与间距}
+\subsection{字体}
 \begin{frame}{Info.}
 	\textbf{本小节将介绍字体相关设置, 包括字号、字体属性、字体强调、文本间距、文本修饰、标点符号与颜色.}
 	\begin{multicols}{2}
@@ -50,28 +50,28 @@
 
 \begin{frame}{字体属性}
 	\textbf{掌门大课堂}~两类方法指定字体属性:
-	(1) \alert{调用命令} \cmd{cmd}\marg{text} $\rightarrow$ 参数内文本, (2) \alert{声明命令} \{\cmd{cmd} \ldots\} $\rightarrow$ 环境全局文本.\vspace*{-1ex}
+	(1) \alert{调用命令} \cmd{cmd}\marg{text} $\rightarrow$ 参数内文本, (2) \alert{声明命令} \{\cmd{cmd} \ldots\} $\rightarrow$ 环境全局文本.\vspace*{-1.1ex}
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{>{\bfseries\color{PrimaryC}}m{.05\textwidth}R{.26\textwidth}m{.16\textwidth}m{.12\textwidth}R{.26\textwidth}}
 		  & \alert{\bfseries 名称} & \alert{\bfseries 调用命令} & \alert{\bfseries 声明命令} & \alert{\bfseries 中英文显示效果} \\[.4ex]
 			\toprule
-			\multirow{2}{=}{\centering 字体系列}
+			\multirow{2}{=}{\centering 字体\\[-2pt]系列}
 		  & 中等 Medium             & \cmd{textmd}\marg{text} & \cmd{mdseries} & Master Ma 形翼马掌门          \\
 			& 加粗 Bold               & \cmd{textbf}\marg{text} & \cmd{bfseries} & \textbf{Master Ma 形翼马掌门} \\
 			\cmidrule(lr){2-5}
-			\multirow{4}{=}{\centering 字体形状}
+			\multirow{4}{=}{\centering 字体\\[-2pt]形状}
 			& 直立 Upright            & \cmd{textup}\marg{text} & \cmd{upshape}  & \textup{Master Ma 形翼马掌门} \\
 			& 意大利斜体 Italic       & \cmd{textit}\marg{text} & \cmd{itshape}  & \textit{Master Ma 形翼马掌门} \\
 			& 倾斜 Slanted            & \cmd{textsl}\marg{text} & \cmd{slshape}  & \textsl{Master Ma 形翼马掌门} \\
 			& 小型大写 Small Caps     & \cmd{textsc}\marg{text} & \cmd{scshape}  & {\scshape Master Ma}    \\
 			\cmidrule(lr){2-5}
-			\multirow{3}{=}{\centering 字体族}
+			\multirow{3}{=}{\centering 字体\\[-2pt]族}
 			& 衬线 Serif (罗马 Roman) & \cmd{textrm}\marg{text} & \cmd{rmfamily} & \textrm{Master Ma 形翼马掌门} \\
 			& 无衬线 Sans-serif       & \cmd{textsf}\marg{text} & \cmd{sffamily} & \textsf{Master Ma 形翼马掌门} \\
 			& 打字机 Typewriter       & \cmd{texttt}\marg{text} & \cmd{ttfamily} & \texttt{Master Ma 形翼马掌门} \\
 			\bottomrule\\[-7pt]
-			\multirow{5}{=}{\centering 字体属性组合}
+			\multirow{5}{=}{\centering 字体\\[-2pt]属性\\[-1pt]组合}
 			& Bold Italic       & \multicolumn{2}{c|}{{\bfseries\itshape Master Ma 形翼马掌门}} & \multirow{2}{=}{\centering\alert{\bfseries 常用场景}} \\
 			& Bold Slanted      & \multicolumn{2}{c|}{{\bfseries\slshape Master Ma 形翼马掌门}} \\
 			& Bold Small Caps   & \multicolumn{2}{c|}{{\bfseries\scshape Master Ma}}           & Bold $\rightarrow$ 强调重点            \\
@@ -80,7 +80,7 @@
 			\bottomrule
 		\end{tabular}
 	\end{table}
-	\vspace*{-1.2ex}\textit{注: \textup{(1)}部分字体可能缺失Italic、Slanted或 Small Caps 字形, 此时 \LaTeX{} 会尝试使用近似字形或自动合成近似效果, 并在编译日志中给出警告. \textup{(2)}部分字体Italic Typewriter字形过于花哨, 建议类似本主题中使用Slanted Typewriter替代.}
+	\vspace*{-1.5ex}\textit{注: \textup{(1)}部分字体可能缺失Italic、Slanted或 Small Caps 字形, 此时 \LaTeX{} 会尝试使用近似字形或自动合成近似效果, 并在编译日志中给出警告. \textup{(2)}部分字体Italic Typewriter字形过于花哨, 建议类似本主题中使用Slanted Typewriter替代.}
 \end{frame}
 
 \begin{frame}{字体强调}
@@ -91,69 +91,91 @@
   \textbf{调用环境}:\\
   \cmd{begin}\marg{structureenv}\textcolor{scugrey}{<\Arg{overlay}>}\\
   \hspace*{1em}\Arg{environment contents}\\
-  \cmd{end}\marg{structureenv}\\[1.6ex]
+  \cmd{end}\marg{structureenv}\\[1.5ex]
 
   \structure{重点字体}\\[1ex]
   \textbf{调用命令}: \cmd{alert}\textcolor{scugrey}{<\Arg{overlay}>}\marg{text}\hfill\alert{Neighbor 老王}\\
   \textbf{调用环境}:\\
   \cmd{begin}\marg{alertenv}\textcolor{scugrey}{<\Arg{overlay}>}\\
   \hspace*{1em}\Arg{environment contents}\\
-  \cmd{end}\marg{alertenv}\\[1.6ex]
+  \cmd{end}\marg{alertenv}\\[1.5ex]
 
   \structure{强调字体}\\[1ex]
   \textbf{调用命令}: \cmd{emph}\marg{text}\hfill\emph{Neighbor 老王}\\
   标准\LaTeX{}强调命令, 中文模式下默认显示为\uline{下划线}(中文排版惯例), 英文模式下默认显示为\emph{斜体}, 会根据上下文自动切换.
 \end{frame}
 
-\cprotEnv\begin{frame}
-	\frametitle{文本间距}
-	\begin{columns}[onlytextwidth]
-		\begin{column}{.52\textwidth}
-			\structure{间距填充}\\[1ex]
-			\scriptsize
-			\verb|\hfil|\&\verb|\hfill|\hfill 填充最大水平间距\\
-			\verb|\vfil|\&\verb|\vfill|\hfill 填充最大垂直间距\\
-			\verb|~|\hfill 不折行空格\\[1ex]
+\begin{frame}{文本间距}
+	\begin{columns}[T, onlytextwidth]
+		\begin{column}{.7\textwidth}
+			\structure{间距填充}
 			\begin{table}[h]
 				\centering
-				\caption{部分空格演示}
-				\begin{tabular}[scale=0.8]{l|l|r|c}
-					\toprule
-					代码 & 效果 & 长度 & 是否需要amsmath宏包 \\
+				\begin{tabular}{lll|lll}
+					\alert{命令}~\cmd{cmd} & \alert{间距/功能} & \alert{效果} & \alert{命令}~\cmd{cmd} & \alert{间距(约)} & \alert{效果} \\
 					\midrule
-					\verb|a~b| & a~b & 不知道 & 否 \\
-					\verb|a\quad b| & a\quad b & 1em & 否 \\
-					\verb|a\qquad b| & a\qquad b & 2em & 否 \\
-					\verb|a\enspace b| & a\enspace b & 0.5em & 否 \\
-					\verb|a\;b| & a\;b & 5/18em & 是 \\
-					\verb|a\:b| & a\:b & 4/18em & 是 \\
-					\verb|a\,b|或者~\verb|a\thinspace b| & a\,b & 3/18em & 否 \\
-					\verb|a\!b|或者~\verb|a\negthinspace b| & a\!b & -3/18em & 是 \\
-					\bottomrule
+					\multicolumn{3}{c|}{\alert{\bfseries\scshape Text Spacing}}
+					& \multicolumn{3}{c}{\alert{\bfseries\scshape Math Spacing}} \\
+					\alert{\ttfamily\textbackslash\char32} & 普通空格 & a\ b
+					& \cmd{,} & \texttt{3/18 em} & a\,b\,c \\
+					\alert{\textasciitilde} & 不折行空格 & a~b
+					& \cmd{thinspace} & 等效 \cmd{,} & a\,b\,c \\
+					\cmd{enspace} & \texttt{1/2 em} & a\enspace b
+					& \cmd{:} & \texttt{4/18 em} & a\:b\:c \\
+					\cmd{quad} & \texttt{1 em} & a\quad b
+					& \cmd{>} & \texttt{4/18 em} & a\:b\:c \\
+					\cmd{qquad} & \texttt{2 em} & a\qquad b
+					& \cmd{medspace} & 等效 \cmd{:} & a\:b\:c \\
+					%
+					\multicolumn{3}{c|}{\alert{\bfseries\scshape Glue}}
+					& \cmd{;} & \texttt{5/18 em} & a\;b\;c \\
+					\cmd{hfil} & \multicolumn{2}{l|}{水平弹性}
+					& \cmd{thickspace} & 等效 \cmd{;} & a\;b\;c \\
+					\cmd{hfill} & \multicolumn{2}{l|}{水平弹性(撑满)}
+					& \cmd{!} & \texttt{-3/18 em} & a\!b~a\!b\!c \\
+					\cmd{vfil} & \multicolumn{2}{l|}{垂直弹性}
+					& \cmd{negthinspace} & 等效 \cmd{!} & a\!b~a\!b\!c \\
+					\cmd{vfill} & \multicolumn{2}{l|}{垂直弹性(撑满)}
+					& \cmd{negmedspace} & \texttt{-4/18 em} & a\negmedspace b~a\negmedspace b\negmedspace c \\
+					%
+					\multicolumn{3}{c|}{\alert{\bfseries\scshape Par Spacing}}
+					& \cmd{negthickspace} & \texttt{-5/18 em} & a\negthickspace b~a\negthickspace b\negthickspace c \\
+					\cmd{smallskip} & \multicolumn{2}{l|}{段落间小间距} & \\
+					\cmd{medskip} & \multicolumn{2}{l|}{段落间中间距} & \\
+					\cmd{bigskip} & \multicolumn{2}{l|}{段落间大间距} & \\
 				\end{tabular}
 			\end{table}
 		\end{column}
-		\begin{column}{.45\textwidth}
-			\structure{段落与换行}\\[1ex]
-			换行方式:
+		\begin{column}{.28\textwidth}
+			\structure{段落与换行}\\~\\
+			\textbf{掌门大课堂}
 			\begin{itemize}
-				\item 两段文字间空一行
-				\item 文字结束使用"\texttt{\textbackslash newline}"
-				\item 文字结束使用"\texttt{\textbackslash par}"
-				\item 文字结束使用"\texttt{\textbackslash\textbackslash[<长度>]}", <长度>单位一般为ex(当前字体尺寸设置下x的高度), 该\textbf{可选}参数指定与下行间距, 可省略.
+				\item 段落结束直接换行: 空一行、\cmd{par}、\cmd{newline}
+				\item 换行后使用预设长度控制段落间距: \cmd{smallskip}, \cmd{medskip}, \cmd{bigskip}
+				\item 换行, 且可通过 \Arg{length} 控制段落间距: \cmd{\textbackslash}\oarg*{\Arg{length}}
+				\item 换行但禁止分页: \cmd{\textbackslash*}\oarg*{\Arg{length}}
+				\item 灵活小技巧(简单换两行, 句尾使用): \cmd{\textbackslash}\alert{\fverb{\textasciitilde}}\cmd{\textbackslash}
 			\end{itemize}
+			\vfill
 		\end{column}
 	\end{columns}
 \end{frame}
 
 \begin{frame}{文本修饰及标点符号}
 	\begin{columns}[onlytextwidth]
-		\begin{column}{.7\textwidth}
+		\begin{column}{.72\textwidth}
 			\structure{文本修饰}\\[1ex]
 			来自 \pkg{ulem} 宏包, 提供下划线类与删除线类修饰命令.
 			\begin{table}[h]
 				\centering
-				\begin{tabular}{*{3}{>{\centering\arraybackslash}m{.12\textwidth}}|*{3}{>{\centering\arraybackslash}m{.12\textwidth}}}
+				\begin{tabular}{
+					>{\centering\arraybackslash}m{.11\columnwidth}
+					>{\centering\arraybackslash}m{.13\columnwidth}
+					>{\centering\arraybackslash}m{.1\columnwidth}|
+					>{\centering\arraybackslash}m{.11\columnwidth}
+					>{\centering\arraybackslash}m{.13\columnwidth}
+					>{\centering\arraybackslash}m{.1\columnwidth}
+				}
 					\multicolumn{3}{c}{\alert{\bfseries 下划线类(underline)}} & \multicolumn{3}{c}{\alert{\bfseries 删除线类(strikeout)}} \\
 					\midrule
 					下划线   & \cmd{uline}  & \uline{混元}  & 删除线   & \cmd{sout} & \sout{弹抖} \\
@@ -180,7 +202,7 @@
 			中西文混排可统一使用全角标点符号, \alert{自然科学类}或\alert{纯西文}排版建议使用\alert{半角标点符号}. \\[.5ex]
 			\CTeX{} \cmd{punctstyle}\marg{style} 可在导言区设置标点样式. \Arg{style} 可选 \texttt{quanjiao} \alert{全角}、\texttt{banjiao} \alert{半角}、\texttt{kaiming} \alert{开明} (。！？等部分标点为全角).
 		\end{column}
-		\begin{column}{.75\textwidth}
+		\begin{column}{.74\textwidth}
 			\hspace*{1.2em}\textbf{掌门大课堂}
 			\begin{itemize}
 				\item \alert{连字}: 部分西文字母连用时存在连字, 可通过 \alert{\fverb{shelf\{\}ful}} 或 \alert{\fverb{shelf\char`\\/ful}} 来取消.
@@ -193,17 +215,83 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{颜色}
-	\scriptsize
-	\begin{scucode}[listing side text]{颜色}*[YanS]{tex}
-		模板依VIS手册定义了以下颜色:\\
-		\textcolor{scured}{锦绣红}
-		\textcolor{scugrey}{优雅灰}
-		\textcolor{scublue}{宝石蓝}
-		\textcolor{scugreen}{荷叶绿}
-		\textcolor{scuyellow}{银杏黄}\\
-		定义颜色请使用\verb!\definecolor!
-	\end{scucode}
+\begin{frame}{颜色}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{.54\textwidth}
+			\textbf{掌门大课堂}\\[1ex]
+			定义新颜色: \\
+			\cmd{definecolor}\marg{name}\marg{model}\marg{spec} \\[.6ex]
+			基于已有颜色创建别名或混合颜色: \\
+			\cmd{colorlet}\marg{name}\marg{existing} \\[.6ex]
+			使用颜色着色文字: \cmd{textcolor}\marg{color}\marg{text} \\[.6ex]
+			使用颜色着色背景: \cmd{colorbox}\marg{color}\marg{text} \\[.6ex]
+			使用颜色着色并加边框: \\
+			\cmd{fcolorbox}\marg{framecolor}\marg{backgroundcolor}\marg{text}
+		\end{column}
+		\begin{column}{.43\textwidth}
+			\hfill\tiny\setlength{\tabcolsep}{0pt}
+			\begin{tabular}{rr*{10}{l}}
+				& & \rotatebox{70}{\texttt{100\%}} & \rotatebox{70}{\texttt{10\%}} &
+				\rotatebox{70}{\texttt{20\%}} & \rotatebox{70}{\texttt{30\%}} &
+				\rotatebox{70}{\texttt{40\%}} & \rotatebox{70}{\texttt{50\%}} &
+				\rotatebox{70}{\texttt{60\%}} & \rotatebox{70}{\texttt{70\%}} &
+				\rotatebox{70}{\texttt{80\%}} & \rotatebox{70}{\texttt{90\%}} \\
+				\texttt{scured}\hspace*{1.5em}    & \textcolor{scured}{锦绣红}\hspace*{1.5em}    &
+				\swatchC{scured}      & \swatchC{scured10}    & \swatchC{scured20}    &
+				\swatchC{scured30}    & \swatchC{scured40}    & \swatchC{scured50}    &
+				\swatchC{scured60}    & \swatchC{scured70}    & \swatchC{scured80}    &
+				\swatchC{scured90}    \\
+				\texttt{scugrey}\hspace*{1.5em}   & \textcolor{scugrey}{优雅灰}\hspace*{1.5em}   &
+				\swatchC{scugrey}     & \swatchC{scugrey10}   & \swatchC{scugrey20}   &
+				\swatchC{scugrey30}   & \swatchC{scugrey40}   & \swatchC{scugrey50}   &
+				\swatchC{scugrey60}   & \swatchC{scugrey70}   & \swatchC{scugrey80}   &
+				\swatchC{scugrey90}   \\
+				\texttt{scublue}\hspace*{1.5em}   & \textcolor{scublue}{宝石蓝}\hspace*{1.5em}   &
+				\swatchC{scublue}     & \swatchC{scublue10}   & \swatchC{scublue20}   &
+				\swatchC{scublue30}   & \swatchC{scublue40}   & \swatchC{scublue50}   &
+				\swatchC{scublue60}   & \swatchC{scublue70}   & \swatchC{scublue80}   &
+				\swatchC{scublue90}   \\
+				\texttt{scugreen}\hspace*{1.5em}  & \textcolor{scugreen}{荷叶绿}\hspace*{1.5em}  &
+				\swatchC{scugreen}    & \swatchC{scugreen10}  & \swatchC{scugreen20}  &
+				\swatchC{scugreen30}  & \swatchC{scugreen40}  & \swatchC{scugreen50}  &
+				\swatchC{scugreen60}  & \swatchC{scugreen70}  & \swatchC{scugreen80}  &
+				\swatchC{scugreen90}  \\
+				\texttt{scuyellow}\hspace*{1.5em} & \textcolor{scuyellow}{银杏黄}\hspace*{1.5em} &
+				\swatchC{scuyellow}   & \swatchC{scuyellow10} & \swatchC{scuyellow20} &
+				\swatchC{scuyellow30} & \swatchC{scuyellow40} & \swatchC{scuyellow50} &
+				\swatchC{scuyellow60} & \swatchC{scuyellow70} & \swatchC{scuyellow80} &
+				\swatchC{scuyellow90} \\
+			\end{tabular}\\[.5ex]
+			\scriptsize
+			本模板依据四川大学 VIS 手册定义了 \textcolor{scured}{\texttt{scured}} \textcolor{scugrey}{\texttt{scugrey}} \textcolor{scublue}{\texttt{scublue}} \textcolor{scugreen}{\texttt{scugreen}} \textcolor{scuyellow}{\texttt{scuyellow}} 5个颜色系列, 添加后缀 \texttt{10}--\texttt{90} , 如 \textcolor{scured70}{\texttt{scured70}} \textcolor{scublue80}{\texttt{scublue80}} 为各系列浅色变体.
+		\end{column}
+	\end{columns}
+	
+	\definecolor{exrgb}{RGB}{255,0,0}
+	\definecolor{exhtml}{HTML}{FF0000}
+	\definecolor{exgray}{gray}{0.5}
+	\definecolor{excmyk}{cmyk}{.1, .2, .3, .4}
+	\colorlet{expurple}{red!50!blue}
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{clclc}
+			\alert{模式} & \alert{命令} & \alert{参数取值} & \alert{示例命令} & \alert{效果} \\
+			\midrule
+			rgb  & \cmd{definecolor} & \texttt{0}--\texttt{1} &
+			\cmd{definecolor}\marg*{myred}\marg*{rgb}\marg*{1, 0, 0} & \colorbox{exrgb}{\phantom{XX}} \\
+			RGB  & \cmd{definecolor} & \texttt{0}--\texttt{255} &
+			\cmd{definecolor}\marg*{myred}\marg*{RGB}\marg*{255, 0, 0} & \colorbox{exrgb}{\phantom{XX}} \\
+			HTML & \cmd{definecolor} & 6位十六进制 &
+			\cmd{definecolor}\marg*{myred}\marg*{HTML}\marg*{FF0000} & \colorbox{exhtml}{\phantom{XX}}\\
+			gray & \cmd{definecolor} & \texttt{0}--\texttt{1} &
+			\cmd{definecolor}\marg*{mygray}\marg*{gray}\marg*{0.5} & \colorbox{exgray}{\phantom{XX}} \\
+			cmyk & \cmd{definecolor} & \texttt{0}--\texttt{1} &
+			\cmd{definecolor}\marg*{mygold}\marg*{cmyk}\marg*{.1, .2, .3, .4} & \colorbox{excmyk}{\phantom{XX}} \\
+			混合 & \cmd{colorlet}    & \texttt{color!num!color} &
+			\cmd{colorlet}\marg*{mypurple}\marg*{red!50!blue} & \colorbox{expurple}{\phantom{XX}}
+		\end{tabular}
+	\end{table}
+	\vspace*{-1ex}
 \end{frame}
 
 \subsection{图与表格}
