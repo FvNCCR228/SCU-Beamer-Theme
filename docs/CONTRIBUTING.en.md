@@ -1,13 +1,13 @@
 [中文](CONTRIBUTING.md) | [English](CONTRIBUTING.en.md)
 
-# SCU Beamer Theme Extension Plugin Contribution Guide
+This is the extension plugin contribution guide for SCU Beamer Theme. For the general contribution guide, see [#13](https://github.com/FvNCCR228/SCU-Beamer-Theme/discussions/13).
 
-This is the extension plugin contribution guide for SCU Beamer Theme. For the general contribution guide, see #13.
+## SCU Beamer Theme Extension Plugin Contribution Guide
 
 ### Plugin System Overview
 
 SCU Beamer Theme supports loading extension themes through a plugin mechanism.
-Refer to #12 for guidance on defining SCU Beamer Theme extension plugins. Once your plugin information is merged into this project's GitHub repository, users can download and install plugins with one click using `docs/install-plugin.sh` (Linux/MacOS) or `docs/install-plugin.bat` (Windows).
+Refer to [#12](https://github.com/FvNCCR228/SCU-Beamer-Theme/discussions/12) for guidance on defining SCU Beamer Theme extension plugins. Once your plugin information is merged into this project's GitHub repository, users can download and install plugins with one click using `docs/install-plugin.sh` (Linux/MacOS) or `docs/install-plugin.bat` (Windows).
 
 ### Prerequisites
 

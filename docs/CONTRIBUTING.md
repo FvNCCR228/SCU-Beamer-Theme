@@ -1,11 +1,11 @@
 [中文](CONTRIBUTING.md) | [English](CONTRIBUTING.en.md)
 
-以下是 SCU Beamer Theme 扩展主题插件贡献指南, SCU Beamer Theme 贡献指南请查看 #13
+以下是 SCU Beamer Theme 扩展主题插件贡献指南, SCU Beamer Theme 贡献指南请查看 [#13](https://github.com/FvNCCR228/SCU-Beamer-Theme/discussions/13)
 
 ## SCU Beamer Theme 扩展主题插件贡献指南
 ### 插件系统简介
 SCU Beamer Theme 支持通过插件机制加载扩展主题
-可参考 #12 相关指南定义 SCU Beamer Theme 扩展主题插件. 合并插件信息到本项目 GitHub 仓库后, 用户可通过 `docs/install-plugin.sh` (Linux/MacOS) 或 `docs/install-plugin.bat` (Windows) 脚本一键下载安装所需插件
+可参考 [#12](https://github.com/FvNCCR228/SCU-Beamer-Theme/discussions/12) 相关指南定义 SCU Beamer Theme 扩展主题插件. 合并插件信息到本项目 GitHub 仓库后, 用户可通过 `docs/install-plugin.sh` (Linux/MacOS) 或 `docs/install-plugin.bat` (Windows) 脚本一键下载安装所需插件
 
 ### 前提条件
 1. 你需要创建一个公开的 GitHub 仓库, 用于存放扩展主题插件文件
