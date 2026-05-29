@@ -8,36 +8,62 @@ set -e
 # 列表: ./install-plugin.sh -l
 # 搜索: ./install-plugin.sh -s <关键词>
 
+# ----------------------------------------
 # 颜色
+# ----------------------------------------
+
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-# 配置
-# 插件 | PLUGINS[插件名]="仓库(用户/仓库) 分支"
-# 设置 | FILES[插件名]="文件1 文件2 文件3"
-# 格式 | NAME[插件名]="插件显示名称"
+# ----------------------------------------
+# 加载插件配置
+# ----------------------------------------
+
 declare -A PLUGINS
+declare -A BRANCHES
 declare -A FILES
 declare -A NAME
 
-# 插件: 示例 - example
-PLUGINS[example]="user/repo main"
-FILES[example]="file1.sty file2.tex"
-NAME[example]="示例插件"
+# 从同目录下的 plugins.conf 加载插件配置 (INI 格式)
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)" || SCRIPT_DIR="."
+CONF_FILE="$SCRIPT_DIR/dev/plugins.conf"
 
-# 插件: 新三国天意爷主题 - TianYiYe
-PLUGINS[TianYiYe]="FvNCCR228/SCU-Beamer-Theme main"
-FILES[TianYiYe]="main.pdf fonts/README.md"
-NAME[TianYiYe]="新三国天意爷主题"
+load_plugins() {
+    if [ ! -f "$CONF_FILE" ]; then
+        echo "错误: 配置文件 $CONF_FILE 不存在"
+        exit 1
+    fi
+    local section=""
+    while IFS='=' read -r key value; do
+        # 跳过空行和注释
+        [[ -z "$key" || "$key" =~ ^[[:space:]]*# ]] && continue
+        # 去除首尾空白
+        key="${key#"${key%%[![:space:]]*}"}"
+        key="${key%"${key##*[![:space:]]}"}"
+        # 解析 section [name]
+        if [[ "$key" =~ ^\[(.*)\]$ ]]; then
+            section="${BASH_REMATCH[1]}"
+            continue
+        fi
+        [[ -z "$section" ]] && continue
+        # 去除 value 首尾空白
+        value="${value#"${value%%[![:space:]]*}"}"
+        value="${value%"${value##*[![:space:]]}"}"
+        case "$key" in
+            repo) PLUGINS["$section"]="$value" ;;
+            branch) BRANCHES["$section"]="$value" ;;
+            files) FILES["$section"]="$value" ;;
+            name) NAME["$section"]="$value" ;;
+        esac
+    done < "$CONF_FILE"
+}
 
-# 继续添加更多插件
-# PLUGINS[xxx]="user/repo main"
-# FILES[xxx]="file1.sty file2.tex"
-# NAME[xxx]="插件显示名称"
+load_plugins
 
 # ----------------------------------------
-
 # 解析参数
+# ----------------------------------------
+
 PLUGIN_NAME=""
 NOGIT=false
 
@@ -90,8 +116,11 @@ if [ -z "$PLUGIN_NAME" ]; then
     exit 1
 fi
 
-# 检查插件是否存在
-if [ -z "$PLUGIN_NAME" ] || [ -z "${PLUGINS[$PLUGIN_NAME]}" ] || [ -z "${FILES[$PLUGIN_NAME]}" ] || [ -z "${NAME[$PLUGIN_NAME]}" ]; then
+# ----------------------------------------
+# 校验插件
+# ----------------------------------------
+
+if [ -z "$PLUGIN_NAME" ] || [ -z "${PLUGINS[$PLUGIN_NAME]}" ] || [ -z "${BRANCHES[$PLUGIN_NAME]}" ] || [ -z "${FILES[$PLUGIN_NAME]}" ] || [ -z "${NAME[$PLUGIN_NAME]}" ]; then
     echo "错误: 插件 '$PLUGIN_NAME' 不存在或配置不完整"
     echo "请运行:"
     echo "  $0 -l 列出所有插件"
@@ -99,9 +128,13 @@ if [ -z "$PLUGIN_NAME" ] || [ -z "${PLUGINS[$PLUGIN_NAME]}" ] || [ -z "${FILES[$
     exit 1
 fi
 
-# 解析仓库信息
-read -r REPO BRANCH <<< "${PLUGINS[$PLUGIN_NAME]}"
+REPO="${PLUGINS[$PLUGIN_NAME]}"
+BRANCH="${BRANCHES[$PLUGIN_NAME]}"
 FILE_LIST="${FILES[$PLUGIN_NAME]}"
+
+# ----------------------------------------
+# 下载插件文件
+# ----------------------------------------
 
 # 检查是否可用 git
 USE_GIT=false
@@ -111,11 +144,9 @@ fi
 
 echo -e "${GREEN}正在从 $REPO 下载插件 '${NAME[$PLUGIN_NAME]}'..., 包含文件: $FILE_LIST${NC}"
 
-# 缓存目录
 CACHE_DIR="./tmp/plug/plug-$PLUGIN_NAME"
 mkdir -p "$CACHE_DIR"
 
-# 下载到缓存目录
 if [ "$PLUGIN_NAME" != "example" ]; then
     if [ "$USE_GIT" = true ]; then
         # 使用 git sparse-checkout 下载
@@ -144,7 +175,7 @@ if [ "$PLUGIN_NAME" != "example" ]; then
         done
     fi
 else
-    # 示例模式
+    # 示例模式: 仅打印下载命令, 不实际下载
     for item in $FILE_LIST; do
         url="https://raw.githubusercontent.com/$REPO/$BRANCH/$item"
         dest="$CACHE_DIR/$item"
@@ -156,7 +187,10 @@ fi
 
 echo -e "${GREEN}下载完成!${NC}"
 
-# 复制到工作目录（项目根目录）
+# ----------------------------------------
+# 复制到工作目录
+# ----------------------------------------
+
 WORK_DIR="$(pwd)"
 echo -e "${GREEN}正在复制文件到工作目录 $WORK_DIR...${NC}"
 
@@ -181,7 +215,10 @@ done
 
 echo -e "${GREEN}插件 '${NAME[$PLUGIN_NAME]}' 安装完成!${NC}"
 
-# 提示是否删除缓存目录
+# ----------------------------------------
+# 清理缓存
+# ----------------------------------------
+
 read -p "是否删除缓存目录 $CACHE_DIR?(y/n): " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
