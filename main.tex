@@ -56,6 +56,7 @@
 % 建议在此定义常用命令.
 % ----------------
 \newcommand{\fverb}[1]{\texttt{#1}}
+\newcommand{\swatchC}[1]{\colorbox{#1}{\rule{0pt}{1em}\kern1em}}
 
 % --------封面信息输入--------
 % [<in footline>], {<in title page>} 方括号内容显示在页脚, 花括号内容为全称显示在封面.
@@ -70,7 +71,7 @@
 	\inst{2} ~Management Science, Business School, Sichuan University
 	\\(\textit{MaXJFake@scu.edu.cn})
 }
-\date{2026年5月20日}
+\date{2026年6月15日}
 
 % ---------------- %
 %      正文区      %
@@ -137,75 +138,139 @@
 % --------节: 研究分析--------
 % ----------------
 \section{研究分析}
-\subsection{字}
-\begin{frame}[fragile]{添加线}
-	\begin{multicols}{2}
-		\verb|\uline|\hfill 下划线\qquad\uline{混}\\
-		\verb|\uuline|\hfill 双下划线\qquad\uuline{元}\\
-		\verb|\uwave|\hfill 波浪线\qquad\uwave{形}\\
-		\verb|\sout|\hfill 删除线\qquad\sout{翼}\\
-		\verb|\xout|\hfill 斜删除线\qquad\xout{太}\\
-		\verb|\dashuline|\hfill 虚线\qquad\dashuline{极}\\
-		\verb|\dotuline|\hfill 加点\qquad\dotuline{门}
-	\end{multicols}
+\subsection{字体, 图与代码}
+\begin{frame}{字号}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{.66\textwidth}
+			\begin{table}[h]
+				\centering
+				\begin{tabular}{r|l}
+				  \alert{命令}~\cmd{cmd} & \alert{效果} \\
+					 			 \cmd{Huge} & \Huge{Fu-Gui老王}                        \\
+						 		 \cmd{huge} & \huge{Fu-Gui老王}                        \\
+							  \cmd{LARGE} & \LARGE{Fu-Gui老王}                       \\
+							  \cmd{Large} & \Large{Fu-Gui老王}                       \\
+							  \cmd{large} & \large{Fu-Gui老王}                       \\
+					 \cmd{normalsize} & \normalsize{\alert{Fu-Gui老王}} (Default)\\
+							  \cmd{small} & \small{Fu-Gui老王}                       \\
+				 \cmd{footnotesize} & \footnotesize{Fu-Gui老王}                \\
+					 \cmd{scriptsize} & \scriptsize{Fu-Gui老王}                  \\
+								 \cmd{tiny} & \tiny{Fu-Gui老王}
+				\end{tabular}
+			\end{table}
+		\end{column}
+		\begin{column}{.25\textwidth}
+			Beamer全局默认字号为 \alert{normalsize}, 一般情况不必修改默认字号.\\[3ex]
+			\textbf{掌门大课堂}~字号局部调整建议使用左侧中 \cmd{footnotesize} 到 \cmd{Large} 间的字号.\\[3ex]
+
+			老王, 形翼门自称超级英雄第二, 道上人称Fu-Gui叔, 其特异能力是形态的缩放.
+		\end{column}
+	\end{columns}
 \end{frame}
 
-\subsection{图, 表, 代码}
+\begin{frame}{颜色}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{.54\textwidth}
+			\textbf{掌门大课堂}\\[1ex]
+			定义新颜色: \cmd{definecolor}\marg{name}\marg{model}\marg{spec} \\[.7ex]
+			基于已有颜色创建别名或混合颜色: \\
+			\cmd{colorlet}\marg{name}\marg{existing} \\[.7ex]
+			使用颜色着色文字: \cmd{textcolor}\marg{color}\marg{text} \\[.7ex]
+			使用颜色着色文字: {\cmd{color}\marg{color} \Arg{text}} \\[.7ex]
+			使用颜色着色背景: \cmd{colorbox}\marg{color}\marg{text} \\[.7ex]
+			使用颜色着色并加边框: \\
+			\cmd{fcolorbox}\marg{framecolor}\marg{backgroundcolor}\marg{text}
+		\end{column}
+		\begin{column}{.43\textwidth}
+			\hfill\tiny\setlength{\tabcolsep}{0pt}
+			\begin{tabular}{rr*{10}{l}}
+				& & \rotatebox{70}{\texttt{100\%}} & \rotatebox{70}{\texttt{10\%}} &
+				\rotatebox{70}{\texttt{20\%}} & \rotatebox{70}{\texttt{30\%}} &
+				\rotatebox{70}{\texttt{40\%}} & \rotatebox{70}{\texttt{50\%}} &
+				\rotatebox{70}{\texttt{60\%}} & \rotatebox{70}{\texttt{70\%}} &
+				\rotatebox{70}{\texttt{80\%}} & \rotatebox{70}{\texttt{90\%}} \\
+				\texttt{scured}\hspace*{1.5em}    & \textcolor{scured}{锦绣红}\hspace*{1.5em}    &
+				\swatchC{scured}      & \swatchC{scured10}    & \swatchC{scured20}    &
+				\swatchC{scured30}    & \swatchC{scured40}    & \swatchC{scured50}    &
+				\swatchC{scured60}    & \swatchC{scured70}    & \swatchC{scured80}    &
+				\swatchC{scured90}    \\
+				\texttt{scugrey}\hspace*{1.5em}   & \textcolor{scugrey}{优雅灰}\hspace*{1.5em}   &
+				\swatchC{scugrey}     & \swatchC{scugrey10}   & \swatchC{scugrey20}   &
+				\swatchC{scugrey30}   & \swatchC{scugrey40}   & \swatchC{scugrey50}   &
+				\swatchC{scugrey60}   & \swatchC{scugrey70}   & \swatchC{scugrey80}   &
+				\swatchC{scugrey90}   \\
+				\texttt{scublue}\hspace*{1.5em}   & \textcolor{scublue}{宝石蓝}\hspace*{1.5em}   &
+				\swatchC{scublue}     & \swatchC{scublue10}   & \swatchC{scublue20}   &
+				\swatchC{scublue30}   & \swatchC{scublue40}   & \swatchC{scublue50}   &
+				\swatchC{scublue60}   & \swatchC{scublue70}   & \swatchC{scublue80}   &
+				\swatchC{scublue90}   \\
+				\texttt{scugreen}\hspace*{1.5em}  & \textcolor{scugreen}{荷叶绿}\hspace*{1.5em}  &
+				\swatchC{scugreen}    & \swatchC{scugreen10}  & \swatchC{scugreen20}  &
+				\swatchC{scugreen30}  & \swatchC{scugreen40}  & \swatchC{scugreen50}  &
+				\swatchC{scugreen60}  & \swatchC{scugreen70}  & \swatchC{scugreen80}  &
+				\swatchC{scugreen90}  \\
+				\texttt{scuyellow}\hspace*{1.5em} & \textcolor{scuyellow}{银杏黄}\hspace*{1.5em} &
+				\swatchC{scuyellow}   & \swatchC{scuyellow10} & \swatchC{scuyellow20} &
+				\swatchC{scuyellow30} & \swatchC{scuyellow40} & \swatchC{scuyellow50} &
+				\swatchC{scuyellow60} & \swatchC{scuyellow70} & \swatchC{scuyellow80} &
+				\swatchC{scuyellow90} \\
+			\end{tabular}\\[.5ex]
+			\scriptsize
+			本模板依据四川大学 VIS 手册定义了 \textcolor{scured}{\texttt{scured}} \textcolor{scugrey}{\texttt{scugrey}} \textcolor{scublue}{\texttt{scublue}} \textcolor{scugreen}{\texttt{scugreen}} \textcolor{scuyellow}{\texttt{scuyellow}} 5个颜色系列, 添加后缀 \texttt{10}--\texttt{90} , 如 \textcolor{scured70}{\texttt{scured70}} \textcolor{scublue80}{\texttt{scublue80}} 为各系列浅色变体.
+		\end{column}
+	\end{columns}
+\end{frame}
+
 \begin{frame}{图}
-	\begin{figure}[h]
-		\begin{subfigure}{.4\columnwidth}
-			\centering
-			\includegraphics%
-			[width=.3\columnwidth]{stop-rd.pdf}
-			\caption{白天的暂停}
-		\end{subfigure}
-		\quad
-		\begin{subfigure}{.4\columnwidth}
-			\centering
-			\includegraphics%
-			[width=.3\columnwidth]{stop-gn.pdf}
-			\caption{晚上的暂停}
-		\end{subfigure}
-		\caption{掌门常用的暂停}
-	\end{figure}
-	\begin{figure}[h]
-		\begin{minipage}[t]{.4\columnwidth}
-			\centering
-			\includegraphics%
-			[width=.3\columnwidth]{stop-rd.pdf}
-			\caption{掌门白天的暂停}
-			\label{fig:ZhangmenBtdzt}
-		\end{minipage}
-		\quad
-		\begin{minipage}[t]{.4\columnwidth}
-			\centering
-			\includegraphics%
-			[width=.3\columnwidth]{stop-gn.pdf}
-			\caption{掌门晚上的暂停}
-			\label{fig:ZhangmenWsdzt}
-		\end{minipage}
-	\end{figure}
-\end{frame}
+	\begin{columns}
+		\begin{column}{.45\textwidth}
+			\structure{图}
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=.15\columnwidth]{stop-bk.pdf}
+				\caption{黑色的暂停}
+			\end{figure}
 
-\cprotEnv\begin{frame}
-	\frametitle{表}
-	表格太麻烦了, 掌门说摸摸鱼, 编者觉得不错, 丢一个三线表示例. 当然也可以看看这个手册前面部分表格的源码.
-	\scugoto{fig:ZhangmenWsdzt}{FIG}
-	\begin{table}[htbp]
-		\centering
-		\caption{一些国风音乐}
-		\label{tab:YixieGfyy}
-		\begin{tabular}{rlc}
-			\toprule
-			作曲家 & 歌名 & 门中喜欢的友人 \\
-			\midrule
-			李志辉 & 小桥流水人家 & 门主 \\
-			林海 & 无羁(器乐版) & 初号 \\
-			吕秀龄 & 逆伦 & 小初 \\
-			麦振鸿 & 从来只有一个人 & 编者(假的) \\
-			\bottomrule
-		\end{tabular}
-	\end{table}
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=.15\columnwidth]{stop-bk.pdf}\qquad%
+				\includegraphics[width=.15\columnwidth]{stop-bk.pdf}%
+				\caption{两个黑色的暂停}\label{fig:StopBk}
+			\end{figure}
+		\end{column}
+		\begin{column}{.45\textwidth}
+			\structure{子图}
+			\begin{figure}[h]
+				\centering
+				\begin{subfigure}{.4\columnwidth}%
+					\centering%
+					\includegraphics[width=.3\columnwidth]{stop-rd.pdf}%
+					\caption{白天的暂停}\label{fig:StopInDay}%
+				\end{subfigure}\quad%
+				\begin{subfigure}{.4\columnwidth}%
+					\centering%
+					\includegraphics[width=.3\columnwidth]{stop-gn.pdf}%
+					\caption{晚上的暂停}\label{fig:StopInNight}%
+				\end{subfigure}%
+				\caption{掌门常用的暂停}%
+			\end{figure}%
+
+			\structure{并列小图}
+			\begin{figure}[h]
+				\centering
+				\begin{minipage}[t]{.4\columnwidth}%
+					\centering%
+					\includegraphics[width=.3\columnwidth]{stop-rd.pdf}%
+					\caption{老王的暂停}%
+				\end{minipage}\quad%
+				\begin{minipage}[t]{.4\columnwidth}%
+					\centering%
+					\includegraphics[width=.3\columnwidth]{stop-gn.pdf}%
+					\caption{富贵的暂停}%
+				\end{minipage}%
+			\end{figure}%
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \subsection{代码环境}
