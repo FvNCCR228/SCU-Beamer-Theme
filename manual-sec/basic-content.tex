@@ -741,50 +741,6 @@
 			\end{itemize}
 		\end{column}
 	\end{columns}
-	\vspace*{1ex}
-	\textbf{注}: 本模板基于 \pkg{unicode-math}, 另提供\cmd{symbb}($\symbb{R}$), \cmd{symbfit}($\symbfit{R}$), \cmd{symcal}($\symcal{R}$), \cmd{symscr}($\symscr{R}$)等符号字体命令, 详见\cmd{fontspec}与\cmd{unicode-math}手册.
-\end{frame}
-
-\begin{frame}[fragile]{数学符号}
-  unicode-math宏包中定义了多个数学字体命令, 如\verb|\symbb|$\symbb{R}$, \verb|\symbbit|$\symbbit{R}$, \verb|\symcal|$\symcal{R}$, \verb|\symscr|$\symscr{R}$, \verb|\symfrak|$\symfrak{R}$, \verb|\symsfup|$\symsfup{R}$, \verb|\symsfit|$\symsfit{R}$, \verb|\symbfsf|$\symbfsf{R}$, \verb|\symbfup|$\symbfup{R}$, \verb|\symbfit|$\symbfit{R}$, \verb|\symbfcal|$\symbfcal{R}$, \verb|\symbfscr|$\symbfscr{R}$, \verb|\symbffrak|$\symbffrak{R}$, \verb|\symbfsfup|$\symbfsfup{R}$, \verb|\symbfsfit|$\symbfsfit{R}$.\\
-\end{frame}
-
-\subsection{交叉引用}
-\begin{frame}[fragile]{交叉引用}
-	在Beamer中应避免过多的交叉引用, 此处编者给出了常用的引用命令及其示例.
-	\begin{table}[h]
-		\centering
-		\caption{交叉引用命令表}
-		\label{tab:JiaochaYymlb}
-		\begin{tabular}{lcl}
-			\toprule
-			命令 & 显示项 & 示例 \\
-			\midrule
-			\verb|\ref|\verb|{<label>}| & 序号 & \ref{assu:BianzheBhfh} \\
-			\verb|\ref*|\verb|{<label>}| & 序号 & \ref*{assu:BianzheBhfh} \\
-			\verb|\nameref|\verb|{<label>}| & 标题 & \nameref{assu:BianzheBhfh} \\
-			\verb|\vref|\verb|{<label>}| & 标题页码 & \vref{fra:Fenlan} \\
-			\verb|\pageref|\verb|{<label>}| & 页码 & \pageref{assu:BianzheBhfh} \\
-			\verb|\vpageref|\verb|{<label>}| & 页码 & \vpageref{assu:BianzheBhfh} \\
-			\verb|\cref|\verb|{<label>}| & 标题 & \cref{assu:BianzheBhfh} \\
-			\verb|\crefrange|\verb|{<label>}| & 范围 & \crefrange{fig:ZhangmenBtdzt}{fig:ZhangmenWsdzt} \\
-			\bottomrule
-		\end{tabular}
-	\end{table}
-\end{frame}
-
-\subsection{参考文献}
-\begin{frame}[fragile]{参考文献相关}
-	\textbf{注意:} 参考文献请采用{\color{scured}Biber}编译模式, 即整体编译思路为XeLaTeX - Biber - XeLaTeX.\\
-	模板采用符合国标GB/T7714-2015的gb7714-2015参考文献格式.\\
-	模板已设置了``ref.bib''为参考文献数据库, 使用时覆盖即可(当然, 实在需要请在tex文件导言区寻找命令修改).\\[1ex]
-	引用文献的命令常采用\cmd{cite}\verb|{<item>}|, 如虚拟偶像单篇\cite{__2020-1}, 多篇\cite{__2016,m_possibilities_2018};\\
-	此处也可视情况使用脚注形式的详细文献信息引用:
-	\begin{itemize}
-		\item 使用\verb|\footnotemark|计数，配合\verb|\footfullcitetext|\verb|[<num>]|\verb|{<item>}|显示, 如虚拟偶像\footnotemark.\footfullcitetext[3]{_ugc_2018}
-		\item \verb|\footfullcite|\verb|[<num>]|\verb|{<item>}|, 如虚拟偶像\footfullcite[8]{__2018}.\\
-		脚注最后的黑色阿拉伯数字为参考文献序号, 需自行输入, 也即上方的\verb|[<num>]|.
-	\end{itemize}
 \end{frame}
 
 %% End of file `basic-content.tex'.

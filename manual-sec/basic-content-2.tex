@@ -1,0 +1,528 @@
+% ----------------
+% 节: 内容排版 (续)
+% ----------------
+\subsection{图与表格}
+\begin{frame}{Info.}
+	\textbf{本小节将介绍图与表格的插入方法, 包括单图、多图(子图与并列图)及表格的排版.}
+	\begin{multicols}{2}
+		\begin{itemize}
+			\item Establish: \textcolor{scugreen}{v1.0a (2021/11/30)}
+			\item Update: \textcolor{scugreen}{v1.3a (2022/03/16)}
+			\item Update: \textcolor{scugreen}{v2.1d (2026/06/15)}
+		\end{itemize}
+	\end{multicols}
+	图: 建议使用矢量图片格式(pdf), svg可使用~\href{https://inkscape.org/}{\color{scublue}Inkscape}~转换为pdf.\par
+	表格: 建议使用~\href{https://www.ctan.org/pkg/excel2latex}{\color{scublue}excel2latex}~插件从xlsx直接转换, 或使用~\href{https://www.tablesgenerator.com/}{\color{scublue}TablesGenerator}~在线绘制, 也可直接让AI协助生成(AI时代了, 他的能力很强的).\par
+	\mycopyright
+\end{frame}
+
+\begin{frame}{图}
+	\textbf{掌门大课堂}~\LaTeX{} 中使用 \env{figure} 环境通过 \cmd{includegraphics} 插入图像, 支持 \texttt{.pdf} \texttt{.eps} \texttt{.png} \texttt{.jpg} 格式, 推荐使用 \alert{\ttfamily .pdf} 矢量图片 (svg可使用 \href{https://inkscape.org/}{\color{scublue}Inkscape} 转换为pdf). 当然 \env{figure} 也支持插入多个 \cmd{includegraphics}, 如\cref{fig:StopBk}.\\[-2ex]
+	\begin{columns}[T, onlytextwidth]
+		\begin{column}{.5\textwidth}
+			\textbf{调用环境}:\\
+			\cmd{begin}\marg*{figure}\oarg{position}\\
+			\hspace*{1em}\cmd{centering}\\
+			\hspace*{1em}\cmd{includegraphics}\oarg{controls}\marg{file}\\
+			\hspace*{1em}\cmd{caption}\marg{title}\cmd{label}\marg{label}\\
+			\cmd{end}\marg*{figure}\\[1ex]
+
+			\alert{\Arg{position}}\hfill \textbf{(可选) 控制浮动体位置}\\
+			\begin{tabular}{w{l}{.9em}w{r}{5em}|w{l}{.9em}w{r}{5em}|w{l}{.9em}w{r}{5em}}
+				\texttt{h} & 此处     & \texttt{t} & 顶部    & \texttt{b} & 底部 \\
+				\texttt{p} & 独立成页 & \texttt{!} & 忽略限制 & \\
+			\end{tabular}\\
+			\textit{注: 常用 \texttt{\upshape h} \texttt{\upshape htbp} \texttt{\upshape htbp!}, 参数顺序不作限制}\\[0.5ex]
+			\alert{\Arg{controls}}\hfill \textbf{(可选) 图片选项}\\
+			\begin{tabular}{w{l}{5.85em}w{r}{4.5em}|w{l}{5.85em}w{r}{4.5em}}
+				\texttt{width=\Arg{width}} & 宽度     & \texttt{height=\Arg{height}} & 高度 \\
+				\texttt{scale=\Arg{scale}} & 缩放     & \texttt{angle=\Arg{angle}}   & 旋转 \\
+				\texttt{frame=true}        & 添加边框 & \texttt{pages=\marg{pages}}  & 指定页码 \\
+			\end{tabular}\\[0.5ex]
+			\alert{\Arg{file}}\hfill \textbf{文件名称(不要有空格)}\\[0.5ex]
+			\alert{\Arg{label}}\hfill \textbf{交叉引用标签}\\
+			\textit{建议命名规范: \texttt{\upshape fig:} 开头, 后接描述性名称, 如 \texttt{\upshape fig:StopBk}.}
+		\end{column}\hspace*{4.5em}
+		\begin{column}{.4\textwidth}
+			\textbf{示例:}\\
+			\cmd{begin}\marg*{figure}\oarg*{ht}\\
+			\hspace*{1em}\cmd{centering}\\
+			\hspace*{1em}\cmd{includegraphics}\oarg*{width=.15\cmd{columnwidth}}\%\\
+			\hspace*{2em}\marg*{stop-bk.pdf}\\
+			\hspace*{1em}\cmd{caption}\marg*{黑色的暂停}\cmd{label}\marg*{fig:StopBk}\\
+			\cmd{end}\marg*{figure}
+
+			\vspace*{-1.5ex}
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=.15\columnwidth]{stop-bk.pdf}
+				\vspace*{-.5ex}\caption{黑色的暂停}
+			\end{figure}
+			\vspace*{-5ex}
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=.15\columnwidth]{stop-bk.pdf}\qquad%
+				\includegraphics[width=.15\columnwidth]{stop-bk.pdf}%
+				\vspace*{-.5ex}\caption{两个黑色的暂停}\label{fig:StopBk}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{子图}
+	\begin{columns}[T, onlytextwidth]
+		\begin{column}{.44\textwidth}
+			\textbf{掌门大课堂}~使用 \pkg{subcaption} 宏包提供的 \env{subfigure} 环境可以插入子图, 每个子图可有独立的标题和引用.\\[1ex]
+			\textbf{调用环境}:\\
+			\cmd{begin}\marg*{figure}\oarg{position}\\
+			\hspace*{1em}\cmd{begin}\marg*{subfigure}\marg{width}\\
+			\hspace*{2em}\cmd{centering}\\
+			\hspace*{2em}\cmd{includegraphics}\oarg{controls}\marg{file}\\
+			\hspace*{2em}\cmd{caption}\marg{subtitle}\cmd{label}\marg{label}\\
+			\hspace*{1em}\cmd{end}\marg*{subfigure}\\
+			\hspace*{1em}\cmd{quad}\% 任意水平间距均可\\
+			\hspace*{1em}\cmd{begin}\marg*{subfigure}\marg{width}\\
+			\hspace*{2em}\cmd{centering}\\
+			\hspace*{2em}\cmd{includegraphics}\oarg{controls}\marg{file}\\
+			\hspace*{2em}\cmd{caption}\marg{subtitle}\cmd{label}\marg{label}\\
+			\hspace*{1em}\cmd{end}\marg*{subfigure}\\
+			\hspace*{1em}\ldots\\
+			\hspace*{1em}\cmd{caption}\marg{title}\cmd{label}\marg{label}\\
+			\cmd{end}\marg*{figure}\\[1ex]
+
+			子图 \Arg{controls} \Arg{file} \Arg{title} \Arg{label} 等相关参数同 \env{figure} 环境.
+		\end{column}\hspace*{1.5em}
+		\begin{column}{.52\textwidth}
+			\textbf{示例:}\\
+			\cmd{begin}\marg*{figure}\oarg*{h}\\
+			\hspace*{1em}\cmd{begin}\marg*{subfigure}\marg*{.4\cmd{columnwidth}}\\
+			\hspace*{2em}\cmd{centering}\\
+			\hspace*{2em}\cmd{includegraphics}\oarg*{width=.3\cmd{columnwidth}}\marg*{stop-rd.pdf}\\
+			\hspace*{2em}\cmd{caption}\marg*{白天的暂停}\\
+			\hspace*{1em}\cmd{end}\marg*{subfigure}\cmd{quad}\%\\
+			\hspace*{1em}\cmd{begin}\marg*{subfigure}\marg*{.4\cmd{columnwidth}}\\
+			\hspace*{2em}\cmd{centering}\\
+			\hspace*{2em}\cmd{includegraphics}\oarg*{width=.3\cmd{columnwidth}}\marg*{stop-gn.pdf}\\
+			\hspace*{2em}\cmd{caption}\marg*{晚上的暂停}\\
+			\hspace*{1em}\cmd{end}\marg*{subfigure}\\
+			\hspace*{1em}\cmd{caption}\marg*{掌门常用的暂停}\\
+			\cmd{end}\marg*{figure}
+
+			\vspace*{-1ex}
+			\begin{figure}[h]
+				\centering
+				\begin{subfigure}{.4\columnwidth}%
+					\centering%
+					\includegraphics[width=.3\columnwidth]{stop-rd.pdf}%
+					\caption{白天的暂停}\label{fig:StopInDay}%
+				\end{subfigure}\quad%
+				\begin{subfigure}{.4\columnwidth}%
+					\centering%
+					\includegraphics[width=.3\columnwidth]{stop-gn.pdf}%
+					\caption{晚上的暂停}\label{fig:StopInNight}%
+				\end{subfigure}%
+				\vspace*{-3ex}\caption{掌门常用的暂停}%
+			\end{figure}%
+		\end{column}
+	\end{columns}
+	\vspace*{-.8ex}
+\end{frame}
+
+\begin{frame}{并列小图}
+	\begin{columns}[T, onlytextwidth]
+		\begin{column}{.44\textwidth}
+			\textbf{掌门大课堂}~使用 \env{minipage} 环境也可以实现图片的并排摆放, 适合不需要子图编号的场景.\\[1ex]
+			\textbf{调用环境}:\\
+			\cmd{begin}\marg*{figure}\oarg{position}\\
+			\hspace*{1em}\cmd{begin}\marg*{minipage}\oarg{align}\marg{width}\\
+			\hspace*{2em}\cmd{centering}\\
+			\hspace*{2em}\cmd{includegraphics}\oarg{controls}\marg{file}\\
+			\hspace*{2em}\cmd{caption}\marg{title}\cmd{label}\marg{label}\\
+			\hspace*{1em}\cmd{end}\marg*{minipage}\\
+			\hspace*{1em}\cmd{quad}\% 任意水平间距均可\\
+			\hspace*{1em}\cmd{begin}\marg*{minipage}\oarg{align}\marg{width}\\
+			\hspace*{2em}\cmd{centering}\\
+			\hspace*{2em}\cmd{includegraphics}\oarg{controls}\marg{file}\\
+			\hspace*{2em}\cmd{caption}\marg{title}\cmd{label}\marg{label}\\
+			\hspace*{1em}\cmd{end}\marg*{minipage}\\
+			\hspace*{1em}\ldots\\
+			\cmd{end}\marg*{figure}\\[1ex]
+
+			minipage 支持使用可选参数 \oarg*{t}(顶部) \oarg*{c}(居中) 或 \oarg*{b}(底部) 对齐, 其余参数同 \env{figure} 环境.
+		\end{column}\hspace*{1.5em}
+		\begin{column}{.52\textwidth}
+			\textbf{示例:}\\
+			\cmd{begin}\marg*{figure}\oarg*{h}\\
+			\hspace*{1em}\cmd{begin}\marg*{minipage}\oarg*{t}\marg*{.4\cmd{columnwidth}}\\
+			\hspace*{2em}\cmd{centering}\\
+			\hspace*{2em}\cmd{includegraphics}\oarg*{width=.3\cmd{columnwidth}}\marg*{stop-rd.pdf}\\
+			\hspace*{2em}\cmd{caption}\marg*{老王的暂停}\%\\
+			\hspace*{1em}\cmd{end}\marg*{minipage}\cmd{quad}\%\\
+			\hspace*{1em}\cmd{begin}\marg*{minipage}\oarg*{t}\marg*{.4\cmd{columnwidth}}\\
+			\hspace*{2em}\cmd{centering}\\
+			\hspace*{2em}\cmd{includegraphics}\oarg*{width=.3\cmd{columnwidth}}\marg*{stop-gn.pdf}\\
+			\hspace*{2em}\cmd{caption}\marg*{富贵的暂停}\%\\
+			\hspace*{1em}\cmd{end}\marg*{minipage}\\
+			\cmd{end}\marg*{figure}
+
+			\vspace*{-1ex}
+			\begin{figure}[h]
+				\centering
+				\begin{minipage}[t]{.4\columnwidth}%
+					\centering%
+					\includegraphics[width=.3\columnwidth]{stop-rd.pdf}%
+					\caption{老王的暂停}%
+				\end{minipage}\quad%
+				\begin{minipage}[t]{.4\columnwidth}%
+					\centering%
+					\includegraphics[width=.3\columnwidth]{stop-gn.pdf}%
+					\caption{富贵的暂停}%
+				\end{minipage}%
+			\end{figure}%
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{表格}
+	\begin{columns}[T, onlytextwidth]
+		\begin{column}{.44\textwidth}
+			\textbf{掌门大课堂}~\LaTeX{} 中使用 \env{table} 环境插入表格浮动体, 实际表格内容由 \env{tabular} 环境排版.\\[1ex]
+			\textbf{调用环境}:\\
+			\cmd{begin}\marg*{table}\oarg{position}\\
+			\hspace*{1em}\cmd{centering}\\
+			\hspace*{1em}\cmd{begin}\marg*{tabular}\marg{colspec}\\
+			\hspace*{2em}cell \& cell \& \ldots \cmd{\textbackslash}\\
+			\hspace*{2em}cell \& cell \& \ldots \cmd{\textbackslash}\\
+			\hspace*{2em}\ldots\\
+			\hspace*{1em}\cmd{end}\marg*{tabular}\\
+			\hspace*{1em}\cmd{caption}\marg{title}\cmd{label}\marg{label}\\
+			\cmd{end}\marg*{table}\\[1ex]
+
+			\alert{\Arg{colspec}}\hfill \textbf{(必选, 且需和列数一致) 列格式}\\
+			\begin{tabular}{w{l}{1em}w{r}{3.8em}|w{l}{1em}w{r}{3.8em}|w{l}{1em}w{r}{3.8em}}
+				\texttt{l} & 左对齐 & \texttt{c} & 居中 & \texttt{r} & 右对齐 \\
+			\end{tabular}\\[1ex]
+			\LaTeX{} 表格中 \alert{\ttfamily\&} 为列分隔符, \cmd{\textbackslash} 为换行符, \Arg{label} 建议以 \texttt{\upshape tab:} 开头. 表格环境其他参数同 \env{figure} 环境.\\[.5ex]
+			\hspace*{-.5em}\begin{tabular}{>{\bfseries}l>{\raggedright\arraybackslash}p{.72\columnwidth}}
+				自动列宽 & \hspace{0pt}\pkg{tabularx} 宏包 \env{tabularx} 环境, 使用 \texttt{X} 列格式 \\
+				跨页表格 & \hspace{0pt}\pkg{longtable} 宏包 \env{longtable} 环境 \\
+				现代表格 & \hspace{0pt}\pkg{tabularray} 宏包 \env{tblr} 环境, 语法统一 \\
+			\end{tabular}
+		\end{column}\hspace*{1.5em}
+		\begin{column}{.52\textwidth}
+			\structure{表格框线}\\[0.5ex]
+			表格的纵向框线通过在 \Arg{colspec} 中添加 \texttt{|} 实现, 如 \texttt{|l|c|r|}. 横向框线由原生(\textsc{Native})命令或 \pkg{booktabs} (\textsc{Booktabs})宏包实现:\\[1ex]
+			\begin{tabular}{w{l}{5em}w{l}{10em}w{l}{6em}}
+				\textsc{Native}   & \cmd{hline}                           & 通栏横线 \\
+					                & \cmd{cline}\marg*{\Arg{x}-\Arg{y}}    & 列间横线 \\
+				\textsc{Booktabs} & \cmd{toprule}\oarg{width}             & 顶部横线 \\
+				\hspace*{1em}\textit{(三线表)} & \cmd{midrule}\oarg{width} & 中间横线 \\
+													& \cmd{cmidrule}\marg*{\Arg{x}-\Arg{y}} & 列间横线 \\
+							            & \cmd{bottomrule}\oarg{width}          & 底部横线 \\
+			\end{tabular}\\[.5ex]
+			\textit{注: 使用 \textup{\cmd{cmidrule}(\Arg{position})} 支持控制横线端点, \textup{\Arg{position}} 可选 \textup{\ttfamily l} \textup{\ttfamily r} 或 \textup{\ttfamily lr}, 用于缩减左/右侧的端点.}\\[-2.5ex]
+			\begin{table}[h]
+				\centering
+				\caption{正经小曲儿们}\label{tab:Music}\vspace*{-.5ex}
+				\begin{tabular}{rc}
+					\toprule
+					真实歌名 & 虚假歌名 \\
+					\midrule
+					昆特牌的小曲 & A Story You Won't Believe \\
+					天星城的小曲 & 登天路 \\
+					Saber的小曲 & 騎士王の誇り \\
+					徐念的小曲 & 雪代 / Snowmelt \\
+					\bottomrule
+				\end{tabular}
+			\end{table}
+			\vspace*{-1ex}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{表格进阶}
+	若想实现各种复杂高阶的表格样式, 也可以使用 \pkg{tabularray} 宏包的 \env{tblr} 环境, 此处不做详细描述, 具体用法可参考相关文档.\\
+	\begin{columns}[T, onlytextwidth]
+		\begin{column}{.44\textwidth}
+
+			\structure{进阶列格式}\\[1ex]
+			\fverb{p}\marg{width} \hfill 顶部对齐, 固定宽度\\[.1ex]
+			\fverb{m}\marg{width} \hfill 居中对齐, 固定宽度\\[.1ex]
+			\fverb{b}\marg{width} \hfill 底部对齐, 固定宽度\\[.1ex]
+			\fverb{w}\marg{align}\marg{width} \hfill 固定宽度\\[.1ex]
+			\fverb{>}\marg{cmd}\Arg{spec} \hfill 列内容前执行命令\\[.1ex]
+			\fverb{<}\marg{cmd}\Arg{spec} \hfill 列内容后执行命令\\[.1ex]
+			\fverb{@}\marg{content} \hfill 插入内容, 去除列间距\\[.1ex]
+			\fverb{!}\marg{content} \hfill 插入内容, 保留列间距\\[2ex]
+
+			\structure{单元格合并}\\[1ex]
+			\cmd{multicolumn}\marg{n}\marg{spec}\marg{cell}\\[.1ex]
+			合并 \texttt{n} 列, \Arg{spec} 为合并后的列格式.\\[.5ex]
+			\cmd{multirow}\marg{n}\marg{width}\marg{cell}\\[.1ex]
+			合并 \texttt{n} 行, \Arg{width} 常用 \fverb{*} 实现自动计算宽度.
+		\end{column}\hspace*{1.5em}
+		\begin{column}{.52\textwidth}
+			\textbf{示例:}\\[1ex]
+			整列加粗且左对齐: \texttt{>\{\cmd{bfseries}\}l}\\[.5ex]
+			5em列宽且右对齐: \texttt{>\{\cmd{raggedleft}\cmd{arraybackslash}\}p\{5em\}}\\[.5ex]
+			去除列间距且替换为冒号: \texttt{l@\{:\}c} \hfill A:B\\[.5ex]
+			保留列间距且插入冒号: \texttt{l!\{:\}c} \hfill A\quad:\quad{}B\\[1ex]
+			合并 3 列居中: \cmd{multicolumn}\marg*{3}\marg*{c}\marg*{内容}\\[.5ex]
+			合并 2 列带右边框: \cmd{multicolumn}\marg*{2}\marg*{c|}\marg*{内容}\\[.5ex]
+			合并 2 行(自动列宽): \cmd{multirow}\marg*{2}\marg*{*}\marg*{内容}\\[.5ex]
+			合并 3 行(5em列宽): \cmd{multirow}\marg*{3}\marg*{5em}\marg*{内容}\\[.5ex]
+
+			\textbf{提示:} \cmd{multicolumn} 的 \Arg{spec} 会覆盖原列格式. \cmd{multirow} 合并行时, 被合并的后续行对应位置需留空(\& \&).\\~\\
+
+			\textbf{老王的忠告}~表格越复杂, 越要去问 AI, 去用插件. 不要学门派那几个和暖水瓶一样的, 仗着几分本事欺负老年人, 结果么\ldots\ldots
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\subsection{代码区块}
+\begin{frame}{Info.}
+	\textbf{本小节将介绍代码区块(含从文件读入)的设置.}
+	\begin{multicols}{2}
+		\begin{itemize}
+			\item Establish: \textcolor{scugreen}{v1.0a (2021/11/30)}
+			\item Update: \textcolor{scugreen}{v1.3a (2022/03/16)}
+		\end{itemize}
+	\end{multicols}
+	注: 自 \textcolor{scugreen}{v1.3a (2021/03/16)} 起, 本小节将替代手册中\alert{\bfseries 代码环境}小节.\par
+	\mycopyright
+\end{frame}
+
+\begin{frame}{代码区块(含从文件读入)环境及命令定义}
+	本模板定义了代码区块环境 \env{scucode} 与命令 \cmd{scucodeinput} 和 \cmd{scucodeinputnocounter}.\par\vspace{1ex}
+
+	\textbf{调用环境(无星号环境)}:\\
+	\cmd{begin}\marg*{scucode}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\marg{code language}\oarg{code options}\textcolor{scugrey}{<\Arg{escapeinside}>}\\
+	\hspace*{1em}\Arg{source code}\\
+	\cmd{end}\marg*{scucode}\\[1ex]
+	\textbf{调用环境(带星号环境)}:\\
+	\cmd{begin}\marg*{scucode*}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\marg{code language}\oarg{code options}\textcolor{scugrey}{<\Arg{escapeinside}>}\\
+	\hspace*{1em}\Arg{source code}\\
+	\cmd{end}\marg*{scucode*}\\[1ex]
+	\textbf{以上带星号环境代表区块不显示序号.}\\
+
+	\textbf{调用命令(区块显示序号)}:\\
+	\cmd{scucodeinput}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\marg{code language}\oarg{code options}\marg{filename}\textcolor{scugrey}{<\Arg{escapeinside}>}\\[1ex]
+	\textbf{调用命令(区块不显示序号)}:\\
+	\cmd{scucodeinputnocounter}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\marg{code language}\oarg{code options}\marg{filename}\textcolor{scugrey}{<\Arg{escapeinside}>}
+\end{frame}
+
+\begin{frame}{代码区块(含从文件读入)环境及命令参数}
+	\alert{\Arg{tcb options}}\hfill \textbf{(可选参数) Tcolorbox参数}\\
+	添加到Tcolorbox中的参数, 常用有comment, sidebyside, listing side(above) comment等.\\
+
+	\alert{\Arg{title}}\hfill \textbf{(必选参数) 标题}\\
+
+	\alert{\Arg{switch star}}\hfill \textbf{(可选参数) 标题前缀显示}\\
+	此处默认留空无需填入; 如填入 * 号, 则区块不显示标题前缀(源码x).\\
+
+	\alert{\Arg{label suffix}}\hfill \textbf{(可选参数) 标签后缀}\\
+	模板中定义的标签均为code:xx形式, 若无填入, 则对应区块无标签.\\
+
+	\alert{\Arg{code language}}\hfill \textbf{(必选参数) 代码语言}\\
+	使用 \pkg{minted} 作为代码高亮引擎时, 可在终端输入\texttt{pygmentize -L lexers}查看支持语言.\\
+
+	\alert{\Arg{code options}}\hfill \textbf{(可选参数) 代码引擎参数}\\
+	添加到minted或listing引擎中的参数, 常用有highlightlines (listing不支持)等.\\
+
+	\alert{\Arg{filename}}\hfill \textbf{(必选参数) 从文件读入源码时的文件名}\\
+
+	\alert{\Arg{escapeinside}}\hfill \textbf{(可选参数) 忽略定界符内输入}\\
+	将定界符间内容按\LaTeX{}命令执行, 支持Beamer \cmd{only}命令, 定界符默认为`||', 此处填入后即更改定界符.\\
+
+	\alert{\Arg{source code}}\hfill \textbf{详细源码}
+\end{frame}
+
+\begin{frame}[fragile]{代码环境演示}
+	\onslide<2>
+	\begin{scucode}{A welcome program.}[cpphelloworld]{c}
+		#include <iostream>
+		int main()
+		{
+			std::cout << "Hello World！" << std::endl;
+			std::cin.get();
+		}
+	\end{scucode}
+	\onslide<1>
+	\begin{scucode}{A welcome program.}[chelloworld]{c}
+		#include <stidio.h>
+		int main()
+		{
+			printf("Hello World！");
+			return 0;
+		}
+	\end{scucode}
+\end{frame}
+
+\subsection{定理区块}
+\begin{frame}{Info.}
+	\textbf{本小节将介绍定理区块的设置.}
+	\begin{multicols}{2}
+		\begin{itemize}
+			\item Establish: \textcolor{scugreen}{v1.0a (2021/11/30)}
+			\item Update: \textcolor{scugreen}{v1.3a (2022/03/16)}
+		\end{itemize}
+	\end{multicols}
+	注: 自 \textcolor{scugreen}{v1.3a (2021/03/16)} 起, 本小节将替代手册中\alert{\bfseries 数学环境}小节.\par
+	\mycopyright
+\end{frame}
+
+\begin{frame}{定理区块环境信息}
+	本模板定义了如下表所示定理区块环境及对应的标签前缀
+	\begin{table}[htbp!]
+		\centering
+		\caption{定理区块环境信息}
+		\label{tab:ShuxueHjdy}
+		\begin{tabular}{ccc|ccc}
+			\toprule
+			名称 &          环境(scuxx)        &  标签前缀  & 名称 &          环境(scuxx)         &  标签前缀  \\ \midrule
+			定理 &  \color{scured}scutheorem   &  theo:     & 证明 &    \color{scured}scuproof    &   /     \\
+			例   &  \color{scured}scuexample   &  exam:     & 算法 &  \color{scured}scualgorithm  &  algo:  \\
+			定义 & \color{scured}scudefinition &  def:      & 公理 &    \color{scured}scuaxiom    &  axio:  \\
+			性质 &  \color{scured}scuproperty  &  prope:    & 命题 & \color{scured}scuproposition &  propo: \\
+			引理 &   \color{scured}sculemma    &  lemm:     & 推论 &  \color{scured}scucorollary  &  coro:  \\
+			注   &   \color{scured}scuremark   &  rema:     & 条件 &  \color{scured}scucondition  &  cond:  \\
+			结论 & \color{scured}scuconclusion &  conc:     & 假设 & \color{scured}scuassumption  &  assu:  \\ \bottomrule
+		\end{tabular}
+	\end{table}
+	其中证明环境(scuproof)结尾带有证毕符号(\cmd{qed}).$\textrightarrow$\qed
+\end{frame}
+
+\begin{frame}{定理区块环境命令}
+	\textbf{调用环境(无星号环境)}(除scuproof与scuremark):\\
+	\cmd{begin}\marg{env}\textcolor{scugrey}{<\Arg{overlay}>}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\\
+	\hspace*{1em}\Arg{environment contents}\\
+	\cmd{end}\marg{env}\\[1ex]
+	\textbf{调用环境(带星号环境)}(除scuproof与scuremark):\\
+	\cmd{begin}\marg{env}*\textcolor{scugrey}{<\Arg{overlay}>}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\\
+	\hspace*{1em}\Arg{environment contents}\\
+	\cmd{end}\marg{env}\\[1ex]
+	\textbf{调用环境}(scuproof与scuremark):\\
+	\cmd{begin}\marg{env}\textcolor{scugrey}{<\Arg{overlay}>}\oarg{tcb options}\marg{title}\oarg{label suffix}\\
+	\hspace*{1em}\Arg{environment contents}\\
+	\cmd{end}\marg{env}\\[1ex]
+	\textbf{以上带星号环境代表不显示序号.}
+\end{frame}
+
+\begin{frame}{定理区块环境参数}
+	\alert{\Arg{env}}\hfill \textbf{环境名称}\\
+	见\vref{tab:ShuxueHjdy}.\\
+
+	\alert{\Arg{overlay}}\hfill \textbf{(可选参数) Beamer Overlay设置}\\
+
+	\alert{\Arg{tcb options}}\hfill \textbf{(可选参数) Tcolorbox参数}\\
+	添加到Tcolorbox中的参数, 常用有comment, sidebyside, listing side(above) comment等.\\
+
+	\alert{\Arg{title}}\hfill \textbf{(必选参数) 标题}\\
+
+	\alert{\Arg{switch star}}\hfill \textbf{(可选参数) 标题前缀显示}\\
+	此处默认留空无需填入; 如填入 * 号, 则区块不显示标题前缀(定理x、结论x等).\\
+
+	\alert{\Arg{label suffix}}\hfill \textbf{(可选参数) 标签后缀}\\
+	模板中定义的标签均为xx:xx形式, 若无填入, 则对应区块无标签.\\
+
+	\alert{\Arg{environment contents}}\hfill \textbf{环境内容}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{数学环境演示}
+	\begin{scutheorem}{切比雪夫大数率}[QiebiXfdsl]
+		对独立随机变量序列$\{X_k\}$, 若$E(X_k)$, $D(X_k)$都存在, $k=1,2,\cdots$, 且有常数$C$, 使得$D(X_k)\leq C$, $k=1,2,\cdots$, 则有
+		\begin{equation}
+		\dfrac{1}{n} \sum_{k=1}^{n} X_k - \dfrac{1}{n} \sum_{k=1}^{n} E(X_k) \stackrel{\;P\;}{\longrightarrow} 0
+		\end{equation}
+	\end{scutheorem}
+	\begin{scuproof}{}
+		请读者自证.
+	\end{scuproof}
+	\begin{scuexample}{形翼门的规模}[HunyuanXytjmdgm]
+		本门昨天去了80个人打水, 今天去了79个人打水, 本门的规模有多大?
+	\end{scuexample}
+	\begin{scualgorithm}{怎么写Beamer模板}[ZengmoXBeamerzs]
+		\begin{algorithmic}[1]
+		\REQUIRE 一点点\LaTeX 知识, 不要太信任百度
+		\ENSURE 不知道怎么搞
+		\STATE 问门主, 肯定不知道
+		\STATE 问初号, 当然不知道
+		\STATE 问小初, 还是不知道
+		\RETURN 算了, 不问了, 都是不知道
+		\end{algorithmic}
+	\end{scualgorithm}
+	\begin{scudefinition}{马老卷}[MalaoJ]
+		是形翼门的打砸工, 直系上峰是马凡王, 入门改姓马, 自称老卷, 实则不卷.
+	\end{scudefinition}
+	\begin{scuaxiom}{皮亚诺公理}[PiyaNgl]
+		略.
+	\end{scuaxiom}
+	\begin{scuproperty}{刚体的性质}[GangtiDxz]
+		刚体是个理想模型. 虽然理想但是还是那么难整, 进动和章动就不会了.
+	\end{scuproperty}
+	\begin{scuproposition}{不确定性原理}[BuqueDxyl]
+		粒子的位置与动量不可同时被确定, 位置的不确定性与动量的不确定性遵守不等式
+		\begin{equation}
+			\Delta x \Delta p \geq \dfrac{h}{4\pi}
+		\end{equation}
+		其中$h$为普朗克常数.
+	\end{scuproposition}
+	\begin{sculemma}{卷王森林法则}[JuanwangSlfz]
+		源自未知高校学生, 此处略.
+	\end{sculemma}
+	\begin{scucorollary}{狼人杀的重要性}[LangrenSdzyx]
+		编者实习时听公司导师说面试有可能是趣味性游戏, 狼人杀感觉很符合, 所以玩狼人杀吧.
+	\end{scucorollary}
+	\begin{scuremark}{}[Zhu]
+		\vref{coro:LangrenSdzyx}, 只是推论, 编者瞎说的.
+	\end{scuremark}
+	\begin{scucondition}{面试狼人杀的条件}[MianshiLrsdtj]
+		\vref{coro:LangrenSdzyx}, 此推论有条件, 即真有公司面试用狼人杀.
+	\end{scucondition}
+	\begin{scuconclusion}{爱废话的编者}[AifeiHdbz]
+		由上述可知: 编者爱废话.
+	\end{scuconclusion}
+	\begin{scuassumption}{编者不会废话}[BianzheBhfh]
+		我们可以假设编者不会废话, 假设成立, 编者当然不会废话.
+	\end{scuassumption}
+\end{frame}
+
+\subsection{交叉引用}
+\begin{frame}[fragile]{交叉引用}
+	在Beamer中应避免过多的交叉引用, 此处编者给出了常用的引用命令及其示例.
+	\begin{table}[h]
+		\centering
+		\caption{交叉引用命令表}
+		\label{tab:JiaochaYymlb}
+		\begin{tabular}{lcl}
+			\toprule
+			命令 & 显示项 & 示例 \\
+			\midrule
+			\verb|\ref|\verb|{<label>}| & 序号 & \ref{assu:BianzheBhfh} \\
+			\verb|\ref*|\verb|{<label>}| & 序号 & \ref*{assu:BianzheBhfh} \\
+			\verb|\nameref|\verb|{<label>}| & 标题 & \nameref{assu:BianzheBhfh} \\
+			\verb|\vref|\verb|{<label>}| & 标题页码 & \vref{fra:Fenlan} \\
+			\verb|\pageref|\verb|{<label>}| & 页码 & \pageref{assu:BianzheBhfh} \\
+			\verb|\vpageref|\verb|{<label>}| & 页码 & \vpageref{assu:BianzheBhfh} \\
+			\verb|\cref|\verb|{<label>}| & 标题 & \cref{assu:BianzheBhfh} \\
+			\verb|\crefrange|\verb|{<label>}| & 范围 & \crefrange{fig:StopInDay}{fig:StopInNight} \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\subsection{参考文献}
+\begin{frame}[fragile]{参考文献相关}
+	\textbf{注意:} 参考文献请采用{\color{scured}Biber}编译模式, 即整体编译思路为XeLaTeX - Biber - XeLaTeX.\\
+	模板采用符合国标GB/T7714-2015的gb7714-2015参考文献格式.\\
+	模板已设置了``ref.bib''为参考文献数据库, 使用时覆盖即可(当然, 实在需要请在tex文件导言区寻找命令修改).\\[1ex]
+	引用文献的命令常采用\cmd{cite}\verb|{<item>}|, 如虚拟偶像单篇\cite{__2020-1}, 多篇\cite{__2016,m_possibilities_2018};\\
+	此处也可视情况使用脚注形式的详细文献信息引用:
+	\begin{itemize}
+		\item 使用\verb|\footnotemark|计数，配合\verb|\footfullcitetext|\verb|[<num>]|\verb|{<item>}|显示, 如虚拟偶像\footnotemark.\footfullcitetext[3]{_ugc_2018}
+		\item \verb|\footfullcite|\verb|[<num>]|\verb|{<item>}|, 如虚拟偶像\footfullcite[8]{__2018}.\\
+		脚注最后的黑色阿拉伯数字为参考文献序号, 需自行输入, 也即上方的\verb|[<num>]|.
+	\end{itemize}
+\end{frame}
+
+%% End of file `basic-content-2.tex'.
