@@ -11,6 +11,7 @@
 			\item Update: \textcolor{scugreen}{v1.3a (2022/03/16)}
       \item Update: \textcolor{scugreen}{v1.3b (2022/04/13)}
       \item Update: \textcolor{scugreen}{v2.1c (2026/05/20)}
+      \item Update: \textcolor{scugreen}{v2.1d (2026/06/15)}
 		\end{itemize}
 	\end{multicols}
 	\mycopyright
@@ -89,16 +90,16 @@
   \structure{结构字体}\\[1ex]
   \textbf{调用命令}: \cmd{structure}\textcolor{scugrey}{<\Arg{overlay}>}\marg{text}\hfill\structure{Neighbor 老王}\\
   \textbf{调用环境}:\\
-  \cmd{begin}\marg{structureenv}\textcolor{scugrey}{<\Arg{overlay}>}\\
+  \cmd{begin}\marg*{structureenv}\textcolor{scugrey}{<\Arg{overlay}>}\\
   \hspace*{1em}\Arg{environment contents}\\
-  \cmd{end}\marg{structureenv}\\[1.5ex]
+  \cmd{end}\marg*{structureenv}\\[1.5ex]
 
   \structure{重点字体}\\[1ex]
   \textbf{调用命令}: \cmd{alert}\textcolor{scugrey}{<\Arg{overlay}>}\marg{text}\hfill\alert{Neighbor 老王}\\
   \textbf{调用环境}:\\
-  \cmd{begin}\marg{alertenv}\textcolor{scugrey}{<\Arg{overlay}>}\\
+  \cmd{begin}\marg*{alertenv}\textcolor{scugrey}{<\Arg{overlay}>}\\
   \hspace*{1em}\Arg{environment contents}\\
-  \cmd{end}\marg{alertenv}\\[1.5ex]
+  \cmd{end}\marg*{alertenv}\\[1.5ex]
 
   \structure{强调字体}\\[1ex]
   \textbf{调用命令}: \cmd{emph}\marg{text}\hfill\emph{Neighbor 老王}\\
@@ -115,7 +116,7 @@
 					\alert{命令}~\cmd{cmd} & \alert{间距/功能} & \alert{效果} & \alert{命令}~\cmd{cmd} & \alert{间距(约)} & \alert{效果} \\
 					\midrule
 					\multicolumn{3}{c|}{\alert{\bfseries\scshape Text Spacing}}
-					& \multicolumn{3}{c}{\alert{\bfseries\scshape Math Spacing}} \\
+					& \multicolumn{3}{c}{\alert{\bfseries\scshape Math Spacing\label{goto:MathQuad}}} \\
 					\alert{\ttfamily\textbackslash\char32} & 普通空格 & a\ b
 					& \cmd{,} & \texttt{3/18 em} & a\,b\,c \\
 					\alert{\textasciitilde} & 不折行空格 & a~b
@@ -140,9 +141,9 @@
 					%
 					\multicolumn{3}{c|}{\alert{\bfseries\scshape Par Spacing}}
 					& \cmd{negthickspace} & \texttt{-5/18 em} & a\negthickspace b~a\negthickspace b\negthickspace c \\
-					\cmd{smallskip} & \multicolumn{2}{l|}{段落间小间距} & \\
-					\cmd{medskip} & \multicolumn{2}{l|}{段落间中间距} & \\
-					\cmd{bigskip} & \multicolumn{2}{l|}{段落间大间距} & \\
+					\cmd{smallskip} & \multicolumn{2}{l|}{段落间小间距} & \scugoto{back:MathQuad}{BACK} \\
+					\cmd{medskip}   & \multicolumn{2}{l|}{段落间中间距} & \\
+					\cmd{bigskip}   & \multicolumn{2}{l|}{段落间大间距} & \\
 				\end{tabular}
 			\end{table}
 		\end{column}
@@ -193,7 +194,7 @@
 				\hspace*{1em}\cmd{markoverwith}\marg{pattern}\%\\
     		\hspace*{1em}\cmd{ULon}\%\\
 			}\\[0.5ex]
-			具体实现可参考 \pkg{ulem} 官方文档和 \href{https://tex.stackexchange.com/questions/530454}{TeX.SE 社区相关讨论}.
+			具体实现可参考 \pkg{ulem} 官方文档和 \href{https://tex.stackexchange.com/questions/530454}{\color{scublue}TeX.SE 社区相关讨论}.
 		\end{column}
 	\end{columns}\vspace*{-.5ex}
 	\begin{columns}[onlytextwidth]
@@ -219,12 +220,12 @@
 	\begin{columns}[onlytextwidth]
 		\begin{column}{.54\textwidth}
 			\textbf{掌门大课堂}\\[1ex]
-			定义新颜色: \\
-			\cmd{definecolor}\marg{name}\marg{model}\marg{spec} \\[.6ex]
+			定义新颜色: \cmd{definecolor}\marg{name}\marg{model}\marg{spec} \\[.7ex]
 			基于已有颜色创建别名或混合颜色: \\
-			\cmd{colorlet}\marg{name}\marg{existing} \\[.6ex]
-			使用颜色着色文字: \cmd{textcolor}\marg{color}\marg{text} \\[.6ex]
-			使用颜色着色背景: \cmd{colorbox}\marg{color}\marg{text} \\[.6ex]
+			\cmd{colorlet}\marg{name}\marg{existing} \\[.7ex]
+			使用颜色着色文字: \cmd{textcolor}\marg{color}\marg{text} \\[.7ex]
+			使用颜色着色文字: {\cmd{color}\marg{color} \Arg{text}} \\[.7ex]
+			使用颜色着色背景: \cmd{colorbox}\marg{color}\marg{text} \\[.7ex]
 			使用颜色着色并加边框: \\
 			\cmd{fcolorbox}\marg{framecolor}\marg{backgroundcolor}\marg{text}
 		\end{column}
@@ -291,454 +292,483 @@
 			\cmd{colorlet}\marg*{mypurple}\marg*{red!50!blue} & \colorbox{expurple}{\phantom{XX}}
 		\end{tabular}
 	\end{table}
-	\vspace*{-1ex}
+	\vspace*{-1.5ex}
 \end{frame}
 
-\subsection{图与表格}
-\begin{frame}[fragile]{单张图片的插入}
-	\begingroup
-	\scriptsize
-	支持格式: {\color{scured}pdf, eps, png, jpg}. 建议使用矢量图片(svg建议下载~\href{https://inkscape.org/}{\color{scublue}Inkscape}~导出pdf)
-	\endgroup
-	\begin{minipage}{0.56\linewidth}
-		\begin{scucode}[comment={%
-				\scriptsize\vskip.5ex%
-				{\color{scured}<position>}\quad 浮动体摆放的位置\\
-				\quad \textbf{参数}: {\color{scublue}h}-此处, {\color{scublue}t}-顶部, {\color{scublue}b}-底部, {\color{scublue}p}-独立成页, \\
-				{\color{scublue}!}-决定位置时忽略限制\\
-				\quad \textbf{注}: 常用{\color{scublue}h}, {\color{scublue}htbp}, {\color{scublue}htbp!}. 参数顺序不作限制\\
-				{\color{scured}<keys>}\quad 限制图片大小等\\
-				\quad \textbf{参数}: {\color{scublue}width=?}-宽度, {\color{scublue}height=?}-高度, \\
-				{\color{scublue}scale=?}-缩放, {\color{scublue}angle=?}-逆时针旋转角度\\
-				\quad \textbf{注}: 宽高不建议同时使用, 以columnwidth设置宽度\\
-				{\color{scured}<file>}\quad 文件名称(不要有空格)\\
-				{\color{scured}<title>}\quad 图片标题\\
-				{\color{scured}<label>}\quad 交叉引用标签\\
-			},%
-			listing above comment]{Figure环境}[FigureHj]{tex}
-				\begin{figure}[<position>]
-					\centering %居中用
-					\includegraphics[<keys>]{<file>}
-					\caption{<title>}
-					\label{<label>}
-				\end{figure}
-		\end{scucode}
-		\end{minipage}\quad
-		\begin{minipage}{0.4\linewidth}
-		\begin{scucode}[righthand width=0.2\textwidth,%
-			listing above text]{单图插入演示}[DantuCrys]{tex}
-				\begin{figure}[h]
-					\centering
-					\includegraphics%
-					[width=0.36\columnwidth]%
-					{stop-bk.pdf}
-					\caption%
-					{黑色的暂停}
-					\label{fig:stopbk}
-				\end{figure}
-		\end{scucode}
-	\end{minipage}
-\end{frame}
-
-\begin{frame}[allowframebreaks,fragile]{多图插入(子图, 并列小图)}
-	放不下了: PowerPoint与Excel均可导出svg格式, 再转pdf(Excel作图时请启用``不随单元格变化''), inkscape有批量转pdf的命令, 请百度.
-
-	很多时候, 我们往往不只在一行中放置一张图片, 我们需要放置并排的图片以提升空间利用率, 增强观感性, 并一定程度上加强图片的关联性. 以下列出三种不同的多图插入情景(仅供参考).
-	\begin{enumerate}
-		\item 在figure环境中插入多个\verb|\includegraphics|, 非子图;
-		\item 使用subcaption环境插入子图;\\
-		\begin{scucode}[comment={%
-				\scriptsize\vskip1ex%
-				{\color{scured}<width>}\quad 子图宽度\\
-				{\color{scured}<code>}\quad 同上页figure环境\\
-			},%
-			listing side comment]{Subfigure环境}[SubfigureHj]{tex}
-				\begin{subfigure}{<width>}
-					<code>
-				\end{subfigure}
-		\end{scucode}
-		\item 使用minipage环境插入并排小图, 当然minipage也可插入子图.
-	\end{enumerate}
-	\begin{scucode}[listing side text,righthand width=.36\columnwidth]{子图示例}[ZituSl]{tex}
-		\begin{figure}[h]
-			\begin{subfigure}{.4\columnwidth}
-				\centering
-				\includegraphics%
-				[width=\columnwidth]{stop-rd.pdf}
-				\caption{白天的暂停}
-			\end{subfigure}
-			\quad
-			\begin{subfigure}{.4\columnwidth}
-				\centering
-				\includegraphics%
-				[width=\columnwidth]{stop-gn.pdf}
-				\caption{晚上的暂停}
-			\end{subfigure}
-			\caption{掌门常用的暂停}
-		\end{figure}
-	\end{scucode}
-	\begin{scucode}[listing side text,righthand width=.36\columnwidth]{并列小图示例}[BinlieXtsl]{tex}
-		\begin{figure}[h]
-			\begin{minipage}[t]{.4\columnwidth}
-				\centering
-				\includegraphics%
-				[width=\columnwidth]{stop-rd.pdf}
-				\caption{掌门白天的暂停}
-				\label{fig:ZhangmenBtdzt}
-			\end{minipage}
-			\quad
-			\begin{minipage}[t]{.4\columnwidth}
-				\centering
-				\includegraphics%
-				[width=\columnwidth]{stop-gn.pdf}
-				\caption{掌门晚上的暂停}
-				\label{fig:ZhangmenWsdzt}
-			\end{minipage}
-		\end{figure}
-	\end{scucode}
-\end{frame}
-
-\cprotEnv\begin{frame}
-	\frametitle{三线表示例}
-	表格太麻烦了, 掌门说摸摸鱼, 编者觉得不错, 丢一个三线表示例. 当然也可以看看这个手册前面部分表格的源码.
-	\begin{table}[htbp]
-		\centering
-		\caption{一些国风音乐}
-		\label{tab:YixieGfyy}
-		\begin{tabular}{rlc}
-			\toprule
-			作曲家 & 歌名 & 门中喜欢的友人 \\
-			\midrule
-			李志辉 & 小桥流水人家 & 门主 \\
-			林海 & 无羁(器乐版) & 初号 \\
-			吕秀龄 & 逆伦 & 小初 \\
-			麦振鸿 & 从来只有一个人 & 编者(假的) \\
-			\bottomrule
-		\end{tabular}
-	\end{table}
-	一些三线表中有用的命令: \verb|\hline|-画横线, \verb|\cline|\verb!{x-y}!-画x-y列的横线.\\
-	一些强大的表格宏包: tabularx, longtable, supertabular, xtab. 还有子表(类似于图).\\
-	差点忘了, 还有合并行与列, 套表等.
-\end{frame}
-
-\subsection{代码区块}
+\subsection{数学公式}
 \begin{frame}{Info.}
-	\textbf{本小节将介绍代码区块(含从文件读入)的设置.}
-	\begin{multicols}{2}
-		\begin{itemize}
-			\item Establish: \textcolor{scugreen}{v1.0a (2021/11/30)}
-			\item Update: \textcolor{scugreen}{v1.3a (2022/03/16)}
-		\end{itemize}
-	\end{multicols}
-	注: 自 \textcolor{scugreen}{v1.3a (2021/03/16)} 起, 本小节将替代手册中\alert{\bfseries 代码环境}小节.\par
-	\mycopyright
-\end{frame}
-
-\begin{frame}{代码区块(含从文件读入)环境及命令定义}
-	本模板定义了代码区块环境 \env{scucode} 与命令 \cmd{scucodeinput} 和 \cmd{scucodeinputnocounter}.\par\vspace{1ex}
-
-	\textbf{调用环境(无星号环境)}:\\
-	\cmd{begin}\marg*{scucode}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\marg{code language}\oarg{code options}\textcolor{scugrey}{<\Arg{escapeinside}>}\\
-	\hspace*{1em}\Arg{source code}\\
-	\cmd{end}\marg*{scucode}\\[1ex]
-	\textbf{调用环境(带星号环境)}:\\
-	\cmd{begin}\marg*{scucode*}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\marg{code language}\oarg{code options}\textcolor{scugrey}{<\Arg{escapeinside}>}\\
-	\hspace*{1em}\Arg{source code}\\
-	\cmd{end}\marg*{scucode*}\\[1ex]
-	\textbf{以上带星号环境代表区块不显示序号.}\\
-
-	\textbf{调用命令(区块显示序号)}:\\
-	\cmd{scucodeinput}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\marg{code language}\oarg{code options}\marg{filename}\textcolor{scugrey}{<\Arg{escapeinside}>}\\[1ex]
-	\textbf{调用命令(区块不显示序号)}:\\
-	\cmd{scucodeinputnocounter}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\marg{code language}\oarg{code options}\marg{filename}\textcolor{scugrey}{<\Arg{escapeinside}>}
-\end{frame}
-
-\begin{frame}{代码区块(含从文件读入)环境及命令参数}
-	\alert{\Arg{tcb options}}\hfill \textbf{(可选参数) Tcolorbox参数}\\
-	添加到Tcolorbox中的参数, 常用有comment, sidebyside, listing side(above) comment等.\\
-
-	\alert{\Arg{title}}\hfill \textbf{(必选参数) 标题}\\
-
-	\alert{\Arg{switch star}}\hfill \textbf{(可选参数) 标题前缀显示}\\
-	此处默认留空无需填入; 如填入 * 号, 则区块不显示标题前缀(源码x).\\
-
-	\alert{\Arg{label suffix}}\hfill \textbf{(可选参数) 标签后缀}\\
-	模板中定义的标签均为code:xx形式, 若无填入, 则对应区块无标签.\\
-
-	\alert{\Arg{code language}}\hfill \textbf{(必选参数) 代码语言}\\
-	使用 \pkg{minted} 作为代码高亮引擎时, 可在终端输入\texttt{pygmentize -L lexers}查看支持语言.\\
-
-	\alert{\Arg{code options}}\hfill \textbf{(可选参数) 代码引擎参数}\\
-	添加到minted或listing引擎中的参数, 常用有highlightlines (listing不支持)等.\\
-
-	\alert{\Arg{filename}}\hfill \textbf{(必选参数) 从文件读入源码时的文件名}\\
-
-	\alert{\Arg{escapeinside}}\hfill \textbf{(可选参数) 忽略定界符内输入}\\
-	将定界符间内容按\LaTeX{}命令执行, 支持Beamer \cmd{only}命令, 定界符默认为`||', 此处填入后即更改定界符.\\
-
-	\alert{\Arg{source code}}\hfill \textbf{详细源码}
-\end{frame}
-
-\begin{frame}[fragile]{代码环境演示}
-	\onslide<2>
-	\begin{scucode}{A welcome program.}[cpphelloworld]{c}
-		#include <iostream>
-		int main()
-		{
-			std::cout << "Hello World！" << std::endl;
-			std::cin.get();
-		}
-	\end{scucode}
-	\onslide<1>
-	\begin{scucode}{A welcome program.}[chelloworld]{c}
-		#include <stidio.h>
-		int main()
-		{
-			printf("Hello World！");
-			return 0;
-		}
-	\end{scucode}
-\end{frame}
-
-\subsection{定理区块}
-\begin{frame}{Info.}
-	\textbf{本小节将介绍定理区块的设置.}
-	\begin{multicols}{2}
-		\begin{itemize}
-			\item Establish: \textcolor{scugreen}{v1.0a (2021/11/30)}
-			\item Update: \textcolor{scugreen}{v1.3a (2022/03/16)}
-		\end{itemize}
-	\end{multicols}
-	注: 自 \textcolor{scugreen}{v1.3a (2021/03/16)} 起, 本小节将替代手册中\alert{\bfseries 数学环境}小节.\par
-	\mycopyright
-\end{frame}
-
-\begin{frame}{定理区块环境信息}
-	本模板定义了如下表所示定理区块环境及对应的标签前缀
-	\begin{table}[htbp!]
-		\centering
-		\caption{定理区块环境信息}
-		\label{tab:ShuxueHjdy}
-		\begin{tabular}{ccc|ccc}
-			\toprule
-			名称 &          环境(scuxx)        &  标签前缀  & 名称 &          环境(scuxx)         &  标签前缀  \\ \midrule
-			定理 &  \color{scured}scutheorem   &  theo:     & 证明 &    \color{scured}scuproof    &   /     \\
-			例   &  \color{scured}scuexample   &  exam:     & 算法 &  \color{scured}scualgorithm  &  algo:  \\
-			定义 & \color{scured}scudefinition &  def:      & 公理 &    \color{scured}scuaxiom    &  axio:  \\
-			性质 &  \color{scured}scuproperty  &  prope:    & 命题 & \color{scured}scuproposition &  propo: \\
-			引理 &   \color{scured}sculemma    &  lemm:     & 推论 &  \color{scured}scucorollary  &  coro:  \\
-			注   &   \color{scured}scuremark   &  rema:     & 条件 &  \color{scured}scucondition  &  cond:  \\
-			结论 & \color{scured}scuconclusion &  conc:     & 假设 & \color{scured}scuassumption  &  assu:  \\ \bottomrule
-		\end{tabular}
-	\end{table}
-	其中证明环境(scuproof)结尾带有证毕符号(\cmd{qed}).$\textrightarrow$\qed
-\end{frame}
-
-\begin{frame}{定理区块环境命令}
-	\textbf{调用环境(无星号环境)}(除scuproof与scuremark):\\
-	\cmd{begin}\marg{env}\textcolor{scugrey}{<\Arg{overlay}>}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\\
-	\hspace*{1em}\Arg{environment contents}\\
-	\cmd{end}\marg{env}\\[1ex]
-	\textbf{调用环境(带星号环境)}(除scuproof与scuremark):\\
-	\cmd{begin}\marg{env}*\textcolor{scugrey}{<\Arg{overlay}>}\oarg{tcb options}\marg{title}\textcolor{scugrey}{\Arg{switch star}}\oarg{label suffix}\\
-	\hspace*{1em}\Arg{environment contents}\\
-	\cmd{end}\marg{env}\\[1ex]
-	\textbf{调用环境}(scuproof与scuremark):\\
-	\cmd{begin}\marg{env}\textcolor{scugrey}{<\Arg{overlay}>}\oarg{tcb options}\marg{title}\oarg{label suffix}\\
-	\hspace*{1em}\Arg{environment contents}\\
-	\cmd{end}\marg{env}\\[1ex]
-	\textbf{以上带星号环境代表不显示序号.}
-\end{frame}
-
-\begin{frame}{定理区块环境参数}
-	\alert{\Arg{env}}\hfill \textbf{环境名称}\\
-	见\vref{tab:ShuxueHjdy}.\\
-
-	\alert{\Arg{overlay}}\hfill \textbf{(可选参数) Beamer Overlay设置}\\
-
-	\alert{\Arg{tcb options}}\hfill \textbf{(可选参数) Tcolorbox参数}\\
-	添加到Tcolorbox中的参数, 常用有comment, sidebyside, listing side(above) comment等.\\
-
-	\alert{\Arg{title}}\hfill \textbf{(必选参数) 标题}\\
-
-	\alert{\Arg{switch star}}\hfill \textbf{(可选参数) 标题前缀显示}\\
-	此处默认留空无需填入; 如填入 * 号, 则区块不显示标题前缀(定理x、结论x等).\\
-
-	\alert{\Arg{label suffix}}\hfill \textbf{(可选参数) 标签后缀}\\
-	模板中定义的标签均为xx:xx形式, 若无填入, 则对应区块无标签.\\
-
-	\alert{\Arg{environment contents}}\hfill \textbf{环境内容}
-\end{frame}
-
-\begin{frame}[fragile,allowframebreaks]{数学环境演示}
-	\begin{scutheorem}{切比雪夫大数率}[QiebiXfdsl]
-		对独立随机变量序列$\{X_k\}$, 若$E(X_k)$, $D(X_k)$都存在, $k=1,2,\cdots$, 且有常数$C$, 使得$D(X_k)\leq C$, $k=1,2,\cdots$, 则有
-		\begin{equation}
-		\dfrac{1}{n} \sum_{k=1}^{n} X_k - \dfrac{1}{n} \sum_{k=1}^{n} E(X_k) \stackrel{\;P\;}{\longrightarrow} 0
-		\end{equation}
-	\end{scutheorem}
-	\begin{scuproof}{}
-		请读者自证.
-	\end{scuproof}
-	\begin{scuexample}{形翼门的规模}[HunyuanXytjmdgm]
-		本门昨天去了80个人打水, 今天去了79个人打水, 本门的规模有多大?
-	\end{scuexample}
-	\begin{scualgorithm}{怎么写Beamer模板}[ZengmoXBeamerzs]
-		\begin{algorithmic}[1]
-		\REQUIRE 一点点\LaTeX 知识, 不要太信任百度
-		\ENSURE 不知道怎么搞
-		\STATE 问门主, 肯定不知道
-		\STATE 问初号, 当然不知道
-		\STATE 问小初, 还是不知道
-		\RETURN 算了, 不问了, 都是不知道
-		\end{algorithmic}
-	\end{scualgorithm}
-	\begin{scudefinition}{马老卷}[MalaoJ]
-		是形翼门的打砸工, 直系上峰是马凡王, 入门改姓马, 自称老卷, 实则不卷.
-	\end{scudefinition}
-	\begin{scuaxiom}{皮亚诺公理}[PiyaNgl]
-		略.
-	\end{scuaxiom}
-	\begin{scuproperty}{刚体的性质}[GangtiDxz]
-		刚体是个理想模型. 虽然理想但是还是那么难整, 进动和章动就不会了.
-	\end{scuproperty}
-	\begin{scuproposition}{不确定性原理}[BuqueDxyl]
-		粒子的位置与动量不可同时被确定, 位置的不确定性与动量的不确定性遵守不等式
-		\begin{equation}
-			\Delta x \Delta p \geq \dfrac{h}{4\pi}
-		\end{equation}
-		其中$h$为普朗克常数.
-	\end{scuproposition}
-	\begin{sculemma}{卷王森林法则}[JuanwangSlfz]
-		源自未知高校学生, 此处略.
-	\end{sculemma}
-	\begin{scucorollary}{狼人杀的重要性}[LangrenSdzyx]
-		编者实习时听公司导师说面试有可能是趣味性游戏, 狼人杀感觉很符合, 所以玩狼人杀吧.
-	\end{scucorollary}
-	\begin{scuremark}{}[Zhu]
-		\vref{coro:LangrenSdzyx}, 只是推论, 编者瞎说的.
-	\end{scuremark}
-	\begin{scucondition}{面试狼人杀的条件}[MianshiLrsdtj]
-		\vref{coro:LangrenSdzyx}, 此推论有条件, 即真有公司面试用狼人杀.
-	\end{scucondition}
-	\begin{scuconclusion}{爱废话的编者}[AifeiHdbz]
-		由上述可知: 编者爱废话.
-	\end{scuconclusion}
-	\begin{scuassumption}{编者不会废话}[BianzheBhfh]
-		我们可以假设编者不会废话, 假设成立, 编者当然不会废话.
-	\end{scuassumption}
-\end{frame}
-
-\subsection{数学公式排版}
-\begin{frame}{Info.}
-	\textbf{本小节将介绍数学公式的排版.}
+	\textbf{本小节将介绍数学公式的排版, 包括行内公式、行间公式、多行公式、数学字体命令、数学符号、数学修饰、定界符与矩阵.}
 	\begin{multicols}{2}
 		\begin{itemize}
 			\item Establish: \textcolor{scugreen}{v1.0a (2021/11/30)}
 			\item Update: \textcolor{scugreen}{v1.3a (2022/03/16)}
       \item Update: \textcolor{scugreen}{v1.3b (2022/04/13)}
+      \item Update: \textcolor{scugreen}{v2.1d (2026/06/15)}
 		\end{itemize}
 	\end{multicols}
 	注: 自 \textcolor{scugreen}{v1.3a (2021/03/16)} 起, 本小节已自手册中\alert{\bfseries 数学环境}小节拆出.\par
 	\mycopyright
 \end{frame}
 
-\begin{frame}[fragile,allowframebreaks]{数学公式演示}
-	\alert{1. 行内公式(无编号):} 使用~\verb|$|~\verb|$|~括起公式.\\
-	如: 麦克斯韦分布函数$f(v) = \dfrac{\mathrm{d}N}{N\,\mathrm{d}v} = 4\pi \Big(\dfrac{\mu}{2\pi kT}\Big)^{3/2} v^2 \mathrm{exp}\Big(-\dfrac{\mu v^2}{2kT}\Big)$.\\[1ex]
-	{\color{scured}2. 行间公式(无编号):} 使用~\verb|\[|~\verb|\]|~括起公式, 与之等效的是displaymath或equation*环境.\\
-	如: 最概然速率\[v_p = \sqrt{\dfrac{2kT}{\mu}} = \sqrt{\dfrac{2RT}{M}}\]其中$R$是气体常数, $M = N_A \mu$是物质的摩尔质量.\\[1ex]
-		\begin{equation*}
-			\bar{v} = \int_0^\infty vf(v)\,\mathrm{d}v = \sqrt{\dfrac{8kT}{\pi\mu}} = \sqrt{\dfrac{8RT}{\pi M}}
-		\end{equation*}
-	{\color{scured}3. 行间公式(有编号):} 使用equation环境(环境内可加label标签).\\[1ex]
-	如: 方均根速率
-		\begin{equation}
-		v_{rms} = \Big(\int_0^\infty v^2f(v)\,\mathrm{d}v\Big)^{1/2} = \sqrt{\dfrac{3kT}{\mu}} = \sqrt{\dfrac{3RT}{M}}
-		\end{equation}
-	上述环境均无法使用\verb!\\!换行, 且环境中无法正常实现空格(可在空格前加\verb|\|). 在数学模式中, 若想加入文字请使用\verb|\text|\verb|{}|, 使用正体请使用\verb|\mathrm|\verb|{}|.\\[1ex]
-	{\color{scured}4. 多行公式(长公式折行):} 使用multline环境.
-	如:
-		\begin{multline}
-			A=\lim_{n\rightarrow\infty}\Delta x\left(a^{2}+\left(a^{2}+2a\Delta x+\left(\Delta x\right)^{2}\right)\right.\label{eq:reset}\\
-			+\left(a^{2}+2\cdot2a\Delta x+2^{2}\left(\Delta x\right)^{2}\right)\\
-			+\left(a^{2}+2\cdot3a\Delta x+3^{2}\left(\Delta x\right)^{2}\right)\\
-			+\ldots\\
-			\left.+\left(a^{2}+2\cdot(n-1)a\Delta x+(n-1)^{2}\left(\Delta x\right)^{2}\right)\right)\\
-			=\frac{1}{3}\left(b^{3}-a^{3}\right)
-		\end{multline}\\[1ex]
-	\pagebreak
-	{\color{scured}5. 多行公式(有编号, 若不希望编号, 使用加*号的环境):}
-	\begin{itemize}
-		\item 使用align环境(每行都编号, 去掉某行编号请用\verb|\notag|命令).
-	\end{itemize}
-	如: 质能方程
-		\begin{align}
-			E=m&c^2 & &E=mc^2\\
-			E=~&mc^2 & E&=mc^2 \notag \\
-			E&=mc^2 & E=~&mc^2\\
-			&E=mc^2 & E=m&c^2
-		\end{align}
-	\begin{itemize}
-		\item 使用aligned环境(共同编号, 需套用在equation中).
-	\end{itemize}
-		\begin{equation}
-			\begin{aligned}
-			\dfrac{\mathrm{d}}{\mathrm{d}t} \symbfit{f} &= \dfrac{\mathrm{d}f_x}{\mathrm{d}t} \symbfit{\hat{i}} + \dfrac{\mathrm{d}\symbfit{\hat{i}}}{\mathrm{d}t} f_x + \dfrac{\mathrm{d}f_y}{\mathrm{d}t} \symbfit{\hat{j}} + \dfrac{\mathrm{d}\symbfit{\hat{j}}}{\mathrm{d}t} f_y + \dfrac{\mathrm{d}f_z}{\mathrm{d}t} \symbfit{\hat{k}} + \dfrac{\mathrm{d}\symbfit{\hat{k}}}{\mathrm{d}t} f_z \\
-			&= \dfrac{\mathrm{d}f_x}{\mathrm{d}t} \symbfit{\hat{i}} + \dfrac{\mathrm{d}f_y}{\mathrm{d}t} \symbfit{\hat{j}} + \dfrac{\mathrm{d}f_z}{\mathrm{d}t} \symbfit{\hat{k}} + \big[\symbf{\Omega} \times \big( f_x \symbfit{\hat{i}} + f_y \symbfit{\hat{j}} + f_z \symbfit{\hat{k}}\big) \big] \\
-			&= \Big(\dfrac{\mathrm{d}\symbfit{f}}{\mathrm{d}t}\Big)_r + \symbf{\Omega} \times \symbfit{f}(t)
-			\end{aligned}
-		\end{equation}
-	\begin{itemize}
-		\item 使用dcases环境(需调用mathtools宏包). 为什么不用cases呢? 因为这个只支持行内公式, 很多时候会出现行重合现象.
-	\end{itemize}
-		\begin{equation}
-			\begin{dcases}
-			\oint_l \symbfit{H} \cdot \mathrm{d}\symbfit{l} = \iint_S \symbfit{J} \cdot \mathrm{d}\symbfit{S} + \iint_S \dfrac{\partial\symbfit{D}}{\partial t} \cdot \mathrm{d}\symbfit{S} \\
-			\oint_l \symbfit{E} \cdot \mathrm{d}\symbfit{l} = - \iint_S \dfrac{\partial\symbfit{B}}{\partial t} \cdot \mathrm{d}\symbfit{S} \\
-			\oint_S \symbfit{B} \cdot \mathrm{d}\symbfit{S} = 0 \\
-			\oint_S \symbfit{D} \cdot \mathrm{d}\symbfit{S} = \iiint_V \rho \mathrm{d}V
-			\end{dcases}
-		\end{equation}
-	{\color{scured}6. 矩阵:} amsmath宏包给出了6种常用的矩阵环境, 无定界符: {\color{scured}matrix}; 有定界符: {\color{scured}pmatrix}($\big(\cdots\big)$), {\color{scured}bmatrix}($\big[\cdots\big]$), {\color{scured}Bmatrix}($\bigl\{\cdots\bigr\}$), {\color{scured}vmatrix}($|\cdots|$), {\color{scured}Vmatrix}($||\cdots||)$).
-	如: 单位矩阵
-		\[
-		\begin{bmatrix}
-		E & 0 \\
-		0 & E \\
-		\end{bmatrix}
-		\begin{pmatrix}
-			E & 0 \\
-			0 & E \\
-		\end{pmatrix}
-		\]
+\begin{frame}{行内与行间公式}
+	\textbf{掌门大课堂}~数学模式中普通空格会被忽略, 需使用专用空格命令\label{back:MathQuad} \scugoto{goto:MathQuad}{DTL}; 若需在公式中插入普通文本, 请使用 \cmd{text}\marg{text}.\\
+	\begin{columns}[T, onlytextwidth]
+		\begin{column}{.45\columnwidth}
+			\structure{行内公式}\\[1ex]
+			\textbf{使用方式}: \fverb{\$\Arg{equation}\$} 和 \fverb{\cmd{(}\Arg{equation}\cmd{)}}\\[1ex]
+			\textbf{例如}, 最概然速率为 $v_p = \sqrt{\dfrac{2kT}{\mu}} = \sqrt{\dfrac{2RT}{M}}$, 其中$R$是气体常数, $M = N_A \mu$是物质的摩尔质量.\\[2ex]
+
+			\structure{行间公式(无编号)}\\[1ex]
+			\textbf{使用方式}: \fverb{\$\$\Arg{equation}\$\$} 和 \fverb{\cmd{[}\Arg{equation}\cmd{]}}\\[.5ex]
+			和 \env{displaymath} 或 \env{equation*} 环境:\\[.5ex]
+			\begin{columns}[onlytextwidth]
+				\begin{column}{.5\textwidth}
+					\cmd{begin}\marg*{displaymath}\\
+					\hspace*{1em}\Arg{equation}\\
+					\cmd{end}\marg*{displaymath}
+				\end{column}
+				\begin{column}{.5\textwidth}
+					\cmd{begin}\marg*{equation*}\\
+					\hspace*{1em}\Arg{equation}\\
+					\cmd{end}\marg*{equation*}
+				\end{column}
+			\end{columns}\vspace*{1ex}
+			\textbf{例如}, 麦克斯韦分布函数为,\\[-3ex]
+			\begin{equation*}
+				f(v) = \dfrac{\mathrm{d}N}{N\,\mathrm{d}v} = 4\pi \Big(\dfrac{\mu}{2\pi kT}\Big)^{3/2} v^2 \mathrm{exp}\Big(-\dfrac{\mu v^2}{2kT}\Big)
+			\end{equation*}
+		\end{column}
+		\begin{column}{.5\columnwidth}
+			\structure{行间公式(有编号)}\\[1ex]
+			\textbf{使用方式}: \env{equation} 环境.\\[.5ex]
+			\cmd{begin}\marg*{equation}\cmd{label}\marg{label}\\
+			\hspace*{1em}\Arg{equation}\\
+			\hspace*{1em}\cmd{tag}\marg{tag}\\
+			\cmd{end}\marg*{equation}\\[.5ex]
+			\Arg{label} 建议以 \texttt{eq:} 开头, \env{equation} 支持使用 \cmd{tag} 自定义编号格式 \\[1ex]
+			\textbf{例如}, 平均速率为,\\[-1ex]
+			\begin{equation}
+				\bar{v} = \int_0^\infty vf(v)\,\mathrm{d}v = \sqrt{\dfrac{8kT}{\pi\mu}} = \sqrt{\dfrac{8RT}{\pi M}}
+			\end{equation}
+			\textbf{例如(自定义编号格式)}, 方均根速率为,\\[-3ex]
+			\begin{equation}
+				v_{rms} = \Big(\int_0^\infty v^2f(v)\,\mathrm{d}v\Big)^{1/2} = \sqrt{\dfrac{3kT}{\mu}} = \sqrt{\dfrac{3RT}{M}}
+				\tag{$\alpha$}
+			\end{equation}
+		\end{column}
+	\end{columns}
 \end{frame}
 
-\begin{frame}{数学模式字体}
-	数学模式中的字体控制:
-	\begin{columns}
-		\begin{column}{.58\textwidth}
-			\begin{table}[h]
-				\begin{tabular}{lll}
-					\toprule
-					\alert{命令} & \alert{字号显示效果} & \alert{用途} \\
-					\midrule
-					无命令 & $R, x, y$ & 默认数学斜体 \\
-					\cmd{mathrm}\marg{R} & $\mathrm{R}$ & 直立, 常量/单位 \\
-					\cmd{mathbf}\marg{R} & $\mathbf{R}$ & 粗体, 向量/矩阵 \\
-					\cmd{mathit}\marg{R} & $\mathit{R}$ & 斜体 \\
-					\cmd{mathsf}\marg{R} & $\mathsf{R}$ & 无衬线 \\
-					\cmd{mathtt}\marg{R} & $\mathtt{R}$ & 打字机 \\
-					\cmd{mathcal}\marg{R} & $\mathcal{R}$ & 花体 \\
-					\bottomrule
-				\end{tabular}
-			\end{table}
+\begin{frame}{多行公式(1/3)}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{.36\columnwidth}
+			\alert{\bfseries multline 环境}~
+			用于长公式折行, 首行左对齐, 末行右对齐, 中间行居中, 整体产生一个编号.\\[1ex]
+			\textbf{使用方式}:\\[.5ex]
+			\cmd{begin}\marg*{multline}\\
+			\hspace*{1em}\Arg{line 1}\cmd{\textbackslash}\\
+			\hspace*{1em}\ldots\\
+			\hspace*{1em}\Arg{line n}\cmd{label}\marg{label}\\
+			\cmd{end}\marg*{multline}\\[3ex]
+
+			\alert{\bfseries gather 环境}~
+			多行公式各自居中, 每行单独编号, \env{gather*} 环境则不编号.\\[1ex]
+			\textbf{使用方式}:\\[.5ex]
+			\cmd{begin}\marg*{gather}\\
+			\hspace*{1em}\Arg{equation 1}\cmd{label}\marg{label 1}\cmd{\textbackslash}\\
+			\hspace*{1em}\Arg{equation 2}\cmd{label}\marg{label 2}\cmd{\textbackslash}\\
+			\hspace*{1em}\ldots\\
+			\cmd{end}\marg*{gather}
 		\end{column}
-		\begin{column}{.4\textwidth}
-			\textbf{常用辅助:}
-			\begin{itemize}
-				\item \cmd{text}\marg{文字} -- 在公式中插入正文文字;
-			\end{itemize}
+		\begin{column}{.6\columnwidth}
+			\textbf{例如(multline)}, Riemann 和展开计算,\\[-4ex]
+			\begin{multline}
+				A=\lim_{n\rightarrow\infty}\Delta x\left(a^{2}+\left(a^{2}+2a\Delta x+\left(\Delta x\right)^{2}\right)\right.\\
+				+\left(a^{2}+2\cdot2a\Delta x+2^{2}\left(\Delta x\right)^{2}\right)\\
+				+\left(a^{2}+2\cdot3a\Delta x+3^{2}\left(\Delta x\right)^{2}\right)\\
+				+\ldots\\
+				\left.+\left(a^{2}+2\cdot(n-1)a\Delta x+(n-1)^{2}\left(\Delta x\right)^{2}\right)\right)\\
+				=\frac{1}{3}\left(b^{3}-a^{3}\right)
+			\end{multline}
+			\textbf{例如(gather)}, 勾股定理、欧拉恒等式与二项式定理,\\[-3ex]
+			\begin{gather}
+				a^2 + b^2 = c^2 \\
+				e^{i\pi} + 1 = 0 \\
+				(x+y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k
+			\end{gather}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{多行公式(2/3)}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{.36\columnwidth}
+			\alert{\bfseries align 环境}~
+			多行对齐公式, 使用 \fverb{\&} 指定对齐位置, 可设置多个对齐列, 每行都编号. \cmd{notag} 或 \cmd{nonumber} 可取消某行编号, \env{align*} 则全部不编号.\\[1ex]
+			\textbf{使用方式}:\\[.5ex]
+			\cmd{begin}\marg*{align}\\
+			\hspace*{1em}\Arg{expr 1} \fverb{\&} \Arg{expr 2}\cmd{label}\marg{label 1}\cmd{\textbackslash}\\
+			\hspace*{1em}\Arg{expr 3} \fverb{\&} \Arg{expr 4}\cmd{notag}\cmd{\textbackslash} \\
+			\cmd{end}\marg*{align}\\[2ex]
+
+			\alert{\bfseries aligned 环境}~
+			类似 \env{align}, 但需嵌套于 \env{equation} 等数学环境中, 整体产生一个编号.\\[1ex]
+			\textbf{使用方式}:\\[.5ex]
+			\cmd{begin}\marg*{equation}\cmd{label}\marg{label}\\
+			\hspace*{1em}\cmd{begin}\marg*{aligned}\\
+			\hspace*{2em}\Arg{expr 1} \fverb{\&} \Arg{expr 2} \cmd{\textbackslash}\\
+			\hspace*{2em}\Arg{expr 3} \fverb{\&} \Arg{expr 4}\\
+			\hspace*{1em}\cmd{end}\marg*{aligned}\\
+			\cmd{end}\marg*{equation}
+		\end{column}
+		\begin{column}{.6\columnwidth}
+			\textbf{例如(align)}, 质能方程,
+			\begin{align}
+				E=m&c^2 & &E=mc^2\\
+				E=~&mc^2 & E&=mc^2 \notag \\
+				E&=mc^2 & E=~&mc^2\\
+				&E=mc^2 & E=m&c^2
+			\end{align}
+			\textbf{例如(aligned)}, 旋转参考系中的矢量求导,
+			\begin{equation}
+				\begin{aligned}
+				\dfrac{\mathrm{d}}{\mathrm{d}t} \symbfit{f} &= \dfrac{\mathrm{d}f_x}{\mathrm{d}t} \symbfit{\hat{i}} + \dfrac{\mathrm{d}\symbfit{\hat{i}}}{\mathrm{d}t} f_x + \dfrac{\mathrm{d}f_y}{\mathrm{d}t} \symbfit{\hat{j}} + \dfrac{\mathrm{d}\symbfit{\hat{j}}}{\mathrm{d}t} f_y + \dfrac{\mathrm{d}f_z}{\mathrm{d}t} \symbfit{\hat{k}} + \dfrac{\mathrm{d}\symbfit{\hat{k}}}{\mathrm{d}t} f_z \\
+				&= \dfrac{\mathrm{d}f_x}{\mathrm{d}t} \symbfit{\hat{i}} + \dfrac{\mathrm{d}f_y}{\mathrm{d}t} \symbfit{\hat{j}} + \dfrac{\mathrm{d}f_z}{\mathrm{d}t} \symbfit{\hat{k}} + \big[\symbf{\Omega} \times \big( f_x \symbfit{\hat{i}} + f_y \symbfit{\hat{j}} + f_z \symbfit{\hat{k}}\big) \big] \\
+				&= \Big(\dfrac{\mathrm{d}\symbfit{f}}{\mathrm{d}t}\Big)_r + \symbf{\Omega} \times \symbfit{f}(t)
+				\end{aligned}
+			\end{equation}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{多行公式(3/3)}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{.49\columnwidth}
+			\alert{\bfseries dcases 环境}~
+			用于排版分段函数或条件定义, 采用 displaystyle 数学样式(区别于 \env{cases} 环境使用 textstyle 数学样式, 会导致数学公式缩小), 需调用 \pkg{mathtools} 宏包.\\[1ex]
+			\textbf{使用方式}:\\[.5ex]
+			\cmd{begin}\marg*{equation}\cmd{label}\marg{label}\\
+			\hspace*{1em}\cmd{begin}\marg*{dcases}\\
+			\hspace*{2em}\Arg{case 1} \cmd{\textbackslash}\\
+			\hspace*{2em}\ldots\\
+			\hspace*{1em}\cmd{end}\marg*{dcases}\\
+			\cmd{end}\marg*{equation}\\[2ex]
+
+			\alert{\bfseries split 环境}~
+			用于单个公式的对齐与拆行, 需嵌套于 \env{equation} 等数学环境中, 整体产生一个编号, 仅支持单列对齐.\\[1ex]
+			\textbf{使用方式}:\\[.5ex]
+			\cmd{begin}\marg*{equation}\cmd{label}\marg{label}\\
+			\hspace*{1em}\cmd{begin}\marg*{split}\\
+			\hspace*{2em}\Arg{expr 1} \fverb{\&} \Arg{expr 2} \cmd{\textbackslash}\\
+			\hspace*{2em}\Arg{expr 3} \fverb{\&} \Arg{expr 4}\\
+			\hspace*{1em}\cmd{end}\marg*{split}\\
+			\cmd{end}\marg*{equation}
+		\end{column}\hspace*{.01\columnwidth}
+		\begin{column}{.49\columnwidth}
+			\textbf{例如(dcases)}, Maxwell 方程组,
+			\begin{equation}
+				\begin{dcases}
+				\oint_l \symbfit{H} \cdot \mathrm{d}\symbfit{l} = \iint_S \symbfit{J} \cdot \mathrm{d}\symbfit{S} + \iint_S \dfrac{\partial\symbfit{D}}{\partial t} \cdot \mathrm{d}\symbfit{S} \\
+				\oint_l \symbfit{E} \cdot \mathrm{d}\symbfit{l} = - \iint_S \dfrac{\partial\symbfit{B}}{\partial t} \cdot \mathrm{d}\symbfit{S} \\
+				\oint_S \symbfit{B} \cdot \mathrm{d}\symbfit{S} = 0 \\
+				\oint_S \symbfit{D} \cdot \mathrm{d}\symbfit{S} = \iiint_V \rho \mathrm{d}V
+				\end{dcases}
+			\end{equation}
+			\textbf{例如(split)}, 变量代换求解积分,
+			\begin{equation}
+				\begin{split}
+				\int_0^{\pi} x \sin x \,\mathrm{d}x &= -x \cos x \Big|_0^{\pi} + \int_0^{\pi} \cos x \,\mathrm{d}x \\
+				&= \pi + \sin x \Big|_0^{\pi} \\
+				&= \pi
+				\end{split}
+			\end{equation}\vspace*{-1ex}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{数学字体命令}
+	\textsc{Native} 为标准\LaTeX{}数学字体命令, \textsc{Ams} 为 \pkg{amsfonts} 或 \pkg{amssymb} 宏包提供的扩展数学字体命令. \textsc{Unicode} 为 \pkg{unicode-math} 宏包提供的数学字体命令 (详见 \pkg{unicode-math} 手册).
+	\begin{table}[h]
+		\centering\setlength{\tabcolsep}{2.5pt}
+		\begin{tabular}{>{\bfseries\color{PrimaryC}}m{.08\textwidth}
+			R{.15\textwidth}R{.2\textwidth}m{.06\textwidth}
+			R{.15\textwidth}R{.2\textwidth}m{.06\textwidth}}
+			& \alert{\bfseries 名称} & \alert{\bfseries 命令} & \alert{\bfseries 效果}
+			& \alert{\bfseries 名称} & \alert{\bfseries 命令} & \alert{\bfseries 效果} \\
+			\midrule
+			\multirow{5}{=}{\centering \textsc{Native}}
+		  & 正常数学样式 & \cmd{mathnormal}\marg{text} & $\mathnormal{Rr}$ \\
+			& 直立        & \cmd{mathrm}\marg{text}     & $\mathrm{Rr}$     &
+			  花体        & \cmd{mathcal}\marg{text}    & $\mathcal{Rr}$    \\
+			& 粗体        & \cmd{mathbf}\marg{text}     & $\mathbf{Rr}$     &
+			  无衬线      & \cmd{mathsf}\marg{text}     & $\mathsf{Rr}$     \\
+			& 斜体        & \cmd{mathit}\marg{text}     & $\mathit{Rr}$     &
+			  打字机      & \cmd{mathtt}\marg{text}     & $\mathtt{Rr}$     \\
+			\cmidrule(lr){2-7}
+			\multirow{1}{=}{\centering \textsc{Ams}}
+		  & 黑板粗体    & \cmd{mathbb}\marg{text}     & $\mathbb{Rr}$     &
+			  哥特体      & \cmd{mathfrak}\marg{text}   & $\mathfrak{Rr}$   \\
+			\cmidrule(lr){2-7}
+			\multirow{10}{=}{\centering \textsc{Unicode}}
+			& 正常数学样式 & \cmd{symnormal}\marg{text}  & $\symnormal{Rr}$  \\
+		  & 直立        & \cmd{symup}\marg{text}      & $\symup{Rr}$      &
+			  粗直立      & \cmd{symbfup}\marg{text}    & $\symbfup{Rr}$    \\
+			& 斜体        & \cmd{symit}\marg{text}      & $\symit{Rr}$      &
+			  粗斜体      & \cmd{symbfit}\marg{text}    & $\symbfit{Rr}$    \\
+			& 花体        & \cmd{symcal}\marg{text}     & $\symcal{Rr}$     &
+			  粗花体      & \cmd{symbfcal}\marg{text}   & $\symbfcal{Rr}$   \\
+			& 无衬线直立   & \cmd{symsfup}\marg{text}    & $\symsfup{Rr}$    &
+			  粗无衬线直立 & \cmd{symbfsfup}\marg{text}  & $\symbfsfup{Rr}$  \\
+			& 无衬线斜体   & \cmd{symsfit}\marg{text}    & $\symsfit{Rr}$    &
+			  粗无衬线斜体 & \cmd{symbfsfit}\marg{text}  & $\symbfsfit{Rr}$  \\
+			& 手写体      & \cmd{symscr}\marg{text}     & $\symscr{Rr}$     &
+			  粗手写体    & \cmd{symbfscr}\marg{text}   & $\symbfscr{Rr}$   \\
+			& 哥特体      & \cmd{symfrak}\marg{text}    & $\symfrak{Rr}$    &
+			  粗哥特体    & \cmd{symbffrak}\marg{text}  & $\symbffrak{Rr}$  \\
+			& 黑板粗体    & \cmd{symbb}\marg{text}      & $\symbb{Rr}$      &
+			  黑板意大利体 & \cmd{symbbit}\marg{text}    & $\symbbit{Rr}$    \\
+			& 打字机      & \cmd{symtt}\marg{text}      & $\symtt{Rr}$      &
+				粗无衬线    & \cmd{symbfsf}\marg{text}    & $\symbfsf{Rr}$    \\
+			\midrule
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}{数学符号}
+	\vspace*{-6pt}
+	\begin{table}[h]
+		\centering\setlength{\tabcolsep}{1.5pt}\renewcommand{\arraystretch}{.8}
+		\begin{tabular}{>{\bfseries\color{PrimaryC}}m{.04\textwidth}
+			m{.13\textwidth}m{.04\textwidth}
+			m{.134\textwidth}m{.04\textwidth}
+			m{.13\textwidth}m{.04\textwidth}
+			m{.13\textwidth}m{.04\textwidth}
+			m{.13\textwidth}m{.04\textwidth}}
+			\midrule
+			\multirow{5}{=}{\centering \\[-8pt]小写\\[-1.8pt]希腊}
+		  & \quad\cmd{alpha}      & $\alpha$      &
+			  \quad\cmd{beta}       & $\beta$       &
+			  \quad\cmd{gamma}      & $\gamma$      &
+			  \quad\cmd{delta}      & $\delta$      &
+			  \quad\cmd{epsilon}    & $\epsilon$    \\
+			& \quad\cmd{zeta}       & $\zeta$       &
+			  \quad\cmd{eta}        & $\eta$        &
+			  \quad\cmd{theta}      & $\theta$      &
+			  \quad\cmd{iota}       & $\iota$       &
+			  \quad\cmd{lambda}     & $\lambda$     \\
+			& \quad\cmd{mu}         & $\mu$         &
+			  \quad\cmd{nu}         & $\nu$         &
+			  \quad\cmd{xi}         & $\xi$         &
+			  \quad\cmd{pi}         & $\pi$         &
+			  \quad\cmd{rho}        & $\rho$        \\
+			& \quad\cmd{sigma}      & $\sigma$      &
+			  \quad\cmd{tau}        & $\tau$        &
+			  \quad\cmd{phi}        & $\phi$        &
+			  \quad\cmd{chi}        & $\chi$        &
+			  \quad\cmd{psi}        & $\psi$        \\
+			& \quad\cmd{omega}      & $\omega$      &
+			  \quad\cmd{varepsilon} & $\varepsilon$ &
+			  \quad\cmd{varphi}     & $\varphi$     &
+			  \quad\cmd{varpi}      & $\varpi$      & \\
+			\cmidrule(lr){2-11}
+			\multirow{2}{=}{\centering \vspace*{1pt}大写\\[-4pt]希腊\vspace*{-2pt}}
+		  & \quad\cmd{Gamma}      & $\Gamma$      &
+			  \quad\cmd{Delta}      & $\Delta$      &
+			  \quad\cmd{Theta}      & $\Theta$      &
+			  \quad\cmd{Lambda}     & $\Lambda$     &
+			  \quad\cmd{Xi}         & $\Xi$         \\
+			& \quad\cmd{Pi}         & $\Pi$         &
+			  \quad\cmd{Sigma}      & $\Sigma$      &
+			  \quad\cmd{Phi}        & $\Phi$        &
+			  \quad\cmd{Psi}        & $\Psi$        &
+			  \quad\cmd{Omega}      & $\Omega$      \\
+			\midrule
+			\multirow{3}{=}{\centering \\[-9pt]数学\\[-1.8pt]函数}
+			& \quad\cmd{sin}				& $\sin$        &
+			  \quad\cmd{cos}        & $\cos$        &
+			  \quad\cmd{tan}        & $\tan$        &
+			  \quad\cmd{log}        & $\log$        &
+			  \quad\cmd{ln}         & $\ln$         \\
+			& \quad\cmd{exp}        & $\exp$        &
+			  \quad\cmd{lim}        & $\lim$        &
+				\quad\cmd{max}        & $\max$        &
+				\quad\cmd{min}        & $\min$        &
+			  \quad\cmd{det}        & $\det$        \\
+			& \quad\cmd{dim}        & $\dim$        &
+			  \quad\cmd{ker}        & $\ker$        &
+			  \quad\cmd{deg}        & $\deg$        &
+				\quad\cmd{bmod}       & $\bmod$       \\
+			\midrule
+		\end{tabular}
+	\end{table}\vspace*{-23.2pt}
+	\begin{table}[h]
+		\centering\setlength{\tabcolsep}{1.5pt}\renewcommand{\arraystretch}{.8}
+		\begin{tabular}{>{\bfseries\color{PrimaryC}}m{.04\textwidth}
+			R{.09\textwidth}m{.08\textwidth}m{.04\textwidth}
+			R{.09\textwidth}m{.08\textwidth}m{.04\textwidth}
+			R{.09\textwidth}m{.08\textwidth}m{.04\textwidth}
+			R{.09\textwidth}m{.08\textwidth}m{.04\textwidth}}
+			\midrule
+			\multirow{3}{=}{\centering \\[-8pt]运算\\[-1.8pt]符号}
+		  & 乘       & \cmd{times}    & $\times$    &
+			  除       & \cmd{div}      & $\div$      &
+			  点乘     & \cmd{cdot}     & $\cdot$     &
+			  加减     & \cmd{pm}       & $\pm$       \\
+			& 减加     & \cmd{mp}       & $\mp$       &
+			  星乘     & \cmd{ast}      & $\ast$      &
+			  并集     & \cmd{cup}      & $\cup$      &
+			  交集     & \cmd{cap}      & $\cap$      \\
+			& 异或     & \cmd{oplus}    & $\oplus$    & \\
+			\cmidrule(lr){2-13}
+			\multirow{3}{=}{\centering \\[-7pt]关系\\[-1.8pt]符号}
+		  & 约等于   & \cmd{approx}   & $\approx$     &
+			  全等     & \cmd{equiv}    & $\equiv$      &
+			  不等于   & \cmd{neq}      & $\neq$        &
+			  小于等于 & \cmd{leq}      & $\leq$        \\
+			& 大于等于 & \cmd{geq}      & $\geq$        &
+			  远小于   & \cmd{ll}       & $\ll$         &
+			  远大于   & \cmd{gg}       & $\gg$         &
+			  约等于   & \cmd{simeq}    & $\simeq$      \\
+			& 相似于   & \cmd{sim}      & $\sim$        &
+			  成比例   & \cmd{propto}   & $\propto$     &
+			  属于     & \cmd{in}       & $\in$         &
+			  子集     & \cmd{subset}   & $\subset$     \\
+			\midrule
+		\end{tabular}
+	\end{table}\vspace*{-23.2pt}
+	\begin{table}[h]
+		\centering\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{.8}
+		\begin{tabular}{>{\bfseries\color{PrimaryC}}m{.04\textwidth}
+			R{.09\textwidth}m{.151\textwidth}m{.04\textwidth}
+			R{.09\textwidth}m{.1455\textwidth}m{.04\textwidth}
+			R{.09\textwidth}m{.151\textwidth}m{.04\textwidth}}
+			\midrule
+			\multirow{3}{=}{\centering \\[-8pt]箭头}
+		  & 右箭头   & \cmd{rightarrow}  & $\rightarrow$  &
+			  左箭头   & \cmd{leftarrow}   & $\leftarrow$   &
+			  双向     & \cmd{leftrightarrow} & $\leftrightarrow$ \\
+			& 长右箭头 & \cmd{longrightarrow} & $\longrightarrow$ &
+			  长左箭头 & \cmd{longleftarrow}  & $\longleftarrow$  &
+			  推出     & \cmd{Rightarrow}  & $\Rightarrow$  \\
+			& 等价     & \cmd{Leftrightarrow} & $\Leftrightarrow$ &
+			  映射     & \cmd{mapsto}      & $\mapsto$      &
+			  蕴含     & \cmd{Leftarrow}   & $\Leftarrow$   \\
+			\midrule
+		\end{tabular}
+	\end{table}
+	\vspace*{-6pt}
+\end{frame}
+
+\begin{frame}{数学修饰}
+	\begin{table}[h]
+		\centering\setlength{\tabcolsep}{3pt}
+		\begin{tabular}{>{\bfseries\color{PrimaryC}}m{.04\textwidth}
+			R{.1\textwidth}R{.26\textwidth}m{.06\textwidth}
+			R{.1\textwidth}R{.26\textwidth}m{.06\textwidth}}
+			& \alert{\bfseries 名称} & \alert{\bfseries 命令} & \alert{\bfseries 效果}
+			& \alert{\bfseries 名称} & \alert{\bfseries 命令} & \alert{\bfseries 效果} \\
+			\midrule
+			\multirow{4}{=}{\centering 重音}
+		  & 帽子     & \cmd{hat}\marg{content}       & $\hat{a}$         &
+			  宽帽子   & \cmd{widehat}\marg{content}   & $\widehat{adf}$   \\
+			& 波浪号   & \cmd{tilde}\marg{content}     & $\tilde{a}$       &
+			  宽波浪号 & \cmd{widetilde}\marg{content} & $\widetilde{adf}$ \\
+			& 短横线   & \cmd{bar}\marg{content}       & $\bar{a}$         &
+			  向量箭头 & \cmd{vec}\marg{content}       & $\vec{a}$         \\
+			& 点号     & \cmd{dot}\marg{content}       & $\dot{a}$         &
+			  双点号   & \cmd{ddot}\marg{content}      & $\ddot{a}$        \\
+			\cmidrule(lr){2-7}
+			\multirow{3}{=}{\centering 上方\\[-2pt]修饰}
+		  & 上划线   & \cmd{overline}\marg{content}          & $\overline{adf}$          &
+			  上方括号 & \cmd{overbrace}\marg{content}         & $\overbrace{adf}$         \\
+			& 上方堆叠 & \cmd{overset}\marg{top}\marg{content} & $\overset{\text{def}}{=}$ &
+			  右箭头   & \cmd{overrightarrow}\marg{content}    & $\overrightarrow{adf}$    \\
+			& 左箭头   & \cmd{overleftarrow}\marg{content}     & $\overleftarrow{adf}$     \\
+			\cmidrule(lr){2-7}
+			\multirow{3}{=}{\centering 下方\\[-2pt]修饰}
+		  & 下划线   & \cmd{underline}\marg{content}           & $\underline{adf}$    &
+			  下方括号 & \cmd{underbrace}\marg{content}          & $\underbrace{adf}$   \\
+			& 下方堆叠 & \cmd{underset}\marg{down}\marg{content} & $\underset{\sim}{a}$ &
+			  右箭头   & \cmd{xrightarrow}\marg{content}         & $\xrightarrow{adf}$  \\
+			& 左箭头   & \cmd{xleftarrow}\marg{content}          & $\xleftarrow{adf}$   \\
+			\cmidrule(lr){2-7}
+			\multirow{2}{=}{\centering 删除\\[-2pt]线}
+		  & 斜删除线   & \cmd{cancel}\marg{content}   & $\cancel{adf}$  &
+			  反斜删除线 & \cmd{bcancel}\marg{content}  & $\bcancel{adf}$ \\
+			& 交叉删除线 & \cmd{xcancel}\marg{content}  & $\xcancel{adf}$ \\
+			\midrule
+		\end{tabular}
+	\end{table}
+	\vspace*{-2ex}~~\textit{注: 删除线命令 \textup{\cmd{cancel} \cmd{bcancel} \cmd{xcancel}} 需调用 \textup{\pkg{cancel}} 宏包.}
+\end{frame}
+
+\begin{frame}{定界符与矩阵}
+	\begin{columns}[T, onlytextwidth]
+		\begin{column}{.5\columnwidth}
+			\structure{定界符}\\[1ex]
+			固定高度, 成对使用:\\\vspace*{-2ex}
+			\begin{multicols}{2}
+				\fverb{(}\Arg{content}\fverb{)} \hfill $(x)$\\[.5ex]
+				\fverb{[}\Arg{content}\fverb{]} \hfill $[x]$\\[.5ex]
+				\cmd{\{}\Arg{content}\cmd{\}} \hfill $\{x\}$\\[.5ex]
+				\fverb{|}\Arg{content}\fverb{|} \hfill $|x|$\\
+			\end{multicols}\vspace*{-2ex}
+			\cmd{langle}\Arg{content}\cmd{rangle} \hfill $\langle x \rangle$\\[2ex]
+			自动匹配高度, 成对使用:\\[.5ex]
+			\cmd{left}\Arg{symbol}\Arg{content}\cmd{right}\Arg{symbol}\\[.5ex]
+			如 \Arg{symbol} 为圆括号, \cmd{left(}\ldots\cmd{right)}; 若某侧无需显示定界符, 可使用 \fverb{.} 占位, 如 \cmd{left.}\ldots\cmd{right|}; 若公式中有竖线, 可以使用 \cmd{middle|} 自动调整中间竖线高度.
+			\vspace*{-1ex}\[
+				\left(\frac{a^2+b^2}{c^2+d^2}\right) \quad
+				\left[\sum_{i=1}^{n} x_i\right] \quad
+				\left\{x \mid x>0\right\} \quad
+				\left\langle \frac{\partial f}{\partial x} \middle| \frac{\partial f}{\partial y} \right\rangle
+			\]\vspace*{-1ex}
+			固定尺寸:\\[.5ex]
+			\cmd{cmd}\Arg{symbol}\Arg{content}\cmd{cmd}\Arg{symbol} \hfill $\bigl( \Bigl( \biggl( \Biggl( x \Biggr) \biggr) \Bigr) \bigr)$\\[-1.5ex]
+			\cmd{cmd} 可为 \cmd{big}, \cmd{Big}, \cmd{bigg}, \cmd{Bigg}
+		\end{column}
+		\begin{column}{.48\columnwidth}
+			\structure{矩阵}\\[1ex]
+			\pkg{amsmath} 宏包给出了6种常用的矩阵环境\\[.5ex]
+			无定界符: \env{matrix}\\[.5ex]
+			有定界符: \\\vspace*{-2ex}
+			\begin{multicols}{2}
+				\env{pmatrix} \hfill $\big(\cdots\big)$\\[.5ex]
+				\env{bmatrix} \hfill $\big[\cdots\big]$\\[.5ex]
+				\env{Bmatrix} \hfill $\bigl\{\cdots\bigr\}$\\[.5ex]
+				\env{vmatrix} \hfill $|\cdots|$\\[.5ex]
+				\env{Vmatrix} \hfill $||\cdots||$\\~\\
+			\end{multicols}\vspace*{-2ex}
+			\LaTeX{} 也提供了 类似 \env{tabular} 的 \env{array} 环境, 支持自定义列对齐(\fverb{l}, \fverb{c}, \fverb{r}), 也可配合 \cmd{left}/\cmd{right} 添加定界符.\\[1ex]
+			\textbf{使用方法}: \\[1ex]
+			\begin{columns}[onlytextwidth]
+				\begin{column}{.5\textwidth}
+					\cmd{begin}\marg*{bmatrix}\\
+					\hspace*{1em}\Arg{content}\\
+					\cmd{end}\marg*{bmatrix}
+				\end{column}
+				\begin{column}{.5\textwidth}
+					\cmd{begin}\marg*{array}\marg{spec}\\
+					\hspace*{1em}\Arg{content}\\
+					\cmd{end}\marg*{array}
+				\end{column}
+			\end{columns}\vspace*{1ex}
+			\textbf{例如},\vspace*{-1ex}
+			\[
+			\begin{bmatrix}
+				E & 0 \\
+				0 & E \\
+			\end{bmatrix}
+			\begin{pmatrix}
+				E & 0 \\
+				0 & E \\
+			\end{pmatrix}
+			\quad
+			\left[\begin{array}{ccc}
+			a_{11} & a_{12} & a_{13} \\
+			a_{21} & a_{22} & a_{23}
+			\end{array}\right]
+			\]
 		\end{column}
 	\end{columns}
 \end{frame}
