@@ -1,0 +1,102 @@
+% ----------------
+% 节: 进阶使用
+% ----------------
+\section{进阶使用}
+\subsection{Latexmk 编译配置}
+\begin{frame}{Info.}
+	\textbf{本小节将介绍 SCU Beamer Theme 所使用的 Latexmk 编译配置.}
+	\begin{multicols}{2}
+		\begin{itemize}
+			\item \myestablish{v2.1d}{2026/06/15}
+		\end{itemize}
+	\end{multicols}
+	\vspace{2ex}本小节涉及 \texttt{.latexmkrc} 配置文件, 详细内容请在终端输入 \alert{\ttfamily texdoc latexmk} 查看完整手册.
+\end{frame}
+
+\begin{frame}{引擎命令配置}
+	以下除 \texttt{-shell-escape} 和 \texttt{-interaction=nonstopmode}, 其他保持默认配置即可. 
+	\begin{tblr}{
+			colspec = {>{\raggedleft\arraybackslash}p{0.15\textwidth}p{0.16\textwidth}p{0.59\textwidth}},
+			row{1} = {font=\bfseries},
+		}
+		配置项 & 配置内容/推荐值 & 说明\\
+		\hline
+
+		\SetCell[r=5]{l}\alert{\ttfamily \$xelatex}
+		& \texttt{-shell-escape} &
+			{\alert{允许调用外部命令 (存在命令执行的安全风险)}. 仅在文档来源可信确实需要时启用(如使用 低于v3版本的 \pkg{minted} 或 \pkg{tikz} 缓存持久化), 否则仍建议在 \texttt{.latexmkrc} 中维持注释 \texttt{-shell-escape} 所在行: \\
+			\texttt{\hspace*{1em}\# $\downarrow$ enable only if trusted and needed (e.g. minted ≤v2 / \\
+			\hspace*{3em}tikz external); comment out otherwise} \\
+			\texttt{\hspace*{1em}\# '-shell-escape ' .}} \\
+		& \texttt{-interaction\\\hspace*{1em}=nonstopmode} &
+			\alert{遇错编译不暂停模式}. 也可使用 \texttt{-interaction=batchmode} 批处理模式加速编译, 但会导致所有错误输出为空, 两模式各有利弊 \\
+		& \texttt{-synctex=1} & \alert{启用 SyncTeX}. 编辑器与 PDF 双向跳转 \\
+		& \texttt{-file-line-error} & \alert{指定错误输出格式}. 文件: 行号: 描述 \\
+		& \texttt{-8bit} & \alert{字节视为可打印字符}. 避免 \texttt{\textasciicircum\textasciicircum} 转义, 如修正代码环境 Tab 制表符编译为 \texttt{\textasciicircum\textasciicircum I} 的异常 \\
+		\hline
+
+		\SetCell[r=3]{l}\alert{\ttfamily \$xdvipdfmx}
+		& \texttt{-z 5} & \alert{PDF 文档压缩等级} (0--9, 默认 9). 指定压缩等级为 5，文件体积略有增加，编译压缩效率显著提升 \\
+		& \texttt{-E} & \alert{无视许可证强制嵌入字体}. 可解决部分字体乱码的问题, 见 \href{https://github.com/CTeX-org/ctex-kit/issues/352}{\color{scublue}\faGithub~相关讨论} \\
+		& \texttt{-q} & \alert{静默模式}. 抑制非错误信息, 减少 Console 输出, 小幅提升编译速度 \\
+	\end{tblr}
+\end{frame}
+
+\begin{frame}{编译优化配置(1/2)}
+	以下除 \texttt{\$go\_mode} 和 \texttt{\$max\_repeat}, 其他保持默认配置即可. 
+	\begin{tblr}{
+			colspec = {>{\raggedleft\arraybackslash}p{0.15\textwidth}p{0.16\textwidth}p{0.59\textwidth}},
+			row{1} = {font=\bfseries},
+		}
+		配置项 & 配置内容/推荐值 & 说明\\
+		\hline
+
+		\SetCell[r=3]{l}\alert{\ttfamily \$go\_mode}
+		& \texttt{3} & \alert{*latex 命令至少编译一次}. 即使文件未改动也强制编译一次\\
+		& \texttt{0} & {\alert{仅在文件过期时编译}. 当文件改动才进行编译, 适合频繁 \texttt{Ctrl+S} 的用户. \\
+		部分版本 \pkg{biblatex} 配合 该模式时, 若文件未改动, 可能报以下3项 Error, 不影响最终 PDF 输出. 文件改动后也能不报错正常编译: \\
+		\texttt{\hspace*{1em}I found no \cmd{citation} commands \hfill I found no \cmd{bibdata} command\hspace*{1em}} \\
+		\texttt{\hspace*{1em}I found no \cmd{bibstyle} command}}\\
+		\hline
+
+		\SetCell[r=2]{l}\alert{\ttfamily \$max\_repeat}
+		& \texttt{1} & {\alert{单次编译}. *latex 最多编译1次, 单轮耗时最短, 交叉引用需手动多次编译, 可配合 {\ttfamily \$go\_mode=3} 使用, 适用于在线平台编译. \\
+		\textit{注: {\upshape\ttfamily \$max\_repeat} 配合 {\upshape\ttfamily \$go\_mode=0} 时, 即使交叉引用未稳定, 仍会判定文件未改动而拒绝再次编译, 不建议组合使用, 请使用其他 {\upshape\ttfamily \$max\_repeat} 值}} \\
+		& \texttt{5} & \alert{编译至稳定}. *latex 最多编译5次直到引用稳定, 可配合 {\ttfamily \$go\_mode=0} 使用 \\
+		\hline
+
+		\alert{\ttfamily \$aux\_dir} & \texttt{tmp/build} & {\alert{辅助文件目录}. 编译产物与中间文件分离\\
+		\textit{注: 通过 {\upshape\cmd{include}} 等命令导入的子目录 \texttt{\upshape .tex} 文件, 需在 \texttt{\upshape tmp/build} 下手动创建同名子目录}} \\
+		\hline
+
+		\SetCell[r=4]{l}\alert{\ttfamily \$pdf\_mode}
+		& \texttt{5} & \alert{XeTeX 编译模式}. \pkg{xelatex} + \pkg{xdvipdfmx} 分步编译 \\
+		\hline
+
+		\alert{\ttfamily \$postscript\_mode} & \texttt{\$dvi\_mode=0} & 禁用 PS 和 DVI 输出, 仅通过 \pkg{xdvipdfmx} 生成 PDF \\	
+	\end{tblr}
+\end{frame}
+
+\begin{frame}{编译优化配置(2/2)}
+	\begin{tblr}{
+			colspec = {>{\raggedleft\arraybackslash}p{0.15\textwidth}p{0.16\textwidth}p{0.59\textwidth}},
+			row{1} = {font=\bfseries},
+		}
+		配置项 & 配置内容/推荐值 & 说明\\
+		\hline
+
+		\alert{\ttfamily \$force\_mode} & \texttt{1} & \alert{遇错不中断}. 忽略未定义引用, 继续编译流程\\
+		\hline
+
+		\alert{\ttfamily \$emulate\_aux} & \texttt{1} & \alert{模拟辅助目录}. 模拟 \texttt{-aux-directory} 功能, TeX Live 不原生支持该参数, 启用后由 latexmk 实现辅助文件目录分离\\
+		\hline
+
+		\alert{\ttfamily \$show\_time} & \texttt{1} & \alert{显示编译耗时}. 每次编译结束后在 Console 输出总耗时\\
+		\hline
+
+		\alert{\ttfamily \$clean\_ext} & \texttt{$\cdots$} & {\alert{扩展清理文件列表}. 执行 \texttt{latexmk -c} 或 \texttt{-C} 时额外清理的文件扩展名. \\ 
+		当前列表: \\texttt{\hspace*{1em}bbl glo gls hd loa nav run.xml snm thm xdv}}
+	\end{tblr}
+\end{frame}
+
+%% End of file `advanced-usage.tex'.
