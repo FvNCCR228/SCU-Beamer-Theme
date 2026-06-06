@@ -1,6 +1,5 @@
 % !TeX encoding = UTF-8
-% !BIB TS-program = biber
-% !TeX TS-program = xelatex
+% !TeX TS-program = latexmk
 % This is file `manual.tex'.
 % Copyright (C) 2021-2026 by Linrong Wu.
 % Version: 2026/05/20 v2.1c (Original Version: 2021/11/30 v1.0a).
@@ -18,8 +17,8 @@
 \usetheme[
 	% ColorDisplay=JXred, % JXred ⚙️ | BSblue | Custom → 主题色显示设置
 	% BlockDisplay=colorful, % colorful ⚙️ | followtheme | allgrey → 区块颜色显示设置
-	CodeDisplay=minted, % listing ⚙️ | minted → 代码高亮显示设置
-	MintedStyle=lightmode, % lightmode ⚙️ | darkmode | ⟨custom⟩ → minted 样式设置 (需优先设置 CodeDisplay=minted)
+	CodeTheme=minted, % listing ⚙️ | minted | minted2 → 代码高亮显示设置
+	MintedStyle=lightmode, % lightmode ⚙️ | darkmode | ⟨custom⟩ → minted 样式设置 (需优先设置 CodeTheme = minted | minted2)
 	% LanguageMode=cn, % cn ⚙️ | en → 语言模式设置
 	Miniframes=follow, % follow ⚙️ | separate | none → 页眉小节迷你帧设置
 	% NavigationTool=1-2-3, % 1-2-3 ⚙️ | ⟨参考 Manual 设置⟩ | none → 页脚导航工具栏设置
@@ -55,6 +54,7 @@
 \usepackage{listings}
 \usepackage{subcaption}
 \usepackage{varioref,cleveref}
+\usepackage{tabularray}
 %\usepackage[active,tightpage]{preview}
 %\PreviewEnvironment{pspicture}
 
@@ -93,8 +93,7 @@
 %		\tableofcontents % 显示目录.
 %	\end{frame}
 
-% --------节: 声明--------
-% ----------------
+% -------- SEC: 声明 --------
 \section{声明}
 \subsection{编写背景}
 \begin{frame}{关于Beamer}
@@ -205,22 +204,19 @@
 	\end{table}
 \end{frame}
 
-% --------节: 基础设置--------
-% ----------------
+% -------- SEC: 基础设置 --------
 \include{manual-sec/base-settings}
 
-% --------节: 页面布局--------
-% ----------------
+% -------- SEC: 页面布局 --------
 \include{manual-sec/basic-layout}
 
-% --------节: 内容排版--------
-% ----------------
+% -------- SEC: 内容排版 --------
 \include{manual-sec/basic-content}
 \include{manual-sec/basic-content-2}
 
-% --------节: 进阶使用--------
-% ----------------
-\section{进阶使用}
+% -------- SEC: 进阶使用 --------
+\include{manual-sec/advanced-usage}
+
 \subsection{文本框}
 \begin{frame}{Tcolorbox}
 	注: 本节为进阶内容, 使用较困难, 编者本人也不会(如tcolorbox, tikz的说明文档页数分别为500+, 1300+, 均为全英文文档).\newline\par
@@ -362,8 +358,7 @@
 \end{frame}
 
 \appendix
-% --------节: 附录 SCU Theme--------
-% ----------------
+% -------- APDX: 附录 SCU Theme --------
 \include{manual-sec/appendix-themescu}
 
 \end{document}

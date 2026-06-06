@@ -274,3 +274,8 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+
+## tmp files:
+# include or input
+tmp/build/manual-sec/*
+!tmp/build/manual-sec/.gitkeep
