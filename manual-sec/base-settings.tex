@@ -74,6 +74,7 @@
 			\item \myupdate{v1.3e}{2024/10/31}
 			\item \myupdate{v2.1b}{2025/10/06}
 			\item \myupdate{v2.1c}{2026/05/20}
+			\item \myupdate{v2.1d}{2026/06/15}
 		\end{itemize}
 	\end{multicols}
 	注: 自 \textcolor{scugreen}{v1.1a (2021/12/30)} 起, 本小节已替代手册中\alert{\bfseries 可注释项}小节.\par
@@ -105,13 +106,15 @@
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{>{\raggedleft\arraybackslash}p{0.25\textwidth}p{0.68\textwidth}}
-			\textbf{Initial supported ver. \alert{\Arg{key}}} & \textbf{`C' means the key here supports a custom value.}\\
-			\textbf{\Arg{value}} & \textbf{`D' means the value here is the default one.}\\
+			\textbf{Initial supported ver. \alert{\Arg{key}}} & \textbf{(C) means the key here supports a custom value.}\\
+			\textbf{\Arg{value}} & \textbf{(D) means the value here is the default one.}\\
 			\midrule
 
 			v1.3a \alert{\ttfamily ColorDisplay} & \textbf{颜色主题设置}\label{back:ColorDisplay} \scugoto{goto:ColorDisplay}{PREV}\\
-			(D) \texttt{JXred} & 四川大学锦锈红主题. \textcolor{scured}{\rule[-.1ex]{1.2em}{1.8ex}} (CMYK 12, 92, 95, 20)\\
-			\texttt{BSblue} & 四川大学宝石蓝主题. \textcolor{scublue}{\rule[-.1ex]{1.2em}{1.8ex}} (CMYK 100, 60, 00, 15)\\
+			(D) \texttt{JXred} & 四川大学锦锈红主题. \texttt{CMYK(\enspace 12, \enspace 92, \enspace 95, \enspace 20)}\qquad
+			\raisebox{.2ex}{\tiny\colorbox{scured}{\phantom{x}}\colorbox{scugrey50}{\phantom{x}}\colorbox{scugrey}{\phantom{x}}\colorbox{scured40}{\phantom{x}}\colorbox{white}{\phantom{x}}\colorbox{black}{\phantom{x}}\colorbox{scured90}{\phantom{x}}} \\
+			\texttt{BSblue} & 四川大学宝石蓝主题. \texttt{CMYK(100, \enspace 60, \enspace 00, \enspace 15)}\qquad
+			\raisebox{.2ex}{\tiny\colorbox{scublue}{\phantom{x}}\colorbox{scugrey50}{\phantom{x}}\colorbox{scugrey}{\phantom{x}}\colorbox{scublue40}{\phantom{x}}\colorbox{white}{\phantom{x}}\colorbox{black}{\phantom{x}}\colorbox{scublue90}{\phantom{x}}} \\
 			v1.3c \texttt{Custom} & 自定义颜色主题.\label{back:CustomColorTheme} \scugoto{goto:CustomColorTheme}{DTL}\\
 			\midrule
 
@@ -124,16 +127,17 @@
 	\vspace*{-1ex}
 \end{frame}
 
-\begin{frame}{\pkg{beamethemescu} 宏包参数说明(2/5)}{CodeDisplay, MintedStyle, FontTheme}
+\begin{frame}{\pkg{beamethemescu} 宏包参数说明(2/5)}{CodeTheme, MintedStyle, FontTheme}
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{>{\raggedleft\arraybackslash}p{0.25\textwidth}p{0.68\textwidth}}
-			v1.1a \alert{\ttfamily CodeDisplay} & \textbf{代码高亮显示设置}\\
+			v2.1d \alert{\ttfamily CodeTheme} & \textbf{代码高亮显示设置}\\
 			(D) \texttt{listing} & listing排版引擎.\\
-			\texttt{minted} & minted排版引擎. (需Python环境, 设置前请阅读手册)\\
+			\texttt{minted} & minted排版引擎. (minted v3+, 自动索引 cache 目录且无需 `-shell-escape' )\\
+			\texttt{minted2} & minted排版引擎. (minted v2, 兼容性选项, 用于 TeX Live 版本低于 2024, 需编译引擎配置 `-shell-escape', 且需Python环境)\\
 			\midrule
 
-			v1.3a (C) \alert{\ttfamily MintedStyle} & \textbf{minted样式设置(需优先设置 \texttt{\alert{CodeDisplay}=minted})}\\
+			v1.3a (C) \alert{\ttfamily MintedStyle} & \textbf{minted样式设置(需优先设置 \texttt{\alert{CodeTheme}=minted} 或 \texttt{minted2})}\\
 			(D) \texttt{lightmode} & 亮色模式, Pygments default样式.\\
 			\texttt{darkmode} & 暗色模式, Pygments rrt样式.\\
 			v1.3c \Arg{custom} & 自定义值.\label{back:CustomMintedStyle} \scugoto{goto:CustomColorTheme}{DTL}\\
@@ -151,7 +155,6 @@
 			\texttt{Custom} & 自定义字体. (需定义命令 \cmd{beamer@scu@fontextend})\\
 		\end{tabular}
 	\end{table}
-	\vspace*{-2ex}
 \end{frame}
 
 \begin{frame}{\pkg{beamethemescu} 宏包参数说明(3/5)}{MathFont, Miniframes, NavigationTool}
@@ -224,7 +227,6 @@
 			\texttt{en} & 英文模式, 支持中文输入, Headline节导航栏更窄且只显示当前节.\\
 		\end{tabular}
 	\end{table}
-	\vspace*{-2ex}
 \end{frame}
 
 \begin{frame}{\pkg{beamethemescu} 宏包参数说明(5/5)}{BIBMode, BIBStyle, ContentMuticols}
@@ -277,6 +279,7 @@
 			~\alert{\ttfamily NavigationTool}\texttt{ = negate} & v2.1b & 由 \texttt{NavigationTool}\texttt{ = none} 替代.\\
 			~\alert{\ttfamily Background}\texttt{ = true} & v2.1c & 由 \texttt{Background}\texttt{ = SCU-Full} 替代.\\
 			~\alert{\ttfamily Background}\texttt{ = false} & v2.1c & 由 \texttt{Background}\texttt{ = SCU-Lite} 替代.\\
+			~\alert{\ttfamily CodeDisplay}\texttt{ = \Arg{value}} & v2.1d & 由 \alert{\ttfamily CodeTheme}\texttt{ = \Arg{value}} 替代.\\
 		\end{tabular}
 	\end{table}
 \end{frame}
