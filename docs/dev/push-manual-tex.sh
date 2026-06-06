@@ -6,7 +6,7 @@ set -e
 
 # 配置工作树目录和文件列表
 WORKTREE_DIR="../worktree-manual"
-FILES=("manual-sec/" "manual.tex")
+FILES=("manual-sec/" "manual.tex" "tmp/build/manual-sec/")
 
 # 同步文件到工作树目录
 for item in "${FILES[@]}"; do
