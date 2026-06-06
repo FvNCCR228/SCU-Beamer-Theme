@@ -1,6 +1,6 @@
 % This is file `beamerthemescu.sty'.
 % Copyright (C) 2021-2026 by Linrong Wu.
-% Version: 2026/05/20 v2.1c (Original Version: 2021/11/30 v1.0a).
+% Version: 2026/06/15 v2.1d (Original Version: 2021/11/30 v1.0a).
 %
 % This file may be distributed and/or modified
 %
@@ -12,7 +12,7 @@
 % Provide options:
 %   ColorDisplay = JXred | BSblue | Custom
 %   BlockDisplay = colorful | followtheme | allgrey
-%   CodeDisplay = listing | minted
+%   CodeTheme = listing | minted | minted2
 %   MintedStyle = lightmode | darkmode | <custom>
 %   LanguageMode = cn | en
 %   Miniframes = follow | separate | none
@@ -31,7 +31,7 @@
 % !请勿轻易改动此文档中代码.
 %%%% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{beamerthemescu}[2026/05/20 v2.1c, SCU Beamer Theme(Main Theme)]
+\ProvidesPackage{beamerthemescu}[2026/06/15 v2.1d, SCU Beamer Theme(Main Theme)]
 %%%% ----------------------------------------------------------------
 
 
@@ -84,9 +84,9 @@
 
 % ----------------
 % Declare of Options
-% Confirmed in v2.1c(2026/05/20).
+% Confirmed in v2.1d(2026/06/15).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31), v2.1b(2025/10/06), v2.1c(2026/05/20).
+% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31), v2.1b(2025/10/06), v2.1c(2026/05/20), v2.1d(2026/06/15).
 % ----------------
 % CMD:: \DeclareOptionBeamer  - 声明参数.
 % CMD:: \ExecuteOptionsBeamer - 预执行参数.
@@ -101,10 +101,10 @@
 % KEY:: BlockDisplay.
 % VALUE:: colorful | followtheme | allgrey.
 \DeclareOptionBeamer{BlockDisplay}{\def\beamer@scu@BlockDisplay{#1}}
-% KEY:: CodeDisplay.
-% VALUE:: minted | listing.
-\DeclareOptionBeamer{CodeDisplay}{\def\beamer@scu@CodeDisplay{#1}}
-% KEY:: MintedStyle [BASED:: CodeDisplay].
+% KEY:: CodeTheme.
+% VALUE:: listing | minted | minted2.
+\DeclareOptionBeamer{CodeTheme}{\def\beamer@scu@CodeTheme{#1}}
+% KEY:: MintedStyle [BASED:: CodeTheme].
 % VALUE:: lightmode | darkmode | <custom>.
 \DeclareOptionBeamer{MintedStyle}{\def\beamer@scu@MintedStyle{#1}}
 % KEY:: LanguageMode.
@@ -142,7 +142,7 @@
 \ExecuteOptionsBeamer{%
   ColorDisplay=JXred,%
   BlockDisplay=colorful,%
-  CodeDisplay=listing,%
+  CodeTheme=listing,%
   LanguageMode=cn,%
   Miniframes=follow,%
   NavigationTool=1-2-3,%
@@ -155,7 +155,10 @@
   VI=SCU%
 }
 \ProcessOptionsBeamer
-\if\EqualOptionsBeamer{CodeDisplay}{minted}%
+\if\EqualOptionsBeamer{CodeTheme}{minted}%
+  \ExecuteOptionsBeamer{MintedStyle=lightmode}%
+\fi
+\if\EqualOptionsBeamer{CodeTheme}{minted2}%
   \ExecuteOptionsBeamer{MintedStyle=lightmode}%
 \fi
 \if\EqualOptionsBeamer{BIBMode}{biber}%
@@ -167,9 +170,9 @@
 
 % ----------------
 % Declare of Packages
-% Confirmed in v2.1c(2026/05/20).
+% Confirmed in v2.1d(2026/06/15).
 % Established in v1.3b(2022/04/13).
-% Updated in v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31), v2.1c(2026/05/20).
+% Updated in v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31), v2.1c(2026/05/20), v2.1d(2026/06/15).
 % ----------------
 % CMD:: \RequirePackage - 调用宏包.
 % ----------------
@@ -190,23 +193,24 @@
 \fi
 \RequirePackage{cleveref}% cleveref: 交叉引用.
 \RequirePackage{tcolorbox}% tcolorbox: 绘制彩色文本框.
-\if\EqualOptionsBeamer{CodeDisplay}{minted}%
-  % minted 临时文件存储在 mintedbuild 文件夹
-  \PassOptionsToPackage{outputdir=./tmp/minted}{minted}
+\if\EqualOptionsBeamer{CodeTheme}{listing}%
+  \tcbuselibrary{skins, breakable, xparse, listings}
+  \PackageWarningNoLine{beamerthemescu}{%
+    Option [CodeTheme=listing] is loaded. %
+    It's recommended to set [CodeTheme=minted] option for powerful code highlighting}
+\else\if\EqualOptionsBeamer{CodeTheme}{minted}%
+  \RequirePackage{minted}% minted: 代码高亮.
+  \tcbuselibrary{skins, breakable, xparse, listings, minted}
+\else\if\EqualOptionsBeamer{CodeTheme}{minted2}%
+  % minted 临时文件存储在 ./tmp/build/_minted 文件夹
+  \PassOptionsToPackage{outputdir=./tmp/build/_minted}{minted}
   \RequirePackage{minted}% minted: 代码高亮.
   \tcbuselibrary{skins, breakable, xparse, listings, minted}
   \PackageWarningNoLine{beamerthemescu}{%
-    Option [CodeDisplay=minted] is loaded. %
-    Please add `-shell-escape' and `-8bit' parameters to XeLaTeX}
-\else\if\EqualOptionsBeamer{CodeDisplay}{listing}%
-  \tcbuselibrary{skins, breakable, xparse, listings}
-  \PackageWarningNoLine{beamerthemescu}{%
-    Option [CodeDisplay=listing] is loaded. %
-    If you have configured Python environment, %
-    you are recommended to set [CodeDisplay=minted] option and %
-    install Pygments through pip. %
-    Additionally, add `-shell-escape' and `-8bit' parameters to XeLaTeX}
-\fi\fi
+    Option [CodeTheme=minted2] is loaded. \MessageBreak%
+    This option corresponds to the legacy minted v2, which requires `-shell-escape' and poses potential security risks \MessageBreak%
+    It's recommended to set [CodeTheme=minted] with TeX Live 2024+ and minted v3+, which no longer requires `-shell-escape'}
+\fi\fi\fi
 \RequirePackage{ifthen}% ifthen: 控制结构语句.
 \RequirePackage{fontawesome5}% fontawesome5: 提供可缩放矢量图标.
 \RequirePackage{tabularx}% tabularx: 智能表格环境.
@@ -832,9 +836,9 @@
 
 % ----------------
 % Listing Layout
-% Confirmed in v1.3c(2024/04/16).
+% Confirmed in v1.3c(2024/04/16), v2.1d(2026/06/15).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.1a(2021/12/30), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3c(2024/04/16).
+% Updated in v1.1a(2021/12/30), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3c(2024/04/16), v2.1d(2026/06/15).
 % ----------------
 % 定义了一个用作代码演示的 Listing, 和一个不带计数的 Listing.
 % ----------------
@@ -851,7 +855,11 @@
 % 计数器 - 定理环境.
 \newcounter{beamer@scu@code@count}
 % 定理区块参数设置.
-\if\EqualOptionsBeamer{CodeDisplay}{minted}%
+\ifboolexpr{
+  test {\ifdefstring{\beamer@scu@CodeTheme}{minted}}
+  or
+  test {\ifdefstring{\beamer@scu@CodeTheme}{minted2}}
+}{%
   \if\EqualOptionsBeamer{MintedStyle}{lightmode}%
     \tcbset{minted style=default}%
   \else\if\EqualOptionsBeamer{MintedStyle}{darkmode}%
@@ -987,7 +995,8 @@
 	  	IfValueT={#4}{label={code\kvtcb@label@sep#4}},%
 	  	nameref={#2}, codestyle={\faFileCode[regular]}, #1%
   }
-\else\if\EqualOptionsBeamer{CodeDisplay}{listing}%
+}{}
+\if\EqualOptionsBeamer{CodeTheme}{listing}%
   \DeclareTCBListing[use counter=beamer@scu@code@count,%
   % #1: <可选>附加参数 - Tcolorbox.
   % #2: 标题.
@@ -1130,7 +1139,7 @@
 	  	IfValueT={#4}{label={code\kvtcb@label@sep#4}},%
 	  	nameref={#2}, codestyle={\faFileCode[regular]}, #1%
   }
-\fi\fi
+\fi
 
 % 智能引用名称定义.
 \Crefname{beamer@scu@code@count}%

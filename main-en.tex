@@ -14,8 +14,8 @@
 \usetheme[
 	ColorDisplay=BSblue, % JXred ⚙️ | BSblue | Custom → 主题色显示设置
 	% BlockDisplay=colorful, % colorful ⚙️ | followtheme | allgrey → 区块颜色显示设置
-	CodeDisplay=minted, % listing ⚙️ | minted → 代码高亮显示设置
-	MintedStyle=dracula, % lightmode ⚙️ | darkmode | ⟨custom⟩ → minted 样式设置 (需优先设置 CodeDisplay=minted)
+	CodeTheme=minted, % listing ⚙️ | minted | minted2 → 代码高亮显示设置
+	MintedStyle=dracula, % lightmode ⚙️ | darkmode | ⟨custom⟩ → minted 样式设置 (需优先设置 CodeTheme = minted | minted2)
 	LanguageMode=en, % cn ⚙️ | en → 语言模式设置
 	Miniframes=follow, % follow ⚙️ | separate | none → 页眉小节迷你帧设置
 	% NavigationTool=1-2-3, % 1-2-3 ⚙️ | ⟨参考 Manual 设置⟩ | none → 页脚导航工具栏设置
@@ -232,7 +232,7 @@
 		#include <iostream>
 		int main()
 		{// $\pi$
-			std::cout << "Hello World！" << std::endl; |# \textsf{\LaTeX{} out hEllo wOrld}|
+			std::cout << "Hello World！" << std::endl; |\# \textsf{\LaTeX{} out hEllo wOrld}|
 			|\colorbox{scugreen!60}{$\sum_\pi^\phi \alpha + \Gamma$}| std::cin.get(); 
 		}
 	\end{scucode}

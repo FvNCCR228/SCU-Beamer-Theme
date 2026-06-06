@@ -14,8 +14,8 @@
 #           file-line-error → show errors as file:line: msg
 #           8bit → treat bytes as printable, avoid ^^ escape sequences
 $xelatex = 'xelatex ' .
-  # ↓ comment out if not using minted/tikz external for safety
-  '-shell-escape ' .
+  # ↓ enable only if trusted and needed (e.g. minted ≤v2 / tikz external); comment out otherwise
+  # '-shell-escape ' .
   # ↓ can use batchmode for speed, but loses error output
   '-interaction=nonstopmode ' .
   '-synctex=1 -file-line-error -8bit %O %S';
