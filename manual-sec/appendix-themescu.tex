@@ -145,6 +145,7 @@
 			\item \myestablish{v1.3e}{2024/10/31}
 			\item \myupdate{v1.3e}{2024/10/31}
 			\item \myupdate{v2.1c}{2026/05/20}
+			\item \myupdate{v2.1d}{2026/06/15}
 		\end{itemize}
 	\end{multicols}
 	注: 自 \textcolor{scugreen}{v1.3e (2024/10/31)} 起, 本小节已替代手册中\alert{\textbf{使用注意}}小节的\alert{项目结构}板块.\par
@@ -152,43 +153,49 @@
 \end{frame}
 
 \begin{frame}{\texttt{main} 分支文件结构 \scugoback{back:BranchMain}{BACK}}\label{goto:BranchMain}
-  从 release 中下载的版本也具有如下的文件结构.
+  从 release 中下载的版本也具有如下的文件结构.\vspace*{-1ex}
   \begin{multicols}{2}
     \setlength{\DTbaselineskip}{10pt}
     \dirtree{%
     .1 \alert{SCU Beamer Theme}/.
-    .2 dev/\DTcomment{\alert{开发辅助脚本}[开发]}.
-    .2 fonts/\DTcomment{\alert{字体存放}[资源]}.
-    .2 image/\DTcomment{\alert{图像存放}[资源]}.
+    .2 docs/\DTcomment{\alert{辅助文件}[进阶]}.
+    .3 dev/\DTcomment{\alert{开发辅助文件}[开发]}.
+    .4 **-manual-tex.sh\DTcomment{\alert{手册支撑脚本}[开发]}.
+    .4 install-plugin.ps1\DTcomment{\alert{插件安装脚本}[开发]}.
+    .4 plugins.conf\DTcomment{\alert{插件配置文件}[开发]}.
+    .3 CONTRIBUTING**.md\DTcomment{\alert{贡献指南}[开发]}.
+    .3 install-plugin.sh\DTcomment{\alert{Linux插件安装脚本}[进阶]}.
+    .3 install-plugin.bat\DTcomment{\alert{Win插件安装脚本}[进阶]}.
+    .2 fonts/\DTcomment{\alert{字体文件}[默认]}.
+    .2 image/\DTcomment{\alert{图像文件}[默认]}.
+    .2 include-sec/\DTcomment{\alert{章节文件}[默认]}.
     .2 resources/\DTcomment{\alert{\textbf{scu 主题素材}}[主题]}.
     .3 SCUbuilding.png\DTcomment{\text{建筑}[主题]}.
     .3 SCUlogo\_name.pdf\DTcomment{\text{logo + 校名}[主题]}.
     .3 SCUname.pdf\DTcomment{\text{校名}[主题]}.
     .3 SCUverify.png\DTcomment{\text{校训}[主题]}.
-    .3 background\ldots.png.\DTcomment{\text{背景}[主题]}.
-    .2 sourcecode/\DTcomment{\alert{代码存放}[资源]}.
-    .2 tmp/\DTcomment{\alert{缓存}[缓存]}.
-    .3 minted/\DTcomment{\alert{minted缓存}[缓存]}.
-    .3 plug/\DTcomment{\alert{插件缓存}[缓存]}.
-    .2 .gitignore.
+    .3 background**.png.\DTcomment{\text{背景}[主题]}.
+    .2 sourcecode/\DTcomment{\alert{代码文件}[默认]}.
     }\columnbreak
     \dirtree{%
     .1 \alert{SCU Beamer Theme}/.
-    .2 beamercolorthemescu.sty\DTcomment{\alert{\textbf{颜色主题}}[主题]}.
-    .2 beamerfontthemescu.sty\DTcomment{\alert{\textbf{字体主题}}[主题]}.
-    .2 beamerinnerthemescu.sty\DTcomment{\alert{\textbf{内部主题}}[主题]}.
-    .2 beamerouterthemescu.sty\DTcomment{\alert{\textbf{外部主题}}[主题]}.
+    .2 tmp/\DTcomment{\alert{缓存}[缓存]}.
+    .3 build/\DTcomment{\alert{编译缓存}[缓存]}.
+    .4 \_minted/\DTcomment{\alert{minted缓存}[缓存]}.
+    .4 include-sec/\DTcomment{\alert{章节缓存}[缓存]}.
+    .3 plug/\DTcomment{\alert{插件缓存}[缓存]}.
+    .2 .gitignore.
+    .2 .latexmkrc\DTcomment{\alert{latexmk配置文件}[编译]}.
+    .2 beamer**themescu.sty\DTcomment{\alert{\textbf{颜色/字体/内部/外部主题}}[主题]}.
     .2 beamerthemescu.sty\DTcomment{\alert{\textbf{scu核心主题}}[主题]}.
     .2 LICENSE.
-    .2 main.tex\DTcomment{\alert{cn模式tex文件}[示例]}.
-    .2 main.pdf\DTcomment{\alert{cn模式pdf文件}[示例]}.
-    .2 main-en.tex\DTcomment{\alert{en模式tex文件}[示例]}.
-    .2 main-en.pdf\DTcomment{\alert{en模式pdf文件}[示例]}.
+    .2 main**.tex\DTcomment{\alert{tex文件}[示例]}.
+    .2 main**.pdf\DTcomment{\alert{pdf文件}[示例]}.
     .2 manual.pdf\DTcomment{\alert{\textbf{用户手册}}[手册]}.
     .2 README.md.
     .2 ref.bib\DTcomment{\alert{\textbf{文献库}}[资源]}.
     }
-  \end{multicols}
+  \end{multicols}\vspace*{-.5ex}
 \end{frame}
 
 \begin{frame}{\texttt{manual} 分支文件结构 \scugoback{back:BranchManual}{BACK}}\label{goto:BranchManual}
@@ -199,11 +206,17 @@
     .1 \alert{SCU Beamer Theme Manual}/.
     .2 manual-sec/\DTcomment{\alert{手册分节tex文件}[章节]}.
     .3 manual-demo/\DTcomment{\alert{手册中示例演示资源}[演示]}.
-    .4 \ldots.tex\DTcomment{\alert{示例tex文件}[演示]}.
-    .4 \ldots.pdf\DTcomment{\alert{示例pdf文件}[演示]}.
-    .3 tikz-\ldots.tex\DTcomment{\alert{TikZ 绘图}[章节]}.
+    .4 **.tex\DTcomment{\alert{示例tex文件}[演示]}.
+    .4 **.pdf\DTcomment{\alert{示例pdf文件}[演示]}.
+    .3 tikz-**.tex\DTcomment{\alert{TikZ 绘图}[章节]}.
     .3 base-settings.tex\DTcomment{\alert{基础设置}[章节]}.
+    .3 basic-layout.tex\DTcomment{\alert{页面布局}[章节]}.
+    .3 basic-content**.tex\DTcomment{\alert{内容排版}[章节]}.
+    .3 advanced-usage.tex\DTcomment{\alert{进阶使用}[章节]}.
     .3 appendix-themescu.tex\DTcomment{\alert{附录}[章节]}.
+    .2 tmp/\DTcomment{\alert{缓存}[缓存]}.
+    .3 build/\DTcomment{\alert{编译缓存}[缓存]}.
+    .4 manual-sec/\DTcomment{\alert{章节缓存}[缓存]}.
     .2 .gitignore.
     }\columnbreak
     \dirtree{%

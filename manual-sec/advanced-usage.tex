@@ -24,7 +24,7 @@
 
 		\SetCell[r=5]{l}\alert{\ttfamily \$xelatex}
 		& \texttt{-shell-escape} &
-			{\alert{允许调用外部命令 (存在命令执行的安全风险)}. 仅在文档来源可信确实需要时启用(如使用 低于v3版本的 \pkg{minted} 或 \pkg{tikz} 缓存持久化), 否则仍建议在 \texttt{.latexmkrc} 中维持注释 \texttt{-shell-escape} 所在行: \\
+			{\alert{允许调用外部命令 (存在命令执行的安全风险)}. 仅在文档来源可信且确实需要时启用(如使用 低于v3版本的 \pkg{minted} 或 \pkg{tikz} 缓存持久化), 否则仍建议在 \texttt{.latexmkrc} 中维持注释 \texttt{-shell-escape} 所在行: \\
 			\texttt{\hspace*{1em}\# $\downarrow$ enable only if trusted and needed (e.g. minted ≤v2 / \\
 			\hspace*{3em}tikz external); comment out otherwise} \\
 			\texttt{\hspace*{1em}\# '-shell-escape ' .}} \\
@@ -95,7 +95,7 @@
 		\hline
 
 		\alert{\ttfamily \$clean\_ext} & \texttt{$\cdots$} & {\alert{扩展清理文件列表}. 执行 \texttt{latexmk -c} 或 \texttt{-C} 时额外清理的文件扩展名. \\ 
-		当前列表: \\texttt{\hspace*{1em}bbl glo gls hd loa nav run.xml snm thm xdv}}
+		当前列表: \\\texttt{\hspace*{1em}bbl glo gls hd loa nav run.xml snm thm xdv}}
 	\end{tblr}
 \end{frame}
 
