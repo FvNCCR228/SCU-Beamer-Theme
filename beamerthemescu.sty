@@ -84,9 +84,9 @@
 
 % ----------------
 % Declare of Options
-% Confirmed in v2.1d(2026/06/15).
+% Confirmed in v2.1e(2026/06/16).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31), v2.1b(2025/10/06), v2.1c(2026/05/20), v2.1d(2026/06/15).
+% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v1.3d(2024/05/18), v1.3e(2024/10/31), v2.1b(2025/10/06), v2.1c(2026/05/20), v2.1d(2026/06/15), v2.1e(2026/06/16).
 % ----------------
 % CMD:: \DeclareOptionBeamer  - 声明参数.
 % CMD:: \ExecuteOptionsBeamer - 预执行参数.
@@ -225,7 +225,7 @@
   \fi
   \RequirePackage{biblatex}% biblatex: 参考文献.
 \else\if\EqualOptionsBeamer{BIBMode}{none}%
-  \relax
+  \RequirePackage{xstring}
 \fi\fi
 
 \RequirePackage{calc}% biblatex: 参考文献.
