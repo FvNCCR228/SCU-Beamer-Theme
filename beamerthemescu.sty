@@ -1,6 +1,6 @@
 % This is file `beamerthemescu.sty'.
 % Copyright (C) 2021-2026 by Linrong Wu.
-% Version: 2026/06/15 v2.1d (Original Version: 2021/11/30 v1.0a).
+% Version: 2026/06/16 v2.1e (Original Version: 2021/11/30 v1.0a).
 %
 % This file may be distributed and/or modified
 %
@@ -31,7 +31,7 @@
 % !请勿轻易改动此文档中代码.
 %%%% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{beamerthemescu}[2026/06/15 v2.1d, SCU Beamer Theme(Main Theme)]
+\ProvidesPackage{beamerthemescu}[2026/06/16 v2.1e, SCU Beamer Theme(Main Theme)]
 %%%% ----------------------------------------------------------------
 
 
@@ -294,11 +294,12 @@
 
 % ----------------
 % Theme Layout
-% Confirmed in v2.1c(2026/05/20).
+% Confirmed in v2.1e(2026/06/16).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16).
+% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v2.1c(2026/05/20), v2.1e(2026/06/16).
 % ----------------
 % 于 v2.1c(2026/05/20) 新增选项 VI, 可设置视觉识别内容, 支持自定义.
+% 于 v2.1e(2026/06/16) 修改 SCU logo+name 文件名为 SCUlogo+name.pdf, 修复 draft 模式下原文件名 SCUlogo_name.pdf 中下划线被识别为数学环境字符, 报错 Missing $ inserted.
 % ----------------
 % THEME:: 颜色主题 - scu | 外部主题 - scu | 内部主题 - sc | 字体主题 - scu.
 % ----------------
@@ -307,7 +308,7 @@
   % Logo:: SCU name.
   \pgfdeclareimage[width=40pt]{lg}{./resources/SCUname.pdf}%
   % Logo+Name:: SCU logo+name.
-  \pgfdeclareimage[height=36pt]{lg-name}{./resources/SCUlogo_name.pdf}%
+  \pgfdeclareimage[height=36pt]{lg-name}{./resources/SCUlogo+name.pdf}%
   % Landmark:: SCU building.
   \pgfdeclareimage[height=80pt]{landmark}{./resources/SCUbuilding.png}%
   % Verify:: SCU verify.
