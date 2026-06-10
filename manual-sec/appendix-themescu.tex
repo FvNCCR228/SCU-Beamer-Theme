@@ -11,6 +11,7 @@
 			\item \myupdate{v1.3e}{2024/10/31}
 			\item \myupdate{v2.1b}{2025/10/06}
 			\item \myupdate{v2.1c}{2026/05/20}
+			\item \myupdate{v2.1e}{2026/06/16}
 		\end{itemize}
 	\end{multicols}
 	注: 本小节仅对部分主题参数进行了演示, 您可点击标题栏 \texttt{BACK} 字样返回对应的宏包参数说明处.\par
@@ -74,7 +75,7 @@
       \def\xForO{145.4pt}
       \def\yForO{55.5pt}
       \draw[scublue, thin] (\xForO-8pt, \yForO-2pt) rectangle (\xForO+9pt, \yForO+2pt); % 以 (x, y) 为中心的框
-      \draw[scublue, thin] (\xForO+9pt, \yForO-2pt) -- (\xForO+29pt, \yForO-12pt); % 斜线
+      \draw[scublue, thin] (\xForO+9pt, \yForO-2pt) -- (\xForO+27pt, \yForO-11pt); % 斜线
       \def\xForT{49pt}
       \def\yForT{35.5pt}
       \draw[scublue, thin] (\xForT-6pt, \yForT-2.8pt) rectangle (\xForT+6pt, \yForT+2.8pt); % 以 (x, y) 为中心的框
@@ -87,35 +88,87 @@
 \end{frame}
 
 \begin{frame}{导航工具栏预览 \scugoback{back:NavigationTool}{BACK}}\label{goto:NavigationTool}
-  \structure{\cmd{usetheme}\oarg*{NavigationTool=\Arg{value}}\marg*{scu}}\vspace*{-.5ex}
+  \structure{\cmd{usetheme}\oarg*{NavigationTool=\Arg{value}}\marg*{scu}}\\\vspace*{-.5ex}
+  \Arg{value} 可取 \texttt{1}, \texttt{2}, \texttt{3} 中的任意组合, 以连字符分隔, 如 \texttt{1-2-3}, \texttt{3-2}, \texttt{2} 等.
   \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{manual-sec/manual-demo/appendix-themescu-NavigationTool.pdf}% inkscape 导入单页 pdf 且转换背景为位图后, 点击导出选项卡 - 自定义, 修改单位 pt, 点击页面再点击自定义(让 inkscape 自动由 px 转为 pt), 设置顶部 260, DPI 40, 导出为 PDF, 可用 Acrobat 减小大小.
   \end{figure}
 
-  \structure{小节及小节跳转工具} 标记为1 - \alert{\hskip.4pt\setfontscu{5}\faCaretLeft\hskip1.6pt\faStream\hskip1.6pt\faCaretRight}\vspace*{1ex}
-
-  \begin{tabular}{l>{\raggedright\arraybackslash}p{.02\textwidth}>{\raggedright\arraybackslash}p{.35\textwidth}l}
-    核心工具 & {\setfontscu{5}\faStream} & 前往当前小节开始 & -\\
-    附加工具 & {\setfontscu{5}\faCaretLeft} & 前往上一小节末尾 & -\\
-    附加工具 & {\setfontscu{5}\faCaretRight} & 前往下一小节开始 & -\\
-  \end{tabular}\vspace*{1ex}
-
-  \structure{查询及首尾跳转工具} 标记为2 - \alert{\hskip.4pt\setfontscu{5}\faCaretLeft\hskip-.05em\faCaretLeft\hskip1.6pt\setfontscu{4.5}\faSearch\hskip1.6pt\setfontscu{5}\faCaretRight\hskip-.05em\faCaretRight}\vspace*{1ex}
-
-  \begin{tabular}{l>{\raggedright\arraybackslash}p{.02\textwidth}>{\raggedright\arraybackslash}p{0.35\textwidth}l}
-    核心工具 & {\setfontscu{4.5}\faSearch} & 查找(需要使用Adobe Acrobat) & Acrobat快捷键: Ctrl + F\\
-    附加工具 & {\setfontscu{5}\faCaretLeft\hskip-.05em\faCaretLeft} & 前往初始页(不包含附录) & -\\
-    附加工具 & {\setfontscu{5}\faCaretRight\hskip-.05em\faCaretRight} & 前往结尾页(不包含附录) & -\\
-  \end{tabular}\vspace*{1ex}
-
-  \structure{放映及历史跳转工具} 标记为3 - \alert{\hskip.4pt\setfontscu{4.5}\faReply\hskip1.6pt\setfontscu{5}\faExpand\hskip1.6pt\setfontscu{4.5}\reflectbox{\faReply}}\vspace*{1ex}
-
-  \begin{tabular}{l>{\raggedright\arraybackslash}p{.02\textwidth}>{\raggedright\arraybackslash}p{0.35\textwidth}l}
-    核心工具 & {\setfontscu{5}\faExpand} & 全屏或退出全屏(需要使用Adobe Acrobat) & Acrobat快捷键: Ctrl + L\\
-    附加工具 & {\setfontscu{4.5}\faReply} & 前往上一视图(需要使用Adobe Acrobat) & Acrobat快捷键: Alt + 向左箭头\\
-    附加工具 & {\setfontscu{4.5}\reflectbox{\faReply}} & 前往下一视图(需要使用Adobe Acrobat) & Acrobat快捷键: Alt + 向右箭头\\
-  \end{tabular}
+  \begin{center}\begin{tikzpicture}[sc/.style={font=\ttfamily\color{scugrey}\normalsize}]
+    % --- 图标节点 (仅定位, 不绘制) ---
+    \node[anchor=base, inner sep=0pt, opacity=0] (N1) at (0, 0) {\setfontscu{15}\faStream};
+    \node[anchor=base, inner sep=0pt, opacity=0] (N2) at (135pt, 0) {\setfontscu{15}\faStream};
+    \node[anchor=base, inner sep=0pt, opacity=0] (N3) at (270pt, 0) {\setfontscu{15}\faStream};
+    % --- 等宽渐变色块 (scured20), 居中于图标 ---
+    \fill[scured20, rounded corners=14pt] (N1.base) ++(-30pt, 18pt) rectangle ++(60pt, -46pt);
+    \fill[scured20, rounded corners=14pt] (N2.base) ++(-30pt, 18pt) rectangle ++(60pt, -46pt);
+    \fill[scured20, rounded corners=14pt] (N3.base) ++(-30pt, 18pt) rectangle ++(60pt, -46pt);
+    % --- 左侧文字说明 ---
+    \node[anchor=west, align=left, text=scured, font=\large\bfseries, inner sep=2pt]
+      at ([xshift=32pt, yshift=-5pt]N1.base) {小节\\工具};
+    \node[anchor=west, align=left, text=scured, font=\large\bfseries, inner sep=2pt]
+      at ([xshift=32pt, yshift=-5pt]N2.base) {查询\\工具};
+    \node[anchor=west, align=left, text=scured, font=\large\bfseries, inner sep=2pt]
+      at ([xshift=32pt, yshift=-5pt]N3.base) {放映\\工具};
+    % --- 核心工具高亮 ---
+    \fill[white, draw=scured60, rounded corners=6pt]
+      (N1.base) ++(-10pt, 16pt) rectangle ++(20pt, -20pt);
+    \fill[white, draw=scured60, rounded corners=6pt]
+      (N2.base) ++(-10pt, 16pt) rectangle ++(20pt, -20pt);
+    \fill[white, draw=scured60, rounded corners=6pt]
+      (N3.base) ++(-10pt, 16pt) rectangle ++(20pt, -20pt);
+    % --- 图标置顶 ---
+    \node[anchor=base, inner sep=0pt] at (N1.base)
+      {\alert{\setfontscu{15}\faCaretLeft\hskip4.8pt\faStream\hskip4.8pt\faCaretRight}};
+    \node[anchor=base, inner sep=0pt] at (N2.base)
+      {\alert{\setfontscu{15}\faCaretLeft\hskip-.05em\faCaretLeft\hskip4.8pt\setfontscu{13.5}\faSearch\hskip4.8pt\setfontscu{15}\faCaretRight\hskip-.05em\faCaretRight}};
+    \node[anchor=base, inner sep=0pt] at (N3.base)
+      {\alert{\setfontscu{13.5}\faReply\hskip4.8pt\setfontscu{15}\faExpand\hskip4.8pt\setfontscu{13.5}\reflectbox{\faReply}}};
+    % --- 编号矩形 (右下角) ---
+    \node[fill=scured, text=white, rounded corners=4pt, inner sep=4pt, font=\bfseries\ttfamily\Large]
+      at ([shift={(10pt, -16pt)}]N1.base) {1};
+    \node[fill=scured, text=white, rounded corners=4pt, inner sep=4pt, font=\bfseries\ttfamily\Large]
+      at ([shift={(10pt, -16pt)}]N2.base) {2};
+    \node[fill=scured, text=white, rounded corners=4pt, inner sep=4pt, font=\bfseries\ttfamily\Large]
+      at ([shift={(10pt, -16pt)}]N3.base) {3};
+    % --- 核心工具标注 ---
+    \draw[scublue, line width=0.8pt]
+      (N1.base) ++(-10pt,-4pt) .. controls ++(-14pt,-8pt) and ++(14pt,8pt) .. ++(-33pt,-36pt);
+    \node[anchor=north west, align=left, font=\normalsize\bfseries, inner sep=1pt]
+      at ([shift={(-52pt,-42pt)}]N1.base) {前往当前小节开始};
+    \draw[scublue, line width=0.8pt]
+      (N2.base) ++(-10pt,-4pt) .. controls ++(-14pt,-8pt) and ++(14pt,8pt) .. ++(-33pt,-36pt);
+    \node[anchor=north west, align=left, font=\normalsize\bfseries, inner sep=1pt]
+      at ([shift={(-52pt,-42pt)}]N2.base) {查找\textsuperscript{\textdagger}{\sc\; Ctrl + F}};
+    \draw[scublue, line width=0.8pt]
+      (N3.base) ++(-10pt,-4pt) .. controls ++(-14pt,-8pt) and ++(14pt,8pt) .. ++(-33pt,-36pt);
+    \node[anchor=north west, align=left, font=\normalsize\bfseries, inner sep=1pt]
+      at ([shift={(-52pt,-42pt)}]N3.base) {全屏或退出全屏\textsuperscript{\textdagger}{\sc\; Ctrl + L}};
+    % --- 附加工具标注 ---
+    % N1
+    \node[anchor=base west, align=left, font=\small\bfseries] (L1)
+      at ([shift={(-60pt, 50pt)}]N1.base) {前往上一小节末尾};
+    \node[anchor=base west, align=left, font=\small\bfseries] (R1)
+      at ([shift={(-20pt, 36pt)}]N1.base) {前往下一小节开始};
+    \draw[scublue, line width=0.8pt] ([shift={(-16pt,12pt)}]N1.base) .. controls ++(-14pt,8pt) and ++(14pt,-8pt) .. ([xshift=10pt]L1.south west);
+    \draw[scublue, line width=0.8pt] ([shift={(16pt,12pt)}]N1.base) .. controls ++(-7pt,4pt) and ++(7pt,-4pt) .. ([xshift=20pt]R1.south west);
+    % N2
+    \node[anchor=base west, align=left, font=\small\bfseries] (L2)
+      at ([shift={(-60pt, 50pt)}]N2.base) {前往初始页(不含附录)};
+    \node[anchor=base west, align=left, font=\small\bfseries] (R2)
+      at ([shift={(-20pt, 36pt)}]N2.base) {前往结尾页(不含附录)};
+    \draw[scublue, line width=0.8pt] ([shift={(-18pt,12pt)}]N2.base) .. controls ++(-14pt,8pt) and ++(14pt,-8pt) .. ([xshift=10pt]L2.south west);
+    \draw[scublue, line width=0.8pt] ([shift={(18pt,12pt)}]N2.base) .. controls ++(-7pt,4pt) and ++(7pt,-4pt) .. ([xshift=20pt]R2.south west);
+    % N3
+    \node[anchor=base west, align=left, font=\small\bfseries] (L3)
+      at ([shift={(-60pt, 50pt)}]N3.base) {前往上一视图\textsuperscript{\textdagger}{\sc\; Alt + $\leftarrow$}};
+    \node[anchor=base west, align=left, font=\small\bfseries] (R3)
+      at ([shift={(-20pt, 36pt)}]N3.base) {前往下一视图\textsuperscript{\textdagger}{\sc\; Alt + $\rightarrow$}};
+    \draw[scublue, line width=0.8pt] ([shift={(-20pt,12pt)}]N3.base) .. controls ++(-14pt,8pt) and ++(14pt,-8pt) .. ([xshift=10pt]L3.south west);
+    \draw[scublue, line width=0.8pt] ([shift={(20pt,12pt)}]N3.base) .. controls ++(-7pt,4pt) and ++(7pt,-4pt) .. ([xshift=20pt]R3.south west);
+  \end{tikzpicture}\end{center}
+  \vspace*{-1ex}{\itshape 注: \textup{\textdagger}\,标注的功能需 Adobe Acrobat 支持, 对应快捷键亦仅在 Acrobat 中生效.}
 \end{frame}
 
 % ----------------
@@ -171,7 +224,7 @@
     .2 include-sec/\DTcomment{\alert{章节文件}[默认]}.
     .2 resources/\DTcomment{\alert{\textbf{scu 主题素材}}[主题]}.
     .3 SCUbuilding.png\DTcomment{\text{建筑}[主题]}.
-    .3 SCUlogo\_name.pdf\DTcomment{\text{logo + 校名}[主题]}.
+    .3 SCUlogo+name.pdf\DTcomment{\text{logo + 校名}[主题]}.
     .3 SCUname.pdf\DTcomment{\text{校名}[主题]}.
     .3 SCUverify.png\DTcomment{\text{校训}[主题]}.
     .3 background**.png.\DTcomment{\text{背景}[主题]}.
