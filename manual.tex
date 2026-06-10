@@ -2,7 +2,7 @@
 % !TeX TS-program = latexmk
 % This is file `manual.tex'.
 % Copyright (C) 2021-2026 by Linrong Wu.
-% Version: 2026/06/15 v2.1d (Original Version: 2021/11/30 v1.0a).
+% Version: 2026/06/16 v2.1e (Original Version: 2021/11/30 v1.0a).
 % 本文件为 SCU Beamer Theme 用户手册源文件.
 % !使用前请阅读用户手册.
 
@@ -38,7 +38,7 @@
 % ----------------
 \usepackage[autoplay]{animate}
 \usepackage{tikz}
-\usetikzlibrary{shadings,arrows,calc,decorations.pathmorphing,patterns}
+\usetikzlibrary{shapes.geometric,positioning,shadings,arrows,calc,decorations.pathmorphing,patterns}
 \usepackage{array}
 \usepackage{cancel}
 \usepackage{algorithm,algorithmic}
@@ -68,8 +68,8 @@
 % --------封面信息输入--------
 % [<in footline>], {<in title page>} 方括号内容显示在页脚, 花括号内容为全称显示在封面.
 % ----------------
-\title[四川大学Beamer模板 | User's Manual Rev~v2.1d]{四川大学Beamer模板}
-\subtitle{用户手册~~~~Rev v2.1d} % subtitle 未设置页脚显示项, 请在 title 中设置.
+\title[四川大学Beamer模板 | User's Manual Rev~v2.1e]{四川大学Beamer模板}
+\subtitle{用户手册~~~~Rev v2.1e} % subtitle 未设置页脚显示项, 请在 title 中设置.
 \author[我不卷, 你才卷]{马老卷\inst{1}\inst{a} \and 马小卷\inst{2}\inst{b}}
 \institute{%
 	\inst{1} 混元形翼太极门
@@ -78,7 +78,7 @@
 	\vspace*{-6pt} \and
 	\inst{a} ~\textit{MaLJFake@taichi.hunyuan} ~ \inst{b} ~\textit{MaXJFake@scu.edu.cn}
 }
-\date{2026年6月15日}
+\date{2026年6月16日}
 
 % ---------------- %
 %      正文区      %
@@ -147,6 +147,82 @@
 	\textbf{页眉:} 采用双行设计, 首行为{\color{scured}节标题导航栏}, 显示幻灯整体思路, 还附带四川大学校名; 次行为标题栏, 左侧显示{\color{scured}小节标题}与{\color{scured}迷你帧(圆点)形式的当前小节帧进度}, 右侧显示当前{\color{scured}幻灯标题}. (编者认为小节迷你帧能在较清晰呈现进度的同时, 节约大量空间, 也能避免某节中幻灯页数过多, 导致标题导航挤压溢出)\\~\\
 	\textbf{页脚:} 采用双行设计, 首行为导航栏, 左侧显示{\color{scured}报告标题}, 右侧为{\color{scured}导航模块}; 次行为信息行, 左中右分别为{\color{scured}作者}、{\color{scured}机构}、{\color{scured}日期与页码}.\\~\\
 	\textbf{环境:} 模板定义了{\color{scured}定理}, {\color{scured}代码}等多种环境演示.
+\end{frame}
+
+\begin{frame}{快速开始}
+	详细操作步骤及完整 MWE 请参见 \href{https://github.com/FvNCCR228/SCU-Beamer-Theme\#快速开始}{\color{scublue}README · 快速开始} 部分.\\
+
+	\begin{tikzpicture}[
+		node distance=0.3cm and 0.4cm,
+		startstop/.style={rectangle, rounded corners, minimum width=2cm,
+			minimum height=.7cm, text width=1.8cm, align=center,
+			draw=scured, fill=scured10},
+		process/.style={rectangle, minimum width=2cm, minimum height=.7cm,
+			text width=1.8cm, align=center, draw=scugrey, fill=scugrey10},
+		decision/.style={diamond, inner sep=2pt, minimum width=1.5cm,
+			minimum height=.7cm, align=center,
+			draw=scublue, fill=scublue10, aspect=2.0},
+		arrow/.style={->, >=stealth, thick, color=scugrey},
+	]
+		% 主流程: start → create (↑) → decide (→)
+		\node (start)   [startstop]  {从Github/Gitee克隆或下载};
+		\node [anchor=north west, align=left, xshift=-.5cm, yshift=-.1cm,
+			at=(start.south west), color=scugrey]
+			{(1) 克隆: \\\phantom{(1)}\texttt{git clone} \texttt{https://github.com/} \\
+			\phantom{(1)}\texttt{FvNCCR228/SCU-Beamer-Theme.git} \\[.5ex] (2) 从 Releases 页面下载};
+		\node (create)  [process, above=1 of start]
+			{创建主 \texttt{.tex} 文件 (假设为 \texttt{exp.tex})};
+		\node (decide)  [decision, right=.9cm of create]
+			{如何创建?};
+
+		% 选项堆叠 (从 decide 右侧引出, 中心在同一垂直线, 间距 2:6)
+		\node (ref)  [process, minimum width=2.8cm, text width=2.6cm] at ($(decide.center)+(3,1.2)$)
+			{参考仓库中 \texttt{main.tex} 或 \texttt{main-en.tex} 示例文件};
+		\node (mwe)  [process, minimum width=2.8cm, text width=2.6cm] at ($(decide.center)+(3,-3.6)$)
+			{展开 README 中的 MWE 保存为 \texttt{exp.tex} 或按需修改};
+
+		% 导入章节文件 (位于 ref 与 mwe 之间, 中心在同一垂直线)
+		\node (sec)  [process, minimum width=2.8cm, text width=2.6cm] at ($(ref.center)!0.5!(mwe.center)$)
+			{在 \texttt{include-sec/} 下创建各章节 \texttt{.tex} 文件};
+
+		% 后半流程 (与 sec 同 y)
+		\node (compile) [process, right=.9cm of mwe]
+			{编译 \texttt{latexmk exp.tex}};
+		\node (end)     [startstop, right=.9cm of compile]
+			{编译完成!\\ 查看生成的 PDF};
+
+		% 清理命令
+		\node (cleanc) [process] at ($(end.north)+(0,1)$)
+			{清除中间文件 \\ \texttt{latexmk -c}\\ 或 \texttt{latexmk -c exp.tex}};
+		\node (cleanC) [process] at ($(cleanc.north)+(0,1.6)$)
+			{清除全部生成文件 \\ \texttt{latexmk -C}\\ 或 \texttt{latexmk -C exp.tex}};
+
+		% 箭头
+		\draw [arrow] (start)  -- (create);
+		\draw [arrow] (create) -- (decide);
+		\draw [arrow] (compile) -- (end);
+		\draw [arrow] (end) -- (cleanc);
+		\draw [arrow] (cleanc) -- (cleanC);
+		% decide → 选项
+		\draw [arrow] (decide.north) |- (ref.west) node[pos=.25, color=scured, xshift=.2cm] {(2)};
+		\draw [arrow] (decide.south) |- (mwe.west) node[pos=.25, color=scured, xshift=.2cm] {(1)};
+		% 导入 ↔ 选项 (sec 上连 ref, 下连 mwe)
+		\draw [arrow] (sec.north) -- (ref.south) node[midway, xshift=.4cm]
+			{通过 \cmd{include} 或 \cmd{input} 导入};
+		\draw [arrow] (sec.south) -- (mwe.north) node[midway, xshift=.4cm]
+			{通过 \cmd{include} 或 \cmd{input} 导入};
+		% 选项 → latexmk 编译
+		\draw [arrow] (ref.east) -| (compile.north);
+		\draw [arrow] (mwe.east) -- (compile);
+		% decide → sec (完整链路)
+		\draw [arrow] (decide) |- (sec);
+
+		% 侧注
+		\node [right=0.15cm of sec, font=\itshape, align=left]
+			{\texttt{\upshape include-sec/} 为预设 \\
+			目录, 且 \texttt{\upshape tmp/build/} \\
+			下已预建对应子目录 \\ (latexmk 安全限制)};
+	\end{tikzpicture}
 \end{frame}
 
 \subsection{使用注意}
@@ -354,7 +430,7 @@
 		\end{column}
 	\end{columns}
 	\centering\vskip4ex
-	SCU Beamer Theme, Rev 2.1d
+	SCU Beamer Theme, Rev 2.1e
 \end{frame}
 
 \appendix
