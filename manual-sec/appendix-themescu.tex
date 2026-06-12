@@ -286,80 +286,184 @@
 	\begin{multicols}{2}
 		\begin{itemize}
 			\item \myestablish{v2.1b}{2025/10/06}
+			\item \myupdate{v2.1f}{2026/06/18}
 		\end{itemize}
 	\end{multicols}
+	本小节在线版见 \href{https://github.com/FvNCCR228/SCU-Beamer-Theme/discussions/12\#discussioncomment-16941714}{\color{scublue}GitHub Discussion: 自定义全新的 SCU Beamer Theme（扩展主题宏包）}\par
 	\mycopyright
 \end{frame}
 
-\begin{frame}{SCU Theme 颜色主题自定义(1/2) \scugoback{back:CustomColorTheme}{BACK}}\label{goto:CustomColorTheme}
-	\structure{\cmd{usetheme}\oarg*{ColorDisplay=\Arg{value}}\marg*{scu}}
+\begin{frame}{扩展主题宏包}
+  \textbf{将自定义配置封装于扩展宏包 \pkg{extension-xxx.sty}, 而后传递给 SCU Beamer Theme.} 例如新三国天意爷主题, 宏包命名可为 \pkg{extension-TianYiYe.sty}.\\[.5ex]
 
-  当设置 \Arg{value} 为 \texttt{Custom} 时激活颜色主题自定义模式, 您可以参照如下步骤自定义颜色.\\
+  \structure{核心步骤}
+  \begin{enumerate}
+    \item 在项目根目录下创建 \pkg{extension-xxx.sty}
+    \item 在宏包中定义颜色 \textsc{Color}、字体 \textsc{Font}、背景 \textsc{Background}、视觉识别 \textsc{VI}
+    \item 通过 \cmd{PassOptionsToPackage} 将选项传递至 SCU Beamer Theme (即主题主宏包 \pkg{beamerthemescu})
+    \item 在 \texttt{.tex} 文件导言区调用扩展宏包, 须在引入 SCU Beamer Theme 之前 (即使用 \cmd{usetheme} 之前)
+  \end{enumerate}\vspace*{1ex}
+
+  \structure{自定义相关的 SCU 主题选项}\vspace*{.5ex}
+  \begin{table}[h]
+    \centering
+    \begin{tabular*}{.95\textwidth}{@{\extracolsep{\fill}}lll@{}}
+      \textbf{选项} & \textbf{选项值} & \textbf{说明} \\
+      \midrule
+      \texttt{ColorDisplay} & \texttt{Custom} & 激活颜色自定义模式 \\
+      \texttt{FontTheme} & \texttt{Custom} & 激活字体自定义模式 \\
+      \texttt{Background} & \texttt{Custom} & 激活背景自定义模式 \\
+      \texttt{VI} & \texttt{Custom} & 激活视觉识别自定义模式 \\
+      \texttt{MathFont} & \marg{font} & 自定义数学字体 \\
+      \texttt{LogoWidth} & \marg{length} & 调整页脚 Logo 背景宽度(默认\texttt{48pt}) \\
+    \end{tabular*}
+  \end{table}\vspace*{-1ex}
+\end{frame}
+
+\begin{frame}{自定义颜色 \scugoback{back:CustomColorTheme}{BACK}}\label{goto:CustomColorTheme}
+  \textbf{在扩展宏包中使用 \cmd{colorlet} 或 \cmd{definecolor} \scugoto{goto:DefColor}{REF} 定义以下颜色, 需传递选项 \texttt{ColorDisplay=Custom} 至 \pkg{beamerthemescu}.} 当用户未定义某颜色时, 主题将使用 \texttt{ColorDisplay=JXred} 的默认颜色值兜底.
+
+  \definecolor{customPrimaryC}{RGB}{42, 74, 107}%
+  \definecolor{customAuxiliaryC}{RGB}{139, 0, 0}%
+  \definecolor{customSecondaryAuxiliaryC}{RGB}{184, 134, 11}%
+  \colorlet{customIntersperseC}{customPrimaryC!60!customAuxiliaryC!40}%
+  \definecolor{customNomalTextC}{RGB}{34, 34, 34}%
+  \definecolor{customAlertedTextC}{RGB}{165, 42, 42}%
+  \definecolor{customBackgroundC}{RGB}{248, 248, 250}%
+  \colorlet{customHighlightCodeLineC}{customPrimaryC!10!customBackgroundC}%
+  \colorlet{customBlockExampleC}{customPrimaryC!12!customBackgroundC}%
+  \colorlet{customBlockDefinitionC}{customPrimaryC!90!black}%
+  \colorlet{customBlockLemmaC}{customAuxiliaryC!8!customBackgroundC}%
+  \colorlet{customBlockConditionC}{customSecondaryAuxiliaryC!10!customBackgroundC}%
+
+  \begin{table}[h]
+    \centering
+    \begin{tabular}{m{.6\textwidth}m{.115\textwidth}m{.145\textwidth}m{.02\textwidth}}
+      \multicolumn{4}{l}{\alert{\scshape Theme Color}} \\
+      \cmd{definecolor}\marg*{PrimaryC}\marg*{RGB}\marg*{42, 74, 107} & 主题色 & 海报青蓝背景 & \raisebox{.2ex}{\tiny\colorbox{customPrimaryC}{\phantom{x}}} \\
+      \cmd{definecolor}\marg*{AuxiliaryC}\marg*{RGB}\marg*{139, 0, 0} & 辅助色 & 曹操赤血红袍 & \raisebox{.2ex}{\tiny\colorbox{customAuxiliaryC}{\phantom{x}}} \\
+      \cmd{definecolor}\marg*{SecondaryAuxiliaryC}\marg*{RGB}\marg*{184, 134, 11} & 次级辅助色 & 标题青铜鎏金 & \raisebox{.2ex}{\tiny\colorbox{customSecondaryAuxiliaryC}{\phantom{x}}} \\
+      \cmd{colorlet}\marg*{IntersperseC}\marg*{PrimaryC!60!AuxiliaryC!40} & 点缀色 & 青红混合暗紫 & \raisebox{.2ex}{\tiny\colorbox{customIntersperseC}{\phantom{x}}} \\
+      \cmidrule(lr){1-4}
+
+      \multicolumn{4}{l}{\alert{\scshape Text Color}} \\
+      \cmd{definecolor}\marg*{NomalTextC}\marg*{RGB}\marg*{34, 34, 34} & 普通文本 & 墨黑深灰 & \raisebox{.2ex}{\tiny\colorbox{customNomalTextC}{\phantom{x}}} \\
+      \cmd{definecolor}\marg*{AlertedTextC}\marg*{RGB}\marg*{165, 42, 42} & 强调文本 & 深朱砂红 & \raisebox{.2ex}{\tiny\colorbox{customAlertedTextC}{\phantom{x}}} \\
+      \cmd{definecolor}\marg*{BackgroundC}\marg*{RGB}\marg*{248, 248, 250} & 背景主体 & 极浅冷灰 & \raisebox{.2ex}{\tiny\colorbox{customBackgroundC}{\phantom{x}}} \\
+      \cmd{colorlet}\marg*{HighlightCodeLineC}\marg*{PrimaryC!10!BackgroundC} & 高亮代码行 & 浅青蓝 & \raisebox{.2ex}{\tiny\colorbox{customHighlightCodeLineC}{\phantom{x}}} \\
+      \cmidrule(lr){1-4}
+
+      \multicolumn{4}{l}{\alert{\scshape Block Color}} \\
+      \cmd{colorlet}\marg*{BlockExampleC}\marg*{PrimaryC!12!BackgroundC} & 示例块 & 浅青蓝背景 & \raisebox{.2ex}{\tiny\colorbox{customBlockExampleC}{\phantom{x}}} \\
+      \cmd{colorlet}\marg*{BlockDefinitionC}\marg*{PrimaryC!90!black} & 定义块 & 深青蓝文字 & \raisebox{.2ex}{\tiny\colorbox{customBlockDefinitionC}{\phantom{x}}} \\
+      \cmd{colorlet}\marg*{BlockLemmaC}\marg*{AuxiliaryC!8!BackgroundC} & 引理块 & 淡红色背景 & \raisebox{.2ex}{\tiny\colorbox{customBlockLemmaC}{\phantom{x}}} \\
+      \cmd{colorlet}\marg*{BlockConditionC}\marg*{SecondaryAuxiliaryC!10!BackgroundC} & 条件块 & 淡金色背景 & \raisebox{.2ex}{\tiny\colorbox{customBlockConditionC}{\phantom{x}}} \\
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}{自定义字体 \scugoback{back:CustomFontTheme}{BACK}}\label{goto:CustomFontTheme}
+  \structure{文本字体设置}\\[.5ex]
+  \textbf{在扩展宏包中定义 \cmd{beamer@scu@fontextend} 宏, 需传递选项 \texttt{FontTheme=Custom} 至 \pkg{beamerthemescu}.} 主题通过该宏加载自定义的中英文无衬线字体(\texttt{sans})、等宽字体(\texttt{mono}), 并可为中文配置 \texttt{Italic} 字形(通常用楷体).\medskip
 
   \begin{columns}[T, onlytextwidth]
-    \begin{column}{.67\textwidth}
-      \structure{1. 在 \cmd{documentclass} 与 \cmd{usetheme} 间使用\\宏 \cmd{colorlet} 或 \cmd{definecolor} 定义下列颜色}\\
-
-      \texttt{\% --- 如用 rgb 定义 ---}\\
-      \cmd{definecolor}\marg*{PrimaryC}\marg*{rgb}\marg*{1,.41,.71}\texttt{\% 主题色-深粉}\\
-      \cmd{definecolor}\marg*{NomalTextC}\marg*{rgb}\marg*{.2,.2,.2}\texttt{\% 普通文本-深灰}\\
-      \cmd{definecolor}\marg*{AlertedTextC}\marg*{rgb}\marg*{1,.94,.96}\texttt{\% 强调文本-薰衣草紫红}\\
-      \texttt{\% --- 如用 cmyk 定义 ---}\\
-      \cmd{definecolor}\marg*{AuxiliaryC}\marg*{cmyk}\marg*{0,.25,0,0}\texttt{\% 辅助色-浅粉}\\
-      \cmd{definecolor}\marg*{SecondaryAuxiliaryC}\marg*{cmyk}\marg*{0,.15,0,0}\texttt{\% 次级辅助色-更浅粉}\\
-      \texttt{\% --- 如用 colorlet 派生/别名 ---}\\
-      \cmd{colorlet}\marg*{BackgroundC}\marg*{white}\texttt{\% 背景主体-白色}\\
-      \cmd{colorlet}\marg*{IntersperseC}\marg*{AuxiliaryC!50!PrimaryC}\texttt{\% 点缀色-粉色混合}\\
-      \cmd{colorlet}\marg*{BlockExampleC}\marg*{AuxiliaryC!70!white}\texttt{\% 示例块-浅粉}\\
-      \cmd{colorlet}\marg*{BlockLemmaC}\marg*{PrimaryC!60!white}\texttt{\% 引理块-淡粉}\\
-      \cmd{colorlet}\marg*{BlockDefinitionC}\marg*{PrimaryC!80!black}\texttt{\% 定义块-深粉}\\
-      \cmd{colorlet}\marg*{BlockConditionC}\marg*{AlertedTextC!50!white}\texttt{\% 条件块-淡紫红}\\
-      \cmd{colorlet}\marg*{HighlightCodeLineC}\marg*{yellow!70!white}\texttt{\% 高亮代码行-浅黄}
-    \end{column}
-    \begin{column}{.33\textwidth}
-      \structure{2. 在 \cmd{usetheme} 中设置选项}\\
-
-      \cmd{usetheme}\oarg*{\%\\
-        \hspace*{1em}ColorDisplay=Custom,\\
-        \hspace*{1em}...\\
-      }\marg*{scu}
+    \begin{column}{.64\textwidth}
+      如下示例将西文无衬线字体设为 Cinzel, 等宽字体设为 Latin Modern Mono (斜体用 Slanted 变体), 中文无衬线字体设为方正姚体, 中文斜体和等宽字体均设为方正舒体. 进一步自定义字体, 可参考 \pkg{beamerfontthemescu.sty}.\\[.5ex]
+      \cmd{def}\cmd{beamer@scu@fontextend}\marg*{\%\\
+      \hspace*{1em}\cmd{setsansfont}\marg*{Cinzel}\%\hfill\textsf{\scshape Sans}\\
+      \hspace*{1em}\cmd{setmonofont}\marg*{Latin Modern Mono}\%\hfill\textsf{\scshape Mono}\\
+      \hspace*{2em}\oarg*{ItalicFont = \marg*{Latin Modern Mono Slanted}}\%\hfill\textsf{\scshape Mono (Italic)}\\
+      \hspace*{1em}\cmd{setCJKsansfont}\marg*{FZYaoTi}\%\hfill\textsf{\scshape CJK Sans}\\
+      \hspace*{2em}\oarg*{ItalicFont = \marg*{FZShuTi}}\%\hfill\textsf{\scshape CJK Sans (Italic)}\\
+      \hspace*{1em}\cmd{setCJKmonofont}\marg*{FZShuTi}\%\hfill\textsf{\scshape CJK Mono}\\
+      }\bigskip
+    \end{column}\qquad
+    \begin{column}{.32\textwidth}
+      如需查询本机已安装的字体名称:\\[1ex]
+      \textbf{Windows}\\
+      \textsc{Win + R} 打开运行, 输入 \texttt{ms-settings:fonts}\\[.5ex]
+      \textbf{macOS}\\
+      系统自带字体本(Font Book)应用\\[.5ex]
+      \textbf{Linux}\\
+      可使用 Fontconfig 的 \texttt{fc-list} 查询\\
+      \texttt{fc-list}\\
+      \texttt{fc-list :lang=zh}\\
+      \texttt{fc-list | grep "FontName"}
     \end{column}
   \end{columns}
+  
+  \structure{数学字体设置}\\[.5ex]
+  \textbf{数学字体可通过 \cmd{usetheme} 选项直接配置, 可取 \texttt{XITS}、\texttt{LM} 或任意自定义字体名称.} 通过以下命令传递至 SCU Beamer Theme (调用位置参见 \hyperref[frame:PassOpts]{\textbf{传递选项与调用宏包}}).\\
+  \cmd{PassOptionsToPackage}\marg*{MathFont=\marg{font}}\marg*{beamerthemescu}
 \end{frame}
 
-\begin{frame}{SCU Theme 颜色主题自定义(2/2)}{深粉主题色预览}
+\begin{frame}{自定义背景及视觉识别标识 \scugoback{back:CustomBackgroundTheme}{BACK}}\label{goto:CustomBackgroundTheme}
+  \begin{columns}[T, onlytextwidth]
+    \begin{column}{.32\textwidth}
+      \structure{背景图片}\\[.5ex]
+      \textbf{在扩展宏包中定义以下宏, 设置各封面、目录和正文的背景图片路径, 需传递选项 \texttt{Background=Custom} 至 \pkg{beamerthemescu}.} 主题将以 \texttt{width=\cmd{paperwidth}} 加载背景图.\\[1ex]
+
+      \texttt{\% bg:: Frame 背景.}\\
+      \cmd{def}\cmd{scu@path@bg}\marg*{\%\\
+      \hspace*{1em}./resources/frame.png}\\[.5ex]
+      \texttt{\% bgoftitle:: 封面背景.}\\
+      \cmd{def}\cmd{scu@path@bgoftitle}\marg*{\%\\
+      \hspace*{1em}./resources/title.png}\\[.5ex]
+      \texttt{\% bgofsubsectoc:: 小节目录背景.}\\
+      \cmd{def}\cmd{scu@path@bgofsubsectoc}\marg*{\%\\
+      \hspace*{1em}./resources/ouline.png}
+    \end{column}\hfil
+    \begin{column}{.64\textwidth}
+      \structure{视觉识别标识}\\[.5ex]
+      \textbf{在扩展宏包中定义 \cmd{beamer@scu@viextend} 宏, 设置如下4种视觉识别标识, 需传递选项 \texttt{VI=Custom} 至 \pkg{beamerthemescu}.} 各标识均建议手动调整宽/高. 此外, 页脚 Logo 背景宽度可通过 \texttt{LogoWidth=100pt} 传递至 \pkg{beamerthemescu}(默认\texttt{48pt}, 调用位置参见 \hyperref[frame:PassOpts]{\textbf{传递选项与调用宏包}}).\\[1ex]
+
+      \cmd{def}\cmd{beamer@scu@viextend}\marg*{\%\\
+      \hspace*{1em}\texttt{\% Logo:: name.}\\
+      \hspace*{1em}\cmd{pgfdeclareimage}\oarg*{width=40pt}\marg*{lg}\marg*{./resources/name.pdf}\%\\
+      \hspace*{1em}\texttt{\% Logo+Name:: logo+name.}\\
+      \hspace*{1em}\cmd{pgfdeclareimage}\oarg*{height=36pt}\marg*{lg-name}\marg*{./resources/logo+name.pdf}\%\\
+      \hspace*{1em}\texttt{\% Landmark:: building.}\\
+      \hspace*{1em}\cmd{pgfdeclareimage}\oarg*{height=80pt}\marg*{landmark}\marg*{./resources/building.png}\%\\
+      \hspace*{1em}\texttt{\% Verify:: verify.}\\
+      \hspace*{1em}\cmd{pgfdeclareimage}\oarg*{height=30pt}\marg*{verify}\marg*{./resources/verify.png}\%\\
+      }
+    \end{column}
+  \end{columns}\medskip
+  \textit{注: 文件名避免使用下划线, draft 模式下会被识别为数学模式字符, 导致报错.}
 \end{frame}
 
+\begin{frame}{传递选项与调用宏包}\label{frame:PassOpts}
+  \begin{columns}[T, onlytextwidth]
+    \begin{column}{.5\textwidth}
+      \structure{传递选项}\\[.5ex]
+      在扩展宏包末尾传递自定义选项至 SCU 主题.\\[1ex]
 
-\begin{frame}{SCU Theme 字体主题自定义}
-  定义微软雅黑字体 \cmd{setCJKsansfont}\oarg*{Scale=0.956}\marg*{Microsoft YaHei}\\
+      \cmd{PassOptionsToPackage}\cmd{\%}\\
+      \hspace*{1em}\texttt{LogoWidth=100pt,} \texttt{\% 页脚 Logo 背景宽度}\\
+      \hspace*{1em}\texttt{FontTheme=Custom,} \texttt{\% 字体自定义模式}\\
+      \hspace*{1em}\texttt{MathFont=\{Fira Math\},} \texttt{\% 数学字体}\\
+      \hspace*{1em}\texttt{ColorDisplay=Custom,} \texttt{\% 颜色自定义模式}\\
+      \hspace*{1em}\texttt{Background=Custom,} \texttt{\% 背景自定义模式}\\
+      \hspace*{1em}\texttt{VI=Custom} \texttt{\% 视觉识别自定义模式}\\
+      \marg*{beamerthemescu}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \structure{调用宏包}\\[.5ex]
+      在 \texttt{.tex} 导言区调用自定义扩展宏包.\\[1ex]
 
-  定义思源黑体字体 \cmd{setCJKsansfont}\marg*{Noto Sans CJK SC}\\
-\end{frame}
-
-\begin{frame}{SCU Theme 背景及标识自定义}
-  注：可使用以下方式临时修改背景及标识\\
-
-  设置外部图片调用的代码如下: 
-
-  \cmd{pgfdeclareimage}\oarg*{width=\Arg{value}, height=\Arg{value}}\texttt{\%}\\
-    \hspace*{1em}\marg*{\Arg{image name}}\marg*{./resources/\Arg{image path}}\\
-
-  \structure{修改封面页背景}
-  
-  定位到宏包文件 \pkg{beamethemescu.sty} 第 299 及 305 行, 修改图片 \texttt{bgoftitle} 对应的文件路径\\
-
-  \structure{修改目录页背景}
-  
-  定位到宏包文件 \pkg{beamethemescu.sty} 第 293 行, 修改图片 \texttt{bgofsubsectoc} 对应的文件路径\\
-
-  \structure{修改其他页背景}
-  
-  定位到宏包文件 \pkg{beamethemescu.sty} 第 288 行, 修改图片 \texttt{bg} 对应的文件路径\\
-
-  \structure{修改 Logo, 带校名Logo, 建筑, 校训四个标识}
-
-  定位到宏包文件 \pkg{beamethemescu.sty} 第 245 到 253 行, 分别修改图片 \texttt{lg}, \texttt{lg-name}, \texttt{building} 和 \texttt{verify} 对应的文件路径
+      \cmd{PassOptionsToPackage}\marg*{cmyk}\marg*{xcolor}\texttt{\% 解决设置 CMYK 颜色时生成 PDF 的色彩偏移}\\
+      \cmd{documentclass}\oarg*{\%
+      \hspace*{1em}\% draft,\% 草稿模式\\
+      \hspace*{1em}\% handout,\% 讲义模式\\
+      \hspace*{1em}\% aspectratio=169,\% 演示比例(推荐) 16:9\\
+      \hspace*{1em}hyperref, UTF8, CJK\%\\
+      }\marg*{beamer}\\[.5ex]
+      \texttt{\% --------SCU Beamer 模板宏包--------}\\
+      \cmd{usepackage}\marg*{extension-TianYiYe}\\
+      \cmd{usetheme}\oarg*{...}\marg*{scu}\\[1ex]
+    \end{column}\bigskip
+  \end{columns}
+  扩展宏包须在 \cmd{usetheme} 之前调用, 且不要在 \cmd{usetheme} 选项中覆盖扩展宏包已传递的参数.
 \end{frame}
 
 %% End of file `appendix-themescu.tex'.
