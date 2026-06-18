@@ -1,5 +1,29 @@
 # 任务工作流
 
+## 代码生成规则
+
+> 生成 tex 代码时，`\usetheme[...]` 中的配置注释（选项速查表）必须完整保留，用户可手动取消注释修改配置。
+
+```tex
+\usetheme[
+  % ColorDisplay=,    % JXred ⚙️ | BSblue | Custom
+  % BlockDisplay=,    % colorful ⚙️ | followtheme | allgrey
+  % CodeTheme=,       % listing ⚙️ | minted | minted2
+  % MintedStyle=,     % lightmode ⚙️ | darkmode | ⟨custom⟩
+  % LanguageMode=,    % cn ⚙️ | en
+  % Miniframes=,      % follow ⚙️ | separate | none
+  % NavigationTool=,  % 1-2-3 ⚙️ | none | ⟨组合⟩
+  % FontTheme=,       % Auto ⚙️ | Ubuntu | Win | Mac | Fandol | ... | Custom
+  % MathFont=,        % LM ⚙️ | XITS | ⟨custom⟩
+  % BIBMode=,         % biber ⚙️ | none
+  % BIBStyle=,        % biber-gb7714 ⚙️
+  % ContentMuticols=, % true ⚙️ | false
+  % Background=,      % SCU-Full ⚙️ | SCU-Lite | Custom | none
+]{scu}
+```
+
+---
+
 ## 标题页配置
 
 ### 命令说明
@@ -36,7 +60,8 @@
 - `\inst{}` 标注机构/邮箱编号，`\and` 分隔作者
 - `\vspace*{-6pt}` 消除 `\and` 产生的多余间距
 - 英文文本前用 `~` 避免间距问题
-- 机构和邮箱可分开为不同 `\inst` 编号
+- **标号规则**：机构和邮箱用不同类型区分（如数字 vs 字母 vs 特殊符号 † ‡ 等），便于识别归属
+- **注意**：不要用 `*` 标记，`*` 一般代表通讯作者，可能直接附加到通讯作者后面
 
 ---
 
