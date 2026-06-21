@@ -2,9 +2,16 @@
 
 ## 代码生成规则
 
-> 生成 tex 代码时，`\usetheme[...]` 中的配置注释（选项速查表）必须完整保留，用户可手动取消注释修改配置。
+> 生成 tex 代码时，`\documentclass[...]` 和 `\usetheme[...]` 中的配置注释必须完整保留，用户可手动取消注释修改配置。
 
 ```tex
+\documentclass[
+  % draft,             % 草稿模式
+  % handout,           % 讲义模式
+  aspectratio=169,     % 演示比例(推荐) 16:9
+  hyperref, UTF8, CJK%
+]{beamer}
+
 \usetheme[
   % ColorDisplay=,    % JXred ⚙️ | BSblue | Custom
   % BlockDisplay=,    % colorful ⚙️ | followtheme | allgrey
