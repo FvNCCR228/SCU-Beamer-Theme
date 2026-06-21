@@ -8,6 +8,7 @@
 [![TeXPage](https://img.shields.io/badge/-TeXPage-2e5090?logo=tex&logoColor=white&style=flat)](https://www.texpage.com/zh/template/91b96607-7702-4a85-b696-658d260db5b9)
 
 ![Version](https://img.shields.io/github/v/release/FvNCCR228/SCU-Beamer-Theme?label=Version)
+[![Skill](https://img.shields.io/badge/Skill-beamer--scu-blue)](https://github.com/FvNCCR228/SCU-Beamer-Theme/tree/skill)
 ![Discussions](https://img.shields.io/github/discussions/FvNCCR228/SCU-Beamer-Theme?label=Discussions)
 ![Issues](https://img.shields.io/github/issues-raw/FvNCCR228/SCU-Beamer-Theme?label=Issues)
 ![License](https://img.shields.io/badge/License-LPPL--1.3c-green)
@@ -233,6 +234,30 @@ latexmk -C exp.tex    # 清除指定文件的全部生成文件
 > - 在线平台 (如 TeXPage, Overleaf) 编译时, 请上传整个工作文件夹, 否则可能出现因文件缺失导致的编译异常;
 > - 模板已内置丰富的配置选项, 建议先查阅用户手册 (配置选项见「基础设置」章节, 项目结构见「附录B」); 如确需修改 `.sty` 文件, 请先了解模板结构, 保留备份后参照文件内注释进行实验性修改;
 > - 推荐使用 `latexmk` 编译; 若无法使用 latexmk, 可在编辑器中配置编译引擎为 XeLaTeX, 参考文献引擎为 Biber, 并按 XeLaTeX → Biber → XeLaTeX → XeLaTeX 的顺序编译四轮.
+
+
+## AI 辅助 (Claude Code Skill)
+
+本模板提供了 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 专用的 Skill (位于 `skill` 分支), 可辅助编写与修改 Beamer 演示文稿.
+
+### 功能
+
+- 将论文/报告转写为 Beamer Slides
+- 从零创建 Slides
+- 修改已有 Slides (配色、动画等)
+- 辅助配置主题参数
+- 排查编译问题
+
+### 使用方式
+
+1. 安装 Claude Code CLI:
+   ```bash
+   npm install -g @anthropic-ai/claude-code
+   ```
+2. 安装 [CC Switch](https://github.com/farion1231/cc-switch), 在 Skills 面板中安装本模板的 Skill:
+   - URL: `https://github.com/FvNCCR228/SCU-Beamer-Theme`
+   - 分支: `skill`
+3. 在项目目录下启动 Claude Code, 输入 `/beamer-scu` 或用自然语言描述需求即可触发 Skill (如 "帮我用 SCU beamer 做一个答辩 Slides")
 
 
 ## 模板设计
