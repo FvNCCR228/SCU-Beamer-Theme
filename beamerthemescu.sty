@@ -1,6 +1,6 @@
 % This is file `beamerthemescu.sty'.
 % Copyright (C) 2021-2026 by Linrong Wu.
-% Version: 2026/06/16 v2.1e (Original Version: 2021/11/30 v1.0a).
+% Version: 2026/06/26 v2.1g (Original Version: 2021/11/30 v1.0a).
 %
 % This file may be distributed and/or modified
 %
@@ -31,15 +31,15 @@
 % !请勿轻易改动此文档中代码.
 %%%% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{beamerthemescu}[2026/06/16 v2.1e, SCU Beamer Theme(Main Theme)]
+\ProvidesPackage{beamerthemescu}[2026/06/26 v2.1g, SCU Beamer Theme(Main Theme)]
 %%%% ----------------------------------------------------------------
 
 
 % ----------------
 % Declare of Commands
-% Confirmed in v2.1b(2025/10/06).
+% Confirmed in v2.1g(2026/06/26).
 % Established in v1.3b(2022/04/13).
-% Updated in v1.3e(2024/10/31), v2.1b(2025/10/06).
+% Updated in v1.3e(2024/10/31), v2.1b(2025/10/06), v2.1g(2026/06/26).
 % ----------------
 \def\mycopyright{\vspace{2ex}Copyright\enspace\copyright\enspace2021-2026 by LR Wu.}% 版权声明.
 \def\myestablish#1#2{Establish: \textcolor{scugreen}{#1 (#2)}}
@@ -78,7 +78,8 @@
 \def\@meta#1{$\m@th\langle$\textnormal{\textit{#1}}$\m@th\rangle$}
 
 % 定义字体命令.
-\def\setfontscu#1{\fontsize{#1}{4}\selectfont}
+\def\setfontscu#1{\fontsize{#1}{4}\selectfont}% 切换字号
+\def\mailscu#1{\hspace{.5em}$\m@th\langle\thinspace$\texttt{#1}$\thinspace\m@th\rangle$}% 封面邮箱
 % ----------------
 
 
