@@ -294,9 +294,9 @@
 
 % ----------------
 % Theme Layout
-% Confirmed in v2.1e(2026/06/16).
+% Confirmed in v2.1g(2026/06/26).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v2.1c(2026/05/20), v2.1e(2026/06/16).
+% Updated in v1.1a(2021/12/31), v1.2a(2022/03/10), v1.3a(2022/03/16), v1.3b(2022/04/13), v1.3c(2024/04/16), v2.1c(2026/05/20), v2.1e(2026/06/16), v2.1g(2026/06/26).
 % ----------------
 % 于 v2.1c(2026/05/20) 新增选项 VI, 可设置视觉识别内容, 支持自定义.
 % 于 v2.1e(2026/06/16) 修改 SCU logo+name 文件名为 SCUlogo+name.pdf, 修复 draft 模式下原文件名 SCUlogo_name.pdf 中下划线被识别为数学环境字符, 报错 Missing $ inserted.
@@ -310,7 +310,7 @@
   % Logo+Name:: SCU logo+name.
   \pgfdeclareimage[height=36pt]{lg-name}{./resources/SCUlogo+name.pdf}%
   % Landmark:: SCU building.
-  \pgfdeclareimage[height=80pt]{landmark}{./resources/SCUbuilding.png}%
+  \pgfdeclareimage[width=.35\paperwidth]{landmark}{./resources/SCUbuilding.png}%
   % Verify:: SCU verify.
   \pgfdeclareimage[height=30pt]{verify}{./resources/SCUverify.png}
 \else\if\EqualOptionsBeamer{VI}{Custom}%
@@ -1151,20 +1151,22 @@
 
 % ----------------
 % Automatic Frame Layout
-% Confirmed in v2.1c(2026/05/20).
+% Confirmed in v2.1g(2026/06/26).
 % Established in v1.0a(2021/12/03).
-% Updated in v1.1a(2021/12/30), v2.1c(2026/05/20).
+% Updated in v1.1a(2021/12/30), v2.1c(2026/05/20), v2.1g(2026/06/26).
 % ----------------
 % 于 v2.1c(2026/05/20) 修改封面和小节背景设置.
 % ----------------
 % 添加封页.
 \AtBeginDocument{%
   \begingroup%
+    \setbeamertemplate{headline}{}
+    \setbeamertemplate{footline}{}
     \ifcsname scu@path@bgoftitle\endcsname%
       \setbeamertemplate{background}{\pgfuseimage{bgoftitle}}%
     \fi% 定义封面背景.
     % 取消页眉残留空白.
-    \vspace*{-\dimexpr\headheight+\topskip\relax}%
+    % \vspace*{-\dimexpr\headheight+\topskip\relax}%
     \begin{frame}[plain]
       %\transfade 渐变
       \titlepage% 显示 titlepage.

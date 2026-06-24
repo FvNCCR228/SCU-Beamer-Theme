@@ -1,6 +1,6 @@
 % This is file `beamerinnerthemescu.sty'.
 % Copyright (C) 2021-2026 by Linrong Wu.
-% Version: 2026/05/20 v2.1c (Original Version: 2024/04/16 v1.3c).
+% Version: 2026/06/26 v2.1g (Original Version: 2024/04/16 v1.3c).
 %
 % This file may be distributed and/or modified
 %
@@ -13,8 +13,19 @@
 % !请勿轻易改动此文档中代码.
 %%%% ----------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{beamerinnerthemescu}[2026/05/20 v2.1c, SCU Beamer Theme(Inner Theme)]
+\ProvidesPackage{beamerinnerthemescu}[2026/06/26 v2.1g, SCU Beamer Theme(Inner Theme)]
 %%%% ----------------------------------------------------------------
+
+
+% ----------------
+% Declare of Packages
+% Confirmed in v2.1g(2026/06/26).
+% Established in v2.1g(2026/06/26).
+% ----------------
+% CMD:: \usetikzlibrary - 调用 TikZ 库.
+% ----------------
+\usetikzlibrary{fadings,patterns}
+% ----------------
 
 
 \mode<presentation>
@@ -22,76 +33,114 @@
 
 % ----------------
 % Beamer Theme Title Page Layout
-% Confirmed in v2.1c(2026/05/20).
+% Confirmed in v2.1g(2026/06/26).
 % Established in v1.3c(2024/04/16).
-% Updated in v2.1b(2025/10/06), v2.1c(2026/05/20).
+% Updated in v2.1b(2025/10/06), v2.1c(2026/05/20), v2.1g(2026/06/26).
+% ----------------
+% 于 v2.1g(2026/06/26) 重新设计封面底栏图形与标题布局. 尺寸参数 \scu@wd@titleskip, \scu@ht@titlecurve, \scu@ht@title 等命名缩减且重新规范化; 标题布局: 不再用框图框住, 分隔线定位, 且无副标题时间距适配; 封面装饰: 取消单色大范围色块, 采用简洁流线型底栏图形 + 随机弧线模拟流星雨效果.
 % ----------------
 % CMD:: \newdimen   - 创建长度寄存器.
 % CMD:: \newsavebox - 创建盒子.
 % ----------------
-% DIMEN:: title 框底部高度 - len@titlelow.
-\newdimen\beamer@scu@len@titlelow
-\beamer@scu@len@titlelow=0.4\paperheight
-% DIMEN:: title 框顶部高度 - len@titlehigh.
-\newdimen\beamer@scu@len@titlehigh
-\beamer@scu@len@titlehigh=0.65\paperheight
-% DIMEN:: title 框文字顶部高度 - len@titletexthigh.
-\newdimen\beamer@scu@len@titletexthigh
-\beamer@scu@len@titletexthigh=\dimexpr\beamer@scu@len@titlehigh-0.025\paperheight\relax
-% DIMEN:: author 框顶部高度 - len@authorhigh.
-\newdimen\beamer@scu@len@authorhigh
-\beamer@scu@len@authorhigh=0.475\paperheight
-% DIMEN:: author 框文字顶部高度 - len@authortexthigh.
-\newdimen\beamer@scu@len@authortexthigh
-\beamer@scu@len@authortexthigh=\dimexpr\beamer@scu@len@authorhigh-0.025\paperheight\relax
-% DIMEN:: author 框最小宽度 - len@authorwidthmin.
-\newdimen\beamer@scu@len@authorwidthmin
-\beamer@scu@len@authorwidthmin=0.75\paperwidth
-% DIMEN:: author 框顶部到 title 框底部距离 - len@titletoauthor.
-\newdimen\beamer@scu@len@titletoauthor
-\beamer@scu@len@titletoauthor=\dimexpr\beamer@scu@len@authorhigh-\beamer@scu@len@titlelow+0.2pt\relax
-% DIMEN:: author 框高度 - len@titletoauthor.
-\newdimen\beamer@scu@len@authorheight
+% DIMEN:: Titlepage 左侧边距宽度 - wd@titleskip.
+\newdimen\scu@wd@titleskip
+\scu@wd@titleskip=16pt
+% DIMEN:: Titlepage 底栏图形基线高度 - ht@titlecurve.
+\newdimen\scu@ht@titlecurve
+\scu@ht@titlecurve=.03\paperheight
+% DIMEN:: Titlepage Logo+name 高度 - ht@titlelogo.
+\newdimen\scu@ht@titlelogo
+\scu@ht@titlelogo=.96\paperheight
+% DIMEN:: Title 顶部高度 - ht@title.
+\newdimen\scu@ht@title
+\scu@ht@title=.75\paperheight
+% DIMEN:: Title 宽度 - wd@title.
+\newdimen\scu@wd@title
+\scu@wd@title=\dimexpr\the\paperwidth-2\scu@wd@titleskip\relax
+% DIMEN:: Author 宽度 - wd@author.
+\newdimen\scu@wd@author
+\scu@wd@author=.65\paperwidth
+% DIMEN:: SepLine 宽度 - wd@titlesep.
+\newdimen\scu@wd@titlesep
+\scu@wd@titlesep=.08\paperwidth
 
 % 封面样式定义.
-\defbeamertemplate*{title page}{SCU title page theme}{%  
-  \newsavebox{\beamer@scu@authorbox}
-  \sbox{\beamer@scu@authorbox}{\parbox{.72\paperwidth}{%
-    \setlength{\baselineskip}{10pt}%
-    {\usebeamerfont{author}\insertauthor\par}%
-    {\vskip6pt}%
-    {\usebeamerfont{institute}\insertinstitute}%
-  }}% savebox 存储
-  \settototalheight{\beamer@scu@len@authorheight}{\usebox{\beamer@scu@authorbox}}% 计算高度
-  \beamer@scu@len@authorheight=\dimexpr\beamer@scu@len@authorheight+0.036\paperwidth\relax% 补齐上下空白部分
+\defbeamertemplate*{title page}{SCU title page theme}{%
   \begin{beamercolorbox}[wd=\paperwidth,ht=\paperheight]{}%
-    \begin{tikzpicture}[overlay, yshift=-13.3pt]%
+    % Author savebox.
+    \newsavebox{\beamer@scu@authorbox}%
+    \sbox{\beamer@scu@authorbox}{\parbox{\scu@wd@author}{%
+      \setlength{\baselineskip}{10pt}%
+      {\usebeamerfont{author}\insertauthor\par}%
+      {\vskip8pt}%
+      {\usebeamerfont{institute}\insertinstitute}%
+    }}% savebox 存储
+    % \settototalheight{\scu@len@authorheight}{\usebox{\beamer@scu@authorbox}}% 计算高度
+    % \scu@len@authorheight=\dimexpr\scu@len@authorheight+0.036\paperwidth\relax% 补齐上下空白部分
+    \begin{tikzpicture}[overlay]%
+      % 限制绘图范围.
+      \clip (0,0) rectangle (\paperwidth, \paperheight);%
+      % 绘制 视觉识别标识.
       \node[anchor=north west, inner sep=0pt, outer sep=0pt]%
-        at (16pt, \dimexpr\paperheight-14pt\relax) {\pgfuseimage{lg-name}};% 绘制 logo-name
+        at (\scu@wd@titleskip, \scu@ht@titlelogo) {\pgfuseimage{lg-name}};% logo-name
       \node[anchor=south east, inner sep=0pt, outer sep=0pt]%
-        at (\paperwidth, \beamer@scu@len@titlehigh) {\pgfuseimage{landmark}};% 绘制望江楼房
-      \fill[PrimaryC] (0, \beamer@scu@len@titlelow) rectangle (\paperwidth, \beamer@scu@len@titlehigh); % 绘制 title 框
-      \node[anchor=north west, inner sep=0pt, outer sep=0pt,%
-        text width=.9\paperwidth] at (16pt, \beamer@scu@len@titletexthigh) {%
-        {\usebeamerfont{title}\usebeamercolor[bg]{title}\inserttitle\par}%
-        {\vskip6pt}%
-        {\usebeamerfont{subtitle}\usebeamercolor[bg]{subtitle}\insertsubtitle\par}%
-      };% 绘制 title | subtitle 文字
-      \fill[PrimaryC!10!BackgroundC] (0, \beamer@scu@len@authorhigh)%
-        -- (\beamer@scu@len@authorwidthmin, \beamer@scu@len@authorhigh)%
-        -- ++ (0.5\beamer@scu@len@authorheight, -\beamer@scu@len@authorheight)%
-        -- (0, \dimexpr\beamer@scu@len@authorhigh-\beamer@scu@len@authorheight\relax)%
-        -- cycle;% 绘制 author 框
-      \fill[BackgroundC] (0, \beamer@scu@len@authorhigh)%
-        -- (\dimexpr\beamer@scu@len@authorwidthmin+1.56pt\relax, \beamer@scu@len@authorhigh)%
-        -- ++ (\dimexpr0.5\beamer@scu@len@titletoauthor\relax, -\beamer@scu@len@titletoauthor)%
-        -- ++ (-1.6pt, 0)%
-        -- ++ (-\dimexpr0.5\beamer@scu@len@titletoauthor-0.8pt\relax, \dimexpr\beamer@scu@len@titletoauthor-1.6pt\relax)%
-        -- (0, \dimexpr\beamer@scu@len@authorhigh-1.6pt\relax) -- cycle;% 绘制装饰线
-      \node[anchor=north west, inner sep=0pt, outer sep=0pt]%
-        at (16pt, \beamer@scu@len@authortexthigh) (AuthorText) {\usebox{\beamer@scu@authorbox}};% 绘制 author | institute 文字
-      \node[anchor=south west, inner sep=0pt, outer sep=0pt] at (16pt, 14pt) {\usebeamerfont{date}\insertdate};% 绘制 date 文字
-      \node[anchor=south east, inner sep=0pt, outer sep=0pt] at (\dimexpr\paperwidth-16pt\relax, 14pt) {\pgfuseimage{verify}};% 绘制 verify 校训
+        at (\paperwidth, 2*\scu@ht@titlecurve) {\pgfuseimage{landmark}};% 特色标识
+      \node[anchor=north east, inner sep=0pt, outer sep=0pt]%
+        at (\paperwidth, \scu@ht@titlelogo) {\pgfuseimage{verify}};% verify 校训
+      % 绘制 底栏图形.
+      \fill[IntersperseC, path fading=south, fading transform={rotate=96}]%
+        plot[smooth, domain=0:1.02, samples=30]%
+        ({\x*\paperwidth}, {(.04+.15*pow(\x,4))*\paperheight})%
+        -- (\paperwidth, \scu@ht@titlecurve) -- (0, \scu@ht@titlecurve) -- cycle;% 浅色渐变
+      \shade[top color=PrimaryC, bottom color=IntersperseC]%
+        plot[smooth, domain=0:.4, samples=30]%
+        ({\x*\paperwidth}, {\scu@ht@titlecurve+.02*exp(-5*\x)*\paperheight})%
+        -- (.4\paperwidth, \scu@ht@titlecurve) -- (0, \scu@ht@titlecurve) -- cycle;% 微下降过渡
+      \fill[PrimaryC, path fading=north, fading transform={rotate=36}]%
+        plot[smooth, domain=0:1.02, samples=30]%
+        ({\x*\paperwidth}, {\scu@ht@titlecurve+.2*pow(\x,6)*\paperheight})%
+        -- (1.02\paperwidth, 0) -- (0, 0) -- cycle;% 主色渐变(1.02 消除边缘空白)
+      \draw[BackgroundC, line width=1pt, postaction={draw, yellow!90!green, path fading=south}]%
+        plot[smooth, domain=0:1.02, samples=30]%
+        ({\x*\paperwidth}, {\scu@ht@titlecurve+.2*pow(\x,6)*\paperheight});% 曲线渐变描边
+      \pgfmathsetseed{10}% 设置随机短弧的种子
+      \foreach \j in {0,...,9} {%
+        \pgfmathsetmacro{\xori}{.6+pow(rnd,.4)*.3}% 从 .6\paperwidth 开始
+        \pgfmathsetmacro{\xlen}{.06+.12*rnd}% 长度最小 .06\paperwidth
+        \pgfmathsetmacro{\lw}{.4+1.2*rnd}% 线宽最小 .4pt
+        \pgfmathsetmacro{\yoff}{rnd*.02}% 短弧下移幅度
+        \pgfmathsetmacro{\amp}{.2*(1-\yoff/(.018))}% 振幅随 yoff 增大而减小
+        \pgfmathsetmacro{\opa}{.2+.4*(1-\yoff/(.02))}% 透明度最低 .2
+        \pgfmathsetmacro{\cidx}{int(rnd*2)}% 随机颜色
+        \ifcase\cidx\def\mycol{BackgroundC}\or\def\mycol{IntersperseC}\fi%
+        \draw[\mycol, path fading=west, line width=\lw pt, opacity=\opa]%
+          plot[smooth, domain=\xori:{\xori+\xlen}, samples=10]%
+          ({\x*\paperwidth}, {(.03-\yoff+\amp*pow(\x,6))*\paperheight});%
+      }% 随机短弧(流星雨效果)
+      % 绘制 Titlepage 元素.
+      \node[anchor=north west, inner sep=0pt, outer sep=0pt, text width=\scu@wd@title]%
+        (TitleText) at (\scu@wd@titleskip, \scu@ht@title) {%
+        {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+      };% title 文字
+      \node[anchor=north west, inner sep=0pt, outer sep=0pt, text width=\scu@wd@author]%
+        (SubText) at ([yshift=-8pt]TitleText.south west) {%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}%
+      };% subtitle 文字
+      % 分隔线基准: 有 subtitle 用 SubText, 否则用 TitleText.
+      \ifx\insertsubtitle\@empty%
+        \coordinate (SepAnchor) at (TitleText.south west);%
+      \else
+        \coordinate (SepAnchor) at (SubText.south west);%
+      \fi%
+      \fill[IntersperseC, path fading=east]%
+        ([yshift=-14pt]SepAnchor) ++(\scu@wd@titlesep, 0) coordinate (SepExt)%
+        rectangle ++(2\scu@wd@titlesep, -2pt);% 分隔线延伸段
+      \shade[left color=PrimaryC, right color=BackgroundC] ([yshift=-14pt]SepAnchor) coordinate (SepLine)%
+        -- ++(\scu@wd@titlesep, 0) arc (90:0: 2pt) -- ++(-\scu@wd@titlesep-2pt, 0) -- cycle;% 分隔线
+      \node[anchor=north west, inner sep=0pt, outer sep=0pt] at ([yshift=-12pt]SepLine) (AuthorText)% 
+        {\usebox{\beamer@scu@authorbox}};% author | institute 文字
+      \node[anchor=south west, inner sep=0pt, outer sep=0pt]%
+        at (\scu@wd@titleskip, 2\scu@ht@titlecurve) {\usebeamerfont{date}\insertdate};% date 文字
       % \node[anchor=south west,draw] at (0, 0) {00};
     \end{tikzpicture}%
   \end{beamercolorbox}%
