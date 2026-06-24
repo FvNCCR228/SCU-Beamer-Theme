@@ -43,11 +43,11 @@
 \subtitle{副标题}% subtitle 未设置页脚显示项, 请在 title 中设置.
 \author[页脚作者]{作者一\inst{1}\inst{a} \and 作者二\inst{2}\inst{b}}
 \institute{%
-  \inst{1} 机构一
-  \vspace*{-6pt} \and
-  \inst{2} ~Institution Two
-  \vspace*{-6pt} \and
-  \inst{a} ~\textit{author1@example.com} ~\inst{b} ~\textit{author2@example.com}
+	\inst{1} 机构一
+	\vspace*{-6pt} \and
+	\inst{2} ~Institution Two
+	\vspace*{-6pt} \and
+	\inst{a} \mailscu{author1@example.com} ~\inst{b} \mailscu{author2@example.com}
 }
 \date{\today}
 

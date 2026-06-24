@@ -1,6 +1,6 @@
 ---
 name: beamer-scu
-version: 2.1f
+version: 2.1g
 description: >
   SCU Beamer Theme (四川大学 Beamer 模板) 专用 Skill。
   使用场景：论文/报告转 Beamer Slides、从零创建 Slides、修改已有 Slides、

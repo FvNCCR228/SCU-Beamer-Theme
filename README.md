@@ -50,6 +50,7 @@ SCU Beamer Theme (四川大学 Beamer 模板) 专用 Claude Code Skill。
 
 ## 版本
 
-| Skill 版本 | 对应主题版本 | 日期 | 变更 |
-|-----------|------------|------|------|
-| v2.1f | v2.1f | 2026/06/18 | 新建 Skill：模块化设计（config-overview / config-detail / workflow / templates / mwe / typography / customization / troubleshooting）；对照源码校验全部内容；支持溢出检测与修复 |
+| Skill 版本 | 对应主题版本 | 变更 |
+|-----------|------------|------|
+| v2.1f | v2.1f(2026/06/18) | 新建 Skill：模块化设计（config-overview / config-detail / workflow / templates / mwe / typography / customization / troubleshooting）；对照源码校验全部内容；支持溢出检测与修复 |
+| v2.1g | v2.1g(2026/06/26) | 新增 `\mailscu{⟨email⟩}` 封面邮箱命令及说明；补充标题页命令详解（`\and`、`\inst`、`\vspace*{-6pt}`） |
