@@ -296,6 +296,7 @@
 		\begin{itemize}
 			\item \myestablish{v1.1a}{2021/12/30}
 			\item \myupdate{v1.3d}{2024/05/18}
+			\item \myupdate{v2.1g}{2026/06/26}
 		\end{itemize}
 	\end{multicols}
 	\mycopyright
@@ -339,20 +340,18 @@
 \end{frame}
 
 \begin{frame}{封面及页脚信息}
-  \structure{多个作者和所属机构}
-
-  使用 \cmd{and} 命令分隔不同作者和机构并使用 \cmd{inst} 命令设置机构标签, 并使用命令 \cmd{vspace*}\marg*{-6pt} 抑制 \cmd{institute}\marg*{} 中 \cmd{and} 命令导致的多余空白.
-
+  \structure{多个作者和所属机构}\\[.5ex]
+  使用 \cmd{and} 命令分隔不同作者和机构, 使用 \cmd{inst}\marg*{\Arg{tag}} 命令设置作者机构标签, 使用 \cmd{mailscu}\marg*{\Arg{email}} 命令设置封面邮箱(自带前导空白, 换行后忽略). 此外, 需在 \cmd{institute}\marg*{} 中 \cmd{and} 前使用 \cmd{vspace*}\marg*{-6pt} 抑制其换行时产生的过大纵向空白.
+	\vspace*{.5ex}
   \begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
 		\begin{column}{.77\textwidth}
 			\textbf{调用示例}: (注意 \cmd{inst}\marg*{} 后面若为英文文本, 请如下所示加上 \alert{\textasciitilde} 符号)\\
       \cmd{author}\oarg*{掌门人, 首席大弟子}\marg*{马老卷\cmd{inst}\marg*{1} \cmd{and} 马小卷\cmd{inst}\marg*{2}}\\
       \cmd{institute}\marg*{\%\\
-        \hspace*{1em}\cmd{inst}\marg*{1} 混元形翼太极门\\
-        \hspace*{1em}\alert{\textasciitilde}(\cmd{textit}\marg*{MaLJFake@taichi.hunyuan})\\
+        \hspace*{1em}\cmd{inst}\marg*{1} 混元形翼太极门 \cmd{mailscu}\marg*{MaLJFake@taichi.hunyuan}\\
         \hspace*{1em}\cmd{vspace*}\marg*{-6pt} \cmd{and}\\
         \hspace*{1em}\cmd{inst}\marg*{2} \alert{\textasciitilde}Management Science, Business School, Sichuan University\\
-        \hspace*{1em}\alert{\textbackslash\textbackslash}(\cmd{textit}\marg*{MaXJFake@scu.edu.cn})\\
+        \hspace*{1em}\alert{\textbackslash\textbackslash}\cmd{mailscu}\marg*{MaXJFake@scu.edu.cn}\\
       }
 		\end{column}
 		\begin{column}{.23\textwidth}
@@ -362,7 +361,7 @@
       \end{figure}
 		\end{column}
 	\end{columns}
-  \vspace*{3ex}
+  \vspace*{.5ex}
   \begin{columns}[T, onlytextwidth]% https://tex.stackexchange.com/questions/7442
 		\begin{column}{.77\textwidth}
 			\textbf{也可将机构与邮箱分开}: \\
@@ -372,7 +371,7 @@
         \hspace*{1em}\cmd{vspace*}\marg*{-6pt} \cmd{and}\\
         \hspace*{1em}\cmd{inst}\marg*{2} \alert{\textasciitilde}Management Science, Business School, Sichuan University\\
         \hspace*{1em}\cmd{vspace*}\marg*{-6pt} \cmd{and}\\
-        \hspace*{1em}\cmd{inst}\marg*{a} \alert{\textasciitilde}\cmd{textit}\marg*{MaLJFake@mail} \alert{\textasciitilde}\cmd{inst}\marg*{b} \alert{\textasciitilde}\cmd{textit}\marg*{MaXJFake@mail}\\
+        \hspace*{1em}\cmd{inst}\marg*{a} \cmd{mailscu}\marg*{MaLJFake@mail} \alert{\textasciitilde}\cmd{inst}\marg*{b} \cmd{mailscu}\marg*{MaXJFake@mail}\\
       }
 		\end{column}
 		\begin{column}{.23\textwidth}
