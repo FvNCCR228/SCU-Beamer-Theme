@@ -18,7 +18,7 @@
 主要参考了中国科学技术大学Beamer模板 [USTCBeamerSX](https://github.com/ysx2000/USTCBeamerSX/), 少量参考了清华大学Beamer模板 [THU-Beamer-Theme](https://github.com/tuna/THU-Beamer-Theme/) 及其衍生的各大学的Beamer模板, 还参考了中国科学技术大学Beamer模板 [ustcbeamer](https://github.com/ustctug/ustcbeamer/).
 
 
-<img width="750" alt="image" src="https://github.com/user-attachments/assets/b0390aa3-ddba-49d4-9244-7ae59074e488" />
+<img width="750" alt="image" src="./docs/assert/assert-1.png" />
 <img width="750" alt="image" src="https://github.com/user-attachments/assets/a9c2518c-c3f6-4298-86d3-376833a110e5" />
 <img width="750" alt="image" src="https://github.com/user-attachments/assets/5086df2b-462a-44bd-be9c-a897655eb7dd" />
 
@@ -102,7 +102,7 @@ git clone https://gitee.com/NCCR/SCU_Beamer_Slide-demo.git
 	\vspace*{-6pt} \and
 	\inst{2} ~Institution Two
 	\vspace*{-6pt} \and
-	\inst{a} ~\textit{author1@example.com} ~\inst{b} ~\textit{author2@example.com}
+	\inst{a} \mailscu{author1@example.com} ~\inst{b} \mailscu{author2@example.com}
 }
 \date{\today}
 
